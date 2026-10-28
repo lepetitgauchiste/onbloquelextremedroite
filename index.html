@@ -171,7 +171,7 @@
             position: relative;
             padding: 12px 32px;
             margin-top: 8px;
-            margin-bottom: 135px; /* Laisse l'illustration respirer avant les 4 boutons */
+            margin-bottom: 135px;
             border-radius: 22px;
         }
 
@@ -199,7 +199,6 @@
             text-shadow: 0 2px 16px rgba(var(--bg-rgb), 0.98);
         }
 
-        /* Bandeau flouté accueillant les 4 boutons au bas de l'image */
         .top-actions-bar {
             display: flex;
             justify-content: center;
@@ -382,7 +381,6 @@
             line-height: 1.5;
         }
 
-        /* Mémo visuel rapide en 3 étapes avec aperçu du vrai bouton Instagram */
         .quick-steps {
             display: inline-flex;
             align-items: center;
@@ -455,7 +453,6 @@
         .btn-explain:hover { background: rgba(var(--bg-rgb), 0.35); }
         .explain-arrow { position: absolute; right: 14px; font-size: 0.75rem; color: var(--muted); }
         
-        /* Sous-case avec sous-teinte adaptée aux deux thèmes */
         .explain-content {
             display: none;
             background: var(--sub-card);
@@ -472,7 +469,7 @@
         .explain-content li strong { color: var(--green); }
 
         /* =========================================================
-           ENCADRÉ TRANSPARENCE "FANTOMATIQUE" (GRIS TRANSLUCIDE DISCRET)
+           ENCADRÉ TRANSPARENCE "FANTOMATIQUE"
            ========================================================= */
         .trust-box {
             background: var(--ghost-bg);
@@ -492,8 +489,7 @@
         .trust-box:hover { opacity: 1; }
 
         /* =========================================================
-           DASHBOARD STICKY : MENTION HAUTE + BARRE PLEINE LARGEUR
-           + BOUTON RÉINITIALISER CENTRÉ EN DESSOUS + FILTRES WRAPPÉS
+           DASHBOARD STICKY
            ========================================================= */
         .sticky-dashboard {
             position: sticky;
@@ -514,7 +510,6 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
-        /* Mention dans la partie haute de la case Grade actuel */
         .dash-autosave-note {
             text-align: center;
             font-size: 0.75rem;
@@ -537,7 +532,6 @@
         .score-num { font-size: 1.2rem; font-weight: 900; color: var(--green); }
         .score-pct { font-size: 0.73rem; font-weight: 700; color: var(--muted); display: block; }
 
-        /* Barre toute la largeur + espace + bouton Réinitialiser centré en dessous */
         .progress-section {
             display: flex;
             flex-direction: column;
@@ -597,7 +591,6 @@
             user-select: none;
         }
 
-        /* Bouton Réinitialiser la progression centré sous la barre */
         .btn-reset-prog {
             display: inline-flex;
             align-items: center;
@@ -633,7 +626,6 @@
             transform: rotate(-180deg);
         }
 
-        /* Filtres organisés avec retour à la ligne automatique et centrage */
         .filter-row {
             display: flex;
             flex-wrap: wrap;
@@ -661,7 +653,7 @@
         .search-input:focus { border-color: var(--green); }
 
         /* =========================================================
-           ÉTAT DE VICTOIRE / FIN DE LISTE
+           ÉTAT DE VICTOIRE
            ========================================================= */
         .empty-victory-card {
             background: var(--card);
@@ -678,8 +670,7 @@
         .empty-victory-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
         /* =========================================================
-           LISTE DES COMPTES : DRAPEAU EN HAUT À DROITE, ÉMOJIS,
-           BOUTON BLOQUÉ GRISÂTRE À GAUCHE & INSTAGRAM GRADIENT À DROITE
+           LISTE DES COMPTES
            ========================================================= */
         .list-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 10px; padding: 0 4px; flex-wrap: wrap; gap: 6px; }
         .list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 40px; position: relative; }
@@ -712,7 +703,6 @@
         .row.done .name { text-decoration: line-through; color: var(--muted); }
         .handle { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
         
-        /* Micro-fait marquant tout petit sous le compte */
         .fact-note {
             font-size: 0.72rem;
             color: var(--muted);
@@ -722,7 +712,6 @@
             margin-top: 2px;
         }
 
-        /* Étiquettes politiques */
         .tag { font-size: 0.66rem; font-weight: 800; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
         .tag-ed { background: #fde8e8; color: #9b1c1c; border: 1px solid #f8b4b4; }
         .tag-droite { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
@@ -730,7 +719,6 @@
         .tag-media { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
         .tag-bollore { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
 
-        /* Drapeau blanc remonté en haut à droite de la carte */
         .btn-flag {
             background: transparent;
             border: 1px solid transparent;
@@ -751,7 +739,6 @@
             color: var(--accent);
         }
 
-        /* Zone du bas : seulement les 2 boutons (Bloqué à gauche, Instagram à droite) */
         .row-actions {
             display: flex;
             align-items: center;
@@ -760,7 +747,6 @@
             width: 100%;
         }
 
-        /* Bouton Bloqué (à gauche) : grisâtre/fantomatique par défaut avec case carrée */
         .btn-check {
             display: inline-flex;
             align-items: center;
@@ -785,7 +771,6 @@
             color: var(--text);
         }
 
-        /* Case à cocher carrée à l'intérieur du bouton Bloqué */
         .check-square {
             width: 14px;
             height: 14px;
@@ -799,7 +784,6 @@
             transition: all 0.15s ease;
         }
 
-        /* État validé : le bouton Bloqué devient bien visible et coché */
         .row.done .btn-check {
             background: var(--green);
             border-color: var(--green);
@@ -812,7 +796,6 @@
             border-color: #ffffff;
         }
 
-        /* Bouton Instagram (à droite pour les droitiers) avec dégradé et logo */
         .btn-ig {
             display: inline-flex;
             align-items: center;
@@ -852,7 +835,6 @@
             opacity: 0.75;
         }
 
-        /* Animation de récompense "Bien joué, au suivant !" */
         @keyframes rewardPop {
             0% { opacity: 0; transform: translateY(8px) scale(0.85); }
             18% { opacity: 1; transform: translateY(-4px) scale(1.04); }
@@ -877,7 +859,6 @@
             animation: rewardPop 1.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        /* Adaptations spécifiques au mode Sombre */
         [data-theme="dark"] .criteria-box { background: #1f1b1e; color: #d6caca; }
         [data-theme="dark"] .tag-ed { background: rgba(220, 38, 38, 0.22); color: #fca5a5; border-color: rgba(220, 38, 38, 0.45); }
         [data-theme="dark"] .tag-droite { background: rgba(217, 119, 6, 0.2); color: #fcd34d; border-color: rgba(217, 119, 6, 0.4); }
@@ -885,9 +866,6 @@
         [data-theme="dark"] .tag-media { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; border-color: rgba(2, 132, 199, 0.4); }
         [data-theme="dark"] .tag-bollore { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border-color: rgba(148, 163, 184, 0.3); }
 
-        /* =========================================================
-           FONDU ET FLOU EN BAS DE L'ÉCRAN (INCITATION AU SCROLL)
-           ========================================================= */
         .bottom-scroll-veil {
             position: fixed;
             bottom: 0;
@@ -907,9 +885,6 @@
             opacity: 0;
         }
 
-        /* =========================================================
-           MODALES (AJOUT, SUGGESTION, SIGNALEMENT & RÉINITIALISATION)
-           ========================================================= */
         .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100; backdrop-filter: blur(4px); }
         .modal-backdrop.open { display: flex; }
         .modal { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; max-width: 460px; width: 100%; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
@@ -953,9 +928,6 @@
             font-family: var(--font-sans);
         }
 
-        /* =========================================================
-           PIED DE PAGE (AVEC SIGNATURE @HENRILUBSZYNSKI & MENTION IA)
-           ========================================================= */
         footer {
             text-align: center;
             font-size: 0.78rem;
@@ -998,10 +970,8 @@
 </head>
 <body>
 
-    <!-- Image 100% visible en haut avec fondu lisse vers la teinte du fond en bas -->
     <div class="hero-bg-banner" aria-hidden="true"></div>
 
-    <!-- En-tête centré avec titre agrandi/abaissé + flou renforcé, et les 4 boutons en bas de l'image -->
     <header class="top-header">
         <div class="brand-blur-zone">
             <div class="brand-title">ON BLOQUE L'EXTRÊME DROITE</div>
@@ -1017,7 +987,6 @@
         </div>
     </header>
 
-    <!-- Bloc central (Hero) épuré et recentré -->
     <section class="hero">
         <h1>La blocklist.</h1>
         <div class="kicker">Action collective & hygiène numérique</div>
@@ -1041,7 +1010,6 @@
         </div>
     </section>
 
-    <!-- Grande case d'explication contenant la sous-case en sous-teinte -->
     <div class="explain-wrapper">
         <button type="button" class="btn-explain" onclick="toggleExplain()">
             <span>💡 Pourquoi bloquer massivement ces comptes ?</span>
@@ -1057,12 +1025,10 @@
         </div>
     </div>
 
-    <!-- Boîte de transparence fantomatique -->
     <div class="trust-box">
         🔒 <strong>Transparence totale :</strong> Ce site est 100 % open-source. Aucun serveur centralisé, aucun traqueur et aucune donnée collectée. Tout s'exécute directement sur votre appareil et votre progression est stockée en local (localStorage). Vous êtes chez vous.
     </div>
 
-    <!-- Tableau de bord Sticky agrandi avec mention haute, barre pleine largeur et bouton Réinitialiser centré en dessous -->
     <div class="sticky-dashboard">
         <div class="dash-card">
             <div class="dash-autosave-note">
@@ -1107,12 +1073,10 @@
         </div>
     </div>
 
-    <!-- Barre de recherche épurée -->
     <div class="search-bar">
         <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un nom, @pseudo, fait marquant ou étiquette..." oninput="render()">
     </div>
 
-    <!-- Métadonnées de liste sans l'ancienne mention d'astuce -->
     <div class="list-meta">
         <span id="visibleCount">0 comptes affichés</span>
         <span>🏳️ Signaler une erreur sur une fiche</span>
@@ -1120,10 +1084,8 @@
 
     <div class="list" id="accountList"></div>
 
-    <!-- Voile de fondu et flou en bas d'écran pour inciter au défilement -->
     <div class="bottom-scroll-veil" id="bottomScrollVeil" aria-hidden="true"></div>
 
-    <!-- Modale 1 : + Il manque quelqu'un ? -->
     <div class="modal-backdrop" id="suggestModal">
         <div class="modal">
             <div class="modal-header">
@@ -1160,7 +1122,6 @@
         </div>
     </div>
 
-    <!-- Modale 2 : Suggestion d'amélioration du site -->
     <div class="modal-backdrop" id="siteFeedbackModal">
         <div class="modal">
             <div class="modal-header">
@@ -1182,7 +1143,6 @@
         </div>
     </div>
 
-    <!-- Modale 3 : Signaler un compte erroné (Drapeau 🏳️) -->
     <div class="modal-backdrop" id="reportModal">
         <div class="modal">
             <div class="modal-header">
@@ -1209,7 +1169,6 @@
         </div>
     </div>
 
-    <!-- Modale 4 : Confirmation de réinitialisation sur-mesure (zéro bug de partage à l'annulation) -->
     <div class="modal-backdrop" id="resetConfirmModal">
         <div class="modal">
             <div class="modal-header">
@@ -1234,37 +1193,35 @@
     </footer>
 
     <script>
-        // Pseudo Instagram du créateur
         const CREATOR_IG_HANDLE = "henrilubszynski";
         document.getElementById("creatorIgLink").href = `https://www.instagram.com/${CREATOR_IG_HANDLE}/`;
         document.getElementById("creatorIgLink").innerText = `@${CREATOR_IG_HANDLE}`;
 
-        // Émojis représentatifs (couleur de cheveux, teint, lunettes/tenue ou icône média)
         const accountEmojis = {
             "marine_lepen": "👱🏻‍♀️",
             "jordanbardella": "🤵🏻‍♂️",
             "ericzemmour_": "👨🏻‍🦲",
             "marionmarechal_": "👱🏻‍♀️",
-            "ericciotti": "👨🏻‍🦲",
-            "sarah_knafo": "👩🏻",
-            "sebastienchenu_off": "🤵🏻‍♂️",
-            "jph_tanguy": "🧑🏻‍💼",
-            "louisaliot": "👨🏻",
-            "laure.lavalette": "👩🏻",
-            "edwigediaz": "👩🏻",
-            "julienodoul": "👱🏻‍♂️",
+            "eciotti": "👨🏻‍🦲",
+            "sarahknafo1": "👩🏻",
+            "sebastien_chenu": "🤵🏻‍♂️",
+            "tanguyjeanphilippe": "🧑🏻‍💼",
+            "louis_aliot": "👨🏻",
+            "laure_lavalette": "👩🏻",
+            "edwige_diaz": "👩🏻",
+            "julien_odoul": "👱🏻‍♂️",
             "laurentjacobelli": "👨🏻",
-            "robertmenardfr": "👨🏻‍🦳",
-            "gilbertcollard": "👨🏻‍🦳",
-            "philippedevilliers": "👴🏻",
-            "jeanmessiha": "👨🏽‍💼",
-            "pierregentillet": "🧔🏻‍♂️",
+            "robert.menard_off": "👨🏻‍🦳",
+            "gilbert_collard": "👨🏻‍🦳",
+            "phdevilliers": "👴🏻",
+            "messiha.jean": "👨🏽‍💼",
+            "pierre_gentillet": "🧔🏻‍♂️",
             "f_philippot": "🤵🏻‍♂️",
             "nicolasbay": "👨🏻",
             "tiffany_joncour": "👩🏻",
             "marcdefleurian": "👨🏻",
             "antoinegolliot": "👨🏻",
-            "theo_bnrdt": "👱🏻‍♂️",
+            "bernhardt_th": "👱🏻‍♂️",
             "rassemblementnational_fr": "🔥",
             "reconquete_officiel": "📢",
             "realdonaldtrump": "👱‍♂️",
@@ -1276,23 +1233,23 @@
             "b.netanyahu": "👨🏻‍🦳",
             "buducnostsrbijeav": "👓",
             "bruno_retailleau": "👓",
-            "geralddarmanin": "🤵🏻‍♂️",
+            "gerald_darmanin": "🤵🏻‍♂️",
             "emmanuelmacron": "🤵🏻‍♂️",
             "nicolassarkozy": "👨🏻",
-            "sarkozy_louis": "👱🏻‍♂️",
-            "nadine__morano": "👱🏻‍♀️",
+            "sarkozy.louis": "👱🏻‍♂️",
+            "nadinemorano": "👱🏻‍♀️",
             "davidlisnard": "👨🏻",
             "edouardphilippelh": "🧔🏻‍♂️",
-            "aurore_berge": "👱🏻‍♀️",
-            "yaelbraunpivet": "👩🏻",
+            "auroreberge.fr": "👱🏻‍♀️",
+            "yael.braunpivet": "👩🏻",
             "manuelvalls": "👨🏻‍🦳",
             "meyerhabib": "👨🏻‍🦳",
             "shannonseban": "👩🏻",
             "fredericlefebvre_off": "👨🏻‍🦳",
             "lesrepublicains": "🏛️",
-            "damienrieu": "🧔🏻‍♂️",
+            "damienrieu7": "🧔🏻‍♂️",
             "thaisdescufon": "👱🏻‍♀️",
-            "alice_cordier2": "👱🏻‍♀️",
+            "alice_cordier_": "👱🏻‍♀️",
             "collectif.nemesis": "🪧",
             "erik_tegner": "👦🏻",
             "jordanflorentin_": "🎤",
@@ -1301,64 +1258,64 @@
             "thefrenchitch": "🕶️",
             "bassem.6920": "🧔🏽‍♂️",
             "psyhodelik_off": "🎧",
-            "sardoche": "🎮",
-            "krocblanc": "🧢",
-            "milafique_": "👩🏻‍🎤",
+            "sardocheyeslife": "🎮",
+            "krocblancoff": "🧢",
+            "milafique": "👩🏻‍🎤",
             "louisemontangon": "👱🏻‍♀️",
             "tanguydavidofficiel_": "👨🏿‍💼",
             "liamdibenedettooff": "👩🏻",
             "cocardeetudiante": "🚩",
-            "institut_iliade": "🏛️",
+            "institutiliade": "🏛️",
             "fondation_polemia": "📢",
             "lafuriaofficiel": "📕",
             "cyrilhanouna": "🧔🏽‍♂️",
             "pascalpraud": "👓",
-            "mathieubockcote": "👓",
-            "charlottedornellas": "👱🏻‍♀️",
-            "geoffroylejeune": "👱🏻‍♂️",
-            "soniamabrouk_officiel": "👩🏼",
-            "christinekellyofficiel": "👩🏾",
-            "ericnaulleau": "👓",
+            "mbockcote": "👓",
+            "charlotte_d.ornellas": "👱🏻‍♀️",
+            "geoffroy_lejeune": "👱🏻‍♂️",
+            "somabrouk": "👩🏼",
+            "christine_kellylea": "👩🏾",
+            "nofaithnolaw": "👓",
             "gwgoldnadel": "👨🏻‍🦳",
-            "eugeniebastie": "👩🏻",
+            "eugeniebastieofficiel": "👩🏻",
             "charlesconsigny": "👱🏻‍♂️",
-            "celine_pina": "👩🏻",
-            "rachelkhan_officiel": "👩🏽",
+            "celine.pina": "👩🏻",
+            "rachel_khan88": "👩🏽",
             "carolinefourest": "👱🏻‍♀️",
-            "bernardhenrilevy": "衬衫",
+            "bernardhenrilevy": "👨🏻‍🦳",
             "benjaminduhamel": "🧑🏻‍💼",
             "ruthelkrief": "👩🏻",
             "oliviertruchot": "👨🏻‍🦲",
             "paulamaroff": "👨🏻‍🦳",
             "frontieresmedia": "📰",
             "valeurs_actuelles": "🗞️",
-            "fdesouche_off": "💻",
-            "bastion_media": "🎥",
+            "fdesouche": "💻",
+            "bastionmediafr": "🎥",
             "bvoltaire": "💻",
             "causeur.fr": "🗞️",
             "breizhinfo": "💻",
-            "tvlibertes": "📺",
+            "tvlofficiel": "📺",
             "radiocourtoisie": "📻",
             "quotidien_present": "🗞️",
-            "mag_lincorrect": "📕",
+            "lincorrect_officiel": "📕",
             "revue_elements": "📘",
             "lesalonbeige": "⛪",
             "cerfiafr": "🚨",
             "alertesinfos": "🚨",
             "bfmtv": "📺",
-            "tf1info": "📺",
+            "lciofficiel": "📺",
             "leparisien": "🗞️",
             "cnews": "📺",
             "europe1": "📻",
-            "lejdd": "🗞️",
+            "le_jdd": "🗞️",
             "jdnews_fr": "🗞️",
             "tbt9w9": "📺",
             "canalplus": "📺",
-            "cstar": "📺",
+            "cstarlachaine": "📺",
             "europe2": "📻",
             "rfmfrance": "📻",
             "parismatch": "📸",
-            "capitalfr": "📈",
+            "magazinecapital": "📈",
             "voici": "🗞️",
             "femme_actuelle": "🗞️",
             "teleloisirs": "📺",
@@ -1368,8 +1325,8 @@
             "primamagazine": "🗞️",
             "tele2semaines": "📺",
             "telez_mag": "📺",
-            "harpersbazaarfrance": "👠",
-            "hachettelivre": "📚",
+            "bazaarfrance": "👠",
+            "hachettefr": "📚",
             "editionsfayard": "📚",
             "editionsgrasset": "📚",
             "editionsstock": "📚",
@@ -1379,38 +1336,36 @@
             "armand_colin": "📚",
             "universalmusicgroup": "🎵",
             "universalmusicfrance": "🎵",
-            "studiocanal": "🎬",
+            "studiocanal.fr": "🎬",
             "havas": "🏢",
             "havasparis": "🏢"
         };
-        accountEmojis["bernardhenrilevy"] = "👨🏻‍🦳";
 
         const accounts = [
-            // EXTRÊME DROITE (Politiques, Partis & International)
             { name: "Marine Le Pen", handle: "marine_lepen", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Condamnée pour détournement de plus de 4 M€ de fonds publics européens." },
             { name: "Jordan Bardella", handle: "jordanbardella", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Président du RN, épinglé pour son absentéisme record au Parlement européen." },
             { name: "Éric Zemmour", handle: "ericzemmour_", cat: "Extrême droite", label: "Extrême droite • Reconquête", style: "tag-ed", fact: "Multi-condamné en justice pour provocation à la haine raciale et injures." },
             { name: "Marion Maréchal", handle: "marionmarechal_", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Figure de la droite identitaire et promotrice de l'agenda ultra-conservateur." },
-            { name: "Éric Ciotti", handle: "ericciotti", cat: "Extrême droite", label: "Allié RN • UDR", style: "tag-ed", fact: "Artisan du ralliement de la droite traditionnelle au Rassemblement National." },
-            { name: "Sarah Knafo", handle: "sarah_knafo", cat: "Extrême droite", label: "Extrême droite • Reconquête", style: "tag-ed", fact: "Stratège de Reconquête et propagandiste de la théorie du « grand remplacement »." },
-            { name: "Sébastien Chenu", handle: "sebastienchenu_off", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Porte-voix de la « préférence nationale » et des thèses identitaires du RN." },
-            { name: "Jean-Philippe Tanguy", handle: "jph_tanguy", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Cadre du RN en première ligne pour défendre le programme anti-social du parti." },
-            { name: "Louis Aliot", handle: "louisaliot", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Condamné dans l'affaire des assistants parlementaires fictifs du FN/RN." },
-            { name: "Laure Lavalette", handle: "laure.lavalette", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Porte-parole du RN issue de la mouvance traditionaliste et anti-IVG." },
-            { name: "Edwige Diaz", handle: "edwigediaz", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Vice-présidente du RN, relais constant des paniques sécuritaires et xénophobes." },
-            { name: "Julien Odoul", handle: "julienodoul", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Agitateur du RN connu pour avoir pris à partie une mère accompagnatrice voilée." },
+            { name: "Éric Ciotti", handle: "eciotti", cat: "Extrême droite", label: "Allié RN • UDR", style: "tag-ed", fact: "Artisan du ralliement de la droite traditionnelle au Rassemblement National." },
+            { name: "Sarah Knafo", handle: "sarahknafo1", cat: "Extrême droite", label: "Extrême droite • Reconquête", style: "tag-ed", fact: "Stratège de Reconquête et propagandiste de la théorie du « grand remplacement »." },
+            { name: "Sébastien Chenu", handle: "sebastien_chenu", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Porte-voix de la « préférence nationale » et des thèses identitaires du RN." },
+            { name: "Jean-Philippe Tanguy", handle: "tanguyjeanphilippe", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Cadre du RN en première ligne pour défendre le programme anti-social du parti." },
+            { name: "Louis Aliot", handle: "louis_aliot", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Condamné dans l'affaire des assistants parlementaires fictifs du FN/RN." },
+            { name: "Laure Lavalette", handle: "laure_lavalette", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Porte-parole du RN issue de la mouvance traditionaliste et anti-IVG." },
+            { name: "Edwige Diaz", handle: "edwige_diaz", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Vice-présidente du RN, relais constant des paniques sécuritaires et xénophobes." },
+            { name: "Julien Odoul", handle: "julien_odoul", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Agitateur du RN connu pour avoir pris à partie une mère accompagnatrice voilée." },
             { name: "Laurent Jacobelli", handle: "laurentjacobelli", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Mis en examen pour outrages et diffamation après avoir qualifié un député de « racaille »." },
-            { name: "Robert Ménard", handle: "robertmenardfr", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Maire d'extrême droite auteur d'affichages municipaux stigmatisant les réfugiés." },
-            { name: "Gilbert Collard", handle: "gilbertcollard", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Figure historique des campagnes de haine du FN puis de Reconquête." },
-            { name: "Philippe de Villiers", handle: "philippedevilliers", cat: "Extrême droite", label: "Droite ultra-réac", style: "tag-ed", fact: "Pilier de la réaction identitaire et relais de théories complotistes sur CNews." },
-            { name: "Jean Messiha", handle: "jeanmessiha", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Auteur d'une cagnotte annulée pour le policier ayant tué le jeune Nahel." },
-            { name: "Pierre Gentillet", handle: "pierregentillet", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Chroniqueur CNews et député RN proche des réseaux pro-Kremlin." },
+            { name: "Robert Ménard", handle: "robert.menard_off", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Maire d'extrême droite auteur d'affichages municipaux stigmatisant les réfugiés." },
+            { name: "Gilbert Collard", handle: "gilbert_collard", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Figure historique des campagnes de haine du FN puis de Reconquête." },
+            { name: "Philippe de Villiers", handle: "phdevilliers", cat: "Extrême droite", label: "Droite ultra-réac", style: "tag-ed", fact: "Pilier de la réaction identitaire et relais de théories complotistes sur CNews." },
+            { name: "Jean Messiha", handle: "messiha.jean", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Auteur d'une cagnotte annulée pour le policier ayant tué le jeune Nahel." },
+            { name: "Pierre Gentillet", handle: "pierre_gentillet", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Chroniqueur CNews et député RN proche des réseaux pro-Kremlin." },
             { name: "Florian Philippot", handle: "f_philippot", cat: "Extrême droite", label: "Extrême droite • Complotiste", style: "tag-ed", fact: "Ex-numéro 2 du FN reconverti dans la désinformation complotiste et climatosceptique." },
             { name: "Nicolas Bay", handle: "nicolasbay", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed", fact: "Condamné dans l'affaire des assistants parlementaires européens du FN." },
             { name: "Tiffany Joncour", handle: "tiffany_joncour", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Députée RN relayant les discours sécuritaires et anti-immigration." },
             { name: "Marc de Fleurian", handle: "marcdefleurian", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Député RN promouvant la ligne identitaire et nationaliste." },
             { name: "Antoine Golliot", handle: "antoinegolliot", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Député RN aligné sur l'agenda anti-immigration du parti." },
-            { name: "Théo Bernhardt", handle: "theo_bnrdt", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Jeune député RN mobilisé sur les réseaux pour lisser l'extrême droite." },
+            { name: "Théo Bernhardt", handle: "bernhardt_th", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed", fact: "Jeune député RN mobilisé sur les réseaux pour lisser l'extrême droite." },
             { name: "Rassemblement National", handle: "rassemblementnational_fr", cat: "Extrême droite", label: "Parti d'extrême droite", style: "tag-ed", fact: "Parti fondé par d'anciens Waffen-SS et collaborateurs, condamné pour détournement." },
             { name: "Reconquête", handle: "reconquete_officiel", cat: "Extrême droite", label: "Parti d'extrême droite", style: "tag-ed", fact: "Parti d'Éric Zemmour bâti sur la xénophobie et le « grand remplacement »." },
             { name: "Donald Trump", handle: "realdonaldtrump", cat: "Extrême droite", label: "Extrême droite • USA", style: "tag-ed", fact: "Condamné au pénal, instigateur de l'assaut du Capitole et des politiques anti-migrants." },
@@ -1422,27 +1377,25 @@
             { name: "Benyamin Netanyahou", handle: "b.netanyahu", cat: "Extrême droite", label: "Extrême droite • Israël", style: "tag-ed", fact: "Visé par un mandat d'arrêt de la Cour pénale internationale pour crimes de guerre." },
             { name: "Aleksandar Vučić", handle: "buducnostsrbijeav", cat: "Extrême droite", label: "Nationaliste • Serbie", style: "tag-ed", fact: "Dérive autoritaire, contrôle des médias et répression des mouvements étudiants." },
 
-            // DROITE DURE, MACRONIE & LIBÉRAUX AUTORITAIRES
             { name: "Bruno Retailleau", handle: "bruno_retailleau", cat: "Droite / Macronie", label: "Droite ultra-conservatrice • LR", style: "tag-droite", fact: "Remise en cause de l'État de droit, ligne anti-immigration dure et issu de la Manif pour tous." },
-            { name: "Gérald Darmanin", handle: "geralddarmanin", cat: "Droite / Macronie", label: "Droite autoritaire • Macronie", style: "tag-droite", fact: "Auteur de la loi immigration votée avec le RN, a jugé Marine Le Pen « trop molle »." },
+            { name: "Gérald Darmanin", handle: "gerald_darmanin", cat: "Droite / Macronie", label: "Droite autoritaire • Macronie", style: "tag-droite", fact: "Auteur de la loi immigration votée avec le RN, a jugé Marine Le Pen « trop molle »." },
             { name: "Emmanuel Macron", handle: "emmanuelmacron", cat: "Droite / Macronie", label: "Macronie • Marchepied ED", style: "tag-droite", fact: "Passage en force de la retraite à 64 ans (49.3) et dissolution ayant propulsé le RN." },
             { name: "Nicolas Sarkozy", handle: "nicolassarkozy", cat: "Droite / Macronie", label: "Droite dure • LR", style: "tag-droite", fact: "Condamné définitivement pour corruption et trafic d'influence (affaire des écoutes)." },
-            { name: "Louis Sarkozy", handle: "sarkozy_louis", cat: "Droite / Macronie", label: "Droite réactionnaire", style: "tag-droite", fact: "Omniprésent sur les médias Bolloré pour promouvoir les thèses trumpistes et ultra-libérales." },
-            { name: "Nadine Morano", handle: "nadine__morano", cat: "Droite / Macronie", label: "Droite dure • LR", style: "tag-droite", fact: "Auteure de la sortie sur la France « pays de race blanche » et de dérapages xénophobes." },
+            { name: "Louis Sarkozy", handle: "sarkozy.louis", cat: "Droite / Macronie", label: "Droite réactionnaire", style: "tag-droite", fact: "Omniprésent sur les médias Bolloré pour promouvoir les thèses trumpistes et ultra-libérales." },
+            { name: "Nadine Morano", handle: "nadinemorano", cat: "Droite / Macronie", label: "Droite dure • LR", style: "tag-droite", fact: "Auteure de la sortie sur la France « pays de race blanche » et de dérapages xénophobes." },
             { name: "David Lisnard", handle: "davidlisnard", cat: "Droite / Macronie", label: "Droite libérale-conservatrice", style: "tag-droite", fact: "Promoteur d'un programme de casse sociale radicale et de surenchère identitaire." },
             { name: "Édouard Philippe", handle: "edouardphilippelh", cat: "Droite / Macronie", label: "Droite libérale • Horizons", style: "tag-droite", fact: "Partisan de la retraite à 67 ans et chef du gouvernement durant la répression des Gilets Jaunes." },
-            { name: "Aurore Bergé", handle: "aurore_berge", cat: "Droite / Macronie", label: "Macronie • Droite", style: "tag-droite", fact: "Surenchères identitaires constantes et mise en cause pour faux témoignage à l'Assemblée." },
-            { name: "Yaël Braun-Pivet", handle: "yaelbraunpivet", cat: "Droite / Macronie", label: "Macronie", style: "tag-droite", fact: "Présidente de l'Assemblée ayant soutenu inconditionnellement le gouvernement Netanyahou." },
+            { name: "Aurore Bergé", handle: "auroreberge.fr", cat: "Droite / Macronie", label: "Macronie • Droite", style: "tag-droite", fact: "Surenchères identitaires constantes et mise en cause pour faux témoignage à l'Assemblée." },
+            { name: "Yaël Braun-Pivet", handle: "yael.braunpivet", cat: "Droite / Macronie", label: "Macronie", style: "tag-droite", fact: "Présidente de l'Assemblée ayant soutenu inconditionnellement le gouvernement Netanyahou." },
             { name: "Manuel Valls", handle: "manuelvalls", cat: "Droite / Macronie", label: "Vallsiste • Réac", style: "tag-droite", fact: "Usage en série du 49.3 (loi Travail), déchéance de nationalité et croisades contre la gauche." },
             { name: "Meyer Habib", handle: "meyerhabib", cat: "Droite / Macronie", label: "Droite radicale", style: "tag-droite", fact: "Ancien député ayant qualifié la population de Gaza de « cancer »." },
             { name: "Shannon Seban", handle: "shannonseban", cat: "Droite / Macronie", label: "Macronie • Renaissance", style: "tag-droite", fact: "Relais régulier des campagnes de diabolisation de la gauche et des mobilisations." },
             { name: "Frédéric Lefebvre", handle: "fredericlefebvre_off", cat: "Droite / Macronie", label: "Droite", style: "tag-droite", fact: "Ex-porte-parole de l'UMP sous l'ère Sarkozy." },
             { name: "Les Républicains", handle: "lesrepublicains", cat: "Droite / Macronie", label: "Parti de droite", style: "tag-droite", fact: "Parti reprenant systématiquement les thèmes sécuritaires et identitaires du RN." },
 
-            // FACHOSPHÈRE, INFLUENCEURS & COLLECTIFS IDENTITAIRES
-            { name: "Damien Rieu", handle: "damienrieu", cat: "Fachosphère", label: "Identitaire • Extrême droite", style: "tag-facho", fact: "Cofondateur de Génération Identitaire (dissous) et diffuseur récidiviste de fake news racistes." },
+            { name: "Damien Rieu", handle: "damienrieu7", cat: "Fachosphère", label: "Identitaire • Extrême droite", style: "tag-facho", fact: "Cofondateur de Génération Identitaire (dissous) et diffuseur récidiviste de fake news racistes." },
             { name: "Thaïs d'Escufon", handle: "thaisdescufon", cat: "Fachosphère", label: "Influenceuse identitaire", style: "tag-facho", fact: "Ex-porte-parole de Génération Identitaire, condamnée pour injures publiques racistes." },
-            { name: "Alice Cordier", handle: "alice_cordier2", cat: "Fachosphère", label: "Fémonationaliste • Némésis", style: "tag-facho", fact: "Présidente du collectif identitaire Némésis instrumentalisant le féminisme à des fins xénophobes." },
+            { name: "Alice Cordier", handle: "alice_cordier_", cat: "Fachosphère", label: "Fémonationaliste • Némésis", style: "tag-facho", fact: "Présidente du collectif identitaire Némésis instrumentalisant le féminisme à des fins xénophobes." },
             { name: "Collectif Némésis", handle: "collectif.nemesis", cat: "Fachosphère", label: "Collectif identitaire", style: "tag-facho", fact: "Groupuscule d'extrême droite détournant la lutte contre les violences sexistes par racisme." },
             { name: "Erik Tegnér", handle: "erik_tegner", cat: "Fachosphère", label: "Extrême droite • Frontières", style: "tag-facho", fact: "Patron du média d'extrême droite Frontières, visé par plusieurs plaintes au sein de sa rédaction." },
             { name: "Jordan Florentin", handle: "jordanflorentin_", cat: "Fachosphère", label: "Agitateur • Frontières", style: "tag-facho", fact: "Spécialiste des micro-trottoirs provocateurs et du harcèlement de militant·es de gauche." },
@@ -1451,31 +1404,30 @@
             { name: "Alex Hitchens", handle: "thefrenchitch", cat: "Fachosphère", label: "Influenceur masculiniste", style: "tag-facho", fact: "Influenceur masculiniste promouvant la soumission des femmes et des arnaques en ligne." },
             { name: "Bassem", handle: "bassem.6920", cat: "Fachosphère", label: "Influenceur réactionnaire", style: "tag-facho", fact: "Multi-condamné pour violences, menaces, homophobie et propos racistes." },
             { name: "Psyhodelik", handle: "psyhodelik_off", cat: "Fachosphère", label: "YouTubeur alt-right / Harcèlement", style: "tag-facho", fact: "Ciblage et cyberharcèlement coordonné contre les créateur·ices progressistes et féministes." },
-            { name: "Sardoche", handle: "sardoche", cat: "Fachosphère", label: "Streameur réac", style: "tag-facho", fact: "Streameur aux multiples polémiques et prises de position réactionnaires." },
-            { name: "Kroc Blanc", handle: "krocblanc", cat: "Fachosphère", label: "Rappeur d'extrême droite", style: "tag-facho", fact: "Rappeur identitaire diffusant les thèmes nationalistes et anti-immigration." },
-            { name: "Mila", handle: "milafique_", cat: "Fachosphère", label: "Influenceuse identitaire", style: "tag-facho", fact: "Ralliée au collectif identitaire Némésis et aux campagnes de l'extrême droite." },
+            { name: "Sardoche", handle: "sardocheyeslife", cat: "Fachosphère", label: "Streameur réac", style: "tag-facho", fact: "Streameur aux multiples polémiques et prises de position réactionnaires." },
+            { name: "Kroc Blanc", handle: "krocblancoff", cat: "Fachosphère", label: "Rappeur d'extrême droite", style: "tag-facho", fact: "Rappeur identitaire diffusant les thèmes nationalistes et anti-immigration." },
+            { name: "Mila", handle: "milafique", cat: "Fachosphère", label: "Influenceuse identitaire", style: "tag-facho", fact: "Ralliée au collectif identitaire Némésis et aux campagnes de l'extrême droite." },
             { name: "Louise Montangon", handle: "louisemontangon", cat: "Fachosphère", label: "Influenceuse tradwife / ED", style: "tag-facho", fact: "Promotion du modèle « tradwife » ultra-réactionnaire et des idées identitaires." },
             { name: "Tanguy David", handle: "tanguydavidofficiel_", cat: "Fachosphère", label: "Militant droite / ex-Zemmour", style: "tag-facho", fact: "Ex-militant Reconquête habitué des plateaux de CNews et de TPMP." },
             { name: "Liam Di Benedetto", handle: "liamdibenedettooff", cat: "Fachosphère", label: "Influenceuse pro-RN", style: "tag-facho", fact: "Influenceuse téléréalité faisant la promotion active du Rassemblement National." },
             { name: "La Cocarde Étudiante", handle: "cocardeetudiante", cat: "Fachosphère", label: "Syndicat d'extrême droite", style: "tag-facho", fact: "Syndicat étudiant d'extrême droite impliqué dans des violences contre les blocages." },
-            { name: "Institut Iliade", handle: "institut_iliade", cat: "Fachosphère", label: "Think-tank identitaire", style: "tag-facho", fact: "Laboratoire idéologique de la mouvance identitaire et suprémaciste blanche." },
+            { name: "Institut Iliade", handle: "institutiliade", cat: "Fachosphère", label: "Think-tank identitaire", style: "tag-facho", fact: "Laboratoire idéologique de la mouvance identitaire et suprémaciste blanche." },
             { name: "Polémia", handle: "fondation_polemia", cat: "Fachosphère", label: "Fondation identitaire", style: "tag-facho", fact: "Structure de Jean-Yves Le Gallou dédiée à la « réinformation » d'extrême droite." },
             { name: "La Furia", handle: "lafuriaofficiel", cat: "Fachosphère", label: "Magazine ultra-droite", style: "tag-facho", fact: "Magazine cofondé par Papacito et Laurent Obertone, vitrine de l'ultra-droite." },
 
-            // ÉDITORIALISTES, CHRONIQUEURS & MÉDIAS D'OPINION
             { name: "Cyril Hanouna", handle: "cyrilhanouna", cat: "Médias & Éditos", label: "Mégaphone Bolloré", style: "tag-media", fact: "Record historique d'amendes de l'Arcom (plus de 7,5 M€) et dédiabolisation de l'extrême droite." },
             { name: "Pascal Praud", handle: "pascalpraud", cat: "Médias & Éditos", label: "Pilier CNews / Europe 1", style: "tag-media", fact: "Figure de proue de CNews, multi-épinglé par l'Arcom pour désinformation et climatoscepticisme." },
-            { name: "Mathieu Bock-Côté", handle: "mathieubockcote", cat: "Médias & Éditos", label: "Éditorialiste ultra-conservateur", style: "tag-media", fact: "Omniprésent sur CNews pour matraquer ses obsessions identitaires et anti-progressistes." },
-            { name: "Charlotte d'Ornellas", handle: "charlottedornellas", cat: "Médias & Éditos", label: "Éditorialiste d'extrême droite", style: "tag-media", fact: "Pilier des médias réactionnaires (Valeurs actuelles, CNews, JDD) issue de la mouvance identitaire." },
-            { name: "Geoffroy Lejeune", handle: "geoffroylejeune", cat: "Médias & Éditos", label: "Directeur JDD • Extrême droite", style: "tag-media", fact: "Placé au JDD par Bolloré après la condamnation de Valeurs actuelles pour injure raciste contre Danièle Obono." },
-            { name: "Sonia Mabrouk", handle: "soniamabrouk_officiel", cat: "Médias & Éditos", label: "Intervieweuse CNews / Europe 1", style: "tag-media", fact: "Interviews complaisantes envers l'extrême droite et offensives permanentes contre la gauche." },
-            { name: "Christine Kelly", handle: "christinekellyofficiel", cat: "Médias & Éditos", label: "Animatrice CNews", style: "tag-media", fact: "Tremplin quotidien d'Éric Zemmour sur CNews, émission condamnée à de lourdes amendes Arcom." },
-            { name: "Éric Naulleau", handle: "ericnaulleau", cat: "Médias & Éditos", label: "Chroniqueur réactionnaire", style: "tag-media", fact: "Chroniqueur chez Hanouna et CNews, soutien affiché d'Éric Zemmour." },
+            { name: "Mathieu Bock-Côté", handle: "mbockcote", cat: "Médias & Éditos", label: "Éditorialiste ultra-conservateur", style: "tag-media", fact: "Omniprésent sur CNews pour matraquer ses obsessions identitaires et anti-progressistes." },
+            { name: "Charlotte d'Ornellas", handle: "charlotte_d.ornellas", cat: "Médias & Éditos", label: "Éditorialiste d'extrême droite", style: "tag-media", fact: "Pilier des médias réactionnaires (Valeurs actuelles, CNews, JDD) issue de la mouvance identitaire." },
+            { name: "Geoffroy Lejeune", handle: "geoffroy_lejeune", cat: "Médias & Éditos", label: "Directeur JDD • Extrême droite", style: "tag-media", fact: "Placé au JDD par Bolloré après la condamnation de Valeurs actuelles pour injure raciste contre Danièle Obono." },
+            { name: "Sonia Mabrouk", handle: "somabrouk", cat: "Médias & Éditos", label: "Intervieweuse CNews / Europe 1", style: "tag-media", fact: "Interviews complaisantes envers l'extrême droite et offensives permanentes contre la gauche." },
+            { name: "Christine Kelly", handle: "christine_kellylea", cat: "Médias & Éditos", label: "Animatrice CNews", style: "tag-media", fact: "Tremplin quotidien d'Éric Zemmour sur CNews, émission condamnée à de lourdes amendes Arcom." },
+            { name: "Éric Naulleau", handle: "nofaithnolaw", cat: "Médias & Éditos", label: "Chroniqueur réactionnaire", style: "tag-media", fact: "Chroniqueur chez Hanouna et CNews, soutien affiché d'Éric Zemmour." },
             { name: "Gilles-William Goldnadel", handle: "gwgoldnadel", cat: "Médias & Éditos", label: "Éditorialiste CNews / Droite dure", style: "tag-media", fact: "Pilier de CNews tenant un discours d'extrême droite et de négation des crimes à Gaza." },
-            { name: "Eugénie Bastié", handle: "eugeniebastie", cat: "Médias & Éditos", label: "Éditorialiste conservatrice", style: "tag-media", fact: "Figure de la droite catholique réactionnaire et anti-féministe (Figaro, CNews)." },
+            { name: "Eugénie Bastié", handle: "eugeniebastieofficiel", cat: "Médias & Éditos", label: "Éditorialiste conservatrice", style: "tag-media", fact: "Figure de la droite catholique réactionnaire et anti-féministe (Figaro, CNews)." },
             { name: "Charles Consigny", handle: "charlesconsigny", cat: "Médias & Éditos", label: "Chroniqueur droite libérale", style: "tag-media", fact: "Chroniqueur défendant la casse sociale et le mépris des mouvements sociaux." },
-            { name: "Céline Pina", handle: "celine_pina", cat: "Médias & Éditos", label: "Essayiste réactionnaire", style: "tag-media", fact: "Chroniqueuse chez Causeur et CNews alimentant les paniques identitaires." },
-            { name: "Rachel Khan", handle: "rachelkhan_officiel", cat: "Médias & Éditos", label: "Essayiste • Caution droite/Macronie", style: "tag-media", fact: "Intervenante régulière pour disqualifier les luttes antiracistes et décoloniales." },
+            { name: "Céline Pina", handle: "celine.pina", cat: "Médias & Éditos", label: "Essayiste réactionnaire", style: "tag-media", fact: "Chroniqueuse chez Causeur et CNews alimentant les paniques identitaires." },
+            { name: "Rachel Khan", handle: "rachel_khan88", cat: "Médias & Éditos", label: "Essayiste • Caution droite/Macronie", style: "tag-media", fact: "Intervenante régulière pour disqualifier les luttes antiracistes et décoloniales." },
             { name: "Caroline Fourest", handle: "carolinefourest", cat: "Médias & Éditos", label: "Éditorialiste • Paniques morales", style: "tag-media", fact: "Croisades médiatiques permanentes contre la gauche, les féministes et les antiracistes." },
             { name: "Bernard-Henri Lévy", handle: "bernardhenrilevy", cat: "Médias & Éditos", label: "Éditorialiste néo-conservateur", style: "tag-media", fact: "Soutien inconditionnel de la politique de Netanyahou et calomnies contre la gauche." },
             { name: "Benjamin Duhamel", handle: "benjaminduhamel", cat: "Médias & Éditos", label: "Éditorialiste BFMTV", style: "tag-media", fact: "Incarnation du journalisme de cour macroniste et de l'acharnement contre le NFP." },
@@ -1484,35 +1436,34 @@
             { name: "Paul Amar", handle: "paulamaroff", cat: "Médias & Éditos", label: "Journaliste", style: "tag-media", fact: "Chroniqueur relayant les éléments de langage de la droite conservatrice." },
             { name: "Frontières (ex-Livre Noir)", handle: "frontieresmedia", cat: "Médias & Éditos", label: "Média d'extrême droite", style: "tag-ed", fact: "Média de propagande identitaire fichant ses opposants politiques." },
             { name: "Valeurs actuelles", handle: "valeurs_actuelles", cat: "Médias & Éditos", label: "Magazine d'extrême droite", style: "tag-ed", fact: "Hebdomadaire condamné pour injure publique à caractère raciste contre Danièle Obono." },
-            { name: "Fdesouche", handle: "fdesouche_off", cat: "Médias & Éditos", label: "Blog d'extrême droite", style: "tag-ed", fact: "Agrégateur historique de faits divers sélectionné pour alimenter la haine raciale." },
-            { name: "Bastion Média", handle: "bastion_media", cat: "Médias & Éditos", label: "Média identitaire", style: "tag-ed", fact: "Canal de diffusion de la jeunesse nationaliste et identitaire." },
+            { name: "Fdesouche", handle: "fdesouche", cat: "Médias & Éditos", label: "Blog d'extrême droite", style: "tag-ed", fact: "Agrégateur historique de faits divers sélectionné pour alimenter la haine raciale." },
+            { name: "Bastion Média", handle: "bastionmediafr", cat: "Médias & Éditos", label: "Média identitaire", style: "tag-ed", fact: "Canal de diffusion de la jeunesse nationaliste et identitaire." },
             { name: "Boulevard Voltaire", handle: "bvoltaire", cat: "Médias & Éditos", label: "Site d'extrême droite", style: "tag-ed", fact: "Site cofondé par Robert Ménard et financé par les réseaux de l'extrême droite." },
             { name: "Causeur", handle: "causeur.fr", cat: "Médias & Éditos", label: "Magazine réactionnaire", style: "tag-ed", fact: "Mensuel d'Élisabeth Lévy dédiabolisant les thèses d'extrême droite et sexistes." },
             { name: "Breizh-Info", handle: "breizhinfo", cat: "Médias & Éditos", label: "Site identitaire", style: "tag-ed", fact: "Site de « réinformation » breton tenu par d'anciens cadres de l'extrême droite." },
-            { name: "TV Libertés", handle: "tvlibertes", cat: "Médias & Éditos", label: "WebTV d'extrême droite", style: "tag-ed", fact: "WebTV nationaliste cofondée par d'anciens cadres du Front National." },
+            { name: "TV Libertés", handle: "tvlofficiel", cat: "Médias & Éditos", label: "WebTV d'extrême droite", style: "tag-ed", fact: "WebTV nationaliste cofondée par d'anciens cadres du Front National." },
             { name: "Radio Courtoisie", handle: "radiocourtoisie", cat: "Médias & Éditos", label: "Radio d'extrême droite", style: "tag-ed", fact: "Radio historique de toutes les chapelles de l'extrême droite radicale." },
             { name: "Présent", handle: "quotidien_present", cat: "Médias & Éditos", label: "Journal national-catholique", style: "tag-ed", fact: "Journal intégriste et nationaliste fondé par des proches de Jean-Marie Le Pen." },
-            { name: "L'Incorrect", handle: "mag_lincorrect", cat: "Médias & Éditos", label: "Magazine union des droites", style: "tag-ed", fact: "Mensuel conçu par les proches de Marion Maréchal pour sceller l'alliance LR-RN." },
+            { name: "L'Incorrect", handle: "lincorrect_officiel", cat: "Médias & Éditos", label: "Magazine union des droites", style: "tag-ed", fact: "Mensuel conçu par les proches de Marion Maréchal pour sceller l'alliance LR-RN." },
             { name: "Revue Éléments", handle: "revue_elements", cat: "Médias & Éditos", label: "Nouvelle Droite / GRECE", style: "tag-ed", fact: "Organe historique de la « Nouvelle Droite » ethno-différentialiste d'Alain de Benoist." },
             { name: "Le Salon Beige", handle: "lesalonbeige", cat: "Médias & Éditos", label: "Blog catho-intégriste", style: "tag-ed", fact: "Blog catholique intégriste militant contre l'IVG et les droits LGBT+." },
             { name: "Cerfia", handle: "cerfiafr", cat: "Médias & Éditos", label: "Compte d'actu anxiogène", style: "tag-media", fact: "Compte d'actualité virale misant sur les faits divers anxiogènes et le sensationnalisme." },
             { name: "AlertesInfos", handle: "alertesinfos", cat: "Médias & Éditos", label: "Compte d'actu droitisé", style: "tag-media", fact: "Compte de « breaking news » biaisé orientant l'actualité vers les thèmes de l'extrême droite." },
             { name: "BFMTV", handle: "bfmtv", cat: "Médias & Éditos", label: "Chaîne d'info en continu", style: "tag-media", fact: "Surenchère sécuritaire permanente et banalisation quotidienne des porte-parole du RN." },
-            { name: "LCI (TF1 Info)", handle: "tf1info", cat: "Médias & Éditos", label: "Chaîne d'info en continu", style: "tag-media", fact: "Plateaux d'éditocrates orientés à droite et hostiles aux mouvements sociaux." },
+            { name: "LCI (TF1 Info)", handle: "lciofficiel", cat: "Médias & Éditos", label: "Chaîne d'info en continu", style: "tag-media", fact: "Plateaux d'éditocrates orientés à droite et hostiles aux mouvements sociaux." },
             { name: "Le Parisien", handle: "leparisien", cat: "Médias & Éditos", label: "Quotidien (Groupe Arnault)", style: "tag-media", fact: "Quotidien propriété du milliardaire Bernard Arnault (LVMH), ligne sécuritaire et pro-macroniste." },
 
-            // EMPIRE BOLLORÉ, PRISMA, HACHETTE & GROUPES ASSOCIÉS
             { name: "CNews", handle: "cnews", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed", fact: "Navire amiral de Vincent Bolloré, multi-sanctionné par l'Arcom pour manquements au pluralisme." },
             { name: "Europe 1", handle: "europe1", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore", fact: "Radio purgée par Vincent Bolloré pour devenir l'antenne jumelle de CNews." },
-            { name: "Le JDD", handle: "lejdd", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed", fact: "Journal vidé de sa rédaction après une grève historique suite à la nomination de Geoffroy Lejeune." },
+            { name: "Le JDD", handle: "le_jdd", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed", fact: "Journal vidé de sa rédaction après une grève historique suite à la nomination de Geoffroy Lejeune." },
             { name: "JDNews", handle: "jdnews_fr", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed", fact: "Supplément magazine hebdomadaire lancé par l'empire Bolloré pour étendre l'influence du JDD." },
             { name: "TBT9 / TPMP", handle: "tbt9w9", cat: "Empire Bolloré & Co", label: "Émission Hanouna", style: "tag-bollore", fact: "Machine d'audience de Cyril Hanouna dédiabolisant l'extrême droite auprès du grand public." },
             { name: "Canal+", handle: "canalplus", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore", fact: "Tête de pont financière du groupe Vivendi / Bolloré ayant censuré plusieurs documentaires." },
-            { name: "CStar", handle: "cstar", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore", fact: "Chaîne de la TNT appartenant au groupe Canal+ / Vincent Bolloré." },
+            { name: "CStar", handle: "cstarlachaine", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore", fact: "Chaîne de la TNT appartenant au groupe Canal+ / Vincent Bolloré." },
             { name: "Europe 2", handle: "europe2", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore", fact: "Radio musicale du groupe Lagardère / Vivendi contrôlé par Vincent Bolloré." },
             { name: "RFM", handle: "rfmfrance", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore", fact: "Radio du groupe Lagardère racheté par l'empire de Vincent Bolloré." },
             { name: "Paris Match", handle: "parismatch", cat: "Empire Bolloré & Co", label: "Presse (ex-Bolloré / Arnault)", style: "tag-bollore", fact: "Hebdomadaire passé des mains de Vincent Bolloré à celles de Bernard Arnault (LVMH)." },
-            { name: "Capital", handle: "capitalfr", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine économique détenu par Prisma Media (propriété du groupe Bolloré)." },
+            { name: "Capital", handle: "magazinecapital", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine économique détenu par Prisma Media (propriété du groupe Bolloré)." },
             { name: "Voici", handle: "voici", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Presse people finançant le groupe Prisma Media / Louis Hachette Group (Bolloré)." },
             { name: "Femme Actuelle", handle: "femme_actuelle", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Titre grand public du groupe Prisma Media détenu par la galaxie Bolloré." },
             { name: "Télé-Loisirs", handle: "teleloisirs", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Média TV appartenant au groupe Prisma Media (empire Bolloré)." },
@@ -1522,8 +1473,8 @@
             { name: "Prima", handle: "primamagazine", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine féminin du groupe Prisma Media (empire Bolloré)." },
             { name: "Télé 2 Semaines", handle: "tele2semaines", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine TV appartenant au groupe Prisma Media (Bolloré)." },
             { name: "Télé Z", handle: "telez_mag", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine TV du groupe Prisma Media (galaxie Bolloré)." },
-            { name: "Harper's Bazaar France", handle: "harpersbazaarfrance", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine de mode édité en France par Prisma Media (Bolloré)." },
-            { name: "Hachette Livre", handle: "hachettelivre", cat: "Empire Bolloré & Co", label: "Édition (Bolloré)", style: "tag-bollore", fact: "Géant de l'édition française tombé sous le contrôle de Vincent Bolloré." },
+            { name: "Harper's Bazaar France", handle: "bazaarfrance", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore", fact: "Magazine de mode édité en France par Prisma Media (Bolloré)." },
+            { name: "Hachette Livre", handle: "hachettefr", cat: "Empire Bolloré & Co", label: "Édition (Bolloré)", style: "tag-bollore", fact: "Géant de l'édition française tombé sous le contrôle de Vincent Bolloré." },
             { name: "Fayard", handle: "editionsfayard", cat: "Empire Bolloré & Co", label: "Édition (Bolloré • Droite/ED)", style: "tag-bollore", fact: "Maison d'édition reprise en main par Bolloré pour publier Bardella, Villiers et Zemmour." },
             { name: "Grasset", handle: "editionsgrasset", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore", fact: "Filiale du groupe Hachette Livre contrôlé par la famille Bolloré." },
             { name: "Stock", handle: "editionsstock", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore", fact: "Maison d'édition appartenant au groupe Hachette Livre (empire Bolloré)." },
@@ -1533,20 +1484,17 @@
             { name: "Armand Colin", handle: "armand_colin", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore", fact: "Maison d'édition universitaire intégrée au groupe Hachette (Bolloré)." },
             { name: "Universal Music Group", handle: "universalmusicgroup", cat: "Empire Bolloré & Co", label: "Actionnariat Bolloré", style: "tag-bollore", fact: "Major musicale dont le groupe Bolloré / Vivendi est l'un des principaux actionnaires." },
             { name: "Universal Music France", handle: "universalmusicfrance", cat: "Empire Bolloré & Co", label: "Actionnariat Bolloré", style: "tag-bollore", fact: "Branche française d'Universal Music liée à l'actionnariat Bolloré." },
-            { name: "StudioCanal", handle: "studiocanal", cat: "Empire Bolloré & Co", label: "Cinéma (Groupe Canal / Bolloré)", style: "tag-bollore", fact: "Société de production et distribution cinéma du groupe Canal+ (Bolloré)." },
+            { name: "StudioCanal", handle: "studiocanal.fr", cat: "Empire Bolloré & Co", label: "Cinéma (Groupe Canal / Bolloré)", style: "tag-bollore", fact: "Société de production et distribution cinéma du groupe Canal+ (Bolloré)." },
             { name: "Havas", handle: "havas", cat: "Empire Bolloré & Co", label: "Communication (Bolloré)", style: "tag-bollore", fact: "Géant de la communication et du lobbying dirigé par Yannick et Vincent Bolloré." },
             { name: "Havas Paris", handle: "havasparis", cat: "Empire Bolloré & Co", label: "Communication (Bolloré)", style: "tag-bollore", fact: "Agence de communication stratégique au cœur de l'empire Bolloré." }
         ];
 
-        const STORAGE_KEY = "ig_blocklist_done_v6";
+        const STORAGE_KEY = "ig_blocklist_done_v7";
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
         let currentFilter = "all";
         let lastRewardedHandle = null;
         let currentReportedAccount = null;
 
-        // =========================================================
-        // GESTION DES 2 THÈMES : THÈME CLAIR & THÈME SOMBRE + ILLUMINATION
-        // =========================================================
         const THEME_KEY = "ig_blocklist_theme";
         let savedTheme = localStorage.getItem(THEME_KEY);
         let currentTheme = (savedTheme === "dark") ? "dark" : "light";
@@ -1584,9 +1532,6 @@
             applyTheme(true);
         }
 
-        // =========================================================
-        // PARTAGE NATIF (ANDROID / iOS / PC)
-        // =========================================================
         async function shareSite() {
             const shareData = {
                 title: "La Blocklist Instagram — On bloque l'extrême droite",
@@ -1598,9 +1543,7 @@
             if (navigator.share) {
                 try {
                     await navigator.share(shareData);
-                } catch (err) {
-                    // Partage annulé
-                }
+                } catch (err) {}
             } else {
                 try {
                     await navigator.clipboard.writeText(window.location.href);
@@ -1661,9 +1604,6 @@
             render();
         }
 
-        // =========================================================
-        // MODALE DE RÉINITIALISATION PROPRE (SANS BUG DE PARTAGE)
-        // =========================================================
         function openResetModal(e) {
             if (e) {
                 e.preventDefault();
@@ -1691,9 +1631,6 @@
             closeModal("resetConfirmModal");
         }
 
-        // =========================================================
-        // VALIDATION DYNAMIQUE DU PSEUDO / LIEN INSTAGRAM
-        // =========================================================
         function extractIgHandle(raw) {
             let cleaned = raw.trim();
             const urlMatch = cleaned.match(/(?:instagram\.com\/)([A-Za-z0-9._]+)/i);
@@ -1723,9 +1660,6 @@
             }
         }
 
-        // =========================================================
-        // GESTION DES MODALES GITHUB
-        // =========================================================
         function openModal(id) {
             document.getElementById(id).classList.add("open");
         }
@@ -1774,7 +1708,7 @@
 
         function submitReport() {
             if (!currentReportedAccount) return;
-            const reason = document.getById ? document.getElementById("repReason").value : "";
+            const reason = document.getElementById("repReason").value;
             const details = document.getElementById("repDetails").value.trim();
             const title = encodeURIComponent(`[Signalement] ${currentReportedAccount.name} (@${currentReportedAccount.handle})`);
             const body = encodeURIComponent(`**Compte concerné :** ${currentReportedAccount.name} (@${currentReportedAccount.handle})\n**Nature du problème :** ${reason}\n**Précisions :** ${details || "Aucune précision supplémentaire"}\n`);
@@ -1782,9 +1716,6 @@
             closeModal("reportModal");
         }
 
-        // =========================================================
-        // RENDU DE LA LISTE ET DE LA BARRE DE PROGRESSION
-        // =========================================================
         function render() {
             const listEl = document.getElementById("accountList");
             const query = document.getElementById("searchInput").value.toLowerCase().trim();
@@ -1794,7 +1725,10 @@
             const doneCount = doneHandles.length;
             const pct = Math.round((doneCount / total) * 100);
 
-            document.getElementById("progressBar").style.width = Math.max(pct, 3) + "%";
+            // Largeur minimale divisée par deux à 0% (1.5% au lieu de 3%)
+            const barWidth = doneCount === 0 ? 1.5 : Math.max(pct, 3);
+            document.getElementById("progressBar").style.width = barWidth + "%";
+
             document.getElementById("scoreNum").innerText = `${doneCount} / ${total}`;
             document.getElementById("scorePct").innerText = `${pct} % terminé`;
 
@@ -1892,7 +1826,6 @@
             }
         }
 
-        // Masquer le voile du bas lorsqu'on atteint le pied de page
         window.addEventListener("scroll", () => {
             const veil = document.getElementById("bottomScrollVeil");
             if (!veil) return;
@@ -1900,7 +1833,6 @@
             veil.classList.toggle("hidden", nearBottom);
         });
 
-        // Initialisation avec illumination du bouton de thème au premier chargement
         applyTheme(true);
         render();
     </script>
