@@ -15,6 +15,8 @@
             --bg-rgb: 246, 235, 224;
             --card: rgba(255, 251, 246, 0.88);
             --card-hero: rgba(255, 251, 246, 0.70);
+            --sub-card: rgba(236, 220, 204, 0.55);
+            --sub-card-border: rgba(180, 148, 122, 0.28);
             --text: #241813;
             --muted: #6b554a;
             --border: rgba(180, 148, 122, 0.36);
@@ -30,6 +32,11 @@
             --ghost-border: rgba(130, 120, 112, 0.18);
             --ghost-text: #7a6a60;
             
+            /* Dégradé Instagram harmonisé au thème clair */
+            --ig-grad: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --ig-shadow: 0 3px 10px rgba(220, 39, 67, 0.22);
+            --ig-border: rgba(255, 255, 255, 0.28);
+
             /* Chemin de l'illustration du banc */
             --hero-img: url('theme-beige.jpg');
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -45,6 +52,8 @@
             --bg-rgb: 11, 14, 18;
             --card: rgba(22, 25, 30, 0.90);
             --card-hero: rgba(18, 20, 25, 0.70);
+            --sub-card: rgba(10, 12, 16, 0.78);
+            --sub-card-border: rgba(255, 255, 255, 0.08);
             --text: #f5f2f2;
             --muted: #a39c9e;
             --border: rgba(255, 255, 255, 0.12);
@@ -60,6 +69,11 @@
             --ghost-border: rgba(255, 255, 255, 0.08);
             --ghost-text: #858082;
             
+            /* Dégradé Instagram harmonisé au thème sombre */
+            --ig-grad: linear-gradient(135deg, #d97724 0%, #d1512c 25%, #c41e3a 55%, #a81c56 80%, #8f1468 100%);
+            --ig-shadow: 0 3px 12px rgba(230, 57, 70, 0.25);
+            --ig-border: rgba(255, 255, 255, 0.16);
+
             /* Chemin de l'illustration des chaînes brisées */
             --hero-img: url('theme-dark.jpg');
         }
@@ -141,33 +155,35 @@
         }
 
         /* =========================================================
-           EN-TÊTE SUPÉRIEUR : TITRE CENTRÉ SUR GRADIENT DE FLOU + BOUTONS
+           EN-TÊTE SUPÉRIEUR : TITRE AGRANDI + DESCENDU + FLOU RENFORCÉ
+           ET LES 4 BOUTONS DESCENDUS DANS LA ZONE DE FONDU FLOUTÉE
            ========================================================= */
         .top-header {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            margin-bottom: 145px;
-            padding-top: 6px;
+            padding-top: 12px;
+            margin-bottom: 24px;
         }
 
         .brand-blur-zone {
             position: relative;
-            padding: 10px 28px;
-            margin-bottom: 12px;
-            border-radius: 20px;
+            padding: 12px 32px;
+            margin-top: 8px;
+            margin-bottom: 135px; /* Laisse l'illustration respirer avant les 4 boutons */
+            border-radius: 22px;
         }
 
         .brand-blur-zone::before {
             content: "";
             position: absolute;
-            inset: -8px -24px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            background: radial-gradient(ellipse at center, rgba(var(--bg-rgb), 0.55) 0%, rgba(var(--bg-rgb), 0.2) 60%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
-            mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+            inset: -12px -30px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            background: radial-gradient(ellipse at center, rgba(var(--bg-rgb), 0.72) 0%, rgba(var(--bg-rgb), 0.35) 62%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 42%, transparent 84%);
+            mask-image: radial-gradient(ellipse at center, black 42%, transparent 84%);
             z-index: -1;
             pointer-events: none;
         }
@@ -175,21 +191,29 @@
         .brand-title {
             font-family: var(--font-sans);
             font-weight: 900;
-            font-size: clamp(1.35rem, 4vw, 1.75rem);
+            font-size: clamp(1.5rem, 4.6vw, 2.05rem);
             letter-spacing: -0.04em;
             text-transform: uppercase;
             color: var(--text);
             line-height: 1.05;
-            text-shadow: 0 2px 14px rgba(var(--bg-rgb), 0.95);
+            text-shadow: 0 2px 16px rgba(var(--bg-rgb), 0.98);
         }
 
-        .top-actions {
+        /* Bandeau flouté accueillant les 4 boutons au bas de l'image */
+        .top-actions-bar {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             gap: 8px;
             width: 100%;
+            padding: 10px 14px;
+            border-radius: 99px;
+            background: rgba(var(--bg-rgb), 0.58);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
         }
 
         .btn-top {
@@ -358,38 +382,67 @@
             line-height: 1.5;
         }
 
-        /* Mémo visuel rapide en 3 étapes (Audit UX : réduction de friction) */
+        /* Mémo visuel rapide en 3 étapes avec aperçu du vrai bouton Instagram */
         .quick-steps {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 6px;
-            background: rgba(var(--bg-rgb), 0.5);
-            border: 1px solid var(--border);
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.74rem;
+            gap: 8px;
+            background: var(--sub-card);
+            border: 1px solid var(--sub-card-border);
+            padding: 8px 14px;
+            border-radius: 14px;
+            font-size: 0.76rem;
             font-weight: 700;
             color: var(--muted);
         }
         .quick-steps span strong { color: var(--text); }
         .quick-steps .step-sep { opacity: 0.45; }
 
+        .ig-mini-preview {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--ig-grad);
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.71rem;
+            font-weight: 800;
+            border: 1px solid var(--ig-border);
+            box-shadow: 0 2px 6px rgba(220, 39, 67, 0.2);
+            vertical-align: middle;
+        }
+        .ig-mini-preview svg {
+            width: 11px;
+            height: 11px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+        }
+
         /* =========================================================
-           BLOC EXPLICATION CENTRÉ
+           BLOC EXPLICATION AVEC SOUS-CASE EN SOUS-TEINTE CONTRASTÉE
            ========================================================= */
-        .explain-wrapper { margin-bottom: 10px; }
-        .btn-explain {
-            width: 100%;
+        .explain-wrapper {
+            margin-bottom: 12px;
             background: var(--card-hero);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            color: var(--text);
             border: 1px solid var(--border);
-            padding: 11px 16px;
+            border-radius: 16px;
+            padding: 6px;
+            transition: all 0.2s ease;
+        }
+        .btn-explain {
+            width: 100%;
+            background: transparent;
+            color: var(--text);
+            border: none;
+            padding: 10px 14px;
             border-radius: 12px;
-            font-size: 0.84rem;
+            font-size: 0.85rem;
             font-weight: 800;
             cursor: pointer;
             display: flex;
@@ -397,25 +450,25 @@
             align-items: center;
             gap: 8px;
             position: relative;
-            transition: all 0.15s;
+            transition: background-color 0.15s;
         }
-        .btn-explain:hover { border-color: var(--muted); }
-        .explain-arrow { position: absolute; right: 16px; font-size: 0.75rem; color: var(--muted); }
+        .btn-explain:hover { background: rgba(var(--bg-rgb), 0.35); }
+        .explain-arrow { position: absolute; right: 14px; font-size: 0.75rem; color: var(--muted); }
+        
+        /* Sous-case avec sous-teinte adaptée aux deux thèmes */
         .explain-content {
             display: none;
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-top: none;
+            background: var(--sub-card);
+            border: 1px solid var(--sub-card-border);
             padding: 16px 18px;
-            border-radius: 0 0 12px 12px;
-            margin-top: -6px;
+            border-radius: 12px;
+            margin-top: 6px;
             font-size: 0.84rem;
             color: var(--text);
             line-height: 1.55;
         }
         .explain-content.open { display: block; }
-        .explain-content ul { padding-left: 18px; margin: 8px 0; display: flex; flex-direction: column; gap: 8px; }
+        .explain-content ul { padding-left: 18px; margin: 10px 0 4px 0; display: flex; flex-direction: column; gap: 9px; }
         .explain-content li strong { color: var(--green); }
 
         /* =========================================================
@@ -439,7 +492,8 @@
         .trust-box:hover { opacity: 1; }
 
         /* =========================================================
-           DASHBOARD STICKY : BARRE LUDIQUE + COUREUR VERS LA DROITE + RESET
+           DASHBOARD STICKY : MENTION HAUTE + BARRE PLEINE LARGEUR
+           + BOUTON RÉINITIALISER CENTRÉ EN DESSOUS + FILTRES WRAPPÉS
            ========================================================= */
         .sticky-dashboard {
             position: sticky;
@@ -456,11 +510,24 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 14px 16px;
+            padding: 14px 16px 16px 16px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
+
+        /* Mention dans la partie haute de la case Grade actuel */
+        .dash-autosave-note {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--muted);
+            background: var(--sub-card);
+            border: 1px solid var(--sub-card-border);
+            padding: 6px 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
         
-        .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px; }
         .milestone { display: flex; align-items: center; gap: 10px; }
         .milestone-icon { font-size: 1.55rem; }
         .milestone-label { font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: var(--muted); letter-spacing: 0.05em; }
@@ -470,16 +537,18 @@
         .score-num { font-size: 1.2rem; font-weight: 900; color: var(--green); }
         .score-pct { font-size: 0.73rem; font-weight: 700; color: var(--muted); display: block; }
 
-        /* Ligne Barre + Bouton Réinitialiser la progression */
-        .progress-row {
+        /* Barre toute la largeur + espace + bouton Réinitialiser centré en dessous */
+        .progress-section {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 14px;
+            width: 100%;
         }
 
         .progress-track {
-            flex: 1;
+            width: 100%;
             background: var(--border);
             height: 14px;
             border-radius: 99px;
@@ -492,7 +561,6 @@
             100% { background-position: 40px 50%; }
         }
 
-        /* Le personnage est inversé (scaleX(-1)) pour courir vers la DROITE ! */
         @keyframes runnerBounceRight {
             0%, 100% { transform: translate(50%, -54%) scaleX(-1) translateY(0px) rotate(-5deg); }
             50% { transform: translate(50%, -54%) scaleX(-1) translateY(-3px) rotate(6deg); }
@@ -529,15 +597,16 @@
             user-select: none;
         }
 
-        /* Bouton Réinitialiser la progression avec grande flèche ouverte SVG */
+        /* Bouton Réinitialiser la progression centré sous la barre */
         .btn-reset-prog {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             background: transparent;
             border: 1px solid var(--border);
             color: var(--muted);
-            padding: 5px 11px;
+            padding: 5px 13px;
             border-radius: 99px;
             font-size: 0.74rem;
             font-weight: 700;
@@ -564,10 +633,27 @@
             transform: rotate(-180deg);
         }
 
-        /* Filtres et Recherche */
-        .filter-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
-        .filter-row::-webkit-scrollbar { display: none; }
-        .pill { background: var(--pill-bg); color: var(--pill-text); border: 1px solid transparent; padding: 6px 12px; border-radius: 99px; font-size: 0.76rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+        /* Filtres organisés avec retour à la ligne automatique et centrage */
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding-top: 2px;
+        }
+        .pill {
+            background: var(--pill-bg);
+            color: var(--pill-text);
+            border: 1px solid transparent;
+            padding: 6px 12px;
+            border-radius: 99px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+        .pill:hover { border-color: var(--border); }
         .pill.active { background: var(--green); color: #fff; }
         
         .search-bar { display: flex; margin-bottom: 12px; }
@@ -575,7 +661,7 @@
         .search-input:focus { border-color: var(--green); }
 
         /* =========================================================
-           ÉTAT DE VICTOIRE / FIN DE LISTE (RECOMMANDATION AUDIT UX)
+           ÉTAT DE VICTOIRE / FIN DE LISTE
            ========================================================= */
         .empty-victory-card {
             background: var(--card);
@@ -592,38 +678,47 @@
         .empty-victory-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
         /* =========================================================
-           LISTE DES COMPTES, FAITS MARQUANTS, SIGNALEMENT & RÉCOMPENSE
+           LISTE DES COMPTES : DRAPEAU EN HAUT À DROITE, ÉMOJIS,
+           BOUTON BLOQUÉ GRISÂTRE À GAUCHE & INSTAGRAM GRADIENT À DROITE
            ========================================================= */
         .list-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 10px; padding: 0 4px; flex-wrap: wrap; gap: 6px; }
-        .list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; position: relative; }
+        .list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 40px; position: relative; }
         
         .row {
             position: relative;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 13px;
-            padding: 12px 14px;
-            gap: 12px;
+            border-radius: 14px;
+            padding: 13px 14px;
+            gap: 11px;
             transition: all 0.18s ease;
         }
         .row.done { background: var(--green-bg); border-color: var(--green-border); }
 
+        .row-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            width: 100%;
+        }
+
         .row-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
-        .row-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .row-header { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+        .person-emoji { font-size: 1.08rem; line-height: 1; user-select: none; }
         .name { font-weight: 800; font-size: 0.95rem; color: var(--text); letter-spacing: -0.01em; }
         .row.done .name { text-decoration: line-through; color: var(--muted); }
         .handle { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
         
         /* Micro-fait marquant tout petit sous le compte */
         .fact-note {
-            font-size: 0.71rem;
+            font-size: 0.72rem;
             color: var(--muted);
             opacity: 0.88;
             font-style: italic;
-            line-height: 1.3;
+            line-height: 1.32;
             margin-top: 2px;
         }
 
@@ -635,33 +730,126 @@
         .tag-media { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
         .tag-bollore { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
 
-        /* Boutons d'action de chaque ligne */
-        .row-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; position: relative; }
-        .btn-ig { background: var(--text); color: var(--bg); text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 0.79rem; font-weight: 700; white-space: nowrap; transition: opacity 0.15s; }
-        .btn-ig:hover { opacity: 0.85; }
-        .row.done .btn-ig { background: rgba(0, 0, 0, 0.08); color: var(--muted); }
-
-        .btn-check { background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 7px 11px; border-radius: 8px; font-size: 0.77rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
-        .row.done .btn-check { background: var(--green); border-color: var(--green); color: #fff; }
-
-        /* Bouton Drapeau pour signaler un compte erroné */
+        /* Drapeau blanc remonté en haut à droite de la carte */
         .btn-flag {
             background: transparent;
             border: 1px solid transparent;
             color: var(--muted);
-            opacity: 0.55;
-            padding: 7px 8px;
-            border-radius: 8px;
+            opacity: 0.48;
+            padding: 4px 6px;
+            border-radius: 7px;
             font-size: 0.82rem;
             cursor: pointer;
             transition: all 0.15s ease;
             line-height: 1;
+            flex-shrink: 0;
         }
         .btn-flag:hover {
             opacity: 1;
             border-color: var(--border);
             background: var(--pill-bg);
             color: var(--accent);
+        }
+
+        /* Zone du bas : seulement les 2 boutons (Bloqué à gauche, Instagram à droite) */
+        .row-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            width: 100%;
+        }
+
+        /* Bouton Bloqué (à gauche) : grisâtre/fantomatique par défaut avec case carrée */
+        .btn-check {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            background: var(--ghost-bg);
+            border: 1px solid var(--ghost-border);
+            color: var(--ghost-text);
+            opacity: 0.72;
+            padding: 8px 13px;
+            border-radius: 9px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.18s ease;
+            font-family: var(--font-sans);
+        }
+        .btn-check:hover {
+            opacity: 0.95;
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        /* Case à cocher carrée à l'intérieur du bouton Bloqué */
+        .check-square {
+            width: 14px;
+            height: 14px;
+            border: 1.6px solid currentColor;
+            border-radius: 3.5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.68rem;
+            line-height: 1;
+            transition: all 0.15s ease;
+        }
+
+        /* État validé : le bouton Bloqué devient bien visible et coché */
+        .row.done .btn-check {
+            background: var(--green);
+            border-color: var(--green);
+            color: #ffffff;
+            opacity: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+        .row.done .check-square {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: #ffffff;
+        }
+
+        /* Bouton Instagram (à droite pour les droitiers) avec dégradé et logo */
+        .btn-ig {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--ig-grad);
+            color: #ffffff;
+            border: 1px solid var(--ig-border);
+            box-shadow: var(--ig-shadow);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 9px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            white-space: nowrap;
+            transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-ig svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+        .btn-ig:hover {
+            transform: translateY(-1px);
+            opacity: 0.94;
+        }
+        .row.done .btn-ig {
+            background: var(--ghost-bg);
+            color: var(--muted);
+            border-color: var(--ghost-border);
+            box-shadow: none;
+            opacity: 0.75;
         }
 
         /* Animation de récompense "Bien joué, au suivant !" */
@@ -691,8 +879,6 @@
 
         /* Adaptations spécifiques au mode Sombre */
         [data-theme="dark"] .criteria-box { background: #1f1b1e; color: #d6caca; }
-        [data-theme="dark"] .btn-ig { background: #262024; color: #f5f2f2; border: 1px solid #3a2e33; }
-        [data-theme="dark"] .row.done .btn-ig { background: rgba(230, 57, 70, 0.15); color: #ff8fa3; border-color: transparent; }
         [data-theme="dark"] .tag-ed { background: rgba(220, 38, 38, 0.22); color: #fca5a5; border-color: rgba(220, 38, 38, 0.45); }
         [data-theme="dark"] .tag-droite { background: rgba(217, 119, 6, 0.2); color: #fcd34d; border-color: rgba(217, 119, 6, 0.4); }
         [data-theme="dark"] .tag-facho { background: rgba(147, 51, 234, 0.2); color: #d8b4fe; border-color: rgba(147, 51, 234, 0.4); }
@@ -722,7 +908,7 @@
         }
 
         /* =========================================================
-           MODALES (AJOUT, SUGGESTION SITE & SIGNALEMENT D'ERREUR)
+           MODALES (AJOUT, SUGGESTION, SIGNALEMENT & RÉINITIALISATION)
            ========================================================= */
         .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100; backdrop-filter: blur(4px); }
         .modal-backdrop.open { display: flex; }
@@ -736,6 +922,36 @@
         .field-hint { font-size: 0.72rem; margin-top: 4px; font-weight: 600; color: var(--muted); }
         .field-hint.valid { color: var(--green); }
         .criteria-box { background: var(--pill-bg); padding: 10px 12px; border-radius: 8px; font-size: 0.77rem; color: var(--pill-text); margin-bottom: 14px; line-height: 1.45; }
+
+        .modal-actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .btn-modal-cancel {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.86rem;
+            cursor: pointer;
+            font-family: var(--font-sans);
+        }
+        .btn-modal-danger {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: none;
+            background: var(--accent);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.86rem;
+            cursor: pointer;
+            font-family: var(--font-sans);
+        }
 
         /* =========================================================
            PIED DE PAGE (AVEC SIGNATURE @HENRILUBSZYNSKI & MENTION IA)
@@ -772,12 +988,11 @@
         }
 
         @media (max-width: 520px) {
-            .top-header { margin-bottom: 105px; }
-            .hero-bg-banner { height: 340px; }
-            .row { flex-direction: column; align-items: flex-start; }
-            .row-actions { width: 100%; justify-content: flex-end; margin-top: 6px; }
-            .btn-ig, .btn-check { flex: 1; text-align: center; padding: 10px 12px; font-size: 0.82rem; }
-            .progress-row { flex-wrap: wrap; }
+            .brand-blur-zone { margin-bottom: 95px; }
+            .top-actions-bar { border-radius: 20px; padding: 10px; }
+            .hero-bg-banner { height: 350px; }
+            .row-actions { width: 100%; justify-content: space-between; }
+            .btn-check, .btn-ig { flex: 1; padding: 10px 12px; font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -786,18 +1001,18 @@
     <!-- Image 100% visible en haut avec fondu lisse vers la teinte du fond en bas -->
     <div class="hero-bg-banner" aria-hidden="true"></div>
 
-    <!-- En-tête centré avec gradient de flou et boutons alignés -->
+    <!-- En-tête centré avec titre agrandi/abaissé + flou renforcé, et les 4 boutons en bas de l'image -->
     <header class="top-header">
         <div class="brand-blur-zone">
             <div class="brand-title">ON BLOQUE L'EXTRÊME DROITE</div>
         </div>
-        <div class="top-actions">
-            <button class="btn-theme-split" onclick="cycleTheme()" id="themeBtn" title="Changer l'apparence du site">
+        <div class="top-actions-bar">
+            <button type="button" class="btn-theme-split" onclick="cycleTheme()" id="themeBtn" title="Changer l'apparence du site">
                 <span class="theme-icon-part" id="themeIconPart">🌿</span>
                 <span class="theme-label-part" id="themeLabelPart">Passer au thème sombre</span>
             </button>
-            <button class="btn-top" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
-            <button class="btn-top outline" onclick="openModal('siteFeedbackModal')">💡 Suggestion site</button>
+            <button type="button" class="btn-top" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
+            <button type="button" class="btn-top outline" onclick="openModal('siteFeedbackModal')">💡 Suggestion site</button>
             <a class="btn-top outline" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Code source ↗</a>
         </div>
     </header>
@@ -806,7 +1021,7 @@
     <section class="hero">
         <h1>La blocklist.</h1>
         <div class="kicker">Action collective & hygiène numérique</div>
-        <button class="btn-share-subtle" onclick="shareSite()" id="shareBtn" title="Partager ce site">
+        <button type="button" class="btn-share-subtle" onclick="shareSite()" id="shareBtn" title="Partager ce site">
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="18" cy="5" r="3"></circle>
                 <circle cx="6" cy="12" r="3"></circle>
@@ -818,7 +1033,7 @@
         </button>
         <p class="lead">L'algorithme ne fait pas la différence entre un like et un clash : tout leur donne de la visibilité. Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Zéro serveur, ta progression reste stockée sur ton appareil.</p>
         <div class="quick-steps" aria-label="Mode d'emploi rapide">
-            <span><strong>1.</strong> Clique sur « Instagram ↗ »</span>
+            <span><strong>1.</strong> Clique sur <span class="ig-mini-preview"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram ↗</span></span>
             <span class="step-sep">→</span>
             <span><strong>2.</strong> Menu <strong>⋯</strong> en haut à droite</span>
             <span class="step-sep">→</span>
@@ -826,10 +1041,10 @@
         </div>
     </section>
 
-    <!-- Bouton et panneau déroulant d'explication centré -->
+    <!-- Grande case d'explication contenant la sous-case en sous-teinte -->
     <div class="explain-wrapper">
-        <button class="btn-explain" onclick="toggleExplain()">
-            <span>💡 Explication : pourquoi et comment ça marche ?</span>
+        <button type="button" class="btn-explain" onclick="toggleExplain()">
+            <span>💡 Pourquoi bloquer massivement ces comptes ?</span>
             <span class="explain-arrow" id="explainArrow">▼</span>
         </button>
         <div class="explain-content" id="explainContent">
@@ -847,9 +1062,12 @@
         🔒 <strong>Transparence totale :</strong> Ce site est 100 % open-source. Aucun serveur centralisé, aucun traqueur et aucune donnée collectée. Tout s'exécute directement sur votre appareil et votre progression est stockée en local (localStorage). Vous êtes chez vous.
     </div>
 
-    <!-- Tableau de bord Sticky avec barre animée, coureur vers la droite et bouton Réinitialiser la progression -->
+    <!-- Tableau de bord Sticky agrandi avec mention haute, barre pleine largeur et bouton Réinitialiser centré en dessous -->
     <div class="sticky-dashboard">
         <div class="dash-card">
+            <div class="dash-autosave-note">
+                ⏱️ Fais à ton rythme. La progression est sauvegardée automatiquement.
+            </div>
             <div class="dash-top">
                 <div class="milestone">
                     <span class="milestone-icon" id="milestoneIcon">🧭</span>
@@ -863,13 +1081,13 @@
                     <span class="score-pct" id="scorePct">0 % terminé</span>
                 </div>
             </div>
-            <div class="progress-row">
+            <div class="progress-section">
                 <div class="progress-track">
                     <div class="progress-fill" id="progressBar">
                         <span class="progress-runner" id="progressRunner" title="En route !">🏃</span>
                     </div>
                 </div>
-                <button class="btn-reset-prog" onclick="resetAll()" title="Remettre le compteur à zéro">
+                <button type="button" class="btn-reset-prog" onclick="openResetModal(event)" title="Remettre le compteur à zéro">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
                         <path d="M3 3v5h5"></path>
@@ -878,13 +1096,13 @@
                 </button>
             </div>
             <div class="filter-row" id="filterRow">
-                <button class="pill active" onclick="setFilter('all', this)">Tout voir</button>
-                <button class="pill" onclick="setFilter('todo', this)">⏳ À faire</button>
-                <button class="pill" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
-                <button class="pill" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
-                <button class="pill" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
-                <button class="pill" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
-                <button class="pill" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
+                <button type="button" class="pill active" onclick="setFilter('all', this)">Tout voir</button>
+                <button type="button" class="pill" onclick="setFilter('todo', this)">⏳ À faire</button>
+                <button type="button" class="pill" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
+                <button type="button" class="pill" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
+                <button type="button" class="pill" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
+                <button type="button" class="pill" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
+                <button type="button" class="pill" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
             </div>
         </div>
     </div>
@@ -894,9 +1112,10 @@
         <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un nom, @pseudo, fait marquant ou étiquette..." oninput="render()">
     </div>
 
+    <!-- Métadonnées de liste sans l'ancienne mention d'astuce -->
     <div class="list-meta">
         <span id="visibleCount">0 comptes affichés</span>
-        <span>Astuce : cliquer sur « Instagram ↗ » coche automatiquement • 🏳️ Signaler une erreur</span>
+        <span>🏳️ Signaler une erreur sur une fiche</span>
     </div>
 
     <div class="list" id="accountList"></div>
@@ -909,7 +1128,7 @@
         <div class="modal">
             <div class="modal-header">
                 <span class="modal-title">+ Il manque quelqu'un ?</span>
-                <button class="modal-close" onclick="closeModal('suggestModal')">×</button>
+                <button type="button" class="modal-close" onclick="closeModal('suggestModal')">×</button>
             </div>
             <div class="criteria-box">
                 <strong>Critères d'ajout :</strong> Personnalité politique, éditorialiste, influenceur ou média public (droite, extrême droite, relais réactionnaire). Pas de compte privé ni de particulier.
@@ -937,7 +1156,7 @@
                     <option value="Empire Bolloré & Co — Groupe / Édition">Empire Bolloré & Co (Chaîne, magazine, édition...)</option>
                 </select>
             </div>
-            <button class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSuggestion()">Envoyer la proposition sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSuggestion()">Envoyer la proposition sur GitHub ↗</button>
         </div>
     </div>
 
@@ -946,7 +1165,7 @@
         <div class="modal">
             <div class="modal-header">
                 <span class="modal-title">💡 Suggestion pour le site</span>
-                <button class="modal-close" onclick="closeModal('siteFeedbackModal')">×</button>
+                <button type="button" class="modal-close" onclick="closeModal('siteFeedbackModal')">×</button>
             </div>
             <div class="criteria-box">
                 Une idée d'amélioration, un bug d'affichage ou une suggestion de design ? Envoie ton message directement via GitHub.
@@ -959,7 +1178,7 @@
                 <label>Ton message ou ta proposition</label>
                 <textarea id="fbBody" class="form-control" rows="4" placeholder="Décris ton idée d'amélioration ici..."></textarea>
             </div>
-            <button class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSiteFeedback()">Envoyer sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSiteFeedback()">Envoyer sur GitHub ↗</button>
         </div>
     </div>
 
@@ -968,7 +1187,7 @@
         <div class="modal">
             <div class="modal-header">
                 <span class="modal-title">🏳️ Signaler une erreur</span>
-                <button class="modal-close" onclick="closeModal('reportModal')">×</button>
+                <button type="button" class="modal-close" onclick="closeModal('reportModal')">×</button>
             </div>
             <div class="criteria-box" id="reportTargetInfo">
                 Compte concerné : ...
@@ -986,7 +1205,24 @@
                 <label>Précisions (nouveau pseudo, source...)</label>
                 <input type="text" id="repDetails" class="form-control" placeholder="Ex: Son nouveau pseudo est @...">
             </div>
-            <button class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitReport()">Transmettre le signalement sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitReport()">Transmettre le signalement sur GitHub ↗</button>
+        </div>
+    </div>
+
+    <!-- Modale 4 : Confirmation de réinitialisation sur-mesure (zéro bug de partage à l'annulation) -->
+    <div class="modal-backdrop" id="resetConfirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">🔄 Réinitialiser la progression ?</span>
+                <button type="button" class="modal-close" onclick="closeResetModal(event)">×</button>
+            </div>
+            <div class="criteria-box" style="margin-bottom: 6px;">
+                Veux-tu vraiment remettre ton compteur à zéro ? Tous les comptes cochés sur cet appareil repasseront dans la liste « À faire ».
+            </div>
+            <div class="modal-actions-row">
+                <button type="button" class="btn-modal-cancel" onclick="closeResetModal(event)">Annuler</button>
+                <button type="button" class="btn-modal-danger" onclick="confirmResetAll(event)">Oui, tout réinitialiser</button>
+            </div>
         </div>
     </div>
 
@@ -998,10 +1234,156 @@
     </footer>
 
     <script>
-        // Pseudo Instagram du créateur (modifiable ici si besoin)
+        // Pseudo Instagram du créateur
         const CREATOR_IG_HANDLE = "henrilubszynski";
         document.getElementById("creatorIgLink").href = `https://www.instagram.com/${CREATOR_IG_HANDLE}/`;
         document.getElementById("creatorIgLink").innerText = `@${CREATOR_IG_HANDLE}`;
+
+        // Émojis représentatifs (couleur de cheveux, teint, lunettes/tenue ou icône média)
+        const accountEmojis = {
+            "marine_lepen": "👱🏻‍♀️",
+            "jordanbardella": "🤵🏻‍♂️",
+            "ericzemmour_": "👨🏻‍🦲",
+            "marionmarechal_": "👱🏻‍♀️",
+            "ericciotti": "👨🏻‍🦲",
+            "sarah_knafo": "👩🏻",
+            "sebastienchenu_off": "🤵🏻‍♂️",
+            "jph_tanguy": "🧑🏻‍💼",
+            "louisaliot": "👨🏻",
+            "laure.lavalette": "👩🏻",
+            "edwigediaz": "👩🏻",
+            "julienodoul": "👱🏻‍♂️",
+            "laurentjacobelli": "👨🏻",
+            "robertmenardfr": "👨🏻‍🦳",
+            "gilbertcollard": "👨🏻‍🦳",
+            "philippedevilliers": "👴🏻",
+            "jeanmessiha": "👨🏽‍💼",
+            "pierregentillet": "🧔🏻‍♂️",
+            "f_philippot": "🤵🏻‍♂️",
+            "nicolasbay": "👨🏻",
+            "tiffany_joncour": "👩🏻",
+            "marcdefleurian": "👨🏻",
+            "antoinegolliot": "👨🏻",
+            "theo_bnrdt": "👱🏻‍♂️",
+            "rassemblementnational_fr": "🔥",
+            "reconquete_officiel": "📢",
+            "realdonaldtrump": "👱‍♂️",
+            "giorgiameloni": "👱🏻‍♀️",
+            "javiermilei": "🦁",
+            "jairmessiasbolsonaro": "👨🏻‍🦳",
+            "flaviobolsonaro": "🤵🏻‍♂️",
+            "orbanviktor": "👨🏻‍🦳",
+            "b.netanyahu": "👨🏻‍🦳",
+            "buducnostsrbijeav": "👓",
+            "bruno_retailleau": "👓",
+            "geralddarmanin": "🤵🏻‍♂️",
+            "emmanuelmacron": "🤵🏻‍♂️",
+            "nicolassarkozy": "👨🏻",
+            "sarkozy_louis": "👱🏻‍♂️",
+            "nadine__morano": "👱🏻‍♀️",
+            "davidlisnard": "👨🏻",
+            "edouardphilippelh": "🧔🏻‍♂️",
+            "aurore_berge": "👱🏻‍♀️",
+            "yaelbraunpivet": "👩🏻",
+            "manuelvalls": "👨🏻‍🦳",
+            "meyerhabib": "👨🏻‍🦳",
+            "shannonseban": "👩🏻",
+            "fredericlefebvre_off": "👨🏻‍🦳",
+            "lesrepublicains": "🏛️",
+            "damienrieu": "🧔🏻‍♂️",
+            "thaisdescufon": "👱🏻‍♀️",
+            "alice_cordier2": "👱🏻‍♀️",
+            "collectif.nemesis": "🪧",
+            "erik_tegner": "👦🏻",
+            "jordanflorentin_": "🎤",
+            "ugogiljimenez": "🧔🏻‍♂️",
+            "julien.rochedy": "🧔🏻‍♂️",
+            "thefrenchitch": "🕶️",
+            "bassem.6920": "🧔🏽‍♂️",
+            "psyhodelik_off": "🎧",
+            "sardoche": "🎮",
+            "krocblanc": "🧢",
+            "milafique_": "👩🏻‍🎤",
+            "louisemontangon": "👱🏻‍♀️",
+            "tanguydavidofficiel_": "👨🏿‍💼",
+            "liamdibenedettooff": "👩🏻",
+            "cocardeetudiante": "🚩",
+            "institut_iliade": "🏛️",
+            "fondation_polemia": "📢",
+            "lafuriaofficiel": "📕",
+            "cyrilhanouna": "🧔🏽‍♂️",
+            "pascalpraud": "👓",
+            "mathieubockcote": "👓",
+            "charlottedornellas": "👱🏻‍♀️",
+            "geoffroylejeune": "👱🏻‍♂️",
+            "soniamabrouk_officiel": "👩🏼",
+            "christinekellyofficiel": "👩🏾",
+            "ericnaulleau": "👓",
+            "gwgoldnadel": "👨🏻‍🦳",
+            "eugeniebastie": "👩🏻",
+            "charlesconsigny": "👱🏻‍♂️",
+            "celine_pina": "👩🏻",
+            "rachelkhan_officiel": "👩🏽",
+            "carolinefourest": "👱🏻‍♀️",
+            "bernardhenrilevy": "衬衫",
+            "benjaminduhamel": "🧑🏻‍💼",
+            "ruthelkrief": "👩🏻",
+            "oliviertruchot": "👨🏻‍🦲",
+            "paulamaroff": "👨🏻‍🦳",
+            "frontieresmedia": "📰",
+            "valeurs_actuelles": "🗞️",
+            "fdesouche_off": "💻",
+            "bastion_media": "🎥",
+            "bvoltaire": "💻",
+            "causeur.fr": "🗞️",
+            "breizhinfo": "💻",
+            "tvlibertes": "📺",
+            "radiocourtoisie": "📻",
+            "quotidien_present": "🗞️",
+            "mag_lincorrect": "📕",
+            "revue_elements": "📘",
+            "lesalonbeige": "⛪",
+            "cerfiafr": "🚨",
+            "alertesinfos": "🚨",
+            "bfmtv": "📺",
+            "tf1info": "📺",
+            "leparisien": "🗞️",
+            "cnews": "📺",
+            "europe1": "📻",
+            "lejdd": "🗞️",
+            "jdnews_fr": "🗞️",
+            "tbt9w9": "📺",
+            "canalplus": "📺",
+            "cstar": "📺",
+            "europe2": "📻",
+            "rfmfrance": "📻",
+            "parismatch": "📸",
+            "capitalfr": "📈",
+            "voici": "🗞️",
+            "femme_actuelle": "🗞️",
+            "teleloisirs": "📺",
+            "geo_france": "🌍",
+            "caminteresse": "📘",
+            "cuisineactuelle": "🍽️",
+            "primamagazine": "🗞️",
+            "tele2semaines": "📺",
+            "telez_mag": "📺",
+            "harpersbazaarfrance": "👠",
+            "hachettelivre": "📚",
+            "editionsfayard": "📚",
+            "editionsgrasset": "📚",
+            "editionsstock": "📚",
+            "calmann.levy": "📚",
+            "editionslarousse": "📕",
+            "lelivredepoche": "📖",
+            "armand_colin": "📚",
+            "universalmusicgroup": "🎵",
+            "universalmusicfrance": "🎵",
+            "studiocanal": "🎬",
+            "havas": "🏢",
+            "havasparis": "🏢"
+        };
+        accountEmojis["bernardhenrilevy"] = "👨🏻‍🦳";
 
         const accounts = [
             // EXTRÊME DROITE (Politiques, Partis & International)
@@ -1279,16 +1661,38 @@
             render();
         }
 
-        function resetAll() {
-            if (confirm("Réinitialiser toute ta progression à zéro ?")) {
-                doneHandles = [];
-                lastRewardedHandle = null;
-                saveState();
+        // =========================================================
+        // MODALE DE RÉINITIALISATION PROPRE (SANS BUG DE PARTAGE)
+        // =========================================================
+        function openResetModal(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
             }
+            openModal("resetConfirmModal");
+        }
+
+        function closeResetModal(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            closeModal("resetConfirmModal");
+        }
+
+        function confirmResetAll(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            doneHandles = [];
+            lastRewardedHandle = null;
+            saveState();
+            closeModal("resetConfirmModal");
         }
 
         // =========================================================
-        // VALIDATION DYNAMIQUE DU PSEUDO / LIEN INSTAGRAM (AUDIT UX)
+        // VALIDATION DYNAMIQUE DU PSEUDO / LIEN INSTAGRAM
         // =========================================================
         function extractIgHandle(raw) {
             let cleaned = raw.trim();
@@ -1320,7 +1724,7 @@
         }
 
         // =========================================================
-        // GESTION DES 3 MODALES GITHUB
+        // GESTION DES MODALES GITHUB
         // =========================================================
         function openModal(id) {
             document.getElementById(id).classList.add("open");
@@ -1370,7 +1774,7 @@
 
         function submitReport() {
             if (!currentReportedAccount) return;
-            const reason = document.getElementById("repReason").value;
+            const reason = document.getById ? document.getElementById("repReason").value : "";
             const details = document.getElementById("repDetails").value.trim();
             const title = encodeURIComponent(`[Signalement] ${currentReportedAccount.name} (@${currentReportedAccount.handle})`);
             const body = encodeURIComponent(`**Compte concerné :** ${currentReportedAccount.name} (@${currentReportedAccount.handle})\n**Nature du problème :** ${reason}\n**Précisions :** ${details || "Aucune précision supplémentaire"}\n`);
@@ -1415,7 +1819,6 @@
 
             document.getElementById("visibleCount").innerText = `${filtered.length} compte${filtered.length > 1 ? "s" : ""} affiché${filtered.length > 1 ? "s" : ""}`;
 
-            // Affichage d'une carte de félicitations si tout est terminé ou filtre vide (Audit UX)
             if (filtered.length === 0) {
                 const emptyCard = document.createElement("div");
                 emptyCard.className = "empty-victory-card";
@@ -1425,8 +1828,8 @@
                         <div class="empty-victory-title">Grand chelem ! Tu as bloqué 100 % de la liste.</div>
                         <p class="empty-victory-desc">Ton fil Instagram est assaini et leur portée algorithmique recule. Fais tourner l'outil autour de toi pour démultiplier l'impact collectif !</p>
                         <div class="empty-victory-actions">
-                            <button class="btn-top" onclick="shareSite()">📣 Partager la blocklist</button>
-                            <button class="btn-top outline" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
+                            <button type="button" class="btn-top" onclick="shareSite()">📣 Partager la blocklist</button>
+                            <button type="button" class="btn-top outline" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
                         </div>
                     `;
                 } else {
@@ -1435,7 +1838,7 @@
                         <div class="empty-victory-title">Aucun compte à afficher ici</div>
                         <p class="empty-victory-desc">Tous les comptes de ce filtre sont déjà bloqués ou aucun profil ne correspond à ta recherche.</p>
                         <div class="empty-victory-actions">
-                            <button class="btn-top outline" onclick="document.getElementById('searchInput').value=''; setFilter('all', document.querySelector('.pill'));">Tout réafficher</button>
+                            <button type="button" class="btn-top outline" onclick="document.getElementById('searchInput').value=''; setFilter('all', document.querySelector('.pill'));">Tout réafficher</button>
                         </div>
                     `;
                 }
@@ -1446,29 +1849,39 @@
             filtered.forEach(acc => {
                 const isDone = doneHandles.includes(acc.handle);
                 const isJustRewarded = (lastRewardedHandle === acc.handle && isDone);
+                const emoji = accountEmojis[acc.handle] || "👤";
                 const row = document.createElement("div");
                 row.className = "row" + (isDone ? " done" : "");
 
                 row.innerHTML = `
                     ${isJustRewarded ? `<div class="reward-badge">👍 Bien joué, au suivant !</div>` : ""}
-                    <div class="row-info">
-                        <div class="row-header">
-                            <span class="name">${acc.name}</span>
-                            <span class="tag ${acc.style}">${acc.label}</span>
+                    <div class="row-top">
+                        <div class="row-info">
+                            <div class="row-header">
+                                <span class="person-emoji" aria-hidden="true">${emoji}</span>
+                                <span class="name">${acc.name}</span>
+                                <span class="tag ${acc.style}">${acc.label}</span>
+                            </div>
+                            <span class="handle">@${acc.handle}</span>
+                            ${acc.fact ? `<span class="fact-note">${acc.fact}</span>` : ""}
                         </div>
-                        <span class="handle">@${acc.handle}</span>
-                        ${acc.fact ? `<span class="fact-note">${acc.fact}</span>` : ""}
-                    </div>
-                    <div class="row-actions">
-                        <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
-                            Instagram ↗
-                        </a>
-                        <button class="btn-check" onclick="toggleHandle('${acc.handle}')">
-                            ${isDone ? "✓ Bloqué" : "○ Bloqué ?"}
-                        </button>
-                        <button class="btn-flag" onclick="openReportModal('${acc.handle}')" title="Signaler une erreur sur ce compte">
+                        <button type="button" class="btn-flag" onclick="openReportModal('${acc.handle}')" title="Signaler une erreur sur ce compte">
                             🏳️
                         </button>
+                    </div>
+                    <div class="row-actions">
+                        <button type="button" class="btn-check" onclick="toggleHandle('${acc.handle}')">
+                            <span class="check-square">${isDone ? "✓" : ""}</span>
+                            <span>${isDone ? "Bloqué" : "Bloqué ?"}</span>
+                        </button>
+                        <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            <span>Instagram ↗</span>
+                        </a>
                     </div>
                 `;
                 listEl.appendChild(row);
