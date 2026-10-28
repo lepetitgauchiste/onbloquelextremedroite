@@ -3,264 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloquer l'extrême droite</title>
+    <title>La Blocklist Instagram — On bloque l'extrême droite</title>
     <style>
         :root {
-            --bg: #f5f4f0;
+            --bg: #f5f3ee;
             --card: #ffffff;
-            --text: #1a1a1a;
-            --muted: #666666;
-            --green: #2d8a4e;
-            --green-bg: rgba(45, 138, 78, 0.08);
-            --border: #e6e4df;
-            --badge-bg: #ece9e1;
+            --text: #161616;
+            --muted: #6b6860;
+            --border: #e2dfd7;
+            --green: #1f7a4c;
+            --green-bg: #eaf5ef;
+            --green-border: #a8d5bc;
             --accent: #d93838;
-            --accent-bg: rgba(217, 56, 56, 0.06);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); padding: 20px; max-width: 600px; margin: 0 auto; }
-        
-        header { position: sticky; top: 0; background: rgba(245, 244, 240, 0.95); backdrop-filter: blur(8px); padding: 16px 0; z-index: 10; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .badge { display: inline-block; background: var(--badge-bg); color: #444; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; letter-spacing: 0.5px; }
-        .nav-links { display: flex; gap: 12px; }
-        .code-link, .suggest-link { font-size: 0.8rem; font-weight: 600; color: #111; text-decoration: underline; cursor: pointer; }
+        body { background-color: var(--bg); color: var(--text); padding: 16px; max-width: 660px; margin: 0 auto; line-height: 1.4; }
 
-        h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; color: #111; letter-spacing: -0.5px; }
-        .subtitle { font-size: 0.9rem; color: var(--muted); margin-bottom: 16px; line-height: 1.4; }
-        
-        /* Gamification & Paliers */
-        .milestone-box { background: var(--card); border: 1px solid var(--border); padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-        .milestone-icon { font-size: 1.8rem; }
-        .milestone-info { display: flex; flex-direction: column; }
-        .milestone-title { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 700; letter-spacing: 0.5px; }
-        .milestone-text { font-size: 0.95rem; font-weight: 700; color: #111; }
+        /* Barre supérieure */
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .brand { font-weight: 900; font-size: 0.95rem; letter-spacing: -0.3px; display: flex; align-items: center; gap: 6px; }
+        .top-actions { display: flex; gap: 8px; align-items: center; }
+        .btn-top { background: #161616; color: #fff; border: none; padding: 7px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-top.outline { background: transparent; color: var(--text); border: 1px solid #c5c1b8; }
+        .btn-top:hover { opacity: 0.85; }
 
-        .progress-container { background: #e0ded9; border-radius: 99px; height: 10px; overflow: hidden; margin-bottom: 8px; }
-        .progress-bar { background: var(--green); height: 100%; width: 0%; transition: width 0.3s ease; }
-        .stats { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: #555; }
-        
-        .controls { display: flex; gap: 8px; margin-top: 14px; }
-        .btn-small { background: #e8e6e1; color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        .btn-small:hover { background: #dedcd7; }
+        /* En-tête */
+        .hero { margin-bottom: 18px; }
+        .kicker { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); margin-bottom: 4px; }
+        h1 { font-size: 2rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.1; margin-bottom: 10px; }
+        .lead { font-size: 0.92rem; color: var(--muted); }
 
-        /* Sections & Listes */
-        .section-title { font-size: 1.1rem; font-weight: 700; margin: 24px 0 12px 0; color: #222; display: flex; align-items: center; justify-content: space-between; }
-        .section-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; line-height: 1.3; }
+        /* Bloc Progression & Gamification */
+        .sticky-dashboard { position: sticky; top: 8px; z-index: 20; background: rgba(245, 243, 238, 0.96); backdrop-filter: blur(10px); padding: 12px 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+        .dash-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
         
-        .list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-        .item { display: flex; align-items: center; justify-content: space-between; background: var(--card); padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-        .item.done { background: var(--green-bg); border-color: #b8dcc5; }
-        .item.gray-zone.done { background: rgba(217, 56, 56, 0.04); border-color: #e8bcbc; }
+        .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .milestone { display: flex; align-items: center; gap: 10px; }
+        .milestone-icon { font-size: 1.6rem; }
+        .milestone-label { font-size: 0.7rem; text-transform: uppercase; font-weight: 800; color: var(--muted); letter-spacing: 0.4px; }
+        .milestone-title { font-size: 0.95rem; font-weight: 800; color: var(--text); }
         
-        .item-left { display: flex; align-items: center; gap: 12px; cursor: pointer; flex: 1; }
-        .checkbox { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all 0.2s; background: #fff; }
-        .item.done .checkbox { background: var(--green); border-color: var(--green); color: #fff; font-weight: bold; }
+        .score-box { text-align: right; }
+        .score-num { font-size: 1.25rem; font-weight: 900; color: var(--green); }
+        .score-pct { font-size: 0.75rem; font-weight: 700; color: var(--muted); display: block; }
+
+        .progress-track { background: #e6e3dc; height: 10px; border-radius: 99px; overflow: hidden; margin-bottom: 12px; }
+        .progress-fill { background: var(--green); height: 100%; width: 0%; transition: width 0.25s ease; }
+
+        /* Filtres et Recherche */
+        .filter-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .filter-row::-webkit-scrollbar { display: none; }
+        .pill { background: #ece9e2; color: #444; border: 1px solid transparent; padding: 6px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+        .pill.active { background: var(--text); color: #fff; }
         
-        .info { display: flex; flex-direction: column; }
-        .name { font-weight: 600; font-size: 0.95rem; color: #222; }
-        .handle { font-size: 0.8rem; color: var(--muted); }
-        .item.done .name { text-decoration: line-through; color: #555; }
+        .search-bar { display: flex; gap: 8px; margin-bottom: 14px; }
+        .search-input { flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); font-size: 0.9rem; outline: none; }
+        .search-input:focus { border-color: #999; }
+        .btn-reset { background: #e8e5de; border: 1px solid var(--border); padding: 0 12px; border-radius: 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer; color: var(--muted); }
 
-        .btn-open { background: #111; color: white; text-decoration: none; padding: 7px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; transition: background 0.2s; }
-        .btn-open:hover { background: #333; }
-        .item.done .btn-open { background: #e0ded9; color: #666; }
+        /* Liste verticale */
+        .list-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 10px; padding: 0 4px; }
+        .list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+        
+        .row { display: flex; align-items: center; justify-content: space-between; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; gap: 12px; transition: all 0.15s; }
+        .row.done { background: var(--green-bg); border-color: var(--green-border); }
 
-        /* Accordéon zone grise */
-        .accordion-toggle { background: #dedcd7; border: none; width: 100%; padding: 12px; text-align: left; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .accordion-content { display: none; margin-top: 12px; }
-        .accordion-content.open { display: block; }
+        .row-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+        .row-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .name { font-weight: 800; font-size: 0.96rem; color: var(--text); }
+        .row.done .name { text-decoration: line-through; color: #4e6b5a; }
+        .handle { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
 
-        footer { text-align: center; font-size: 0.8rem; color: var(--muted); padding: 24px 0; border-top: 1px solid var(--border); line-height: 1.5; }
-        footer a { color: #111; font-weight: 600; text-decoration: underline; }
+        /* Étiquettes politiques */
+        .tag { font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+        .tag-ed { background: #fde8e8; color: #9b1c1c; border: 1px solid #f8b4b4; } /* Extrême droite */
+        .tag-droite { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; } /* Droite / Macronie / Réac */
+        .tag-facho { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; } /* Fachosphère / Influence */
+        .tag-media { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; } /* Éditorialiste / Média */
+        .tag-bollore { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; } /* Empire Bolloré & Groupes */
+
+        /* Boutons d'action de chaque ligne */
+        .row-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .btn-ig { background: var(--text); color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; transition: opacity 0.15s; }
+        .btn-ig:hover { opacity: 0.85; }
+        .row.done .btn-ig { background: #d5e6dc; color: #2d5a40; }
+
+        .btn-check { background: transparent; border: 1.5px solid #c5c1b8; color: var(--text); padding: 7px 10px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+        .row.done .btn-check { background: var(--green); border-color: var(--green); color: #fff; }
+
+        /* Modale "Ajoute ton faf" */
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100; }
+        .modal-backdrop.open { display: flex; }
+        .modal { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; max-width: 460px; width: 100%; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .modal-title { font-size: 1.2rem; font-weight: 900; }
+        .modal-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 4px; }
+        .form-control { width: 100%; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border); background: #fff; font-size: 0.9rem; }
+        .criteria-box { background: #ece9e2; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #444; margin-bottom: 14px; line-height: 1.45; }
+
+        footer { text-align: center; font-size: 0.8rem; color: var(--muted); padding: 24px 0; border-top: 1px solid var(--border); line-height: 1.6; }
+        footer a { color: var(--text); font-weight: 700; }
+
+        @media (max-width: 480px) {
+            .row { flex-direction: column; align-items: flex-start; }
+            .row-actions { width: 100%; justify-content: flex-end; margin-top: 4px; }
+            .btn-ig, .btn-check { flex: 1; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="top-bar">
-            <span class="badge">Action collective & Bienveillante</span>
-            <div class="nav-links">
-                <span class="suggest-link" onclick="openSuggestModal()">Suggérer ✍️</span>
-                <a class="code-link" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Code ↗</a>
+    <nav class="top-nav">
+        <div class="brand">🛑 ON BLOQUE L'EXTRÊME DROITE</div>
+        <div class="top-actions">
+            <button class="btn-top" onclick="openModal()">+ Ajoute ton faf</button>
+            <a class="btn-top outline" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Code source ↗</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="kicker">Action collective & hygiène numérique</div>
+        <h1>La blocklist.</h1>
+        <p class="lead">L'algorithme ne fait pas la différence entre un like et un clash : tout leur donne de la visibilité[cite: 6]. Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant[cite: 6]. Zéro serveur, ta progression reste stockée sur ton appareil.</p>
+    </div>
+
+    <div class="sticky-dashboard">
+        <div class="dash-card">
+            <div class="dash-top">
+                <div class="milestone">
+                    <span class="milestone-icon" id="milestoneIcon">🧭</span>
+                    <div>
+                        <div class="milestone-label">Grade actuel</div>
+                        <div class="milestone-title" id="milestoneText">Prêt·e à nettoyer son fil</div>
+                    </div>
+                </div>
+                <div class="score-box">
+                    <span class="score-num" id="scoreNum">0 / 0</span>
+                    <span class="score-pct" id="scorePct">0 % terminé</span>
+                </div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="filter-row" id="filterRow">
+                <button class="pill active" onclick="setFilter('all', this)">Tout voir</button>
+                <button class="pill" onclick="setFilter('todo', this)">⏳ À faire</button>
+                <button class="pill" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
+                <button class="pill" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
+                <button class="pill" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
+                <button class="pill" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
+                <button class="pill" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
             </div>
         </div>
-        <h1>Bloquer l'extrême droite</h1>
-        <p class="subtitle">Ne nourrissons plus l'algorithme des marchands de haine. Coupons net la visibilité en bloquant massivement. Aucune donnée collectée, tout reste sur votre appareil.</p>
-        
-        <!-- Gamification / Paliers -->
-        <div class="milestone-box" id="milestoneBox">
-            <div class="milestone-icon" id="milestoneIcon">🌱</div>
-            <div class="milestone-info">
-                <span class="milestone-title">Grade actuel</span>
-                <span class="milestone-text" id="milestoneText">Prêt·e à nettoyer son fil</span>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un nom, @pseudo ou étiquette..." oninput="render()">
+        <button class="btn-reset" onclick="resetAll()" title="Réinitialiser la progression">Réinitialiser</button>
+    </div>
+
+    <div class="list-meta">
+        <span id="visibleCount">0 comptes affichés</span>
+        <span>Astuce : cliquer sur « Instagram ↗ » coche automatiquement</span>
+    </div>
+
+    <div class="list" id="accountList"></div>
+
+    <!-- Modale Ajoute ton faf -->
+    <div class="modal-backdrop" id="suggestModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">+ Ajoute ton faf</span>
+                <button class="modal-close" onclick="closeModal()">×</button>
             </div>
+            <div class="criteria-box">
+                <strong>Critères d'ajout :</strong> Personnalité politique, éditorialiste, influenceur ou média public (droite, extrême droite, relais réactionnaire). Pas de compte privé ni de particulier.
+            </div>
+            <div class="form-group">
+                <label>Nom de la personne ou du média</label>
+                <input type="text" id="sugName" class="form-control" placeholder="Ex: Laurent Jacobelli">
+            </div>
+            <div class="form-group">
+                <label>Pseudo Instagram (ou lien)</label>
+                <input type="text" id="sugHandle" class="form-control" placeholder="Ex: @laurentjacobelli">
+            </div>
+            <div class="form-group">
+                <label>Étiquette politique</label>
+                <select id="sugTag" class="form-control">
+                    <option value="Extrême droite — RN / Reconquête / Alliés">Extrême droite (RN, Reconquête, Alliés...)</option>
+                    <option value="Droite / Macronie — Droite réac / Libérale">Droite / Macronie (LR, ministres, droite dure...)</option>
+                    <option value="Fachosphère — Influenceur / Militant">Fachosphère (Influenceur, militant, collectif...)</option>
+                    <option value="Médias & Éditos — Chroniqueur / Média réac">Médias & Éditos (Chroniqueur, média réac...)</option>
+                    <option value="Empire Bolloré & Co — Groupe / Édition">Empire Bolloré & Co (Chaîne, magazine, édition...)</option>
+                </select>
+            </div>
+            <button class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.9rem;" onclick="submitSuggestion()">Envoyer la proposition sur GitHub ↗</button>
         </div>
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="stats">
-            <span id="counter">0 / 0 bloqués (0%)</span>
-            <span id="remaining"></span>
-        </div>
-        <div class="controls">
-            <button class="btn-small" onclick="toggleHideDone()" id="toggleBtn">Masquer les comptes faits</button>
-            <button class="btn-small" onclick="resetAll()">Réinitialiser</button>
-        </div>
-    </header>
-
-    <!-- SECTION 1 : Cœur de cible (Extrême droite & Médias associés) -->
-    <div class="section-title">🚨 Cœur de cible (Extrême droite & Médias)</div>
-    <div class="section-desc">Les acteurs politiques directs, éditorialistes réactionnaires et structures médiatiques principales.</div>
-    <div class="list" id="mainAccountList"></div>
-
-    <!-- SECTION 2 : Optionnelle (Zone grise / Profils ambiguës ou complaisants) -->
-    <button class="accordion-toggle" onclick="toggleAccordion()">
-        <span>⚠️ Zone grise : Profils ambiguës ou complaisants (Optionnel)</span>
-        <span id="accordionArrow">▼</span>
-    </button>
-    <div class="accordion-content" id="accordionContent">
-        <div class="section-desc" style="margin-top: 10px;">Personnalités politiques ou médiatiques de gouvernement ou de la droite conservatrice/libérale dont les positionnements ou alliances alimentent le même espace. À vous de choisir d'étendre ou non votre action ici.</div>
-        <div class="list" id="grayAccountList"></div>
     </div>
 
     <footer>
-        Projet 100% open-source, transparent et indépendant.<br>
-        Ferme sur le fond, joyeux sur la forme.<br><br>
-        <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Contribuer sur GitHub</a>
+        Projet citoyen 100% open-source, transparent et garanti sans traçage.<br>
+        Inspiré de la campagne brésilienne et de <em>Mise au Poing</em>[cite: 6].<br><br>
+        <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Inspecter le code ou contribuer sur GitHub</a>
     </footer>
 
     <script>
-        // Liste principale : Cœur de cible (Extrême droite & Médias)
-        const mainAccounts = [
-            { name: "Marine Le Pen", handle: "marine_lepen" },
-            { name: "Jordan Bardella", handle: "jordanbardella" },
-            { name: "Éric Zemmour", handle: "ericzemmour_" },
-            { name: "Marion Maréchal", handle: "marionmarechal_" },
-            { name: "Éric Ciotti", handle: "ericciotti" },
-            { name: "Sarah Knafo", handle: "sarah_knafo" },
-            { name: "Sébastien Chenu", handle: "sebastienchenu_off" },
-            { name: "Jean-Philippe Tanguy", handle: "jph_tanguy" },
-            { name: "Louis Aliot", handle: "louisaliot" },
-            { name: "Laure Lavalette", handle: "laure.lavalette" },
-            { name: "Edwige Diaz", handle: "edwigediaz" },
-            { name: "Julien Odoul", handle: "julienodoul" },
-            { name: "Robert Ménard", handle: "robertmenardfr" },
-            { name: "Gilbert Collard", handle: "gilbertcollard" },
-            { name: "Philippe de Villiers", handle: "philippedevilliers" },
-            { name: "Jean Messiha", handle: "jeanmessiha" },
-            { name: "Pierre Gentillet", handle: "pierregentillet" },
-            { name: "Damien Rieu", handle: "damienrieu" },
-            { name: "Pascal Praud", handle: "pascalpraud" },
-            { name: "Mathieu Bock-Côté", handle: "mathieubockcote" },
-            { name: "Charlotte d'Ornellas", handle: "charlottedornellas" },
-            { name: "Éric Naulleau", handle: "ericnaulleau" },
-            { name: "Gilles-William Goldnadel", handle: "gwgoldnadel" },
-            { name: "Eugénie Bastié", handle: "eugeniebastie" },
-            { name: "Geoffroy Lejeune", handle: "geoffroylejeune" },
-            { name: "Cyril Hanouna", handle: "cyrilhanouna" },
-            { name: "Charles Consigny", handle: "charlesconsigny" },
-            { name: "Céline Pina", handle: "celine_pina" },
-            { name: "Christine Kelly", handle: "christinekellyofficiel" },
-            { name: "Sonia Mabrouk", handle: "soniamabrouk_officiel" },
-            { name: "Rachel Khan", handle: "rachelkhan_officiel" },
-            { name: "Olivier Truchot", handle: "oliviertruchot" },
-            { name: "Thaïs d'Escufon", handle: "thaisdescufon" },
-            { name: "Alice Cordier", handle: "alice_cordier2" },
-            { name: "Psyhodelik", handle: "psyhodelik_off" },
-            { name: "Sardoche", handle: "sardoche" },
-            { name: "Kroc Blanc", handle: "krocblanc" },
-            { name: "Mila", handle: "milafique_" },
-            { name: "CNews", handle: "cnews" },
-            { name: "Valeurs actuelles", handle: "valeurs_actuelles" },
-            { name: "Frontières", handle: "frontieresmedia" },
-            { name: "Fdesouche", handle: "fdesouche_off" },
-            { name: "Bastion Média", handle: "bastion_media" },
-            { name: "Cerfia", handle: "cerfiafr" },
-            { name: "AlertesInfos", handle: "alertesinfos" },
-            { name: "Boulevard Voltaire", handle: "bvoltaire" },
-            { name: "Causeur", handle: "causeur.fr" },
-            { name: "Breizh-Info", handle: "breizhinfo" },
-            { name: "TV Libertés", handle: "tvlibertes" },
-            { name: "Radio Courtoisie", handle: "radiocourtoisie" },
-            { name: "Présent", handle: "quotidien_present" },
-            { name: "L'Incorrect", handle: "mag_lincorrect" },
-            { name: "Éléments", handle: "revue_elements" },
-            { name: "Polémia", handle: "fondation_polemia" },
-            { name: "Le Salon Beige", handle: "lesalonbeige" },
-            { name: "Institut Iliade", handle: "institut_iliade" },
-            { name: "CStar", handle: "cstar" },
-            { name: "Le JDD", handle: "lejdd" },
-            { name: "JDNews", handle: "jdnews_fr" }
+        const accounts = [
+            // EXTRÊME DROITE (Politiques, Partis & International)
+            { name: "Marine Le Pen", handle: "marine_lepen", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Jordan Bardella", handle: "jordanbardella", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Éric Zemmour", handle: "ericzemmour_", cat: "Extrême droite", label: "Extrême droite • Reconquête", style: "tag-ed" },
+            { name: "Marion Maréchal", handle: "marionmarechal_", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed" },
+            { name: "Éric Ciotti", handle: "ericciotti", cat: "Extrême droite", label: "Allié RN • UDR", style: "tag-ed" },
+            { name: "Sarah Knafo", handle: "sarah_knafo", cat: "Extrême droite", label: "Extrême droite • Reconquête", style: "tag-ed" },
+            { name: "Sébastien Chenu", handle: "sebastienchenu_off", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Jean-Philippe Tanguy", handle: "jph_tanguy", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Louis Aliot", handle: "louisaliot", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Laure Lavalette", handle: "laure.lavalette", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Edwige Diaz", handle: "edwigediaz", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Julien Odoul", handle: "julienodoul", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Laurent Jacobelli", handle: "laurentjacobelli", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Robert Ménard", handle: "robertmenardfr", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed" },
+            { name: "Gilbert Collard", handle: "gilbertcollard", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed" },
+            { name: "Philippe de Villiers", handle: "philippedevilliers", cat: "Extrême droite", label: "Droite ultra-réac", style: "tag-ed" },
+            { name: "Jean Messiha", handle: "jeanmessiha", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed" },
+            { name: "Pierre Gentillet", handle: "pierregentillet", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Florian Philippot", handle: "f_philippot", cat: "Extrême droite", label: "Extrême droite • Complotiste", style: "tag-ed" },
+            { name: "Nicolas Bay", handle: "nicolasbay", cat: "Extrême droite", label: "Extrême droite", style: "tag-ed" },
+            { name: "Tiffany Joncour", handle: "tiffany_joncour", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Marc de Fleurian", handle: "marcdefleurian", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Antoine Golliot", handle: "antoinegolliot", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Théo Bernhardt", handle: "theo_bnrdt", cat: "Extrême droite", label: "Extrême droite • RN", style: "tag-ed" },
+            { name: "Rassemblement National", handle: "rassemblementnational_fr", cat: "Extrême droite", label: "Parti d'extrême droite", style: "tag-ed" },
+            { name: "Reconquête", handle: "reconquete_officiel", cat: "Extrême droite", label: "Parti d'extrême droite", style: "tag-ed" },
+            { name: "Donald Trump", handle: "realdonaldtrump", cat: "Extrême droite", label: "Extrême droite • USA", style: "tag-ed" },
+            { name: "Giorgia Meloni", handle: "giorgiameloni", cat: "Extrême droite", label: "Extrême droite • Italie", style: "tag-ed" },
+            { name: "Javier Milei", handle: "javiermilei", cat: "Extrême droite", label: "Ultra-droite • Argentine", style: "tag-ed" },
+            { name: "Jair Bolsonaro", handle: "jairmessiasbolsonaro", cat: "Extrême droite", label: "Extrême droite • Brésil", style: "tag-ed" },
+            { name: "Flávio Bolsonaro", handle: "flaviobolsonaro", cat: "Extrême droite", label: "Extrême droite • Brésil", style: "tag-ed" },
+            { name: "Viktor Orbán", handle: "orbanviktor", cat: "Extrême droite", label: "Extrême droite • Hongrie", style: "tag-ed" },
+            { name: "Benyamin Netanyahou", handle: "b.netanyahu", cat: "Extrême droite", label: "Extrême droite • Israël", style: "tag-ed" },
+            { name: "Aleksandar Vučić", handle: "buducnostsrbijeav", cat: "Extrême droite", label: "Nationaliste • Serbie", style: "tag-ed" },
+
+            // DROITE DURE, MACRONIE & LIBÉRAUX AUTORITAIRES
+            { name: "Bruno Retailleau", handle: "bruno_retailleau", cat: "Droite / Macronie", label: "Droite ultra-conservatrice • LR", style: "tag-droite" },
+            { name: "Gérald Darmanin", handle: "geralddarmanin", cat: "Droite / Macronie", label: "Droite autoritaire • Macronie", style: "tag-droite" },
+            { name: "Emmanuel Macron", handle: "emmanuelmacron", cat: "Droite / Macronie", label: "Macronie • Marchepied ED", style: "tag-droite" },
+            { name: "Nicolas Sarkozy", handle: "nicolassarkozy", cat: "Droite / Macronie", label: "Droite dure • LR", style: "tag-droite" },
+            { name: "Louis Sarkozy", handle: "sarkozy_louis", cat: "Droite / Macronie", label: "Droite réactionnaire", style: "tag-droite" },
+            { name: "Nadine Morano", handle: "nadine__morano", cat: "Droite / Macronie", label: "Droite dure • LR", style: "tag-droite" },
+            { name: "David Lisnard", handle: "davidlisnard", cat: "Droite / Macronie", label: "Droite libérale-conservatrice", style: "tag-droite" },
+            { name: "Édouard Philippe", handle: "edouardphilippelh", cat: "Droite / Macronie", label: "Droite libérale • Horizons", style: "tag-droite" },
+            { name: "Aurore Bergé", handle: "aurore_berge", cat: "Droite / Macronie", label: "Macronie • Droite", style: "tag-droite" },
+            { name: "Yaël Braun-Pivet", handle: "yaelbraunpivet", cat: "Droite / Macronie", label: "Macronie", style: "tag-droite" },
+            { name: "Manuel Valls", handle: "manuelvalls", cat: "Droite / Macronie", label: "Vallsiste • Réac", style: "tag-droite" },
+            { name: "Meyer Habib", handle: "meyerhabib", cat: "Droite / Macronie", label: "Droite radicale", style: "tag-droite" },
+            { name: "Shannon Seban", handle: "shannonseban", cat: "Droite / Macronie", label: "Macronie • Renaissance", style: "tag-droite" },
+            { name: "Frédéric Lefebvre", handle: "fredericlefebvre_off", cat: "Droite / Macronie", label: "Droite", style: "tag-droite" },
+            { name: "Les Républicains", handle: "lesrepublicains", cat: "Droite / Macronie", label: "Parti de droite", style: "tag-droite" },
+
+            // FACHOSPHÈRE, INFLUENCEURS & COLLECTIFS IDENTITAIRES
+            { name: "Damien Rieu", handle: "damienrieu", cat: "Fachosphère", label: "Identitaire • Extrême droite", style: "tag-facho" },
+            { name: "Thaïs d'Escufon", handle: "thaisdescufon", cat: "Fachosphère", label: "Influenceuse identitaire", style: "tag-facho" },
+            { name: "Alice Cordier", handle: "alice_cordier2", cat: "Fachosphère", label: "Fémonationaliste • Némésis", style: "tag-facho" },
+            { name: "Collectif Némésis", handle: "collectif.nemesis", cat: "Fachosphère", label: "Collectif identitaire", style: "tag-facho" },
+            { name: "Erik Tegnér", handle: "erik_tegner", cat: "Fachosphère", label: "Extrême droite • Frontières", style: "tag-facho" },
+            { name: "Jordan Florentin", handle: "jordanflorentin_", cat: "Fachosphère", label: "Agitateur • Frontières", style: "tag-facho" },
+            { name: "Papacito", handle: "ugogiljimenez", cat: "Fachosphère", label: "Influenceur d'extrême droite", style: "tag-facho" },
+            { name: "Julien Rochedy", handle: "julien.rochedy", cat: "Fachosphère", label: "Influenceur masculiniste / ED", style: "tag-facho" },
+            { name: "Alex Hitchens", handle: "thefrenchitch", cat: "Fachosphère", label: "Influenceur masculiniste", style: "tag-facho" },
+            { name: "Bassem", handle: "bassem.6920", cat: "Fachosphère", label: "Influenceur réactionnaire", style: "tag-facho" },
+            { name: "Psyhodelik", handle: "psyhodelik_off", cat: "Fachosphère", label: "YouTubeur alt-right / Harcèlement", style: "tag-facho" },
+            { name: "Sardoche", handle: "sardoche", cat: "Fachosphère", label: "Streameur réac", style: "tag-facho" },
+            { name: "Kroc Blanc", handle: "krocblanc", cat: "Fachosphère", label: "Rappeur d'extrême droite", style: "tag-facho" },
+            { name: "Mila", handle: "milafique_", cat: "Fachosphère", label: "Influenceuse identitaire", style: "tag-facho" },
+            { name: "Louise Montangon", handle: "louisemontangon", cat: "Fachosphère", label: "Influenceuse tradwife / ED", style: "tag-facho" },
+            { name: "Tanguy David", handle: "tanguydavidofficiel_", cat: "Fachosphère", label: "Militant droite / ex-Zemmour", style: "tag-facho" },
+            { name: "Liam Di Benedetto", handle: "liamdibenedettooff", cat: "Fachosphère", label: "Influenceuse pro-RN", style: "tag-facho" },
+            { name: "La Cocarde Étudiante", handle: "cocardeetudiante", cat: "Fachosphère", label: "Syndicat d'extrême droite", style: "tag-facho" },
+            { name: "Institut Iliade", handle: "institut_iliade", cat: "Fachosphère", label: "Think-tank identitaire", style: "tag-facho" },
+            { name: "Polémia", handle: "fondation_polemia", cat: "Fachosphère", label: "Fondation identitaire", style: "tag-facho" },
+            { name: "La Furia", handle: "lafuriaofficiel", cat: "Fachosphère", label: "Magazine ultra-droite", style: "tag-facho" },
+
+            // ÉDITORIALISTES, CHRONIQUEURS & MÉDIAS D'OPINION
+            { name: "Cyril Hanouna", handle: "cyrilhanouna", cat: "Médias & Éditos", label: "Mégaphone Bolloré", style: "tag-media" },
+            { name: "Pascal Praud", handle: "pascalpraud", cat: "Médias & Éditos", label: "Pilier CNews / Europe 1", style: "tag-media" },
+            { name: "Mathieu Bock-Côté", handle: "mathieubockcote", cat: "Médias & Éditos", label: "Éditorialiste ultra-conservateur", style: "tag-media" },
+            { name: "Charlotte d'Ornellas", handle: "charlottedornellas", cat: "Médias & Éditos", label: "Éditorialiste d'extrême droite", style: "tag-media" },
+            { name: "Geoffroy Lejeune", handle: "geoffroylejeune", cat: "Médias & Éditos", label: "Directeur JDD • Extrême droite", style: "tag-media" },
+            { name: "Sonia Mabrouk", handle: "soniamabrouk_officiel", cat: "Médias & Éditos", label: "Intervieweuse CNews / Europe 1", style: "tag-media" },
+            { name: "Christine Kelly", handle: "christinekellyofficiel", cat: "Médias & Éditos", label: "Animatrice CNews", style: "tag-media" },
+            { name: "Éric Naulleau", handle: "ericnaulleau", cat: "Médias & Éditos", label: "Chroniqueur réactionnaire", style: "tag-media" },
+            { name: "Gilles-William Goldnadel", handle: "gwgoldnadel", cat: "Médias & Éditos", label: "Éditorialiste CNews / Droite dure", style: "tag-media" },
+            { name: "Eugénie Bastié", handle: "eugeniebastie", cat: "Médias & Éditos", label: "Éditorialiste conservatrice", style: "tag-media" },
+            { name: "Charles Consigny", handle: "charlesconsigny", cat: "Médias & Éditos", label: "Chroniqueur droite libérale", style: "tag-media" },
+            { name: "Céline Pina", handle: "celine_pina", cat: "Médias & Éditos", label: "Essayiste réactionnaire", style: "tag-media" },
+            { name: "Rachel Khan", handle: "rachelkhan_officiel", cat: "Médias & Éditos", label: "Essayiste • Caution droite/Macronie", style: "tag-media" },
+            { name: "Caroline Fourest", handle: "carolinefourest", cat: "Médias & Éditos", label: "Éditorialiste • Paniques morales", style: "tag-media" },
+            { name: "Bernard-Henri Lévy", handle: "bernardhenrilevy", cat: "Médias & Éditos", label: "Éditorialiste néo-conservateur", style: "tag-media" },
+            { name: "Benjamin Duhamel", handle: "benjaminduhamel", cat: "Médias & Éditos", label: "Éditorialiste BFMTV", style: "tag-media" },
+            { name: "Ruth Elkrief", handle: "ruthelkrief", cat: "Médias & Éditos", label: "Éditorialiste LCI", style: "tag-media" },
+            { name: "Olivier Truchot", handle: "oliviertruchot", cat: "Médias & Éditos", label: "Animateur RMC / BFMTV", style: "tag-media" },
+            { name: "Paul Amar", handle: "paulamaroff", cat: "Médias & Éditos", label: "Journaliste", style: "tag-media" },
+            { name: "Frontières (ex-Livre Noir)", handle: "frontieresmedia", cat: "Médias & Éditos", label: "Média d'extrême droite", style: "tag-ed" },
+            { name: "Valeurs actuelles", handle: "valeurs_actuelles", cat: "Médias & Éditos", label: "Magazine d'extrême droite", style: "tag-ed" },
+            { name: "Fdesouche", handle: "fdesouche_off", cat: "Médias & Éditos", label: "Blog d'extrême droite", style: "tag-ed" },
+            { name: "Bastion Média", handle: "bastion_media", cat: "Médias & Éditos", label: "Média identitaire", style: "tag-ed" },
+            { name: "Boulevard Voltaire", handle: "bvoltaire", cat: "Médias & Éditos", label: "Site d'extrême droite", style: "tag-ed" },
+            { name: "Causeur", handle: "causeur.fr", cat: "Médias & Éditos", label: "Magazine réactionnaire", style: "tag-ed" },
+            { name: "Breizh-Info", handle: "breizhinfo", cat: "Médias & Éditos", label: "Site identitaire", style: "tag-ed" },
+            { name: "TV Libertés", handle: "tvlibertes", cat: "Médias & Éditos", label: "WebTV d'extrême droite", style: "tag-ed" },
+            { name: "Radio Courtoisie", handle: "radiocourtoisie", cat: "Médias & Éditos", label: "Radio d'extrême droite", style: "tag-ed" },
+            { name: "Présent", handle: "quotidien_present", cat: "Médias & Éditos", label: "Journal national-catholique", style: "tag-ed" },
+            { name: "L'Incorrect", handle: "mag_lincorrect", cat: "Médias & Éditos", label: "Magazine union des droites", style: "tag-ed" },
+            { name: "Revue Éléments", handle: "revue_elements", cat: "Médias & Éditos", label: "Nouvelle Droite / GRECE", style: "tag-ed" },
+            { name: "Le Salon Beige", handle: "lesalonbeige", cat: "Médias & Éditos", label: "Blog catho-intégriste", style: "tag-ed" },
+            { name: "Cerfia", handle: "cerfiafr", cat: "Médias & Éditos", label: "Compte d'actu anxiogène", style: "tag-media" },
+            { name: "AlertesInfos", handle: "alertesinfos", cat: "Médias & Éditos", label: "Compte d'actu droitisé", style: "tag-media" },
+            { name: "BFMTV", handle: "bfmtv", cat: "Médias & Éditos", label: "Chaîne d'info en continu", style: "tag-media" },
+            { name: "LCI (TF1 Info)", handle: "tf1info", cat: "Médias & Éditos", label: "Chaîne d'info en continu", style: "tag-media" },
+            { name: "Le Parisien", handle: "leparisien", cat: "Médias & Éditos", label: "Quotidien (Groupe Arnault)", style: "tag-media" },
+
+            // EMPIRE BOLLORÉ, PRISMA, HACHETTE & GROUPES ASSOCIÉS
+            { name: "CNews", handle: "cnews", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed" },
+            { name: "Europe 1", handle: "europe1", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore" },
+            { name: "Le JDD", handle: "lejdd", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed" },
+            { name: "JDNews", handle: "jdnews_fr", cat: "Empire Bolloré & Co", label: "Empire Bolloré • Extrême droite", style: "tag-ed" },
+            { name: "TBT9 / TPMP", handle: "tbt9w9", cat: "Empire Bolloré & Co", label: "Émission Hanouna", style: "tag-bollore" },
+            { name: "Canal+", handle: "canalplus", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore" },
+            { name: "CStar", handle: "cstar", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore" },
+            { name: "Europe 2", handle: "europe2", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore" },
+            { name: "RFM", handle: "rfmfrance", cat: "Empire Bolloré & Co", label: "Empire Bolloré", style: "tag-bollore" },
+            { name: "Paris Match", handle: "parismatch", cat: "Empire Bolloré & Co", label: "Presse (ex-Bolloré / Arnault)", style: "tag-bollore" },
+            { name: "Capital", handle: "capitalfr", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Voici", handle: "voici", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Femme Actuelle", handle: "femme_actuelle", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Télé-Loisirs", handle: "teleloisirs", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "GEO", handle: "geo_france", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Ça m'intéresse", handle: "caminteresse", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Cuisine Actuelle", handle: "cuisineactuelle", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Prima", handle: "primamagazine", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Télé 2 Semaines", handle: "tele2semaines", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Télé Z", handle: "telez_mag", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Harper's Bazaar France", handle: "harpersbazaarfrance", cat: "Empire Bolloré & Co", label: "Prisma Media (Bolloré)", style: "tag-bollore" },
+            { name: "Hachette Livre", handle: "hachettelivre", cat: "Empire Bolloré & Co", label: "Édition (Bolloré)", style: "tag-bollore" },
+            { name: "Fayard", handle: "editionsfayard", cat: "Empire Bolloré & Co", label: "Édition (Bolloré • Droite/ED)", style: "tag-bollore" },
+            { name: "Grasset", handle: "editionsgrasset", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore" },
+            { name: "Stock", handle: "editionsstock", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore" },
+            { name: "Calmann-Lévy", handle: "calmann.levy", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore" },
+            { name: "Larousse", handle: "editionslarousse", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore" },
+            { name: "Le Livre de Poche", handle: "lelivredepoche", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore" },
+            { name: "Armand Colin", handle: "armand_colin", cat: "Empire Bolloré & Co", label: "Édition (Hachette / Bolloré)", style: "tag-bollore" },
+            { name: "Universal Music Group", handle: "universalmusicgroup", cat: "Empire Bolloré & Co", label: "Actionnariat Bolloré", style: "tag-bollore" },
+            { name: "Universal Music France", handle: "universalmusicfrance", cat: "Empire Bolloré & Co", label: "Actionnariat Bolloré", style: "tag-bollore" },
+            { name: "StudioCanal", handle: "studiocanal", cat: "Empire Bolloré & Co", label: "Cinéma (Groupe Canal / Bolloré)", style: "tag-bollore" },
+            { name: "Havas", handle: "havas", cat: "Empire Bolloré & Co", label: "Communication (Bolloré)", style: "tag-bollore" },
+            { name: "Havas Paris", handle: "havasparis", cat: "Empire Bolloré & Co", label: "Communication (Bolloré)", style: "tag-bollore" }
         ];
 
-        // Liste secondaire (Optionnelle) : Zone grise / Profils ambiguës ou complaisants
-        const grayAccounts = [
-            { name: "Bruno Retailleau", handle: "bruno_retailleau" },
-            { name: "Nadine Morano", handle: "nadine__morano" },
-            { name: "Shannon Seban", handle: "shannonseban" },
-            { name: "David Lisnard", handle: "davidlisnard" },
-            { name: "Gérald Darmanin", handle: "geralddarmanin" },
-            { name: "Emmanuel Macron", handle: "emmanuelmacron" },
-            { name: "Édouard Philippe", handle: "edouardphilippelh" },
-            { name: "Aurore Bergé", handle: "aurore_berge" },
-            { name: "Yaël Braun-Pivet", handle: "yaelbraunpivet" },
-            { name: "Manuel Valls", handle: "manuelvalls" },
-            { name: "Nicolas Sarkozy", handle: "nicolassarkozy" },
-            { name: "Louis Sarkozy", handle: "sarkozy_louis" },
-            { name: "Meyer Habib", handle: "meyerhabib" },
-            { name: "Donald Trump", handle: "realdonaldtrump" },
-            { name: "Frédéric Lefebvre", handle: "fredericlefebvre_off" },
-            { name: "Benjamin Duhamel", handle: "benjaminduhamel" },
-            { name: "Caroline Fourest", handle: "carolinefourest" },
-            { name: "Ruth Elkrief", handle: "ruthelkrief" },
-            { name: "Bernard-Henri Lévy", handle: "bernardhenrilevy" },
-            { name: "Paul Amar", handle: "paulamaroff" },
-            { name: "BFMTV", handle: "bfmtv" },
-            { name: "LCI (TF1 Info)", handle: "tf1info" },
-            { name: "Le Parisien", handle: "leparisien" },
-            { name: "Canal+", handle: "canalplus" },
-            { name: "Europe 1", handle: "europe1" },
-            { name: "Europe 2", handle: "europe2" },
-            { name: "RFM", handle: "rfmfrance" },
-            { name: "Paris Match", handle: "parismatch" },
-            { name: "Télé-Loisirs", handle: "teleloisirs" },
-            { name: "Femme Actuelle", handle: "femme_actuelle" },
-            { name: "Voici", handle: "voici" },
-            { name: "Capital", handle: "capitalfr" },
-            { name: "GEO", handle: "geo_france" },
-            { name: "Ça m'intéresse", handle: "caminteresse" },
-            { name: "Cuisine Actuelle", handle: "cuisineactuelle" },
-            { name: "Prima", handle: "primamagazine" },
-            { name: "Télé 2 Semaines", handle: "tele2semaines" },
-            { name: "Télé Z", handle: "telez_mag" },
-            { name: "Harper's Bazaar France", handle: "harpersbazaarfrance" },
-            { name: "Hachette Livre", handle: "hachettelivre" },
-            { name: "Fayard", handle: "editionsfayard" },
-            { name: "Grasset", handle: "editionsgrasset" },
-            { name: "Stock", handle: "editionsstock" },
-            { name: "Calmann-Lévy", handle: "calmann.levy" },
-            { name: "Larousse", handle: "editionslarousse" },
-            { name: "Le Livre de Poche", handle: "lelivredepoche" },
-            { name: "Armand Colin", handle: "armand_colin" },
-            { name: "Universal Music Group", handle: "universalmusicgroup" },
-            { name: "Universal Music France", handle: "universalmusicfrance" },
-            { name: "StudioCanal", handle: "studiocanal" },
-            { name: "Havas", handle: "havas" },
-            { name: "Havas Paris", handle: "havasparis" }
-        ];
-
-        const allAccounts = [...mainAccounts, ...grayAccounts];
-        const STORAGE_KEY = "ig_blocklist_done_v5";
+        const STORAGE_KEY = "ig_blocklist_done_v6";
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        let hideDone = false;
+        let currentFilter = "all";
 
         function getMilestone(pct) {
             if (pct === 100) return { icon: "🎉", text: "Zone 100% Assainie – Victoire Totale !" };
-            if (pct >= 75) return { icon: "🛡️", text: "Résistant·e chevronné·e (75%+)" };
-            if (pct >= 50) return { icon: "⚡", text: "Cap de la moitié – Ça respire mieux !" };
+            if (pct >= 75) return { icon: "🛡️", text: "Résistant·e chevronné·e – L'algo étouffe" };
+            if (pct >= 50) return { icon: "⚡", text: "Cap de la moitié – On respire mieux !" };
             if (pct >= 25) return { icon: "✊", text: "Premières lignes – Antifasciste actif·ve" };
             if (pct > 0) return { icon: "🌱", text: "Premier pas engagé" };
             return { icon: "🧭", text: "Prêt·e à nettoyer son fil" };
@@ -287,76 +397,98 @@
             }
         }
 
-        function toggleHideDone() {
-            hideDone = !hideDone;
-            document.getElementById("toggleBtn").innerText = hideDone ? "Afficher tout" : "Masquer les comptes faits";
+        function setFilter(filter, btnEl) {
+            currentFilter = filter;
+            document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+            btnEl.classList.add("active");
             render();
         }
 
         function resetAll() {
-            if (confirm("Réinitialiser toute ta progression ?")) {
+            if (confirm("Réinitialiser toute ta progression à zéro ?")) {
                 doneHandles = [];
                 saveState();
             }
         }
 
-        function toggleAccordion() {
-            const content = document.getElementById("accordionContent");
-            const arrow = document.getElementById("accordionArrow");
-            content.classList.toggle("open");
-            arrow.innerText = content.classList.contains("open") ? "▲" : "▼";
+        function openModal() {
+            document.getElementById("suggestModal").classList.add("open");
         }
 
-        function openSuggestModal() {
-            alert("Pour suggérer un nouveau profil, vous pouvez ouvrir une 'Issue' directement sur notre dépôt GitHub. Précisez bien son nom, son identifiant Instagram et s'il s'agit du cœur de cible ou de la zone grise !");
-            window.open("https://github.com/lepetitgauchiste/onbloquelextremedroite", "_blank");
+        function closeModal() {
+            document.getElementById("suggestModal").classList.remove("open");
         }
 
-        function renderList(accountsArray, containerId, isGray = false) {
-            const listEl = document.getElementById(containerId);
-            listEl.innerHTML = "";
-
-            accountsArray.forEach(acc => {
-                const isDone = doneHandles.includes(acc.handle);
-                if (hideDone && isDone) return;
-
-                const item = document.createElement("div");
-                item.className = "item" + (isDone ? " done" : "") + (isGray ? " gray-zone" : "");
-
-                item.innerHTML = `
-                    <div class="item-left" onclick="toggleHandle('${acc.handle}')">
-                        <div class="checkbox">${isDone ? "✓" : ""}</div>
-                        <div class="info">
-                            <span class="name">${acc.name}</span>
-                            <span class="handle">@${acc.handle}</span>
-                        </div>
-                    </div>
-                    <a class="btn-open" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
-                        ${isDone ? "Revoir" : "Ouvrir ↗"}
-                    </a>
-                `;
-                listEl.appendChild(item);
-            });
+        function submitSuggestion() {
+            const name = document.getElementById("sugName").value.trim();
+            const handle = document.getElementById("sugHandle").value.trim().replace(/^@/, "");
+            const tag = document.getElementById("sugTag").value;
+            if (!name || !handle) {
+                alert("Merci d'indiquer au moins le nom et le @pseudo Instagram.");
+                return;
+            }
+            const title = encodeURIComponent(`[Ajout] ${name} (@${handle})`);
+            const body = encodeURIComponent(`**Nom :** ${name}\n**Pseudo Instagram :** @${handle}\n**Lien :** https://www.instagram.com/${handle}/\n**Étiquette politique :** ${tag}\n`);
+            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
+            closeModal();
         }
 
         function render() {
-            const total = allAccounts.length;
+            const listEl = document.getElementById("accountList");
+            const query = document.getElementById("searchInput").value.toLowerCase().trim();
+            listEl.innerHTML = "";
+
+            const total = accounts.length;
             const doneCount = doneHandles.length;
             const pct = Math.round((doneCount / total) * 100);
 
-            // Mise à jour de la barre et stats globales
             document.getElementById("progressBar").style.width = pct + "%";
-            document.getElementById("counter").innerText = `${doneCount} / ${total} bloqués (${pct}%)`;
-            document.getElementById("remaining").innerText = `Reste : ${total - doneCount}`;
+            document.getElementById("scoreNum").innerText = `${doneCount} / ${total}`;
+            document.getElementById("scorePct").innerText = `${pct} % terminé`;
 
-            // Gamification
             const milestone = getMilestone(pct);
             document.getElementById("milestoneIcon").innerText = milestone.icon;
             document.getElementById("milestoneText").innerText = milestone.text;
 
-            // Rendu des deux listes
-            renderList(mainAccounts, "mainAccountList", false);
-            renderList(grayAccounts, "grayAccountList", true);
+            const filtered = accounts.filter(acc => {
+                const isDone = doneHandles.includes(acc.handle);
+                if (currentFilter === "todo" && isDone) return false;
+                if (currentFilter !== "all" && currentFilter !== "todo" && acc.cat !== currentFilter) return false;
+                if (query) {
+                    const matchName = acc.name.toLowerCase().includes(query);
+                    const matchHandle = acc.handle.toLowerCase().includes(query);
+                    const matchLabel = acc.label.toLowerCase().includes(query);
+                    return matchName || matchHandle || matchLabel;
+                }
+                return true;
+            });
+
+            document.getElementById("visibleCount").innerText = `${filtered.length} compte${filtered.length > 1 ? "s" : ""} affiché${filtered.length > 1 ? "s" : ""}`;
+
+            filtered.forEach(acc => {
+                const isDone = doneHandles.includes(acc.handle);
+                const row = document.createElement("div");
+                row.className = "row" + (isDone ? " done" : "");
+
+                row.innerHTML = `
+                    <div class="row-info">
+                        <div class="row-header">
+                            <span class="name">${acc.name}</span>
+                            <span class="tag ${acc.style}">${acc.label}</span>
+                        </div>
+                        <span class="handle">@${acc.handle}</span>
+                    </div>
+                    <div class="row-actions">
+                        <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
+                            Instagram ↗
+                        </a>
+                        <button class="btn-check" onclick="toggleHandle('${acc.handle}')">
+                            ${isDone ? "✓ Bloqué" : "○ Bloqué ?"}
+                        </button>
+                    </div>
+                `;
+                listEl.appendChild(row);
+            });
         }
 
         render();
