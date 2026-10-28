@@ -57,10 +57,19 @@
         .btn-top:hover { opacity: 0.85; }
 
         /* En-tête */
-        .hero { margin-bottom: 18px; }
+        .hero { margin-bottom: 14px; }
         .kicker { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); margin-bottom: 4px; }
         h1 { font-size: 2rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.1; margin-bottom: 10px; }
         .lead { font-size: 0.92rem; color: var(--muted); }
+
+        /* Bouton & Panneau Explication */
+        .explain-wrapper { margin-bottom: 14px; }
+        .btn-explain { width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 11px 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 800; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.15s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .btn-explain:hover { border-color: var(--muted); }
+        .explain-content { display: none; background: var(--card); border: 1px solid var(--border); border-top: none; padding: 14px 16px; border-radius: 0 0 10px 10px; margin-top: -6px; font-size: 0.85rem; color: var(--text); line-height: 1.55; }
+        .explain-content.open { display: block; }
+        .explain-content ul { padding-left: 18px; margin: 8px 0; display: flex; flex-direction: column; gap: 8px; }
+        .explain-content li strong { color: var(--green); }
 
         /* Encadré Transparence */
         .trust-box { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--green); padding: 12px 14px; border-radius: 10px; margin-bottom: 16px; font-size: 0.85rem; line-height: 1.4; color: var(--text); }
@@ -162,7 +171,7 @@
     <nav class="top-nav">
         <div class="brand">🛑 ON BLOQUE L'EXTRÊME DROITE</div>
         <div class="top-actions">
-            <button class="btn-top outline" onclick="cycleTheme()" id="themeBtn" title="Changer l'apparence du site">🌿 Beige</button>
+            <button class="btn-top outline" onclick="cycleTheme()" id="themeBtn" title="Changer l'apparence du site">🌿 Thème beige</button>
             <button class="btn-top" onclick="openModal()">+ Ajoute ton faf</button>
             <a class="btn-top outline" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Code source ↗</a>
         </div>
@@ -172,6 +181,22 @@
         <div class="kicker">Action collective & hygiène numérique</div>
         <h1>La blocklist.</h1>
         <p class="lead">L'algorithme ne fait pas la différence entre un like et un clash : tout leur donne de la visibilité. Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Zéro serveur, ta progression reste stockée sur ton appareil.</p>
+    </div>
+
+    <!-- Bouton et panneau déroulant d'explication -->
+    <div class="explain-wrapper">
+        <button class="btn-explain" onclick="toggleExplain()">
+            <span>💡 Explication : pourquoi et comment ça marche ?</span>
+            <span id="explainArrow">▼</span>
+        </button>
+        <div class="explain-content" id="explainContent">
+            <p>Cette stratégie d'autodéfense numérique nous vient directement du <strong>Brésil</strong> (lors de la présidentielle d'octobre 2026 opposant Lula à Flávio Bolsonaro) et du mouvement <strong>#BlockOut</strong> :</p>
+            <ul>
+                <li><strong>Le piège de l'algorithme :</strong> Sur Instagram, commenter sous un post d'extrême droite pour le contredire, s'indigner ou clasher est interprété par l'algorithme de Meta comme un fort taux d'engagement. Résultat : la plateforme propulse encore plus leurs vidéos auprès du grand public et des indécis.</li>
+                <li><strong>L'impact mécanique du blocage :</strong> Le blocage est le signal négatif ultime pour l'algorithme. Bloquer un compte coupe non seulement toute recommandation vers ton réseau d'amis proches, mais un pic coordonné de milliers de blocages fait chuter drastiquement le score de visibilité global du profil.</li>
+                <li><strong>Une méthode qui a fait ses preuves :</strong> Face aux biais algorithmiques favorisant le camp Bolsonaro, les militant·es brésilien·nes ont lancé une consigne massive : zéro interaction conflictuelle et blocage coordonné de tous les comptes réactionnaires. Cette riposte citoyenne a accompagné la remontée victorieuse de Lula le 25 octobre 2026, avant d'être importée en France dès le lendemain.</li>
+            </ul>
+        </div>
     </div>
 
     <div class="trust-box">
@@ -416,10 +441,14 @@
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
         let currentFilter = "all";
 
-        // Gestion des thèmes (Beige, Sombre, Clair)
+        // Gestion des thèmes (Thème beige, Thème sombre, Thème clair)
         const THEME_KEY = "ig_blocklist_theme";
         const themes = ["beige", "dark", "light"];
-        const themeLabels = { beige: "🌿 Beige", dark: "🌙 Nuit", light: "☀️ Clair" };
+        const themeLabels = {
+            beige: "🌿 Thème beige",
+            dark: "🌙 Thème sombre",
+            light: "☀️ Thème clair"
+        };
         let currentTheme = localStorage.getItem(THEME_KEY) || "beige";
 
         function applyTheme() {
@@ -437,6 +466,13 @@
             currentTheme = themes[nextIndex];
             localStorage.setItem(THEME_KEY, currentTheme);
             applyTheme();
+        }
+
+        function toggleExplain() {
+            const content = document.getElementById("explainContent");
+            const arrow = document.getElementById("explainArrow");
+            content.classList.toggle("open");
+            arrow.innerText = content.classList.contains("open") ? "▲" : "▼";
         }
 
         function getMilestone(pct) {
