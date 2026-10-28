@@ -13,29 +13,26 @@
             --bg-top: #f3decb;
             --bg: #f6ebe0;
             --bg-rgb: 246, 235, 224;
-            --card: rgba(255, 251, 246, 0.86);
-            --card-hero: rgba(255, 251, 246, 0.68);
+            --card: rgba(255, 251, 246, 0.88);
+            --card-hero: rgba(255, 251, 246, 0.70);
             --text: #241813;
             --muted: #6b554a;
             --border: rgba(180, 148, 122, 0.36);
             --green: #2c6e49;
             --green-light: #40916c;
-            --green-bg: rgba(229, 242, 234, 0.88);
+            --green-bg: rgba(229, 242, 234, 0.90);
             --green-border: #9ecbb0;
             --accent: #c8372d;
             --pill-bg: rgba(234, 213, 195, 0.85);
             --pill-text: #48352c;
-            --sticky-bg: rgba(246, 235, 224, 0.85);
+            --sticky-bg: rgba(246, 235, 224, 0.86);
             --ghost-bg: rgba(130, 120, 112, 0.08);
             --ghost-border: rgba(130, 120, 112, 0.18);
             --ghost-text: #7a6a60;
             
             /* Chemin de l'illustration du banc */
             --hero-img: url('theme-beige.jpg');
-            
-            /* Système typographique unifié */
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-display: 'Impact', 'Arial Black', 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         /* =========================================================
@@ -46,8 +43,8 @@
             --bg-top: #140d0e;
             --bg: #0b0e12;
             --bg-rgb: 11, 14, 18;
-            --card: rgba(22, 25, 30, 0.88);
-            --card-hero: rgba(18, 20, 25, 0.68);
+            --card: rgba(22, 25, 30, 0.90);
+            --card-hero: rgba(18, 20, 25, 0.70);
             --text: #f5f2f2;
             --muted: #a39c9e;
             --border: rgba(255, 255, 255, 0.12);
@@ -56,7 +53,7 @@
             --green-bg: rgba(230, 57, 70, 0.16);
             --green-border: #801f27;
             --accent: #ff4754;
-            --pill-bg: rgba(36, 30, 34, 0.9);
+            --pill-bg: rgba(36, 30, 34, 0.92);
             --pill-text: #d6caca;
             --sticky-bg: rgba(11, 14, 18, 0.88);
             --ghost-bg: rgba(255, 255, 255, 0.035);
@@ -357,9 +354,27 @@
             opacity: 0.88;
             font-weight: 500;
             max-width: 540px;
-            margin: 0 auto;
+            margin: 0 auto 14px auto;
             line-height: 1.5;
         }
+
+        /* Mémo visuel rapide en 3 étapes (Audit UX : réduction de friction) */
+        .quick-steps {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            background: rgba(var(--bg-rgb), 0.5);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--muted);
+        }
+        .quick-steps span strong { color: var(--text); }
+        .quick-steps .step-sep { opacity: 0.45; }
 
         /* =========================================================
            BLOC EXPLICATION CENTRÉ
@@ -421,12 +436,10 @@
             opacity: 0.75;
             transition: opacity 0.25s ease, background-color 0.25s ease;
         }
-        .trust-box:hover {
-            opacity: 1;
-        }
+        .trust-box:hover { opacity: 1; }
 
         /* =========================================================
-           DASHBOARD STICKY : BARRE LUDIQUE ONDULANTE + COUREUR + RESET
+           DASHBOARD STICKY : BARRE LUDIQUE + COUREUR VERS LA DROITE + RESET
            ========================================================= */
         .sticky-dashboard {
             position: sticky;
@@ -461,7 +474,7 @@
         .progress-row {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 12px;
         }
 
@@ -479,9 +492,10 @@
             100% { background-position: 40px 50%; }
         }
 
-        @keyframes runnerBounce {
-            0%, 100% { transform: translate(50%, -52%) translateY(0px) rotate(-4deg); }
-            50% { transform: translate(50%, -52%) translateY(-3px) rotate(6deg); }
+        /* Le personnage est inversé (scaleX(-1)) pour courir vers la DROITE ! */
+        @keyframes runnerBounceRight {
+            0%, 100% { transform: translate(50%, -54%) scaleX(-1) translateY(0px) rotate(-5deg); }
+            50% { transform: translate(50%, -54%) scaleX(-1) translateY(-3px) rotate(6deg); }
         }
 
         .progress-fill {
@@ -505,31 +519,49 @@
             position: absolute;
             right: 0;
             top: 50%;
-            transform: translate(50%, -52%);
-            font-size: 1.05rem;
+            display: inline-block;
+            transform: translate(50%, -54%) scaleX(-1);
+            font-size: 1.15rem;
             line-height: 1;
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.22));
-            animation: runnerBounce 0.45s ease-in-out infinite;
+            animation: runnerBounceRight 0.45s ease-in-out infinite;
             pointer-events: none;
             user-select: none;
         }
 
+        /* Bouton Réinitialiser la progression avec grande flèche ouverte SVG */
         .btn-reset-prog {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: transparent;
             border: 1px solid var(--border);
             color: var(--muted);
-            padding: 4px 10px;
+            padding: 5px 11px;
             border-radius: 99px;
-            font-size: 0.72rem;
+            font-size: 0.74rem;
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.15s ease;
+            transition: all 0.18s ease;
+        }
+        .btn-reset-prog svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            stroke-width: 2.3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.35s ease;
         }
         .btn-reset-prog:hover {
             color: var(--text);
             border-color: var(--muted);
             background: var(--pill-bg);
+        }
+        .btn-reset-prog:hover svg {
+            transform: rotate(-180deg);
         }
 
         /* Filtres et Recherche */
@@ -541,6 +573,23 @@
         .search-bar { display: flex; margin-bottom: 12px; }
         .search-input { width: 100%; padding: 11px 15px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 0.88rem; outline: none; transition: border-color 0.15s; }
         .search-input:focus { border-color: var(--green); }
+
+        /* =========================================================
+           ÉTAT DE VICTOIRE / FIN DE LISTE (RECOMMANDATION AUDIT UX)
+           ========================================================= */
+        .empty-victory-card {
+            background: var(--card);
+            border: 1.5px solid var(--green);
+            border-radius: 16px;
+            padding: 26px 20px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+        .empty-victory-icon { font-size: 2.3rem; margin-bottom: 8px; }
+        .empty-victory-title { font-size: 1.15rem; font-weight: 900; margin-bottom: 6px; color: var(--text); }
+        .empty-victory-desc { font-size: 0.86rem; color: var(--muted); max-width: 440px; margin: 0 auto 16px auto; }
+        .empty-victory-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
         /* =========================================================
            LISTE DES COMPTES, FAITS MARQUANTS, SIGNALEMENT & RÉCOMPENSE
@@ -572,7 +621,7 @@
         .fact-note {
             font-size: 0.71rem;
             color: var(--muted);
-            opacity: 0.86;
+            opacity: 0.88;
             font-style: italic;
             line-height: 1.3;
             margin-top: 2px;
@@ -588,11 +637,11 @@
 
         /* Boutons d'action de chaque ligne */
         .row-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; position: relative; }
-        .btn-ig { background: var(--text); color: var(--bg); text-decoration: none; padding: 7px 11px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; transition: opacity 0.15s; }
+        .btn-ig { background: var(--text); color: var(--bg); text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 0.79rem; font-weight: 700; white-space: nowrap; transition: opacity 0.15s; }
         .btn-ig:hover { opacity: 0.85; }
         .row.done .btn-ig { background: rgba(0, 0, 0, 0.08); color: var(--muted); }
 
-        .btn-check { background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 8px; font-size: 0.76rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+        .btn-check { background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 7px 11px; border-radius: 8px; font-size: 0.77rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
         .row.done .btn-check { background: var(--green); border-color: var(--green); color: #fff; }
 
         /* Bouton Drapeau pour signaler un compte erroné */
@@ -601,9 +650,9 @@
             border: 1px solid transparent;
             color: var(--muted);
             opacity: 0.55;
-            padding: 6px 7px;
+            padding: 7px 8px;
             border-radius: 8px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: all 0.15s ease;
             line-height: 1;
@@ -684,10 +733,12 @@
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; }
         .form-control { width: 100%; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 0.88rem; font-family: var(--font-sans); }
+        .field-hint { font-size: 0.72rem; margin-top: 4px; font-weight: 600; color: var(--muted); }
+        .field-hint.valid { color: var(--green); }
         .criteria-box { background: var(--pill-bg); padding: 10px 12px; border-radius: 8px; font-size: 0.77rem; color: var(--pill-text); margin-bottom: 14px; line-height: 1.45; }
 
         /* =========================================================
-           PIED DE PAGE (AVEC SIGNATURE & MENTION IA)
+           PIED DE PAGE (AVEC SIGNATURE @HENRILUBSZYNSKI & MENTION IA)
            ========================================================= */
         footer {
             text-align: center;
@@ -702,14 +753,17 @@
             display: inline-block;
             background: var(--pill-bg);
             color: var(--text);
-            padding: 1px 8px;
+            padding: 2px 9px;
             border-radius: 6px;
             font-weight: 800;
             text-decoration: none;
             border: 1px solid var(--border);
-            transition: transform 0.15s ease;
+            transition: transform 0.15s ease, border-color 0.15s ease;
         }
-        .ig-tag-link:hover { transform: translateY(-1px); }
+        .ig-tag-link:hover {
+            transform: translateY(-1px);
+            border-color: var(--muted);
+        }
         .ai-shame-note {
             margin-top: 10px;
             font-size: 0.72rem;
@@ -722,7 +776,7 @@
             .hero-bg-banner { height: 340px; }
             .row { flex-direction: column; align-items: flex-start; }
             .row-actions { width: 100%; justify-content: flex-end; margin-top: 6px; }
-            .btn-ig, .btn-check { flex: 1; text-align: center; }
+            .btn-ig, .btn-check { flex: 1; text-align: center; padding: 10px 12px; font-size: 0.82rem; }
             .progress-row { flex-wrap: wrap; }
         }
     </style>
@@ -763,6 +817,13 @@
             <span id="shareBtnText">Partager</span>
         </button>
         <p class="lead">L'algorithme ne fait pas la différence entre un like et un clash : tout leur donne de la visibilité. Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Zéro serveur, ta progression reste stockée sur ton appareil.</p>
+        <div class="quick-steps" aria-label="Mode d'emploi rapide">
+            <span><strong>1.</strong> Clique sur « Instagram ↗ »</span>
+            <span class="step-sep">→</span>
+            <span><strong>2.</strong> Menu <strong>⋯</strong> en haut à droite</span>
+            <span class="step-sep">→</span>
+            <span><strong>3.</strong> <strong>Bloquer</strong> 🚫</span>
+        </div>
     </section>
 
     <!-- Bouton et panneau déroulant d'explication centré -->
@@ -786,7 +847,7 @@
         🔒 <strong>Transparence totale :</strong> Ce site est 100 % open-source. Aucun serveur centralisé, aucun traqueur et aucune donnée collectée. Tout s'exécute directement sur votre appareil et votre progression est stockée en local (localStorage). Vous êtes chez vous.
     </div>
 
-    <!-- Tableau de bord Sticky avec barre animée, coureur et bouton Réinitialiser la progression -->
+    <!-- Tableau de bord Sticky avec barre animée, coureur vers la droite et bouton Réinitialiser la progression -->
     <div class="sticky-dashboard">
         <div class="dash-card">
             <div class="dash-top">
@@ -808,7 +869,13 @@
                         <span class="progress-runner" id="progressRunner" title="En route !">🏃</span>
                     </div>
                 </div>
-                <button class="btn-reset-prog" onclick="resetAll()" title="Remettre le compteur à zéro">↺ Réinitialiser la progression</button>
+                <button class="btn-reset-prog" onclick="resetAll()" title="Remettre le compteur à zéro">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                    </svg>
+                    <span>Réinitialiser la progression</span>
+                </button>
             </div>
             <div class="filter-row" id="filterRow">
                 <button class="pill active" onclick="setFilter('all', this)">Tout voir</button>
@@ -852,8 +919,9 @@
                 <input type="text" id="sugName" class="form-control" placeholder="Ex: Laurent Jacobelli">
             </div>
             <div class="form-group">
-                <label>Pseudo Instagram (ou lien)</label>
-                <input type="text" id="sugHandle" class="form-control" placeholder="Ex: @laurentjacobelli">
+                <label>Pseudo ou lien Instagram</label>
+                <input type="text" id="sugHandle" class="form-control" placeholder="Ex: @laurentjacobelli ou lien instagram.com/..." oninput="validateIgInput(this)">
+                <div class="field-hint" id="sugHandleHint">Colle un @pseudo ou un lien Instagram complet, il sera nettoyé automatiquement.</div>
             </div>
             <div class="form-group">
                 <label>Fait marquant en quelques mots (optionnel)</label>
@@ -925,7 +993,7 @@
     <footer>
         🛡️ <strong>Transparence & Confidentialité :</strong> Ce projet est 100 % open-source. Aucun serveur centralisé n'est utilisé : tout s'exécute directement sur votre appareil et votre progression est stockée uniquement en local (localStorage). Aucune donnée personnelle n'est collectée.<br><br>
         Inspiré de la campagne brésilienne et de <em>Mise au Poing</em> • <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Inspecter le code source sur GitHub</a><br><br>
-        Créé par <strong>Henri Lubszynski</strong>, votre gaucho dévoué et en colère <a class="ig-tag-link" id="creatorIgLink" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@#henrilubszynski</a>
+        Créé par <a class="ig-tag-link" id="creatorIgLink" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@henrilubszynski</a>, votre gaucho dévoué et en colère.
         <div class="ai-shame-note">🤖 Honteusement conçu à l'aide de l'IA.</div>
     </footer>
 
@@ -933,7 +1001,7 @@
         // Pseudo Instagram du créateur (modifiable ici si besoin)
         const CREATOR_IG_HANDLE = "henrilubszynski";
         document.getElementById("creatorIgLink").href = `https://www.instagram.com/${CREATOR_IG_HANDLE}/`;
-        document.getElementById("creatorIgLink").innerText = `@#${CREATOR_IG_HANDLE}`;
+        document.getElementById("creatorIgLink").innerText = `@${CREATOR_IG_HANDLE}`;
 
         const accounts = [
             // EXTRÊME DROITE (Politiques, Partis & International)
@@ -1099,14 +1167,13 @@
         // =========================================================
         const THEME_KEY = "ig_blocklist_theme";
         let savedTheme = localStorage.getItem(THEME_KEY);
-        // Compatibilité avec l'ancien nom "beige"
         let currentTheme = (savedTheme === "dark") ? "dark" : "light";
 
         function triggerThemeIllumination() {
             const btn = document.getElementById("themeBtn");
             if (!btn) return;
             btn.classList.remove("illuminate");
-            void btn.offsetWidth; // Force reflow pour relancer l'animation CSS
+            void btn.offsetWidth;
             btn.classList.add("illuminate");
         }
 
@@ -1150,7 +1217,7 @@
                 try {
                     await navigator.share(shareData);
                 } catch (err) {
-                    // Partage annulé par l'utilisateur
+                    // Partage annulé
                 }
             } else {
                 try {
@@ -1174,11 +1241,11 @@
 
         function getMilestone(pct) {
             if (pct === 100) return { icon: "🎉", text: "Zone 100% Assainie – Victoire Totale !", runner: "🏆" };
-            if (pct >= 75) return { icon: "🛡️", text: "Résistant·e chevronné·e – L'algo étouffe", runner: "🚀" };
+            if (pct >= 75) return { icon: "🛡️", text: "Résistant·e chevronné·e – L'algo étouffe", runner: "🏃" };
             if (pct >= 50) return { icon: "⚡", text: "Cap de la moitié – On respire mieux !", runner: "🏃" };
             if (pct >= 25) return { icon: "✊", text: "Premières lignes – Antifasciste actif·ve", runner: "🏃" };
             if (pct > 0) return { icon: "🌱", text: "Premier pas engagé", runner: "🏃" };
-            return { icon: "🧭", text: "Prêt·e à nettoyer son fil", runner: "🚶" };
+            return { icon: "🧭", text: "Prêt·e à nettoyer son fil", runner: "🏃" };
         }
 
         function saveState() {
@@ -1208,7 +1275,7 @@
         function setFilter(filter, btnEl) {
             currentFilter = filter;
             document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
-            btnEl.classList.add("active");
+            if (btnEl) btnEl.classList.add("active");
             render();
         }
 
@@ -1217,6 +1284,38 @@
                 doneHandles = [];
                 lastRewardedHandle = null;
                 saveState();
+            }
+        }
+
+        // =========================================================
+        // VALIDATION DYNAMIQUE DU PSEUDO / LIEN INSTAGRAM (AUDIT UX)
+        // =========================================================
+        function extractIgHandle(raw) {
+            let cleaned = raw.trim();
+            const urlMatch = cleaned.match(/(?:instagram\.com\/)([A-Za-z0-9._]+)/i);
+            if (urlMatch && urlMatch[1]) {
+                cleaned = urlMatch[1];
+            }
+            return cleaned.replace(/^@/, "").split(/[/?#]/)[0];
+        }
+
+        function validateIgInput(inputEl) {
+            const hint = document.getElementById("sugHandleHint");
+            const handle = extractIgHandle(inputEl.value);
+            if (!handle) {
+                hint.className = "field-hint";
+                hint.innerText = "Colle un @pseudo ou un lien Instagram complet, il sera nettoyé automatiquement.";
+                return;
+            }
+            const exists = accounts.some(a => a.handle.toLowerCase() === handle.toLowerCase());
+            if (exists) {
+                hint.className = "field-hint";
+                hint.style.color = "var(--accent)";
+                hint.innerText = `⚠️ @${handle} est déjà présent dans la blocklist !`;
+            } else {
+                hint.className = "field-hint valid";
+                hint.style.color = "";
+                hint.innerText = `✓ Pseudo détecté : @${handle}`;
             }
         }
 
@@ -1242,7 +1341,8 @@
 
         function submitSuggestion() {
             const name = document.getElementById("sugName").value.trim();
-            const handle = document.getElementById("sugHandle").value.trim().replace(/^@/, "");
+            const rawHandle = document.getElementById("sugHandle").value;
+            const handle = extractIgHandle(rawHandle);
             const fact = document.getElementById("sugFact").value.trim();
             const tag = document.getElementById("sugTag").value;
             if (!name || !handle) {
@@ -1314,6 +1414,34 @@
             });
 
             document.getElementById("visibleCount").innerText = `${filtered.length} compte${filtered.length > 1 ? "s" : ""} affiché${filtered.length > 1 ? "s" : ""}`;
+
+            // Affichage d'une carte de félicitations si tout est terminé ou filtre vide (Audit UX)
+            if (filtered.length === 0) {
+                const emptyCard = document.createElement("div");
+                emptyCard.className = "empty-victory-card";
+                if (doneCount === total) {
+                    emptyCard.innerHTML = `
+                        <div class="empty-victory-icon">🎉✊</div>
+                        <div class="empty-victory-title">Grand chelem ! Tu as bloqué 100 % de la liste.</div>
+                        <p class="empty-victory-desc">Ton fil Instagram est assaini et leur portée algorithmique recule. Fais tourner l'outil autour de toi pour démultiplier l'impact collectif !</p>
+                        <div class="empty-victory-actions">
+                            <button class="btn-top" onclick="shareSite()">📣 Partager la blocklist</button>
+                            <button class="btn-top outline" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
+                        </div>
+                    `;
+                } else {
+                    emptyCard.innerHTML = `
+                        <div class="empty-victory-icon">✨</div>
+                        <div class="empty-victory-title">Aucun compte à afficher ici</div>
+                        <p class="empty-victory-desc">Tous les comptes de ce filtre sont déjà bloqués ou aucun profil ne correspond à ta recherche.</p>
+                        <div class="empty-victory-actions">
+                            <button class="btn-top outline" onclick="document.getElementById('searchInput').value=''; setFilter('all', document.querySelector('.pill'));">Tout réafficher</button>
+                        </div>
+                    `;
+                }
+                listEl.appendChild(emptyCard);
+                return;
+            }
 
             filtered.forEach(acc => {
                 const isDone = doneHandles.includes(acc.handle);
