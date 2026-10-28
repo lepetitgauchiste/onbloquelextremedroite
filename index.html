@@ -7,78 +7,61 @@
     <style>
         /* =========================================================
            1. THÈME PAR DÉFAUT : BEIGE & JARDIN COMMUNAUTAIRE (🌿)
-           Associé à l'illustration de la personne sur le banc
+           Teinte extrapolée du chemin sable/pêche au bas de l'image
            ========================================================= */
         :root {
-            --bg: #f4ece1;
-            --bg-rgb: 244, 236, 225;
-            --card: rgba(255, 252, 247, 0.9);
-            --text: #261c18;
-            --muted: #6e5d53;
-            --border: #e2d5c4;
-            --green: #2c6e49;       /* Vert jardin / sauge profond */
-            --green-bg: #e6f2eb;
-            --green-border: #a3cfb4;
-            --accent: #c83e37;      /* Rouge rose engagée */
-            --pill-bg: #e8dccb;
-            --pill-text: #4a3c35;
-            --sticky-bg: rgba(244, 236, 225, 0.88);
+            --bg-top: #f3decb;       /* Teinte exacte du bas de l'image (sable/pêche chaud) */
+            --bg: #f6ebe0;           /* Teinte unie de continuité en descendant */
+            --bg-rgb: 243, 222, 203;
+            --card: rgba(255, 251, 246, 0.92);
+            --text: #281b15;
+            --muted: #6e584d;
+            --border: #e4cdb8;
+            --green: #2c6e49;        /* Vert jardin / sauge profond */
+            --green-bg: #e5f2ea;
+            --green-border: #9ecbb0;
+            --accent: #c8372d;       /* Rouge des roses */
+            --pill-bg: #ead5c3;
+            --pill-text: #48352c;
+            --sticky-bg: rgba(246, 235, 224, 0.9);
             
-            /* Remplacez par le chemin ou l'URL de l'image du banc */
+            /* Image 100% nette en haut, sans voile */
             --hero-img: url('theme-beige.jpg');
-            --hero-opacity: 0.42;
+            --text-halo: rgba(255, 248, 240, 0.95);
         }
 
         /* =========================================================
            2. THÈME SOMBRE : RUPTURE & ÉTOILE ROUGE (✊)
-           Associé à l'illustration des chaînes numériques brisées
+           Teinte extrapolée du noir bleuté profond et braise de l'image
            ========================================================= */
         [data-theme="dark"] {
-            --bg: #0d0c0e;
-            --bg-rgb: 13, 12, 14;
-            --card: rgba(26, 23, 27, 0.9);
-            --text: #f5f0f0;
-            --muted: #a89999;
-            --border: #332427;
-            --green: #e63946;       /* Rouge étoile / lutte pour l'action */
+            --bg-top: #140d0e;       /* Raccord braise/ombre du bas de l'affiche */
+            --bg: #0b0e12;           /* Noir nuit profond extrapolé du ciel étoilé */
+            --bg-rgb: 11, 14, 18;
+            --card: rgba(20, 23, 28, 0.92);
+            --text: #f5f2f2;
+            --muted: #a39c9e;
+            --border: #2c2225;
+            --green: #e63946;        /* Rouge étoile / lutte */
             --green-bg: rgba(230, 57, 70, 0.16);
             --green-border: #801f27;
-            --accent: #ff4d5a;      /* Rouge lumineux */
-            --pill-bg: #221c1e;
-            --pill-text: #d4c5c5;
-            --sticky-bg: rgba(13, 12, 14, 0.9);
+            --accent: #ff4754;       /* Rouge vif lumineux */
+            --pill-bg: #1f1b1e;
+            --pill-text: #d6caca;
+            --sticky-bg: rgba(11, 14, 18, 0.9);
             
-            /* Remplacez par le chemin ou l'URL de l'image des chaînes brisées */
+            /* Image 100% nette en haut, sans voile */
             --hero-img: url('theme-dark.jpg');
-            --hero-opacity: 0.55;
-        }
-
-        /* =========================================================
-           3. THÈME CLAIR MINIMALISTE (☀️)
-           ========================================================= */
-        [data-theme="light"] {
-            --bg: #f8f9fa;
-            --bg-rgb: 248, 249, 250;
-            --card: rgba(255, 255, 255, 0.92);
-            --text: #111111;
-            --muted: #555555;
-            --border: #dee2e6;
-            --green: #198754;
-            --green-bg: #e8f5e9;
-            --green-border: #a3cfbb;
-            --accent: #d93838;
-            --pill-bg: #e9ecef;
-            --pill-text: #495057;
-            --sticky-bg: rgba(248, 249, 250, 0.9);
-            
-            --hero-img: url('theme-beige.jpg');
-            --hero-opacity: 0.25;
+            --text-halo: rgba(11, 14, 18, 0.95);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         
         body {
+            /* Dégradé vertical très lisse qui part de la teinte du bas de l'image vers le fond uni */
             background-color: var(--bg);
+            background-image: linear-gradient(to bottom, var(--bg-top) 0px, var(--bg-top) 360px, var(--bg) 720px);
+            background-repeat: no-repeat;
             color: var(--text);
             padding: 16px;
             max-width: 660px;
@@ -90,16 +73,16 @@
         }
 
         /* =========================================================
-           IMAGE D'EN-TÊTE AVEC DÉGRADÉ VERS LE FOND UNI
+           IMAGE AU SOMMET : 100% PURE EN HAUT + FONDU AU BAS DE L'IMAGE
            ========================================================= */
         .hero-bg-banner {
-            position: fixed; /* Reste en haut ou mettez 'absolute' pour qu'elle défile */
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 100vw;
-            height: 540px;
+            max-width: 1100px; /* Évite un zoom excessif sur grand écran */
+            height: 460px;
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
@@ -111,38 +94,66 @@
             inset: 0;
             background-image: var(--hero-img);
             background-size: cover;
-            background-position: center 25%;
+            background-position: center top;
             background-repeat: no-repeat;
-            opacity: var(--hero-opacity);
-            transition: opacity 0.4s ease, background-image 0.4s ease;
-            /* Masque de fondu progressif pour éviter toute coupure nette */
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0) 100%);
+            opacity: 1; /* Aucun voile : l'image est à 100% de sa clarté */
+            
+            /* Le haut (0% à 62%) est 100% visible, puis fondu ultra-lisse vers la fin de l'image */
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                #000000 0%,
+                #000000 62%,
+                rgba(0, 0, 0, 0.75) 75%,
+                rgba(0, 0, 0, 0.3) 89%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to bottom,
+                #000000 0%,
+                #000000 62%,
+                rgba(0, 0, 0, 0.75) 75%,
+                rgba(0, 0, 0, 0.3) 89%,
+                transparent 100%
+            );
         }
 
-        .hero-bg-banner::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            /* Double dégradé vertical et radial pour fondre les bords dans la couleur --bg */
-            background: 
-                radial-gradient(circle at 50% 0%, rgba(var(--bg-rgb), 0.05) 0%, rgba(var(--bg-rgb), 0.85) 85%, var(--bg) 100%),
-                linear-gradient(to bottom, rgba(var(--bg-rgb), 0.15) 0%, rgba(var(--bg-rgb), 0.7) 55%, var(--bg) 100%);
+        /* Fondu latéral doux uniquement sur très grands écrans pour fondre les côtés de l'image */
+        @media (min-width: 900px) {
+            .hero-bg-banner::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to right,
+                    var(--bg-top) 0%,
+                    transparent 12%,
+                    transparent 88%,
+                    var(--bg-top) 100%
+                );
+            }
         }
 
         /* Barre supérieure */
-        .top-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 22px; flex-wrap: wrap; gap: 10px; }
-        .brand { font-weight: 900; font-size: 0.95rem; letter-spacing: -0.3px; display: flex; align-items: center; gap: 6px; text-shadow: 0 1px 8px rgba(var(--bg-rgb), 0.8); }
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid rgba(128, 128, 128, 0.2); margin-bottom: 190px; flex-wrap: wrap; gap: 10px; }
+        .brand { font-weight: 900; font-size: 0.95rem; letter-spacing: -0.3px; display: flex; align-items: center; gap: 6px; background: var(--card); backdrop-filter: blur(8px); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
         .top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .btn-top { background: var(--text); color: var(--bg); border: none; padding: 7px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; }
+        .btn-top { background: var(--text); color: var(--bg); border: none; padding: 7px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; box-shadow: 0 2px 10px rgba(0,0,0,0.12); }
         .btn-top.outline { background: var(--card); backdrop-filter: blur(8px); color: var(--text); border: 1px solid var(--border); }
-        .btn-top:hover { opacity: 0.88; transform: translateY(-1px); }
+        .btn-top:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        /* En-tête */
-        .hero { margin-bottom: 18px; padding: 8px 0 4px 0; }
-        .kicker { font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); margin-bottom: 4px; text-shadow: 0 1px 4px rgba(var(--bg-rgb), 0.9); }
-        h1 { font-size: 2.15rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.08; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(var(--bg-rgb), 0.9); }
-        .lead { font-size: 0.94rem; color: var(--text); font-weight: 500; opacity: 0.9; text-shadow: 0 1px 8px rgba(var(--bg-rgb), 0.95); }
+        /* En-tête placé juste dans la zone de transition lisse de l'image */
+        .hero {
+            margin-bottom: 16px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 18px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .kicker { font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); margin-bottom: 4px; }
+        h1 { font-size: 2.1rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.08; margin-bottom: 8px; }
+        .lead { font-size: 0.92rem; color: var(--muted); font-weight: 500; line-height: 1.45; }
 
         /* Bouton & Panneau Explication */
         .explain-wrapper { margin-bottom: 14px; }
@@ -215,8 +226,8 @@
         .row.done .btn-check { background: var(--green); border-color: var(--green); color: #fff; }
 
         /* Adaptations spécifiques au mode Sombre (Chaînes brisées & Étoile rouge) */
-        [data-theme="dark"] .criteria-box { background: #221c1e; color: #d4c5c5; }
-        [data-theme="dark"] .btn-ig { background: #2b2326; color: #f5f0f0; border: 1px solid #3d3034; }
+        [data-theme="dark"] .criteria-box { background: #1f1b1e; color: #d6caca; }
+        [data-theme="dark"] .btn-ig { background: #262024; color: #f5f2f2; border: 1px solid #3a2e33; }
         [data-theme="dark"] .row.done .btn-ig { background: rgba(230, 57, 70, 0.15); color: #ff8fa3; border-color: transparent; }
         [data-theme="dark"] .tag-ed { background: rgba(220, 38, 38, 0.22); color: #fca5a5; border-color: rgba(220, 38, 38, 0.45); }
         [data-theme="dark"] .tag-droite { background: rgba(217, 119, 6, 0.2); color: #fcd34d; border-color: rgba(217, 119, 6, 0.4); }
@@ -240,16 +251,17 @@
         footer a { color: var(--text); font-weight: 700; }
 
         @media (max-width: 480px) {
+            .top-nav { margin-bottom: 130px; }
+            .hero-bg-banner { height: 340px; }
             .row { flex-direction: column; align-items: flex-start; }
             .row-actions { width: 100%; justify-content: flex-end; margin-top: 4px; }
             .btn-ig, .btn-check { flex: 1; text-align: center; }
-            .hero-bg-banner { height: 460px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Bannière d'arrière-plan au sommet avec fondu vers le bas -->
+    <!-- Image 100% visible en haut avec fondu lisse vers la teinte du fond en bas -->
     <div class="hero-bg-banner" aria-hidden="true"></div>
 
     <nav class="top-nav">
@@ -525,29 +537,28 @@
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
         let currentFilter = "all";
 
-        // Gestion des thèmes (Thème beige, Thème sombre, Thème clair)
+        // Gestion des 2 thèmes uniquement (Thème beige & Thème sombre)
         const THEME_KEY = "ig_blocklist_theme";
-        const themes = ["beige", "dark", "light"];
+        const themes = ["beige", "dark"];
         const themeLabels = {
             beige: "🌿 Thème beige",
-            dark: "✊ Thème sombre",
-            light: "☀️ Thème clair"
+            dark: "✊ Thème sombre"
         };
-        let currentTheme = localStorage.getItem(THEME_KEY) || "beige";
+        let savedTheme = localStorage.getItem(THEME_KEY);
+        let currentTheme = (savedTheme === "dark") ? "dark" : "beige";
 
         function applyTheme() {
             if (currentTheme === "beige") {
                 document.documentElement.removeAttribute("data-theme");
             } else {
-                document.documentElement.setAttribute("data-theme", currentTheme);
+                document.documentElement.setAttribute("data-theme", "dark");
             }
             const btn = document.getElementById("themeBtn");
             if (btn) btn.innerText = themeLabels[currentTheme];
         }
 
         function cycleTheme() {
-            const nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
-            currentTheme = themes[nextIndex];
+            currentTheme = (currentTheme === "beige") ? "dark" : "beige";
             localStorage.setItem(THEME_KEY, currentTheme);
             applyTheme();
         }
