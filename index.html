@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autodéfense Algorithmique — On bloque l'extrême droite</title>
+    <title>Autodéfense Algorithmique & Action — On bloque l'extrême droite</title>
     <style>
         /* =========================================================
            1. THÈME CLAIR (PAR DÉFAUT — 🌿)
@@ -14,24 +14,24 @@
             --bg-rgb: 246, 235, 224;
             --card: rgba(255, 251, 246, 0.92);
             --card-solid: #fffbf6;
-            --card-hero: rgba(255, 251, 246, 0.76);
-            --sub-card: rgba(236, 220, 204, 0.55);
-            --sub-card-border: rgba(180, 148, 122, 0.28);
+            --card-hero: rgba(255, 251, 246, 0.82);
+            --sub-card: rgba(236, 220, 204, 0.62);
+            --sub-card-border: rgba(180, 148, 122, 0.32);
             --text: #241813;
-            --muted: #6b554a;
-            --border: rgba(180, 148, 122, 0.36);
+            --muted: #5a463c;
+            --border: rgba(180, 148, 122, 0.38);
             --green: #2c6e49;
             --green-light: #40916c;
-            --green-bg: rgba(229, 242, 234, 0.94);
+            --green-bg: rgba(229, 242, 234, 0.96);
             --green-solid: #e5f2ea;
             --green-border: #9ecbb0;
             --accent: #c8372d;
-            --pill-bg: rgba(234, 213, 195, 0.85);
-            --pill-text: #48352c;
-            --sticky-bg: rgba(246, 235, 224, 0.88);
-            --ghost-bg: rgba(130, 120, 112, 0.08);
-            --ghost-border: rgba(130, 120, 112, 0.18);
-            --ghost-text: #7a6a60;
+            --pill-bg: rgba(234, 213, 195, 0.88);
+            --pill-text: #3e2d25;
+            --sticky-bg: rgba(246, 235, 224, 0.90);
+            --ghost-bg: rgba(130, 120, 112, 0.12);
+            --ghost-border: rgba(130, 120, 112, 0.25);
+            --ghost-text: #4a3c35;
             
             --ig-grad: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --ig-shadow: 0 3px 10px rgba(220, 39, 67, 0.22);
@@ -50,24 +50,24 @@
             --bg-rgb: 11, 14, 18;
             --card: rgba(22, 25, 30, 0.92);
             --card-solid: #16191e;
-            --card-hero: rgba(18, 20, 25, 0.76);
-            --sub-card: rgba(10, 12, 16, 0.78);
-            --sub-card-border: rgba(255, 255, 255, 0.08);
+            --card-hero: rgba(18, 20, 25, 0.82);
+            --sub-card: rgba(10, 12, 16, 0.82);
+            --sub-card-border: rgba(255, 255, 255, 0.10);
             --text: #f5f2f2;
-            --muted: #a39c9e;
-            --border: rgba(255, 255, 255, 0.12);
+            --muted: #b5aeaf;
+            --border: rgba(255, 255, 255, 0.14);
             --green: #e63946;
             --green-light: #ff6b76;
-            --green-bg: rgba(230, 57, 70, 0.16);
+            --green-bg: rgba(230, 57, 70, 0.18);
             --green-solid: #231418;
             --green-border: #801f27;
             --accent: #ff4754;
-            --pill-bg: rgba(36, 30, 34, 0.92);
-            --pill-text: #d6caca;
-            --sticky-bg: rgba(11, 14, 18, 0.90);
-            --ghost-bg: rgba(255, 255, 255, 0.035);
-            --ghost-border: rgba(255, 255, 255, 0.08);
-            --ghost-text: #858082;
+            --pill-bg: rgba(36, 30, 34, 0.94);
+            --pill-text: #e0d6d6;
+            --sticky-bg: rgba(11, 14, 18, 0.92);
+            --ghost-bg: rgba(255, 255, 255, 0.06);
+            --ghost-border: rgba(255, 255, 255, 0.12);
+            --ghost-text: #d0c8ca;
             
             --ig-grad: linear-gradient(135deg, #d97724 0%, #d1512c 25%, #c41e3a 55%, #a81c56 80%, #8f1468 100%);
             --ig-shadow: 0 3px 12px rgba(230, 57, 70, 0.25);
@@ -103,37 +103,35 @@
         }
 
         /* =========================================================
-           BOUTON DE THÈME UNIQUE FIXÉ EN HAUT À GAUCHE (JOUR / NUIT)
+           BOUTON DE THÈME UNIQUE FIXÉ EN HAUT À GAUCHE (LUNE / SOLEIL)
            ========================================================= */
         .btn-theme-corner {
             position: fixed;
             top: 14px;
             left: 14px;
-            z-index: 60;
-            width: 42px;
-            height: 42px;
+            z-index: 90;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--card-solid);
             border: 1.5px solid var(--border);
             color: var(--text);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
-            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
         }
         .btn-theme-corner:hover {
-            transform: translateY(-1.5px) scale(1.04);
+            transform: translateY(-2px) scale(1.06);
             border-color: var(--green);
         }
         .btn-theme-corner svg {
-            width: 20px;
-            height: 20px;
+            width: 21px;
+            height: 21px;
             stroke: currentColor;
-            stroke-width: 2.1;
+            stroke-width: 2.2;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
@@ -141,9 +139,9 @@
 
         @keyframes themeSpotlight {
             0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0), 0 0 0 0 rgba(44, 110, 73, 0); transform: scale(1); }
-            30% { box-shadow: 0 0 0 6px rgba(230, 57, 70, 0.35), 0 0 22px 4px var(--green); transform: scale(1.08); border-color: var(--green); }
+            30% { box-shadow: 0 0 0 6px rgba(230, 57, 70, 0.35), 0 0 22px 4px var(--green); transform: scale(1.09); border-color: var(--green); }
             65% { box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2), 0 0 14px 2px var(--green); transform: scale(1.03); }
-            100% { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14); transform: scale(1); }
+            100% { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18); transform: scale(1); }
         }
         .btn-theme-corner.illuminate {
             animation: themeSpotlight 1.8s cubic-bezier(0.22, 1, 0.36, 1) 2;
@@ -209,7 +207,8 @@
         }
 
         /* =========================================================
-           EN-TÊTE SUPÉRIEUR & BARRE D'ACTIONS ÉPURÉE
+           EN-TÊTE SUPÉRIEUR : TITRE DESCENDU SUR/SOUS L'ÉTOILE
+           + BARRE D'ACTIONS COMPACTE (FIT-CONTENT)
            ========================================================= */
         .top-header {
             display: flex;
@@ -217,15 +216,15 @@
             align-items: center;
             text-align: center;
             padding-top: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             width: 100%;
         }
 
         .brand-blur-zone {
             position: relative;
-            padding: 12px 24px;
-            margin-top: 8px;
-            margin-bottom: 125px;
+            padding: 12px 26px;
+            margin-top: 52px; /* Descendu pour s'aligner avec l'étoile de l'image */
+            margin-bottom: 82px;
             border-radius: 22px;
             max-width: 100%;
         }
@@ -233,12 +232,12 @@
         .brand-blur-zone::before {
             content: "";
             position: absolute;
-            inset: -12px -20px;
+            inset: -12px -22px;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            background: radial-gradient(ellipse at center, rgba(var(--bg-rgb), 0.72) 0%, rgba(var(--bg-rgb), 0.35) 62%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 42%, transparent 84%);
-            mask-image: radial-gradient(ellipse at center, black 42%, transparent 84%);
+            background: radial-gradient(ellipse at center, rgba(var(--bg-rgb), 0.78) 0%, rgba(var(--bg-rgb), 0.42) 64%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 86%);
+            mask-image: radial-gradient(ellipse at center, black 45%, transparent 86%);
             z-index: -1;
             pointer-events: none;
         }
@@ -255,20 +254,23 @@
             cursor: pointer;
         }
 
+        /* Barre d'actions compacte qui englobe uniquement ses boutons */
         .top-actions-bar {
-            display: flex;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             gap: 8px;
-            width: 100%;
-            padding: 9px 14px;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 7px 10px;
             border-radius: 99px;
-            background: rgba(var(--bg-rgb), 0.62);
+            background: rgba(var(--bg-rgb), 0.72);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
         }
 
         .btn-top {
@@ -286,7 +288,7 @@
             align-items: center;
             gap: 6px;
             transition: all 0.18s ease;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             white-space: nowrap;
         }
 
@@ -318,25 +320,30 @@
         }
 
         /* =========================================================
-           MENTION D'HUMILITÉ / IA EN HAUT DE PAGE
+           MENTION DE TRANSPARENCE / IA PLUS FONCÉE ET TRÈS LISIBLE
            ========================================================= */
         .top-ai-banner {
-            background: var(--ghost-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid var(--ghost-border);
-            color: var(--ghost-text);
-            padding: 9px 14px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            line-height: 1.42;
+            background: var(--card-hero);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 14px;
+            font-size: 0.76rem;
+            line-height: 1.45;
             text-align: center;
             margin-bottom: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
         }
-        .top-ai-banner strong { color: var(--text); }
+        .top-ai-banner strong {
+            font-weight: 800;
+            color: var(--green);
+        }
 
         /* =========================================================
-           GESTION DES VUES (PORTAIL / MODE 1 / MODE 2)
+           GESTION DES VUES (PORTAIL / POLITIQUE / BLOCKLIST / SABOTAGE)
            ========================================================= */
         .view-section { display: none; width: 100%; }
         .view-section.active { display: block; animation: fadeInView 0.25s ease; }
@@ -347,13 +354,13 @@
         }
 
         /* =========================================================
-           VUE 0 : PORTAIL D'ACCUEIL STRATÉGIQUE (SYNTHÉTIQUE & CENTRÉ)
+           VUE 0 : PORTAIL D'ACCUEIL STRATÉGIQUE (LES 4 PORTES D'ENTRÉE)
            ========================================================= */
         .mode-cards-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 14px;
-            margin-bottom: 24px;
+            gap: 13px;
+            margin-bottom: 28px;
         }
 
         .mode-card {
@@ -362,12 +369,12 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1.5px solid var(--border);
             border-radius: 18px;
-            padding: 20px 18px;
+            padding: 18px 18px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 10px;
+            gap: 9px;
             transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
         }
@@ -388,18 +395,18 @@
         }
 
         .mode-badge {
-            font-size: 0.7rem;
+            font-size: 0.69rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            padding: 4px 10px;
+            padding: 3px 10px;
             border-radius: 99px;
             background: var(--pill-bg);
             color: var(--pill-text);
         }
 
         .mode-status-pill {
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             font-weight: 800;
             color: var(--green);
             background: var(--green-bg);
@@ -409,22 +416,23 @@
         }
 
         .mode-card h2 {
-            font-size: 1.32rem;
+            font-size: 1.24rem;
             font-weight: 900;
             letter-spacing: -0.02em;
             color: var(--text);
             text-align: center;
             width: 100%;
+            line-height: 1.2;
         }
 
         .mode-quote {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-style: italic;
             font-weight: 600;
             color: var(--muted);
             background: var(--sub-card);
             border: 1px solid var(--sub-card-border);
-            padding: 8px 14px;
+            padding: 7px 13px;
             border-radius: 10px;
             width: 100%;
         }
@@ -439,9 +447,9 @@
             background: var(--sub-card);
             border: 1px solid var(--sub-card-border);
             color: var(--text);
-            padding: 8px 14px;
+            padding: 7px 14px;
             border-radius: 10px;
-            font-size: 0.78rem;
+            font-size: 0.77rem;
             font-weight: 800;
             cursor: pointer;
             display: flex;
@@ -470,9 +478,9 @@
             border-radius: 10px;
             margin-top: 6px;
             text-align: left;
-            font-size: 0.82rem;
+            font-size: 0.81rem;
             color: var(--text);
-            line-height: 1.5;
+            line-height: 1.48;
         }
         .mode-dropdown-content.open {
             display: block;
@@ -492,11 +500,12 @@
             background: var(--green);
             color: #ffffff;
             border: none;
-            padding: 12px 16px;
+            padding: 11px 16px;
             border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 800;
             cursor: pointer;
+            text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -520,14 +529,14 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            padding: 22px 20px 18px 20px;
+            padding: 20px 20px 18px 20px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         }
 
         .hero h1 {
-            font-size: clamp(1.85rem, 5vw, 2.4rem);
+            font-size: clamp(1.8rem, 5vw, 2.35rem);
             font-weight: 900;
             letter-spacing: -0.04em;
             line-height: 1.08;
@@ -536,12 +545,12 @@
         }
 
         .hero .kicker {
-            font-size: 0.74rem;
+            font-size: 0.73rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.09em;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .btn-share-subtle {
@@ -576,20 +585,19 @@
         }
 
         .hero .lead {
-            font-size: 0.9rem;
+            font-size: 0.89rem;
             color: var(--text);
-            opacity: 0.9;
             font-weight: 500;
-            max-width: 550px;
-            margin: 0 auto 12px auto;
-            line-height: 1.5;
+            max-width: 560px;
+            margin: 0 auto 10px auto;
+            line-height: 1.48;
         }
 
         .hero-choice-prompt {
             font-size: 0.88rem;
             font-weight: 800;
-            color: var(--text);
-            margin-top: 6px;
+            color: var(--green);
+            margin-top: 8px;
         }
 
         .quick-steps {
@@ -679,7 +687,7 @@
         .explain-content li strong { color: var(--green); }
 
         /* =========================================================
-           DASHBOARD STICKY (SANS LES FILTRES DEDANS)
+           DASHBOARD STICKY (AMORCE 1.5% AU DÉPART)
            ========================================================= */
         .sticky-dashboard {
             position: sticky;
@@ -847,11 +855,10 @@
         }
         .search-input:focus { border-color: var(--green); }
 
-        /* Bouton "+ Il manque quelqu'un ?" à droite de la barre de recherche */
         .btn-search-add {
             background: var(--green);
             color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             padding: 0 14px;
             border-radius: 12px;
             font-size: 0.8rem;
@@ -862,7 +869,7 @@
             align-items: center;
             justify-content: center;
             font-family: var(--font-sans);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
             transition: transform 0.15s ease, opacity 0.15s ease;
             flex-shrink: 0;
         }
@@ -967,7 +974,7 @@
         }
 
         /* =========================================================
-           AVATARS WIKIMEDIA COMMONS + LISTE DES COMPTES
+           AVATARS WIKIMEDIA + ANIMATION DE MONTÉE VERS LA PILE
            ========================================================= */
         .list-meta {
             display: flex;
@@ -992,9 +999,20 @@
             border-radius: 14px;
             padding: 13px 14px;
             gap: 11px;
-            transition: all 0.22s ease;
+            transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease, background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
         }
         .row.done { background: var(--green-bg); border-color: var(--green-border); }
+
+        /* Animation de montée fluide vers la pile quand on bloque quelqu'un */
+        .row.flying-to-stack {
+            background: var(--green-solid) !important;
+            border-color: var(--green) !important;
+            box-shadow: 0 10px 26px rgba(44, 110, 73, 0.25) !important;
+            transform: translateY(-54px) scale(0.96) !important;
+            opacity: 0 !important;
+            pointer-events: none;
+            z-index: 15;
+        }
 
         @keyframes gentleLastBounce {
             0%, 100% { transform: translateY(0); }
@@ -1119,7 +1137,7 @@
             background: var(--ghost-bg);
             border: 1px solid var(--ghost-border);
             color: var(--ghost-text);
-            opacity: 0.78;
+            opacity: 0.85;
             padding: 8px 13px;
             border-radius: 9px;
             font-size: 0.78rem;
@@ -1196,7 +1214,7 @@
         }
 
         /* =========================================================
-           VUE 2 : MODE SABOTAGE FANTÔME & IGNORANCE ACTIVE
+           VUES ACTION POLITIQUE (MODE 1) & SABOTAGE FANTÔME (MODE 3)
            ========================================================= */
         .tactic-list {
             display: flex;
@@ -1211,7 +1229,7 @@
             padding: 16px 18px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 9px;
             transition: all 0.2s ease;
         }
         .tactic-card.done {
@@ -1322,13 +1340,13 @@
         .btn-modal-danger { flex: 1; padding: 10px 14px; border-radius: 10px; border: none; background: var(--accent); color: #ffffff; font-weight: 800; font-size: 0.86rem; cursor: pointer; font-family: var(--font-sans); }
 
         /* =========================================================
-           PIED DE PAGE SYNTHÉTIQUE
+           PIED DE PAGE SYNTHÉTIQUE ET DIRECT
            ========================================================= */
         footer {
             text-align: center;
             font-size: 0.76rem;
             color: var(--muted);
-            padding: 22px 0 85px 0;
+            padding: 20px 0 85px 0;
             border-top: 1px solid var(--border);
             line-height: 1.6;
         }
@@ -1345,9 +1363,9 @@
         }
 
         @media (max-width: 520px) {
-            .btn-theme-corner { top: 10px; left: 10px; width: 38px; height: 38px; }
-            .brand-blur-zone { margin-bottom: 85px; padding: 10px 16px; }
-            .top-actions-bar { border-radius: 18px; padding: 8px; gap: 6px; }
+            .btn-theme-corner { top: 10px; left: 10px; width: 40px; height: 40px; }
+            .brand-blur-zone { margin-top: 38px; margin-bottom: 58px; padding: 10px 16px; }
+            .top-actions-bar { border-radius: 22px; padding: 7px 10px; gap: 6px; }
             .hero-bg-banner { height: 340px; }
             .search-bar { flex-direction: column; }
             .btn-search-add { padding: 10px 14px; width: 100%; }
@@ -1360,9 +1378,11 @@
 
     <div class="hero-bg-banner" aria-hidden="true"></div>
 
-    <!-- BOUTON UNIQUE DE THÈME (JOUR / NUIT) FIXÉ EN HAUT À GAUCHE -->
+    <!-- BOUTON UNIQUE DE THÈME (LUNE EN MODE CLAIR / SOLEIL EN MODE SOMBRE) -->
     <button type="button" class="btn-theme-corner" onclick="cycleTheme()" id="themeBtn" title="Changer le thème (Jour / Nuit)" aria-label="Changer le thème">
-        <svg id="themeCornerSvg" viewBox="0 0 24 24" aria-hidden="true"></svg>
+        <svg id="themeCornerSvg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
     </button>
 
     <header class="top-header">
@@ -1383,17 +1403,17 @@
         </div>
     </header>
 
-    <!-- MENTION D'HUMILITÉ EN HAUT DE PAGE -->
+    <!-- MENTION DE TRANSPARENCE BIEN LISIBLE EN HAUT DE PAGE -->
     <div class="top-ai-banner">
-        🤖 <strong>Petit mot de transparence :</strong> Je ne suis pas du tout informaticien. Ce site a été conçu avec l'aide de l'IA (et n'est sans doute pas très beau pour cette raison), uniquement pour mettre un outil simple, gratuit et 100 % local à disposition de tout le monde.
+        🤖 <strong>Petit mot de transparence :</strong> Je ne suis pas du tout informaticien. Ce site a été conçu avec l'aide de l'IA (et n'est pas très beau pour cette raison), uniquement pour mettre un outil simple, gratuit et ouvert à disposition de tout le monde.
     </div>
 
     <!-- =========================================================
-         VUE 0 : PORTAIL STRATÉGIQUE D'ACCUEIL (LES 2 MODES)
+         VUE 0 : PORTAIL STRATÉGIQUE D'ACCUEIL (LES 4 PORTES D'ENTRÉE)
          ========================================================= -->
     <main id="viewHome" class="view-section active">
         <section class="hero">
-            <div class="kicker">Portail d'autodéfense algorithmique</div>
+            <div class="kicker">Portail d'action citoyenne & d'autodéfense algorithmique</div>
             <h1>Coupons leur oxygène.</h1>
             <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1406,16 +1426,44 @@
                 <span class="shareBtnTextLabel">Partager l'outil</span>
             </button>
             <p class="lead">
-                Si l'extrême droite arrive au pouvoir, nos conquêtes sociales, l'écologie, les minorités et les contre-pouvoirs seront directement attaqués. Sur Instagram, leur arme principale est <strong>l'algorithme</strong> : il ne fait aucune différence entre un like et un clash.
+                Face à l'offensive de l'extrême droite et de l'empire Bolloré, la riposte se joue sur le terrain comme dans les algorithmes. Comme l'ont démontré les campagnes d'autodéfense numérique au Brésil autour de Lula, <strong>l'algorithme ne fait aucune différence entre un like et un commentaire d'indignation</strong> : tout leur donne de la portée.
             </p>
             <p class="hero-choice-prompt">Choisis ta philosophie d'action ou combine-les :</p>
         </section>
 
         <div class="mode-cards-grid">
-            <!-- CARTE MODE 1 : LA BLOCKLIST -->
+            <!-- OPTION 1 : ACTION POLITIQUE & BOUCLES WHATSAPP -->
             <article class="mode-card">
                 <div class="mode-card-header">
                     <span class="mode-badge">Mode d'action n°1</span>
+                    <span class="mode-status-pill">Terrain & Réseaux</span>
+                </div>
+                <h2>📢 Rejoindre l'Action Politique & les Boucles</h2>
+                <div class="mode-quote">
+                    « Je ne reste pas isolé·e derrière mon écran : je rejoins les boucles WhatsApp, les réseaux et les campagnes de terrain. »
+                </div>
+                <div class="mode-dropdown-wrapper">
+                    <button type="button" class="btn-mode-dropdown" onclick="toggleModeDetails('modeDetailsPol', 'modeArrowPol')">
+                        <span>💡 Comprendre ce mode d'action</span>
+                        <span class="mode-dropdown-arrow" id="modeArrowPol">▼</span>
+                    </button>
+                    <div class="mode-dropdown-content" id="modeDetailsPol">
+                        <ul class="mode-points">
+                            <li><strong>Pourquoi le choisir :</strong> Bloquer sur les réseaux ne suffit pas si l'on n'organise pas la riposte collective. Rejoins les boucles WhatsApp de mobilisation, la plateforme <em>Action Populaire</em> et les QG numériques pour agir concrètement.</li>
+                            <li><strong>Ce que tu y trouveras :</strong> Les canaux de diffusion directe, les groupes d'action locaux et les outils de riposte coordonnée.</li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="button" class="btn-mode-cta" onclick="switchMode('politique')">
+                    <span>Accéder aux boucles WhatsApp & réseaux d'action</span>
+                    <span>→</span>
+                </button>
+            </article>
+
+            <!-- OPTION 2 : LE BARRAGE RADICAL (LA BLOCKLIST) -->
+            <article class="mode-card">
+                <div class="mode-card-header">
+                    <span class="mode-badge">Mode d'action n°2</span>
                     <span class="mode-status-pill" id="homeBlocklistStatus">0 / 138 bloqués</span>
                 </div>
                 <h2>🛡️ Le Barrage Radical (La Blocklist)</h2>
@@ -1429,21 +1477,21 @@
                     </button>
                     <div class="mode-dropdown-content" id="modeDetails1">
                         <ul class="mode-points">
-                            <li><strong>Pourquoi le choisir :</strong> Inspiré de la campagne brésilienne (octobre 2026) et de #BlockOut. Bloquer un compte l'empêche d'être recommandé à ton cercle d'amis proches et nettoie durablement ton espace mental.</li>
+                            <li><strong>Pourquoi le choisir :</strong> Inspiré de la campagne brésilienne et de #BlockOut. Bloquer un compte l'empêche d'être recommandé à ton cercle d'amis proches et nettoie durablement ton espace mental.</li>
                             <li><strong>La limite à connaître :</strong> Aller chercher 138 profils un par un demande quelques minutes, et tu ne verras plus leurs publications pour les signaler.</li>
                         </ul>
                     </div>
                 </div>
                 <button type="button" class="btn-mode-cta" onclick="switchMode('blocklist')">
-                    <span>Accéder à la Blocklist interactive (138 comptes)</span>
+                    <span>Ouvrir la Blocklist interactive (138 comptes)</span>
                     <span>→</span>
                 </button>
             </article>
 
-            <!-- CARTE MODE 2 : LE SABOTAGE FANTÔME -->
+            <!-- OPTION 3 : LE SABOTAGE FANTÔME -->
             <article class="mode-card">
                 <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°2</span>
+                    <span class="mode-badge">Mode d'action n°3</span>
                     <span class="mode-status-pill" id="homeSabotageStatus">0 / 5 règles activées</span>
                 </div>
                 <h2>👻 Le Sabotage Fantôme (Ignorance & Poison d'Algo)</h2>
@@ -1467,16 +1515,113 @@
                     <span>→</span>
                 </button>
             </article>
+
+            <!-- OPTION 4 : TROUVER UNE ACTION PRÈS DE CHEZ SOI (CARTE INTERACTIVE) -->
+            <article class="mode-card">
+                <div class="mode-card-header">
+                    <span class="mode-badge">Mode d'action n°4</span>
+                    <span class="mode-status-pill">Carte de France</span>
+                </div>
+                <h2>📍 Trouver une Mobilisation près de chez soi</h2>
+                <div class="mode-quote">
+                    « Je passe du numérique à la rue : je repère les rassemblements, manifs et actions locales autour de moi. »
+                </div>
+                <div class="mode-dropdown-wrapper">
+                    <button type="button" class="btn-mode-dropdown" onclick="toggleModeDetails('modeDetailsMap', 'modeArrowMap')">
+                        <span>💡 Comprendre ce mode d'action</span>
+                        <span class="mode-dropdown-arrow" id="modeArrowMap">▼</span>
+                    </button>
+                    <div class="mode-dropdown-content" id="modeDetailsMap">
+                        <ul class="mode-points">
+                            <li><strong>Pourquoi le choisir :</strong> L'autodéfense numérique prépare le rapport de force, mais c'est dans la rue, les assemblées locales et les manifestations que l'on fait reculer concrètement l'extrême droite.</li>
+                            <li><strong>Comment ça marche :</strong> Accède directement aux cartes citoyennes et agendas des mobilisations partout en France.</li>
+                        </ul>
+                    </div>
+                </div>
+                <a class="btn-mode-cta secondary" href="https://mobilisations.org/" target="_blank" rel="noopener noreferrer">
+                    <span>Consulter la carte des mobilisations ↗</span>
+                </a>
+            </article>
         </div>
     </main>
 
     <!-- =========================================================
-         VUE 1 : LA BLOCKLIST INTERACTIVE (MODE 1)
+         VUE POLITIQUE : REJOINDRE L'ACTION & LES BOUCLES (MODE 1)
+         ========================================================= -->
+    <main id="viewPolitique" class="view-section">
+        <section class="hero">
+            <div class="kicker">Mode 1 • S'organiser collectivement sur le terrain et en ligne</div>
+            <h1>Rejoindre l'Action.</h1>
+            <p class="lead">
+                Pour faire face à l'empire médiatique des milliardaires, notre force est le nombre et la coordination. Rejoins les plateformes d'organisation, les boucles WhatsApp et les canaux de mobilisation :
+            </p>
+        </section>
+
+        <div class="tactic-list">
+            <div class="tactic-card">
+                <div class="tactic-top">
+                    <div class="tactic-title">
+                        <span>✊</span>
+                        <span>1. Plateforme Action Populaire (Groupes locaux & événements)</span>
+                    </div>
+                </div>
+                <p class="tactic-desc">Rejoins un groupe d'action près de chez toi, participe aux campagnes de terrain, aux collages, au porte-à-porte et aux réunions publiques partout en France.</p>
+                <a class="btn-mode-cta" href="https://actionpopulaire.fr/" target="_blank" rel="noopener noreferrer">
+                    <span>Rejoindre Action Populaire ↗</span>
+                </a>
+            </div>
+
+            <div class="tactic-card">
+                <div class="tactic-top">
+                    <div class="tactic-title">
+                        <span>💬</span>
+                        <span>2. Les Boucles WhatsApp & Canaux de Riposte</span>
+                    </div>
+                </div>
+                <p class="tactic-desc">Reçois directement sur ton téléphone les visuels à partager, les arguments de débunkage rapide et les alertes de mobilisation sans dépendre du bon vouloir de l'algorithme de Meta.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+                    <a class="btn-mode-cta" style="flex:1; min-width:200px;" href="https://actionpopulaire.fr/groupes/" target="_blank" rel="noopener noreferrer">
+                        <span>Trouver une boucle locale ↗</span>
+                    </a>
+                    <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">
+                        <span>Suivre les alertes sur Instagram ↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="tactic-card">
+                <div class="tactic-top">
+                    <div class="tactic-title">
+                        <span>🗺️</span>
+                        <span>3. Cartes des Manifestations & Rassemblements</span>
+                    </div>
+                </div>
+                <p class="tactic-desc">Retrouve les horaires et lieux des prochaines manifestations unitaires, rassemblements antifascistes et mobilisations sociales dans ton département.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+                    <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://mobilisations.org/" target="_blank" rel="noopener noreferrer">
+                        <span>Carte Mobilisations.org ↗</span>
+                    </a>
+                    <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://radar.squat.net/fr/events/country/FR" target="_blank" rel="noopener noreferrer">
+                        <span>Agenda des luttes locales ↗</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 36px;">
+            <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
+                ← Retourner au portail des 4 modes d'action
+            </button>
+        </div>
+    </main>
+
+    <!-- =========================================================
+         VUE BLOCKLIST : LA BLOCKLIST INTERACTIVE (MODE 2)
          ========================================================= -->
     <main id="viewBlocklist" class="view-section">
         <section class="hero">
             <h1>La blocklist.</h1>
-            <div class="kicker">Mode 1 • Barrage radical & hygiène numérique</div>
+            <div class="kicker">Mode 2 • Barrage radical & hygiène numérique</div>
             <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="18" cy="5" r="3"></circle>
@@ -1487,7 +1632,7 @@
                 </svg>
                 <span class="shareBtnTextLabel">Partager</span>
             </button>
-            <p class="lead">Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Les comptes bloqués s'empilent en haut et libèrent ta liste au fur et à mesure.</p>
+            <p class="lead">Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Les comptes bloqués montent s'empiler en haut et libèrent ta liste au fur et à mesure.</p>
             <div class="quick-steps" aria-label="Mode d'emploi rapide">
                 <span><strong>1.</strong> Clique sur <span class="ig-mini-preview"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram ↗</span></span>
                 <span class="step-sep">→</span>
@@ -1503,11 +1648,10 @@
                 <span class="explain-arrow" id="explainArrow">▼</span>
             </button>
             <div class="explain-content" id="explainContent">
-                <p>Cette stratégie d'autodéfense numérique nous vient directement du <strong>Brésil</strong> (lors de la présidentielle d'octobre 2026 opposant Lula à Flávio Bolsonaro) et du mouvement <strong>#BlockOut</strong> :</p>
+                <p>Cette stratégie d'autodéfense numérique nous vient directement du <strong>Brésil</strong> et du mouvement <strong>#BlockOut</strong> :</p>
                 <ul>
                     <li><strong>Le piège de l'algorithme :</strong> Sur Instagram, commenter sous un post d'extrême droite pour le contredire, s'indigner ou clasher est interprété par l'algorithme de Meta comme un fort taux d'engagement. Résultat : la plateforme propulse encore plus leurs vidéos auprès du grand public et des indécis.</li>
                     <li><strong>L'impact mécanique du blocage :</strong> Le blocage est le signal négatif ultime pour l'algorithme. Bloquer un compte coupe non seulement toute recommandation vers ton réseau d'amis proches, mais un pic coordonné de milliers de blocages fait chuter drastiquement le score de visibilité global du profil.</li>
-                    <li><strong>Complémentarité :</strong> Tu peux aussi combiner ce blocage avec le <em>Mode 2 (Sabotage Fantôme)</em> accessible via le bouton « Changer de mode » en haut de page.</li>
                 </ul>
             </div>
         </div>
@@ -1585,11 +1729,11 @@
     </main>
 
     <!-- =========================================================
-         VUE 2 : LE SABOTAGE FANTÔME / IGNORANCE ACTIVE (MODE 2)
+         VUE SABOTAGE : LE SABOTAGE FANTÔME / IGNORANCE ACTIVE (MODE 3)
          ========================================================= -->
     <main id="viewSabotage" class="view-section">
         <section class="hero">
-            <div class="kicker">Mode 2 • Guérilla algorithmique sans visite de profil</div>
+            <div class="kicker">Mode 3 • Guérilla algorithmique sans visite de profil</div>
             <h1>Le Sabotage Fantôme.</h1>
             <p class="lead">
                 Tu ne veux pas visiter leurs profils ni leur donner un seul clic ? Voici comment retourner les règles d'Instagram contre l'extrême droite. Coche les 5 réflexes ci-dessous pour activer ton protocole d'asphyxie algorithmique :
@@ -1600,7 +1744,7 @@
 
         <div style="text-align: center; margin-bottom: 36px;">
             <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
-                ← Retourner au portail des modes d'action
+                ← Retourner au portail des 4 modes d'action
             </button>
         </div>
     </main>
@@ -1707,10 +1851,9 @@
         </div>
     </div>
 
-    <!-- PIED DE PAGE SYNTHÉTIQUE -->
+    <!-- PIED DE PAGE SYNTHÉTIQUE ET DIRECT -->
     <footer>
-        🔒 <strong>100 % local & open-source :</strong> zéro serveur, zéro traqueur, ta progression reste sur ton appareil.<br>
-        Inspiré de la campagne brésilienne et de <em>Mise au Poing</em> • Par <a class="ig-tag-link" id="creatorIgLink" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@henrilubszynski</a> • <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Code GitHub</a>
+        🔒 <strong>100 % local & sans traqueur</strong> • Inspiré du Brésil & de <em>Mise au Poing</em> • Par <a class="ig-tag-link" id="creatorIgLink" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@henrilubszynski</a> • <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">GitHub</a>
     </footer>
 
     <script>
@@ -1994,19 +2137,22 @@
 
         function applyTheme(animate = false) {
             const svgEl = document.getElementById("themeCornerSvg");
+            const btnEl = document.getElementById("themeBtn");
 
             if (currentTheme === "light") {
                 document.documentElement.removeAttribute("data-theme");
                 if (svgEl) {
-                    // Icône Lune pour passer au thème sombre
+                    // Lune affichée quand on est en mode clair (cliquer active le mode nuit)
                     svgEl.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
                 }
+                if (btnEl) btnEl.title = "Passer au mode nuit";
             } else {
                 document.documentElement.setAttribute("data-theme", "dark");
                 if (svgEl) {
-                    // Icône Soleil pour passer au thème clair
+                    // Soleil affiché quand on est en mode nuit (cliquer active le mode jour)
                     svgEl.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
                 }
+                if (btnEl) btnEl.title = "Passer au mode jour";
             }
 
             if (animate) triggerThemeIllumination();
@@ -2027,10 +2173,12 @@
         }
 
         function switchMode(mode) {
+            if (!["home", "politique", "blocklist", "sabotage"].includes(mode)) mode = "home";
             currentMode = mode;
             localStorage.setItem(MODE_KEY, mode);
 
             document.getElementById("viewHome").classList.toggle("active", mode === "home");
+            document.getElementById("viewPolitique").classList.toggle("active", mode === "politique");
             document.getElementById("viewBlocklist").classList.toggle("active", mode === "blocklist");
             document.getElementById("viewSabotage").classList.toggle("active", mode === "sabotage");
 
@@ -2097,23 +2245,51 @@
             render();
         }
 
-        function toggleHandle(handle) {
+        // Animation de montée vers la pile avec changement de couleur avant insertion dans la pile
+        function animateRowToStack(handle, rowEl, callback) {
+            if (!rowEl) {
+                callback();
+                return;
+            }
+            rowEl.classList.add("done", "flying-to-stack");
+            const checkBtn = rowEl.querySelector(".btn-check");
+            if (checkBtn) {
+                checkBtn.innerHTML = `<span class="check-square">✓</span><span>Bloqué !</span>`;
+            }
+            setTimeout(() => {
+                callback();
+            }, 340);
+        }
+
+        function toggleHandle(handle, btnEl) {
             if (doneHandles.includes(handle)) {
                 doneHandles = doneHandles.filter(h => h !== handle);
                 lastActionHandle = doneHandles.length ? doneHandles[doneHandles.length - 1] : null;
+                saveState();
             } else {
+                const rowEl = btnEl ? btnEl.closest(".row") : null;
+                animateRowToStack(handle, rowEl, () => {
+                    doneHandles = doneHandles.filter(h => h !== handle);
+                    doneHandles.push(handle);
+                    lastActionHandle = handle;
+                    saveState();
+                });
+            }
+        }
+
+        function markAsDone(handle, linkEl) {
+            if (doneHandles.includes(handle)) {
+                lastActionHandle = handle;
+                saveState();
+                return;
+            }
+            const rowEl = linkEl ? linkEl.closest(".row") : null;
+            animateRowToStack(handle, rowEl, () => {
                 doneHandles = doneHandles.filter(h => h !== handle);
                 doneHandles.push(handle);
                 lastActionHandle = handle;
-            }
-            saveState();
-        }
-
-        function markAsDone(handle) {
-            doneHandles = doneHandles.filter(h => h !== handle);
-            doneHandles.push(handle);
-            lastActionHandle = handle;
-            saveState();
+                saveState();
+            });
         }
 
         function setFilter(filter, btnEl) {
@@ -2152,7 +2328,7 @@
                 : `<span aria-hidden="true">${emoji}</span>`;
 
             row.innerHTML = `
-                ${isPersistentLast ? `<div class="persistent-last-badge">✨ Dernier compte bloqué</div>` : ""}
+                ${isPersistentLast ? `<div class="persistent-last-badge">✨ Dernier compte bloqué — Bien joué, au suivant !</div>` : ""}
                 <div class="row-top">
                     <div class="row-profile-left">
                         <div class="avatar-circle" data-avatar-handle="${acc.handle}">${avatarContent}</div>
@@ -2170,11 +2346,11 @@
                     </button>
                 </div>
                 <div class="row-actions">
-                    <button type="button" class="btn-check" onclick="toggleHandle('${acc.handle}')">
+                    <button type="button" class="btn-check" onclick="toggleHandle('${acc.handle}', this)">
                         <span class="check-square">${isDone ? "✓" : ""}</span>
                         <span>${isDone ? "Bloqué (Annuler)" : "Bloqué ?"}</span>
                     </button>
-                    <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
+                    <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}', this)">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -2327,7 +2503,7 @@
                         <p class="empty-victory-desc">Tous les comptes sont désormais empilés dans ta réserve en haut. Fais tourner l'outil autour de toi pour démultiplier l'impact collectif !</p>
                         <div class="empty-victory-actions">
                             <button type="button" class="btn-top" onclick="shareSite()">📣 Partager la blocklist</button>
-                            <button type="button" class="btn-top outline" onclick="switchMode('sabotage')">👻 Voir aussi le Mode 2</button>
+                            <button type="button" class="btn-top outline" onclick="switchMode('politique')">📢 Rejoindre l'action terrain</button>
                         </div>
                     `;
                 } else {
