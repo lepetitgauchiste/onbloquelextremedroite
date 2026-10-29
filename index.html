@@ -74,27 +74,27 @@
         }
 
         [data-theme="empowerment"] {
-            --bg-top: #f1e2f6;
-            --bg: #fff1ed;
-            --bg-rgb: 255, 241, 237;
-            --card: rgba(255, 252, 250, 0.94);
-            --card-solid: #fffaf8;
-            --card-hero: rgba(255, 250, 248, 0.88);
-            --sub-card: rgba(232, 220, 247, 0.66);
-            --sub-card-border: rgba(135, 81, 166, 0.28);
+            --bg-top: #eadcf3;
+            --bg: #f5edcf;
+            --bg-rgb: 245, 237, 207;
+            --card: rgba(255, 249, 220, 0.96);
+            --card-solid: #fff8d8;
+            --card-hero: rgba(255, 247, 218, 0.94);
+            --sub-card: rgba(225, 211, 239, 0.78);
+            --sub-card-border: rgba(116, 59, 177, 0.32);
             --text: #35213d;
             --muted: #68516f;
-            --border: rgba(135, 81, 166, 0.3);
+            --border: rgba(116, 59, 177, 0.34);
             --green: #743bb1;
             --green-light: #a23eaa;
             --theme-glow: 116, 59, 177;
-            --green-bg: rgba(232, 220, 247, 0.88);
-            --green-solid: #efe4fa;
-            --green-border: #c5a5df;
+            --green-bg: rgba(230, 216, 243, 0.94);
+            --green-solid: #e3d6ef;
+            --green-border: #b997d4;
             --accent: #e34791;
-            --pill-bg: rgba(255, 220, 148, 0.68);
+            --pill-bg: #fef1a1;
             --pill-text: #53344d;
-            --sticky-bg: rgba(255, 241, 237, 0.92);
+            --sticky-bg: rgba(245, 237, 207, 0.94);
             --ghost-bg: rgba(116, 59, 177, 0.08);
             --ghost-border: rgba(116, 59, 177, 0.2);
             --ghost-text: #584264;
@@ -920,61 +920,17 @@
             color: var(--muted);
             font-size: 0.76rem;
         }
+        .support-avatar { background: var(--sub-card); }
         .support-category-politique { background: #e8f5e9; color: #27623a; border: 1px solid #b7dfc1; }
         .support-category-media { background: #e8f1fb; color: #285784; border: 1px solid #bfd4ea; }
         .support-category-humour-politique { background: #f2eafb; color: #68428b; border: 1px solid #d6c3e9; }
         [data-theme="dark"] .support-category-politique { background: rgba(57, 128, 77, 0.22); color: #a7e2b4; border-color: rgba(126, 201, 145, 0.35); }
         [data-theme="dark"] .support-category-media { background: rgba(59, 113, 166, 0.22); color: #afd3f4; border-color: rgba(123, 173, 221, 0.35); }
         [data-theme="dark"] .support-category-humour-politique { background: rgba(126, 82, 166, 0.22); color: #d3b5f0; border-color: rgba(173, 135, 209, 0.35); }
-        .btn-follow {
-            display: inline-flex;
-            flex: 1 1 0;
-            min-width: 0;
-            min-height: 42px;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            padding: 8px 13px;
-            border: 1px solid var(--green-border);
-            border-radius: 9px;
-            background: var(--green-bg);
-            color: var(--green);
-            font: inherit;
-            font-size: 0.78rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-        }
-        .btn-follow:hover { border-color: var(--green); }
-        .btn-follow:focus-visible,
-        .support-profile-link:focus-visible,
         .support-source-link:focus-visible {
             outline: 2px solid var(--green);
             outline-offset: 2px;
         }
-        .btn-follow[aria-pressed="true"] {
-            border-color: var(--green);
-            background: var(--green);
-            color: #fff;
-        }
-        .support-profile-link {
-            flex: 1 1 0;
-            min-height: 42px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 12px;
-            border: 1px solid var(--ig-border, var(--border));
-            border-radius: 9px;
-            background: var(--card);
-            color: var(--text);
-            font-size: 0.78rem;
-            font-weight: 800;
-            text-align: center;
-            text-decoration: none;
-        }
-        .support-profile-link:hover { border-color: var(--green); color: var(--green); }
         .support-source-link {
             color: var(--muted);
             font-size: 0.72rem;
@@ -990,11 +946,13 @@
         /* =========================================================
            PILE EN CASCADE DES COMPTES BLOQUÉS
            ========================================================= */
-        .blocked-stack-wrapper {
+        .blocked-stack-wrapper,
+        .support-stack-wrapper {
             margin-bottom: 18px;
             display: none;
         }
-        .blocked-stack-wrapper.has-items {
+        .blocked-stack-wrapper.has-items,
+        .support-stack-wrapper.has-items {
             display: block;
         }
         .stack-header-bar {
@@ -1072,10 +1030,12 @@
         .stack-container.collapsed .row.stack-item .handle,
         .stack-container.collapsed .row.stack-item .fact-note,
         .stack-container.collapsed .row.stack-item .tag,
-        .stack-container.collapsed .row.stack-item .btn-flag {
+        .stack-container.collapsed .row.stack-item .btn-flag,
+        .stack-container.collapsed .row.stack-item .support-source-link {
             display: none;
         }
-        .stack-container.collapsed .row.last-action-row .row-info {
+        .stack-container.collapsed .row.last-action-row .row-info,
+        .stack-container.collapsed .row.last-followed-row .row-info {
             padding-right: 155px;
         }
         .row.stack-item .row-actions { display: none; }
@@ -1096,9 +1056,27 @@
             background: var(--green-solid);
         }
         .stack-container.collapsed .row.last-action-row { animation: none; pointer-events: auto; }
+        .stack-container.collapsed .row.last-followed-row { animation: none; pointer-events: auto; }
         .stack-container.expanded {
             gap: 8px;
         }
+        .support-row.flying-to-stack {
+            background: var(--green-solid) !important;
+            border-color: var(--green) !important;
+            transform: translateY(-48px) scale(0.97) !important;
+            opacity: 0 !important;
+        }
+        .support-row.is-followed .btn-check {
+            background: var(--green);
+            border-color: var(--green);
+            color: #ffffff;
+        }
+        .support-row.is-followed .check-square {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: #ffffff;
+        }
+        .support-row .btn-check { flex: 1 1 0; min-width: 0; }
+        .support-row .btn-ig { flex: 1 1 0; min-width: 0; }
 
         /* =========================================================
            LISTE DES COMPTES & 16e LIGNE « AFFICHER PLUS DE COMPTES »
@@ -1739,6 +1717,9 @@
             }
         }
         .welcome-theme-card {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1753,12 +1734,36 @@
             font: inherit;
             text-align: center;
             cursor: pointer;
-            transition: border-color 0.18s ease;
+            transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
         }
-        .welcome-theme-card:hover { border-color: var(--border); }
+        .welcome-theme-card:hover,
         .welcome-theme-card:focus-visible {
-            outline: 2px solid rgba(var(--theme-glow), 0.3);
-            outline-offset: 3px;
+            border-color: rgba(var(--theme-glow), 0.72);
+            background-color: rgba(var(--theme-glow), 0.09);
+            box-shadow: 0 0 0 2px rgba(var(--theme-glow), 0.12), 0 8px 24px rgba(var(--theme-glow), 0.12);
+        }
+        .welcome-theme-card:active { transform: scale(0.99); }
+        .welcome-theme-card:focus-visible {
+            outline: 2px solid rgba(var(--theme-glow), 0.5);
+            outline-offset: 2px;
+        }
+        .welcome-theme-card > * { position: relative; z-index: 1; }
+        .welcome-theme-card.is-changing::after {
+            position: absolute;
+            z-index: 0;
+            top: var(--shock-y, 50%);
+            left: var(--shock-x, 50%);
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(var(--theme-glow), 0.72);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+            animation: welcomeThemeShockwave 0.72s ease-out forwards;
+        }
+        @keyframes welcomeThemeShockwave {
+            from { opacity: 0.9; transform: translate(-50%, -50%) scale(0); }
+            to { opacity: 0; transform: translate(-50%, -50%) scale(28); }
         }
         .welcome-theme-heading {
             display: flex;
@@ -1894,6 +1899,8 @@
                 scroll-behavior: auto !important;
                 transition-duration: 0.01ms !important;
             }
+            .welcome-theme-card.is-changing { background-color: rgba(var(--theme-glow), 0.18); }
+            .welcome-theme-card.is-changing::after { display: none; }
         }
     </style>
 </head>
@@ -1936,7 +1943,7 @@
             <h1 id="welcomeTitle">Bienvenue sur « On bloque l'extrême droite »</h1>
             <p id="welcomeIntro">Un outil d'autodéfense numérique et d'action collective pour reprendre la main sur nos espaces en ligne et soutenir les mobilisations contre l'extrême droite.</p>
             <button type="button" class="welcome-disclaimer-link" onclick="dismissWelcome(); openModal('disclaimerModal')">À propos du projet et mentions légales</button>
-            <button type="button" class="welcome-theme-card" id="welcomeThemeBtn" onclick="cycleTheme()" aria-label="Choisir le thème">
+            <button type="button" class="welcome-theme-card" id="welcomeThemeBtn" onclick="cycleTheme(event)" aria-label="Choisir le thème">
                 <span class="welcome-theme-heading">
                     <span class="welcome-theme-title">Choisir un thème</span>
                     <span class="welcome-theme-optional">Facultatif</span>
@@ -2116,10 +2123,10 @@
             <div class="kicker">Découvrir, soutenir, s'informer</div>
             <h1>Les comptes à suivre.</h1>
             <p class="lead">
-                Une sélection de personnalités politiques, de médias et d'humour politique. Ouvre un profil pour le découvrir, puis marque-le comme suivi si tu le souhaites.
+                Une sélection de personnalités politiques, de médias et d'humour politique. Ouvre un profil Instagram : à ton retour, le compte rejoint ta pile de suivis. Tu peux aussi le marquer manuellement.
             </p>
             <p class="support-source-note">
-                Les pseudos et liens sont repris de sources publiques. Vérifie le profil sur Instagram avant de t'abonner ; les catégories à confirmer sont signalées.
+                Les pseudos et liens sont repris de sources publiques. Les images disponibles sont chargées depuis Wikipédia et mémorisées sur cet appareil. Vérifie le profil sur Instagram avant de t'abonner ; les catégories à confirmer sont signalées.
             </p>
         </section>
 
@@ -2131,6 +2138,16 @@
             <div class="support-progress-track" id="supportProgressTrack" role="progressbar" aria-label="Comptes marqués comme suivis" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
                 <div class="support-progress-fill" id="supportProgressFill"></div>
             </div>
+        </section>
+
+        <section class="support-stack-wrapper" id="supportStackWrapper" aria-label="Comptes déjà suivis">
+            <div class="stack-header-bar">
+                <span class="stack-title" id="supportStackTitle">Comptes déjà suivis (0)</span>
+                <button type="button" class="btn-stack-toggle" id="supportStackToggle" onclick="toggleSupportStackExpand()">
+                    Tout dérouler ▼
+                </button>
+            </div>
+            <div class="stack-container collapsed" id="supportStackList"></div>
         </section>
 
         <div class="search-and-filters">
@@ -2241,7 +2258,7 @@
             </div>
         </div>
 
-        <!-- PILE EN CASCADE DES COMPTES BLOQUÉS (EN HAUT) -->
+        <!--         PILES EN CASCADE DES COMPTES BLOQUÉS ET SUIVIS (EN HAUT) -->
         <section class="blocked-stack-wrapper" id="blockedStackWrapper">
             <div class="stack-header-bar">
                 <span class="stack-title" id="stackTitleLabel">Comptes bloqués (0)</span>
@@ -2796,11 +2813,13 @@
         const LAST_HANDLE_KEY = "ig_blocklist_last_v7";
         const REINTRODUCED_HANDLE_KEY = "ig_blocklist_reintroduced_v1";
         const PENDING_INSTAGRAM_KEY = "ig_blocklist_pending_instagram_v1";
+        const SUPPORT_PENDING_INSTAGRAM_KEY = "ig_support_pending_instagram_v1";
         const MODE_KEY = "ig_blocklist_mode_v1";
         const SABOTAGE_KEY = "ig_sabotage_done_v1";
         const WIKI_CACHE_KEY = "ig_wiki_thumbs_v1";
         const WELCOME_HIDE_KEY = "ig_blocklist_hide_welcome_v1";
         const SUPPORT_FOLLOWED_KEY = "ig_support_followed_v1";
+        const SUPPORT_WIKI_CACHE_KEY = "ig_support_wiki_thumbs_v1";
         const PAGE_SIZE = 15;
 
         let visibleLimit = PAGE_SIZE;
@@ -2808,6 +2827,10 @@
         let followedSupportHandles = JSON.parse(localStorage.getItem(SUPPORT_FOLLOWED_KEY) || "[]");
         let supportFilter = "all";
         let supportVisibleLimit = PAGE_SIZE;
+        let isSupportStackExpanded = false;
+        const supportFollowInProgress = new Set();
+        let supportWikiThumbCache = JSON.parse(localStorage.getItem(SUPPORT_WIKI_CACHE_KEY) || "{}");
+        let supportAvatarFetchStarted = false;
         let lastActionHandle = localStorage.getItem(LAST_HANDLE_KEY) || (doneHandles.length ? doneHandles[doneHandles.length - 1] : null);
         let reintroducedHandle = localStorage.getItem(REINTRODUCED_HANDLE_KEY);
         let currentMode = "home";
@@ -2824,6 +2847,7 @@
         const THEME_OPTIONS = ["light", "dark", "empowerment"];
         let savedTheme = localStorage.getItem(THEME_KEY);
         let currentTheme = THEME_OPTIONS.includes(savedTheme) ? savedTheme : "light";
+        let welcomeThemeFeedbackTimeout;
         let shareToastTimeout;
         const philosophyMessages = [
             "Gratuit",
@@ -2919,11 +2943,27 @@
             if (welcomeThemeLabel) welcomeThemeLabel.textContent = `Thème ${currentThemeLabel}`;
         }
 
-        function cycleTheme() {
+        function cycleTheme(event) {
             const currentThemeIndex = THEME_OPTIONS.indexOf(currentTheme);
             currentTheme = THEME_OPTIONS[(currentThemeIndex + 1) % THEME_OPTIONS.length];
             localStorage.setItem(THEME_KEY, currentTheme);
             applyTheme();
+
+            const welcomeThemeButton = event?.currentTarget;
+            if (welcomeThemeButton?.id !== "welcomeThemeBtn") return;
+            const bounds = welcomeThemeButton.getBoundingClientRect();
+            const clickX = event.detail === 0 ? bounds.width / 2 : event.clientX - bounds.left;
+            const clickY = event.detail === 0 ? bounds.height / 2 : event.clientY - bounds.top;
+            welcomeThemeButton.style.setProperty("--shock-x", `${clickX}px`);
+            welcomeThemeButton.style.setProperty("--shock-y", `${clickY}px`);
+            welcomeThemeButton.classList.remove("is-changing");
+            void welcomeThemeButton.offsetWidth;
+            welcomeThemeButton.classList.add("is-changing");
+            clearTimeout(welcomeThemeFeedbackTimeout);
+            const feedbackDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 260 : 760;
+            welcomeThemeFeedbackTimeout = setTimeout(() => {
+                welcomeThemeButton.classList.remove("is-changing");
+            }, feedbackDuration);
         }
 
         function dismissWelcome() {
@@ -2986,6 +3026,7 @@
                 behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
             });
             render();
+            if (mode === "support") fetchWikimediaSupportAvatars();
         }
 
         window.addEventListener("popstate", event => {
@@ -3136,6 +3177,15 @@
 
         function completeInstagramReturn() {
             if (!instagramPageWasHidden || document.hidden) return;
+            const supportHandle = sessionStorage.getItem(SUPPORT_PENDING_INSTAGRAM_KEY);
+            if (supportHandle) {
+                sessionStorage.removeItem(SUPPORT_PENDING_INSTAGRAM_KEY);
+                instagramPageWasHidden = false;
+                const row = Array.from(document.querySelectorAll("#supportAccountList .row[data-support-account-handle]"))
+                    .find(item => item.dataset.supportAccountHandle === supportHandle);
+                markSupportFollowed(supportHandle, row);
+                return;
+            }
             const handle = sessionStorage.getItem(PENDING_INSTAGRAM_KEY);
             if (!handle) return;
 
@@ -3212,14 +3262,166 @@
             renderSupportList();
         }
 
-        function toggleSupportFollow(handle) {
-            if (followedSupportHandles.includes(handle)) {
+        function prepareSupportInstagramReturn(handle) {
+            sessionStorage.setItem(SUPPORT_PENDING_INSTAGRAM_KEY, handle);
+            instagramPageWasHidden = false;
+        }
+
+        function markSupportFollowed(handle, row) {
+            if (followedSupportHandles.includes(handle) || supportFollowInProgress.has(handle)) return;
+            supportFollowInProgress.add(handle);
+            const saveFollowed = () => {
+                supportFollowInProgress.delete(handle);
                 followedSupportHandles = followedSupportHandles.filter(savedHandle => savedHandle !== handle);
-            } else {
                 followedSupportHandles.push(handle);
+                localStorage.setItem(SUPPORT_FOLLOWED_KEY, JSON.stringify(followedSupportHandles));
+                renderSupportList();
+            };
+            if (!row || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                saveFollowed();
+                return;
             }
+            row.classList.add("is-followed", "flying-to-stack");
+            const button = row.querySelector(".btn-check");
+            if (button) button.innerHTML = `<span class="check-square">✓</span><span>Suivi !</span>`;
+            setTimeout(saveFollowed, 820);
+        }
+
+        function toggleSupportFollow(handle, button) {
+            if (followedSupportHandles.includes(handle)) {
+                restoreSupportAccount(handle, button?.closest(".row"));
+                return;
+            }
+            markSupportFollowed(handle, button?.closest(".row"));
+        }
+
+        function restoreSupportAccount(handle, sourceRow) {
+            if (!followedSupportHandles.includes(handle)) return;
+            const sourceRect = sourceRow ? sourceRow.getBoundingClientRect() : null;
+            followedSupportHandles = followedSupportHandles.filter(savedHandle => savedHandle !== handle);
             localStorage.setItem(SUPPORT_FOLLOWED_KEY, JSON.stringify(followedSupportHandles));
             renderSupportList();
+
+            if (!sourceRect || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            const targetRow = Array.from(document.querySelectorAll("#supportAccountList .row[data-support-account-handle]"))
+                .find(row => row.dataset.supportAccountHandle === handle);
+            if (!targetRow) return;
+            const targetRect = targetRow.getBoundingClientRect();
+            targetRow.style.transition = "none";
+            targetRow.style.transform = `translate(${sourceRect.left - targetRect.left}px, ${sourceRect.top - targetRect.top}px)`;
+            targetRow.style.opacity = "0.35";
+            void targetRow.offsetWidth;
+            requestAnimationFrame(() => {
+                targetRow.style.transition = "";
+                targetRow.style.transform = "";
+                targetRow.style.opacity = "";
+            });
+        }
+
+        function toggleSupportStackExpand() {
+            isSupportStackExpanded = !isSupportStackExpanded;
+            renderSupportList();
+        }
+
+        function createSupportAccountRow(account, isFollowed, isLatest = false) {
+            const row = document.createElement("article");
+            row.className = `row support-row${isFollowed ? " is-followed" : ""}${isLatest ? " last-followed-row" : ""}`;
+            row.dataset.supportAccountHandle = account.handle;
+
+            if (isLatest) {
+                const restoreButton = document.createElement("button");
+                restoreButton.type = "button";
+                restoreButton.className = "persistent-last-badge";
+                restoreButton.textContent = "Dernier suivi · Retirer ↩";
+                restoreButton.setAttribute("aria-label", `Retirer ${account.name} de la liste des comptes suivis`);
+                restoreButton.addEventListener("click", () => restoreSupportAccount(account.handle, row));
+                row.appendChild(restoreButton);
+            }
+
+            const top = document.createElement("div");
+            top.className = "row-top";
+            const profile = document.createElement("div");
+            profile.className = "row-profile-left";
+            const avatar = document.createElement("div");
+            avatar.className = "avatar-circle support-avatar";
+            const fallbackEmoji = account.category === "media" ? "📰" : account.category === "humour-politique" ? "🎭" : "✊";
+            const cachedImage = supportWikiThumbCache[account.handle];
+            if (cachedImage?.src) {
+                const image = document.createElement("img");
+                image.src = cachedImage.src;
+                image.alt = "";
+                image.loading = "lazy";
+                image.addEventListener("error", () => {
+                    supportWikiThumbCache[account.handle] = null;
+                    localStorage.setItem(SUPPORT_WIKI_CACHE_KEY, JSON.stringify(supportWikiThumbCache));
+                    avatar.replaceChildren(document.createTextNode(fallbackEmoji));
+                }, { once: true });
+                avatar.appendChild(image);
+            } else {
+                avatar.textContent = fallbackEmoji;
+            }
+            avatar.setAttribute("aria-hidden", "true");
+
+            const info = document.createElement("div");
+            info.className = "row-info";
+            const header = document.createElement("div");
+            header.className = "row-header";
+            const name = document.createElement("span");
+            name.className = "name";
+            name.textContent = account.name;
+            const category = document.createElement("span");
+            category.className = `tag support-category-${account.category}`;
+            category.textContent = account.category === "media" ? "Média" : account.category === "humour-politique" ? "Humour politique" : "Politique";
+            if (account.status === "provisional") category.textContent += " · à confirmer";
+            header.append(name, category);
+            const handle = document.createElement("span");
+            handle.className = "handle";
+            handle.textContent = `@${account.handle}`;
+            info.append(header, handle);
+            if (typeof account.source === "string" && /^https?:\/\//i.test(account.source)) {
+                const sourceLink = document.createElement("a");
+                sourceLink.className = "support-source-link";
+                sourceLink.href = account.source;
+                sourceLink.target = "_blank";
+                sourceLink.rel = "noopener noreferrer";
+                sourceLink.textContent = "Source de vérification ↗";
+                info.appendChild(sourceLink);
+            }
+            if (cachedImage?.articleUrl) {
+                const imageSourceLink = document.createElement("a");
+                imageSourceLink.className = "support-source-link";
+                imageSourceLink.href = cachedImage.articleUrl;
+                imageSourceLink.target = "_blank";
+                imageSourceLink.rel = "noopener noreferrer";
+                imageSourceLink.textContent = "Image : Wikipédia ↗";
+                info.appendChild(imageSourceLink);
+            }
+            profile.append(avatar, info);
+            top.appendChild(profile);
+
+            const actions = document.createElement("div");
+            actions.className = "row-actions";
+            const followButton = document.createElement("button");
+            followButton.type = "button";
+            followButton.className = "btn-check";
+            followButton.setAttribute("aria-pressed", String(isFollowed));
+            followButton.setAttribute("aria-label", isFollowed
+                ? `Retirer ${account.name} de la liste des comptes suivis`
+                : `Marquer ${account.name} comme déjà suivi`);
+            followButton.innerHTML = `<span class="check-square">${isFollowed ? "✓" : ""}</span><span>${isFollowed ? "Déjà suivi (Annuler)" : "Marquer comme suivi"}</span>`;
+            followButton.addEventListener("click", () => toggleSupportFollow(account.handle, followButton));
+
+            const profileLink = document.createElement("a");
+            profileLink.className = "btn-ig";
+            profileLink.href = `https://www.instagram.com/${account.handle}/`;
+            profileLink.target = "_blank";
+            profileLink.rel = "noopener noreferrer";
+            profileLink.setAttribute("aria-label", `Ouvrir le profil Instagram de ${account.name}`);
+            profileLink.addEventListener("click", () => prepareSupportInstagramReturn(account.handle));
+            profileLink.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>Instagram ↗</span>`;
+            actions.append(followButton, profileLink);
+            row.append(top, actions);
+            return row;
         }
 
         function renderSupportList() {
@@ -3252,12 +3454,51 @@
             if (progressFill) progressFill.style.width = `${percent}%`;
 
             const query = (document.getElementById("supportSearch")?.value || "").trim().toLocaleLowerCase("fr");
-            const visibleAccounts = uniqueAccounts.filter(account => {
+            const matchesCurrentSelection = account => {
                 if (supportFilter !== "all" && account.category !== supportFilter) return false;
                 return !query || `${account.name} ${account.handle}`.toLocaleLowerCase("fr").includes(query);
-            });
+            };
+            const visibleAccounts = uniqueAccounts.filter(account => !followedSupportHandles.includes(account.handle) && matchesCurrentSelection(account));
+            const followedAccounts = followedSupportHandles
+                .map(handle => uniqueAccounts.find(account => account.handle === handle))
+                .filter(account => account && matchesCurrentSelection(account));
+            const stackWrapper = document.getElementById("supportStackWrapper");
+            const stackList = document.getElementById("supportStackList");
+            const stackTitle = document.getElementById("supportStackTitle");
+            const stackToggle = document.getElementById("supportStackToggle");
+            if (followedAccounts.length) {
+                stackWrapper.classList.add("has-items");
+                stackTitle.textContent = `Pile des comptes déjà suivis (${followedAccounts.length})`;
+                stackList.className = `stack-container ${isSupportStackExpanded ? "expanded" : "collapsed"}`;
+                stackToggle.style.display = followedAccounts.length <= 1 ? "none" : "inline-block";
+                stackToggle.textContent = isSupportStackExpanded
+                    ? "Replier la pile ▲"
+                    : `Dérouler la pile (${followedAccounts.length}) ▼`;
+                stackList.replaceChildren();
+                const visibleStackAccounts = isSupportStackExpanded ? followedAccounts : followedAccounts.slice(-4);
+                stackList.style.height = isSupportStackExpanded ? "" : `${48 + (visibleStackAccounts.length - 1) * 40}px`;
+                visibleStackAccounts.forEach((account, index) => {
+                    const isLatest = account.handle === followedSupportHandles[followedSupportHandles.length - 1];
+                    const row = createSupportAccountRow(account, true, isLatest);
+                    row.classList.add("stack-item");
+                    if (!isSupportStackExpanded) {
+                        const distanceFromFront = visibleStackAccounts.length - index - 1;
+                        row.style.top = `${index * 40}px`;
+                        row.style.left = `${index * 5}px`;
+                        row.style.width = `calc(100% - ${index * 5}px)`;
+                        row.style.zIndex = String(index + 1);
+                        row.style.opacity = String(1 - distanceFromFront * 0.2);
+                        row.style.filter = `blur(${distanceFromFront * 0.3}px)`;
+                    }
+                    stackList.appendChild(row);
+                });
+            } else {
+                stackWrapper.classList.remove("has-items");
+                stackList.replaceChildren();
+                stackList.style.height = "";
+            }
             const visibleCount = document.getElementById("supportVisibleCount");
-            if (visibleCount) visibleCount.textContent = `${visibleAccounts.length} compte${visibleAccounts.length > 1 ? "s" : ""} dans la sélection`;
+            if (visibleCount) visibleCount.textContent = `${visibleAccounts.length} compte${visibleAccounts.length > 1 ? "s" : ""} restant${visibleAccounts.length > 1 ? "s" : ""} à suivre`;
 
             list.replaceChildren();
             if (visibleAccounts.length === 0) {
@@ -3265,75 +3506,14 @@
                 emptyCard.className = "empty-victory-card";
                 const title = document.createElement("div");
                 title.className = "empty-victory-title";
-                title.textContent = total === 0 ? "La sélection est en cours de vérification." : "Aucun compte ne correspond à cette recherche.";
+                title.textContent = total === 0 ? "La sélection est en cours de vérification." : followedCount === total ? "Toute la sélection est dans ta pile de comptes suivis." : "Aucun compte ne correspond à cette recherche.";
                 emptyCard.appendChild(title);
                 list.appendChild(emptyCard);
                 return;
             }
 
             visibleAccounts.slice(0, supportVisibleLimit).forEach(account => {
-                const isFollowed = followedSupportHandles.includes(account.handle);
-                const row = document.createElement("article");
-                row.className = `row support-row${isFollowed ? " is-followed" : ""}`;
-
-                const top = document.createElement("div");
-                top.className = "row-top";
-                const profile = document.createElement("div");
-                profile.className = "row-profile-left";
-                const avatar = document.createElement("div");
-                avatar.className = "avatar-circle";
-                avatar.setAttribute("aria-hidden", "true");
-                avatar.textContent = account.category === "media" ? "📰" : account.category === "humour-politique" ? "🎭" : "✊";
-
-                const info = document.createElement("div");
-                info.className = "row-info";
-                const header = document.createElement("div");
-                header.className = "row-header";
-                const name = document.createElement("span");
-                name.className = "name";
-                name.textContent = account.name;
-                const category = document.createElement("span");
-                category.className = `tag support-category-${account.category}`;
-                category.textContent = account.category === "media" ? "Média" : account.category === "humour-politique" ? "Humour politique" : "Politique";
-                if (account.status === "provisional") category.textContent += " · à confirmer";
-                header.append(name, category);
-                const handle = document.createElement("span");
-                handle.className = "handle";
-                handle.textContent = `@${account.handle}`;
-                info.append(header, handle);
-                if (typeof account.source === "string" && /^https?:\/\//i.test(account.source)) {
-                    const sourceLink = document.createElement("a");
-                    sourceLink.className = "support-source-link";
-                    sourceLink.href = account.source;
-                    sourceLink.target = "_blank";
-                    sourceLink.rel = "noopener noreferrer";
-                    sourceLink.textContent = "Source de vérification ↗";
-                    info.appendChild(sourceLink);
-                }
-                profile.append(avatar, info);
-                top.appendChild(profile);
-
-                const actions = document.createElement("div");
-                actions.className = "row-actions";
-                const followButton = document.createElement("button");
-                followButton.type = "button";
-                followButton.className = "btn-follow";
-                followButton.setAttribute("aria-pressed", String(isFollowed));
-                followButton.setAttribute("aria-label", isFollowed
-                    ? `Retirer ${account.name} de la liste des comptes suivis`
-                    : `Marquer ${account.name} comme déjà suivi`);
-                followButton.textContent = isFollowed ? "✓ Déjà suivi" : "＋ Marquer comme suivi";
-                followButton.addEventListener("click", () => toggleSupportFollow(account.handle));
-
-                const profileLink = document.createElement("a");
-                profileLink.className = "support-profile-link";
-                profileLink.href = `https://www.instagram.com/${account.handle}/`;
-                profileLink.target = "_blank";
-                profileLink.rel = "noopener noreferrer";
-                profileLink.textContent = "Voir le profil ↗";
-                actions.append(followButton, profileLink);
-                row.append(top, actions);
-                list.appendChild(row);
+                list.appendChild(createSupportAccountRow(account, false));
             });
 
             if (visibleAccounts.length > supportVisibleLimit) {
@@ -3688,6 +3868,61 @@
             localStorage.setItem(WIKI_CACHE_KEY, JSON.stringify(wikiThumbCache));
         }
 
+        async function fetchWikimediaSupportAvatars() {
+            if (supportAvatarFetchStarted) return;
+            supportAvatarFetchStarted = true;
+
+            const titleToHandles = new Map();
+            supportAccounts.forEach(account => {
+                if (!account || typeof account.name !== "string" || typeof account.handle !== "string") return;
+                if (account.handle in supportWikiThumbCache) return;
+                const title = wikiTitleOverrides[account.name] || account.name;
+                if (!titleToHandles.has(title)) titleToHandles.set(title, []);
+                titleToHandles.get(title).push(account.handle);
+            });
+            const titles = [...titleToHandles.keys()];
+
+            for (let index = 0; index < titles.length; index += 45) {
+                const batch = titles.slice(index, index + 45);
+                const url = `https://fr.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(batch.join("|"))}&prop=pageimages|info&inprop=url&pithumbsize=240&redirects=1&format=json&origin=*`;
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error(`Wikipedia API returned ${response.status}`);
+                    const data = await response.json();
+                    if (!data.query?.pages) throw new Error("Wikipedia API response is missing page data");
+
+                    const resolvedTitles = new Map(batch.map(title => [title, title]));
+                    [...(data.query.normalized || []), ...(data.query.redirects || [])].forEach(({ from, to }) => {
+                        resolvedTitles.set(to, resolvedTitles.get(from) || from);
+                    });
+                    const matchedTitles = new Set();
+                    Object.values(data.query.pages).forEach(page => {
+                        const requestedTitle = resolvedTitles.get(page.title) || page.title;
+                        const handles = titleToHandles.get(requestedTitle) || titleToHandles.get(page.title) || [];
+                        handles.forEach(handle => {
+                            matchedTitles.add(requestedTitle);
+                            const imageUrl = page.thumbnail?.source;
+                            const articleUrl = page.fullurl;
+                            supportWikiThumbCache[handle] = imageUrl?.startsWith("https://upload.wikimedia.org/") && articleUrl?.startsWith("https://fr.wikipedia.org/")
+                                ? { src: imageUrl, articleUrl }
+                                : null;
+                        });
+                    });
+                    batch.forEach(title => {
+                        if (!matchedTitles.has(title)) {
+                            (titleToHandles.get(title) || []).forEach(handle => {
+                                supportWikiThumbCache[handle] = null;
+                            });
+                        }
+                    });
+                    localStorage.setItem(SUPPORT_WIKI_CACHE_KEY, JSON.stringify(supportWikiThumbCache));
+                    renderSupportList();
+                } catch (error) {
+                    console.warn("Impossible de charger les images Wikipédia des comptes à suivre.", error);
+                }
+            }
+        }
+
         function openResetModal(e) {
             if (e) { e.preventDefault(); e.stopPropagation(); }
             openModal("resetConfirmModal");
@@ -3845,13 +4080,13 @@
         });
 
         window.addEventListener("blur", () => {
-            if (sessionStorage.getItem(PENDING_INSTAGRAM_KEY)) instagramPageWasHidden = true;
+            if (sessionStorage.getItem(PENDING_INSTAGRAM_KEY) || sessionStorage.getItem(SUPPORT_PENDING_INSTAGRAM_KEY)) instagramPageWasHidden = true;
         });
         window.addEventListener("focus", completeInstagramReturn);
         window.addEventListener("pageshow", completeInstagramReturn);
         document.addEventListener("visibilitychange", () => {
             if (document.hidden) {
-                if (sessionStorage.getItem(PENDING_INSTAGRAM_KEY)) instagramPageWasHidden = true;
+                if (sessionStorage.getItem(PENDING_INSTAGRAM_KEY) || sessionStorage.getItem(SUPPORT_PENDING_INSTAGRAM_KEY)) instagramPageWasHidden = true;
                 return;
             }
             completeInstagramReturn();
