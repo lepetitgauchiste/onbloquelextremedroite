@@ -168,10 +168,10 @@
 
         @keyframes themeGlow {
             0%, 100% {
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(var(--theme-glow), 0);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 7px 2px rgba(var(--theme-glow), 0.1);
             }
             50% {
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 11px 3px rgba(var(--theme-glow), 0.16);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 18px 6px rgba(var(--theme-glow), 0.24);
             }
         }
 
@@ -1745,6 +1745,8 @@
             <h3>Le projet</h3>
             <p>« On bloque l'extrême droite » est un <strong>outil</strong> citoyen d'autodéfense algorithmique. Il propose plusieurs pistes pour assainir son fil et rejoindre des actions collectives. Le blocage reste une action simple, mais son effet sur la visibilité globale des comptes n'est pas garanti. Pas besoin d'être informaticien·ne ou <strong>hacker</strong> pour s'en servir.</p>
             <p>Les modes d'action sont des propositions : chacun·e reste libre de choisir celles qui lui conviennent. Les informations des fiches sont données à titre indicatif et peuvent être signalées ou corrigées depuis le site.</p>
+            <p>La récente campagne présidentielle au Brésil a montré l'importance que peut prendre une mobilisation numérique collective. André Janones, l'un des stratèges de Lula, a toutefois précisé que sa méthode consistait à ignorer les publications d'extrême droite, et non à bloquer leurs comptes. <a href="https://www.huffingtonpost.fr/international/article/ignorer-ou-bloquer-le-stratege-de-lula-precise-son-plan-qui-a-contre-l-extreme-droite-et-qui-est-reproduit-en-france_347393.html" target="_blank" rel="noopener noreferrer">Lire son éclairage dans le HuffPost</a>.</p>
+            <p>Cette expérience invite à réfléchir à la façon dont certains leviers — mobilisation collective, relais d'informations et présence coordonnée — pourraient être adaptés en France pour la présidentielle de 2027 et les échéances à venir. Les contextes diffèrent, et aucune stratégie numérique ne garantit un résultat électoral : le blocage proposé ici reste une option personnelle pour gérer son fil.</p>
         </section>
         <section class="disclaimer-section">
             <h3>Transparence</h3>
@@ -2443,10 +2445,11 @@
         const WELCOME_HIDE_KEY = "ig_blocklist_hide_welcome_v1";
         const PAGE_SIZE = 15;
 
+        let visibleLimit = PAGE_SIZE;
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
         let lastActionHandle = localStorage.getItem(LAST_HANDLE_KEY) || (doneHandles.length ? doneHandles[doneHandles.length - 1] : null);
         let reintroducedHandle = localStorage.getItem(REINTRODUCED_HANDLE_KEY);
-        let currentMode = localStorage.getItem(MODE_KEY) || "home";
+        let currentMode = "home";
         let sabotageDone = JSON.parse(localStorage.getItem(SABOTAGE_KEY) || "[]");
         let wikiThumbCache = JSON.parse(localStorage.getItem(WIKI_CACHE_KEY) || "{}");
 
@@ -3215,7 +3218,7 @@
         document.getElementById("showWelcomePreference").checked = showWelcome;
         document.getElementById("welcomeScreen").hidden = !showWelcome;
         applyTheme();
-        switchMode(currentMode, false);
+        switchMode("home", false);
         window.history.replaceState({ mode: currentMode }, "", window.location.href);
         if (showWelcome) document.getElementById("welcomeEnterButton").focus();
         fetchWikimediaAvatars();
