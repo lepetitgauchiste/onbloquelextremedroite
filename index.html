@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -176,11 +176,9 @@
             top: 39px;
             left: 50%;
             z-index: 70;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            width: min(620px, calc(100% - 140px));
+            display: block;
+            width: max-content;
+            max-width: calc(100% - 140px);
             padding: 4px 8px;
             border: 0;
             background: transparent;
@@ -194,15 +192,6 @@
             cursor: pointer;
             transform: translate(-50%, -50%);
         }
-        .top-philosophy::before {
-            content: "";
-            flex: 0 0 5px;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--green);
-            opacity: 0.75;
-        }
         .top-philosophy:hover,
         .top-philosophy:focus-visible { opacity: 1; }
         .top-philosophy:focus-visible {
@@ -210,6 +199,8 @@
             border-radius: 999px;
         }
         .top-philosophy-text {
+            display: block;
+            max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -885,6 +876,116 @@
         }
         .pill:hover { border-color: var(--border); }
         .pill.active { background: var(--green); color: #fff; }
+
+        .support-progress-card {
+            margin-bottom: 16px;
+            padding: 14px 16px;
+            border: 1px solid var(--green-border);
+            border-radius: 14px;
+            background: var(--green-bg);
+        }
+        .support-progress-heading {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 9px;
+            color: var(--green);
+            font-size: 0.8rem;
+        }
+        .support-progress-heading span {
+            color: var(--muted);
+            font-size: 0.72rem;
+            text-align: right;
+        }
+        .support-progress-track {
+            height: 7px;
+            overflow: hidden;
+            border-radius: 99px;
+            background: var(--card);
+        }
+        .support-progress-fill {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--green);
+            transition: width 0.3s ease;
+        }
+        .support-row.is-followed {
+            border-color: var(--green-border);
+            background: var(--green-bg);
+        }
+        .support-source-note {
+            margin: -4px 0 16px;
+            color: var(--muted);
+            font-size: 0.76rem;
+        }
+        .support-category-politique { background: #e8f5e9; color: #27623a; border: 1px solid #b7dfc1; }
+        .support-category-media { background: #e8f1fb; color: #285784; border: 1px solid #bfd4ea; }
+        .support-category-humour-politique { background: #f2eafb; color: #68428b; border: 1px solid #d6c3e9; }
+        [data-theme="dark"] .support-category-politique { background: rgba(57, 128, 77, 0.22); color: #a7e2b4; border-color: rgba(126, 201, 145, 0.35); }
+        [data-theme="dark"] .support-category-media { background: rgba(59, 113, 166, 0.22); color: #afd3f4; border-color: rgba(123, 173, 221, 0.35); }
+        [data-theme="dark"] .support-category-humour-politique { background: rgba(126, 82, 166, 0.22); color: #d3b5f0; border-color: rgba(173, 135, 209, 0.35); }
+        .btn-follow {
+            display: inline-flex;
+            flex: 1 1 0;
+            min-width: 0;
+            min-height: 42px;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 8px 13px;
+            border: 1px solid var(--green-border);
+            border-radius: 9px;
+            background: var(--green-bg);
+            color: var(--green);
+            font: inherit;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+        }
+        .btn-follow:hover { border-color: var(--green); }
+        .btn-follow:focus-visible,
+        .support-profile-link:focus-visible,
+        .support-source-link:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 2px;
+        }
+        .btn-follow[aria-pressed="true"] {
+            border-color: var(--green);
+            background: var(--green);
+            color: #fff;
+        }
+        .support-profile-link {
+            flex: 1 1 0;
+            min-height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border: 1px solid var(--ig-border, var(--border));
+            border-radius: 9px;
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+        }
+        .support-profile-link:hover { border-color: var(--green); color: var(--green); }
+        .support-source-link {
+            color: var(--muted);
+            font-size: 0.72rem;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .support-source-link:hover { color: var(--green); }
+        @media (max-width: 520px) {
+            .support-progress-heading { align-items: flex-start; flex-direction: column; }
+            .support-progress-heading span { text-align: left; }
+        }
 
         /* =========================================================
            PILE EN CASCADE DES COMPTES BLOQUÉS
@@ -1766,9 +1867,8 @@
             .btn-share-corner { right: 14px; left: auto; }
             .top-philosophy {
                 top: 30px;
-                width: calc(100% - 104px);
+                max-width: calc(100% - 104px);
                 padding: 4px 2px;
-                gap: 5px;
                 font-size: 0.64rem;
             }
             .brand-blur-zone { margin-top: 38px; margin-bottom: 58px; padding: 10px 16px; }
@@ -1818,7 +1918,7 @@
         </svg>
     </button>
     <button type="button" class="top-philosophy" onclick="openModal('disclaimerModal')" aria-label="À propos du projet et mentions légales">
-        <span class="top-philosophy-text" id="topPhilosophyText">Action collective</span>
+        <span class="top-philosophy-text" id="topPhilosophyText">Gratuit</span>
     </button>
 
     <header class="top-header">
@@ -1994,12 +2094,59 @@
                     <a class="btn-mode-cta" style="flex:1; min-width:200px;" href="https://www.whatsapp.com/channel/0029VbDuBhQ2Jl8E7JiZEu1Y" target="_blank" rel="noopener noreferrer">
                         <span>Rejoindre la chaîne WhatsApp ↗</span>
                     </a>
-                    <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">
-                        <span>Suivre sur Instagram ↗</span>
-                    </a>
+                    <button type="button" class="btn-mode-cta secondary" style="flex:1; min-width:200px;" onclick="switchMode('support')">
+                        <span>Découvrir les comptes à suivre</span>
+                    </button>
                 </div>
             </div>
         </div>
+
+        <div style="text-align: center; margin-bottom: 36px;">
+            <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
+                ← Retourner au portail d'action
+            </button>
+        </div>
+    </main>
+
+    <!-- =========================================================
+         VUE : LES COMPTES À SUIVRE
+         ========================================================= -->
+    <main id="viewSupport" class="view-section">
+        <section class="hero">
+            <div class="kicker">Découvrir, soutenir, s'informer</div>
+            <h1>Les comptes à suivre.</h1>
+            <p class="lead">
+                Une sélection de personnalités politiques, de médias et d'humour politique. Ouvre un profil pour le découvrir, puis marque-le comme suivi si tu le souhaites.
+            </p>
+            <p class="support-source-note">
+                Les pseudos et liens sont repris de sources publiques. Vérifie le profil sur Instagram avant de t'abonner ; les catégories à confirmer sont signalées.
+            </p>
+        </section>
+
+        <section class="support-progress-card" aria-label="Progression des comptes suivis">
+            <div class="support-progress-heading">
+                <strong id="supportProgressCount" aria-live="polite">0 compte suivi</strong>
+                <span>Progression enregistrée sur cet appareil</span>
+            </div>
+            <div class="support-progress-track" id="supportProgressTrack" role="progressbar" aria-label="Comptes marqués comme suivis" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
+                <div class="support-progress-fill" id="supportProgressFill"></div>
+            </div>
+        </section>
+
+        <div class="search-and-filters">
+            <input type="search" class="search-input" id="supportSearch" aria-label="Rechercher un compte à suivre par nom ou pseudo" placeholder="Rechercher un nom ou un @pseudo..." oninput="renderSupportList()">
+            <div class="filter-row" aria-label="Filtrer les comptes">
+                <button type="button" class="pill active" aria-pressed="true" onclick="setSupportFilter('all', this)">Tout voir</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setSupportFilter('politique', this)">Politique</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setSupportFilter('media', this)">Médias</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setSupportFilter('humour-politique', this)">Humour politique</button>
+            </div>
+        </div>
+
+        <div class="list-meta">
+            <span id="supportVisibleCount" aria-live="polite" aria-atomic="true">0 compte à découvrir</span>
+        </div>
+        <div class="list" id="supportAccountList"></div>
 
         <div style="text-align: center; margin-bottom: 36px;">
             <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
@@ -2490,6 +2637,122 @@
             { name: "Havas Paris", handle: "havasparis", cat: "Empire Bolloré & Co", label: "Communication (Bolloré)", style: "tag-bollore", fact: "Agence de communication stratégique au cœur de l'empire Bolloré." }
         ];
 
+        const supportAccounts = [
+            { name: "Extinction Rebellion France", handle: "extinctionrebellionfrance", category: "politique", source: "https://extinctionrebellion.fr/" },
+            { name: "Attac France", handle: "attac_fr", category: "politique", source: "https://france.attac.org/" },
+            { name: "Oxfam France", handle: "oxfamfrance", category: "politique", source: "https://www.oxfamfrance.org/qui-sommes-nous/" },
+            { name: "Le Journal de 20h", handle: "le20hfrancetelevisions", category: "media", source: "https://www.france.tv/france-2/journal-20h00/" },
+            { name: "Alexandre Ouizille", handle: "alexandreouizille", category: "politique", source: "https://www.senat.fr/senateur/ouizille_alexandre21078w.html" },
+            { name: "Off Investigation", handle: "offinvestigation", category: "media", source: "https://www.off-investigation.fr/" },
+            { name: "France TV Sport", handle: "francetvsport", category: "media", source: "https://www.france.tv/sport/" },
+            { name: "CNN", handle: "cnn", category: "media", source: "https://www.cnn.com/about" },
+            { name: "Zohran Mamdani", handle: "zohrankmamdani", category: "politique", source: "https://en.wikipedia.org/wiki/Zohran_Mamdani" },
+            { name: "NYC Mayor", handle: "nycmayor", category: "politique", source: "https://www.nyc.gov/office-of-the-mayor/index.page" },
+            { name: "Bon Pote", handle: "bonpote", category: "media", source: "https://bonpote.com/a-propos/" },
+            { name: "Anticor", handle: "anticorofficiel", category: "politique", source: "https://www.anticor.org/" },
+            { name: "L214 Éthique & Animaux", handle: "association_l214", category: "politique", source: "https://www.l214.com/" },
+            { name: "La Relève et la Peste", handle: "la_releve_et_la_peste", category: "media", source: "https://lareleveetlapeste.fr/" },
+            { name: "Jean-Luc Mélenchon", handle: "jlmelenchon", category: "politique", source: "https://melenchon.fr/" },
+            { name: "Guillaume Meurice", handle: "guillaumemeurice", category: "humour-politique", source: "https://www.radiofrance.fr/personnes/guillaume-meurice" },
+            { name: "China Minutes", handle: "chinaminutes", category: "media", source: "https://chinaminutes.com/" },
+            { name: "60 Millions de consommateurs", handle: "60millionsdeconsommateurs", category: "media", source: "https://www.60millions-mag.com/qui-sommes-nous/" },
+            { name: "Puppet Regime", handle: "realpuppetregime", category: "humour-politique", source: "https://www.gzeromedia.com/video/puppet-regime" },
+            { name: "C à vous", handle: "c_a_vous", category: "media", source: "https://www.france.tv/france-5/c-a-vous/" },
+            { name: "Radio Nova", handle: "laradionova", category: "media", source: "https://www.nova.fr/" },
+            { name: "URBANIA", handle: "urbania_fr", category: "media", source: "https://urbania.fr/" },
+            { name: "Info gauchO", handle: "infogaucho", category: "media", source: "https://x.com/Info_gauchO/status/1872738090793783509" },
+            { name: "Louka", handle: "justeungaucho", category: "politique", source: "https://linktr.ee/justeungaucho" },
+            { name: "Hugo au Perchoir", handle: "hugoauperchoir", category: "media", source: "https://www.twitch.tv/hugoauperchoir" },
+            { name: "The Daily Show", handle: "thedailyshow", category: "humour-politique", source: "https://www.cc.com/shows/the-daily-show" },
+            { name: "HugoDécrypte", handle: "hugodecrypte", category: "media", source: "https://fr.wikipedia.org/wiki/Hugo_D%C3%A9crypte" },
+            { name: "Manon Aubry", handle: "manonaubryfr", category: "politique", source: "https://en.wikipedia.org/wiki/Manon_Aubry" },
+            { name: "The Left in the European Parliament", handle: "theleft_eu", category: "politique", source: "https://en.wikipedia.org/wiki/The_Left_in_the_European_Parliament" },
+            { name: "Leïla Chaibi", handle: "leileila_chaibi", category: "politique", source: "https://en.wikipedia.org/wiki/Le%C3%AFla_Chaibi" },
+            { name: "Mediapart", handle: "mediapart", category: "media", source: "https://fr.wikipedia.org/wiki/Mediapart" },
+            { name: "Manuel Bompard", handle: "manuelbompard", category: "politique", source: "https://en.wikipedia.org/wiki/Manuel_Bompard" },
+            { name: "Fabien Gay", handle: "fabiengay93", category: "politique", source: "https://en.wikipedia.org/wiki/Fabien_Gay" },
+            { name: "Libération", handle: "liberationfr", category: "media", source: "https://fr.wikipedia.org/wiki/Lib%C3%A9ration_(journal)" },
+            { name: "Nouveau Front populaire", handle: "nouveau.front.populaire", category: "politique", source: "https://fr.wikipedia.org/wiki/Nouveau_Front_populaire" },
+            { name: "Sandrine Rousseau", handle: "sandrousseau", category: "politique", source: "https://en.wikipedia.org/wiki/Sandrine_Rousseau" },
+            { name: "Vakita", handle: "vakitamedia", category: "media", source: "https://fr.wikipedia.org/wiki/Vakita" },
+            { name: "Le Média", handle: "lemedia_tv", category: "media", source: "https://www.lemediatv.fr/" },
+            { name: "FEMEN France", handle: "femen_france", category: "politique", source: "https://en.wikipedia.org/wiki/FEMEN" },
+            { name: "Le Dessous des images", handle: "dessousdesimages_arte", category: "media", source: "https://fr.wikipedia.org/wiki/Le_Dessous_des_images" },
+            { name: "ARTE", handle: "artefr", category: "media", source: "https://www.arte.tv/fr/" },
+            { name: "France Culture", handle: "franceculture", category: "media", source: "https://www.radiofrance.fr/franceculture" },
+            { name: "INA", handle: "ina.fr", category: "media", source: "https://www.ina.fr/" },
+            { name: "Mélenchon 2027", handle: "melenchon2027.fr", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Alma Dufour", handle: "alma_dufour", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Antoine Léaument", handle: "aleaument", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Bally Bagayoko", handle: "ballybagayoko", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Camille Étienne", handle: "camilleetienne_", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Clémence Guetté", handle: "clemence_guette", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Danièle Obono", handle: "danieleobono", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "David Guiraud", handle: "guirauddavid", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Elsa Marcel", handle: "elsa.marcel1", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Fabien Roussel", handle: "fabien_roussel", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Gabrielle Cathala", handle: "gabrielle_cathala", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Greta Thunberg", handle: "gretathunberg", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Jean-Marc Jancovici", handle: "jmjancovici", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Louis Boyard", handle: "boyardlouis", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Mathilde Panot", handle: "mathildepanot", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Nathalie Arthaud", handle: "nathalie_arthaud_lo", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Olivier Besancenot", handle: "olivier_besancenot", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Philippe Poutou", handle: "philippepoutou_officiel", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Rima Hassan", handle: "rimamobarak", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Salomé Saqué", handle: "salomesaque", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "AFA Paris-Banlieue", handle: "afaparisbanlieue", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Amnesty International France", handle: "amnestyfrance", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Banlieues Antifascistes & Populaires", handle: "banlieues_antifa_populaires", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "CGT", handle: "cgt_confederation", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "CNT-F Région Parisienne", handle: "syndicat_cnt_rp", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Jeune Garde Lille", handle: "jeunegardelille", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "La France insoumise", handle: "franceinsoumise", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Le Poing Levé", handle: "lepoing_leve", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Les Écologistes", handle: "eelvfr", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Les Jeunes Insoumis·es", handle: "jeunesinsoumis", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "LFI Nogent-le-Rotrou", handle: "lfinogentlerotrou", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "NPA - L’Anticapitaliste", handle: "npa.anticapitaliste", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "NPA Jeunes Révolutionnaires", handle: "npajeunes_revo", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Parti communiste français", handle: "pcfparticommunistefrancais", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Tsedek !", handle: "tsdkcollectif", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Union syndicale Solidaires", handle: "union_solidaires", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Utopia 56", handle: "utopia.56", category: "politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "AJ+ français", handle: "ajplusfrancais", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Basta!", handle: "basta.media", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Blast", handle: "blastofficiel", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "BLIK", handle: "blikmedia", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Cerveaux Non Disponibles", handle: "cerveaux_non_disponibles", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Contre Attaque", handle: "_contreattaque", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Histoire des Luttes", handle: "histoiredesluttes", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Histoires Crépues", handle: "histoires_crepues", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "L’Anticapitaliste", handle: "l_anticapitaliste", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "L’Humanité", handle: "lhumanitefr", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "La Brèche", handle: "_la_breche_", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Le Canard Réfractaire", handle: "lecanardrefractaire", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Le Coin des LGBT+", handle: "lecoindeslgbt", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Le Tréma", handle: "le_trema", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Les Répliques", handle: "lesrepliquesofficiel", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "LesravagesduRn", handle: "ravages_du_rn", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Mr Mondialisation", handle: "mr_mondialisation", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Paint", handle: "paint.media", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Paroles d'honneur", handle: "parolesdhonneur", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Reporterre", handle: "reporterre_media", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Révolution Permanente", handle: "revolutionpermanente.fr", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "StreetPress", handle: "streetpress", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Vert", handle: "vert_le_media", category: "media", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche" },
+            { name: "Akim Omiri", handle: "akimomiri", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Aymeric Lompret", handle: "aymeric_lompret", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Cogito Ergo Seum", handle: "cogitoergo.seum", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Le Politaquin", handle: "le_politaquin", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Le Roi Borgne", handle: "leroiborgneee", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Mahaut Drama", handle: "mahautdrama", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Miaoulenchon", handle: "miaoulenchon", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Nicole Ferroni", handle: "nicoleferronize", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Pierre-Emmanuel Barré", handle: "pierreemmanuelbarre", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" },
+            { name: "Waly Dia", handle: "waly_dia", category: "humour-politique", source: "https://www.onbloquelextremedroite.fr/onsoutientlagauche", status: "provisional" }
+        ];
+
         const sabotageTactics = [
             {
                 id: "tactic_session_kill",
@@ -2537,10 +2800,14 @@
         const SABOTAGE_KEY = "ig_sabotage_done_v1";
         const WIKI_CACHE_KEY = "ig_wiki_thumbs_v1";
         const WELCOME_HIDE_KEY = "ig_blocklist_hide_welcome_v1";
+        const SUPPORT_FOLLOWED_KEY = "ig_support_followed_v1";
         const PAGE_SIZE = 15;
 
         let visibleLimit = PAGE_SIZE;
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        let followedSupportHandles = JSON.parse(localStorage.getItem(SUPPORT_FOLLOWED_KEY) || "[]");
+        let supportFilter = "all";
+        let supportVisibleLimit = PAGE_SIZE;
         let lastActionHandle = localStorage.getItem(LAST_HANDLE_KEY) || (doneHandles.length ? doneHandles[doneHandles.length - 1] : null);
         let reintroducedHandle = localStorage.getItem(REINTRODUCED_HANDLE_KEY);
         let currentMode = "home";
@@ -2559,14 +2826,17 @@
         let currentTheme = THEME_OPTIONS.includes(savedTheme) ? savedTheme : "light";
         let shareToastTimeout;
         const philosophyMessages = [
-            "Action collective",
-            "Choix libre",
-            "Gratuit et accessible",
+            "Gratuit",
+            "Accessible",
             "Sans compte",
-            "Progression sur l'appareil",
+            "Stockage local",
+            "Progression 100 % locale",
+            "Pas de serveur de suivi",
             "Aucun traqueur",
-            "Code sur GitHub",
-            "Autodéfense numérique"
+            "Code open source",
+            "Outil transparent",
+            "Outil facile",
+            "😢 Vibecodé 🤖"
         ];
 
         function startPhilosophyTicker() {
@@ -2582,7 +2852,7 @@
                     text.textContent = philosophyMessages[messageIndex];
                     text.classList.remove("changing");
                 }, 180);
-            }, 2000);
+            }, 3000);
         }
 
         function showShareToast(message) {
@@ -2689,7 +2959,7 @@
         }
 
         function switchMode(mode, addHistory = true) {
-            if (!["home", "mobilisation", "politique", "sabotage", "blocklist"].includes(mode)) mode = "home";
+            if (!["home", "mobilisation", "politique", "support", "sabotage", "blocklist"].includes(mode)) mode = "home";
             const modeChanged = mode !== currentMode;
             currentMode = mode;
             localStorage.setItem(MODE_KEY, mode);
@@ -2700,6 +2970,7 @@
             document.getElementById("viewHome").classList.toggle("active", mode === "home");
             document.getElementById("viewMobilisation").classList.toggle("active", mode === "mobilisation");
             document.getElementById("viewPolitique").classList.toggle("active", mode === "politique");
+            document.getElementById("viewSupport").classList.toggle("active", mode === "support");
             document.getElementById("viewBlocklist").classList.toggle("active", mode === "blocklist");
             document.getElementById("viewSabotage").classList.toggle("active", mode === "sabotage");
 
@@ -2931,6 +3202,153 @@
             render();
         }
 
+        function setSupportFilter(filter, btnEl) {
+            supportFilter = filter;
+            document.querySelectorAll("#viewSupport .filter-row .pill").forEach(button => {
+                const isActive = button === btnEl;
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+            renderSupportList();
+        }
+
+        function toggleSupportFollow(handle) {
+            if (followedSupportHandles.includes(handle)) {
+                followedSupportHandles = followedSupportHandles.filter(savedHandle => savedHandle !== handle);
+            } else {
+                followedSupportHandles.push(handle);
+            }
+            localStorage.setItem(SUPPORT_FOLLOWED_KEY, JSON.stringify(followedSupportHandles));
+            renderSupportList();
+        }
+
+        function renderSupportList() {
+            const list = document.getElementById("supportAccountList");
+            if (!list) return;
+
+            const accountsByHandle = new Map();
+            supportAccounts.forEach(account => {
+                if (!account || typeof account.name !== "string" ||
+                    typeof account.handle !== "string" ||
+                    !/^[A-Za-z0-9._]{1,30}$/.test(account.handle) ||
+                    !["politique", "media", "humour-politique"].includes(account.category)) return;
+                const normalizedHandle = account.handle.toLowerCase();
+                if (!accountsByHandle.has(normalizedHandle)) accountsByHandle.set(normalizedHandle, account);
+            });
+            const uniqueAccounts = [...accountsByHandle.values()];
+            const total = uniqueAccounts.length;
+            const followedCount = uniqueAccounts.filter(account => followedSupportHandles.includes(account.handle)).length;
+            const progressCount = document.getElementById("supportProgressCount");
+            const progressTrack = document.getElementById("supportProgressTrack");
+            const progressFill = document.getElementById("supportProgressFill");
+            const percent = total ? Math.round((followedCount / total) * 100) : 0;
+
+            if (progressCount) progressCount.textContent = `${followedCount} / ${total} compte${total > 1 ? "s" : ""} suivi${total > 1 ? "s" : ""} (${percent} %)`;
+            if (progressTrack) {
+                progressTrack.setAttribute("aria-valuemax", String(total));
+                progressTrack.setAttribute("aria-valuenow", String(followedCount));
+                progressTrack.setAttribute("aria-valuetext", `${followedCount} sur ${total} comptes marqués comme suivis`);
+            }
+            if (progressFill) progressFill.style.width = `${percent}%`;
+
+            const query = (document.getElementById("supportSearch")?.value || "").trim().toLocaleLowerCase("fr");
+            const visibleAccounts = uniqueAccounts.filter(account => {
+                if (supportFilter !== "all" && account.category !== supportFilter) return false;
+                return !query || `${account.name} ${account.handle}`.toLocaleLowerCase("fr").includes(query);
+            });
+            const visibleCount = document.getElementById("supportVisibleCount");
+            if (visibleCount) visibleCount.textContent = `${visibleAccounts.length} compte${visibleAccounts.length > 1 ? "s" : ""} dans la sélection`;
+
+            list.replaceChildren();
+            if (visibleAccounts.length === 0) {
+                const emptyCard = document.createElement("div");
+                emptyCard.className = "empty-victory-card";
+                const title = document.createElement("div");
+                title.className = "empty-victory-title";
+                title.textContent = total === 0 ? "La sélection est en cours de vérification." : "Aucun compte ne correspond à cette recherche.";
+                emptyCard.appendChild(title);
+                list.appendChild(emptyCard);
+                return;
+            }
+
+            visibleAccounts.slice(0, supportVisibleLimit).forEach(account => {
+                const isFollowed = followedSupportHandles.includes(account.handle);
+                const row = document.createElement("article");
+                row.className = `row support-row${isFollowed ? " is-followed" : ""}`;
+
+                const top = document.createElement("div");
+                top.className = "row-top";
+                const profile = document.createElement("div");
+                profile.className = "row-profile-left";
+                const avatar = document.createElement("div");
+                avatar.className = "avatar-circle";
+                avatar.setAttribute("aria-hidden", "true");
+                avatar.textContent = account.category === "media" ? "📰" : account.category === "humour-politique" ? "🎭" : "✊";
+
+                const info = document.createElement("div");
+                info.className = "row-info";
+                const header = document.createElement("div");
+                header.className = "row-header";
+                const name = document.createElement("span");
+                name.className = "name";
+                name.textContent = account.name;
+                const category = document.createElement("span");
+                category.className = `tag support-category-${account.category}`;
+                category.textContent = account.category === "media" ? "Média" : account.category === "humour-politique" ? "Humour politique" : "Politique";
+                if (account.status === "provisional") category.textContent += " · à confirmer";
+                header.append(name, category);
+                const handle = document.createElement("span");
+                handle.className = "handle";
+                handle.textContent = `@${account.handle}`;
+                info.append(header, handle);
+                if (typeof account.source === "string" && /^https?:\/\//i.test(account.source)) {
+                    const sourceLink = document.createElement("a");
+                    sourceLink.className = "support-source-link";
+                    sourceLink.href = account.source;
+                    sourceLink.target = "_blank";
+                    sourceLink.rel = "noopener noreferrer";
+                    sourceLink.textContent = "Source de vérification ↗";
+                    info.appendChild(sourceLink);
+                }
+                profile.append(avatar, info);
+                top.appendChild(profile);
+
+                const actions = document.createElement("div");
+                actions.className = "row-actions";
+                const followButton = document.createElement("button");
+                followButton.type = "button";
+                followButton.className = "btn-follow";
+                followButton.setAttribute("aria-pressed", String(isFollowed));
+                followButton.setAttribute("aria-label", isFollowed
+                    ? `Retirer ${account.name} de la liste des comptes suivis`
+                    : `Marquer ${account.name} comme déjà suivi`);
+                followButton.textContent = isFollowed ? "✓ Déjà suivi" : "＋ Marquer comme suivi";
+                followButton.addEventListener("click", () => toggleSupportFollow(account.handle));
+
+                const profileLink = document.createElement("a");
+                profileLink.className = "support-profile-link";
+                profileLink.href = `https://www.instagram.com/${account.handle}/`;
+                profileLink.target = "_blank";
+                profileLink.rel = "noopener noreferrer";
+                profileLink.textContent = "Voir le profil ↗";
+                actions.append(followButton, profileLink);
+                row.append(top, actions);
+                list.appendChild(row);
+            });
+
+            if (visibleAccounts.length > supportVisibleLimit) {
+                const loadMore = document.createElement("button");
+                loadMore.type = "button";
+                loadMore.className = "row load-more-row";
+                loadMore.textContent = `Afficher ${Math.min(PAGE_SIZE, visibleAccounts.length - supportVisibleLimit)} comptes supplémentaires`;
+                loadMore.addEventListener("click", () => {
+                    supportVisibleLimit += PAGE_SIZE;
+                    renderSupportList();
+                });
+                list.appendChild(loadMore);
+            }
+        }
+
         function onSearchInput() {
             visibleLimit = PAGE_SIZE;
             render();
@@ -3066,6 +3484,7 @@
         }
 
         function render() {
+            renderSupportList();
             const total = accounts.length;
             const doneCount = doneHandles.length;
             const pct = Math.round((doneCount / total) * 100);
