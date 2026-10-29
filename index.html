@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autodéfense Algorithmique — On bloque l'extrême droite</title>
+    <title>La Blocklist Instagram — On bloque l'extrême droite</title>
     <style>
         /* =========================================================
            1. THÈME CLAIR (PAR DÉFAUT — 🌿)
@@ -12,9 +12,8 @@
             --bg-top: #f3decb;
             --bg: #f6ebe0;
             --bg-rgb: 246, 235, 224;
-            --card: rgba(255, 251, 246, 0.92);
-            --card-solid: #fffbf6;
-            --card-hero: rgba(255, 251, 246, 0.76);
+            --card: rgba(255, 251, 246, 0.88);
+            --card-hero: rgba(255, 251, 246, 0.70);
             --sub-card: rgba(236, 220, 204, 0.55);
             --sub-card-border: rgba(180, 148, 122, 0.28);
             --text: #241813;
@@ -22,13 +21,12 @@
             --border: rgba(180, 148, 122, 0.36);
             --green: #2c6e49;
             --green-light: #40916c;
-            --green-bg: rgba(229, 242, 234, 0.94);
-            --green-solid: #e5f2ea;
+            --green-bg: rgba(229, 242, 234, 0.90);
             --green-border: #9ecbb0;
             --accent: #c8372d;
             --pill-bg: rgba(234, 213, 195, 0.85);
             --pill-text: #48352c;
-            --sticky-bg: rgba(246, 235, 224, 0.88);
+            --sticky-bg: rgba(246, 235, 224, 0.86);
             --ghost-bg: rgba(130, 120, 112, 0.08);
             --ghost-border: rgba(130, 120, 112, 0.18);
             --ghost-text: #7a6a60;
@@ -48,9 +46,8 @@
             --bg-top: #140d0e;
             --bg: #0b0e12;
             --bg-rgb: 11, 14, 18;
-            --card: rgba(22, 25, 30, 0.92);
-            --card-solid: #16191e;
-            --card-hero: rgba(18, 20, 25, 0.76);
+            --card: rgba(22, 25, 30, 0.90);
+            --card-hero: rgba(18, 20, 25, 0.70);
             --sub-card: rgba(10, 12, 16, 0.78);
             --sub-card-border: rgba(255, 255, 255, 0.08);
             --text: #f5f2f2;
@@ -59,12 +56,11 @@
             --green: #e63946;
             --green-light: #ff6b76;
             --green-bg: rgba(230, 57, 70, 0.16);
-            --green-solid: #231418;
             --green-border: #801f27;
             --accent: #ff4754;
             --pill-bg: rgba(36, 30, 34, 0.92);
             --pill-text: #d6caca;
-            --sticky-bg: rgba(11, 14, 18, 0.90);
+            --sticky-bg: rgba(11, 14, 18, 0.88);
             --ghost-bg: rgba(255, 255, 255, 0.035);
             --ghost-border: rgba(255, 255, 255, 0.08);
             --ghost-text: #858082;
@@ -76,16 +72,8 @@
             --hero-img: url('theme-dark.jpg');
         }
 
-        /* =========================================================
-           CORRECTION DÉFILEMENT HORIZONTAL MOBILE
-           ========================================================= */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        html, body {
-            overflow-x: hidden;
-            max-width: 100%;
-        }
-
         body {
             font-family: var(--font-sans);
             background-color: var(--bg);
@@ -98,20 +86,18 @@
             line-height: 1.45;
             position: relative;
             min-height: 100vh;
+            overflow-x: hidden; /* Empêche tout défilement horizontal parasite mobile */
             transition: background-color 0.35s ease, color 0.35s ease;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* =========================================================
-           IMAGE AU SOMMET SANS DÉPASSEMENT D'ÉCRAN
-           ========================================================= */
         .hero-bg-banner {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 100vw;
-            max-width: 100vw;
+            max-width: 1120px;
             height: 470px;
             z-index: -1;
             pointer-events: none;
@@ -127,43 +113,19 @@
             background-position: center top;
             background-repeat: no-repeat;
             opacity: 1;
-            -webkit-mask-image: linear-gradient(
-                to bottom,
-                #000000 0%,
-                #000000 62%,
-                rgba(0, 0, 0, 0.75) 76%,
-                rgba(0, 0, 0, 0.28) 90%,
-                transparent 100%
-            );
-            mask-image: linear-gradient(
-                to bottom,
-                #000000 0%,
-                #000000 62%,
-                rgba(0, 0, 0, 0.75) 76%,
-                rgba(0, 0, 0, 0.28) 90%,
-                transparent 100%
-            );
+            -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,0.75) 76%, rgba(0,0,0,0.28) 90%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,0.75) 76%, rgba(0,0,0,0.28) 90%, transparent 100%);
         }
 
         @media (min-width: 900px) {
-            .hero-bg-banner { max-width: 1120px; }
             .hero-bg-banner::after {
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(
-                    to right,
-                    var(--bg-top) 0%,
-                    transparent 12%,
-                    transparent 88%,
-                    var(--bg-top) 100%
-                );
+                background: linear-gradient(to right, var(--bg-top) 0%, transparent 12%, transparent 88%, var(--bg-top) 100%);
             }
         }
 
-        /* =========================================================
-           EN-TÊTE SUPÉRIEUR & BARRE D'ACTIONS
-           ========================================================= */
         .top-header {
             display: flex;
             flex-direction: column;
@@ -171,22 +133,20 @@
             text-align: center;
             padding-top: 12px;
             margin-bottom: 24px;
-            width: 100%;
         }
 
         .brand-blur-zone {
             position: relative;
-            padding: 12px 24px;
+            padding: 12px 32px;
             margin-top: 8px;
-            margin-bottom: 125px;
+            margin-bottom: 135px;
             border-radius: 22px;
-            max-width: 100%;
         }
 
         .brand-blur-zone::before {
             content: "";
             position: absolute;
-            inset: -12px -20px;
+            inset: -12px -30px;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             background: radial-gradient(ellipse at center, rgba(var(--bg-rgb), 0.72) 0%, rgba(var(--bg-rgb), 0.35) 62%, transparent 100%);
@@ -199,13 +159,12 @@
         .brand-title {
             font-family: var(--font-sans);
             font-weight: 900;
-            font-size: clamp(1.45rem, 4.6vw, 2.05rem);
+            font-size: clamp(1.5rem, 4.6vw, 2.05rem);
             letter-spacing: -0.04em;
             text-transform: uppercase;
             color: var(--text);
             line-height: 1.05;
             text-shadow: 0 2px 16px rgba(var(--bg-rgb), 0.98);
-            cursor: pointer;
         }
 
         .top-actions-bar {
@@ -213,11 +172,11 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 7px;
+            gap: 8px;
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 24px;
-            background: rgba(var(--bg-rgb), 0.62);
+            padding: 10px 14px;
+            border-radius: 99px;
+            background: rgba(var(--bg-rgb), 0.58);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
@@ -229,9 +188,9 @@
             background: var(--text);
             color: var(--bg);
             border: 1px solid transparent;
-            padding: 7px 12px;
+            padding: 7px 13px;
             border-radius: 99px;
-            font-size: 0.76rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
@@ -240,7 +199,6 @@
             gap: 5px;
             transition: all 0.18s ease;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-            white-space: nowrap;
         }
 
         .btn-top.outline {
@@ -251,21 +209,11 @@
             border: 1px solid var(--border);
         }
 
-        .btn-top.mode-switch {
-            background: var(--green);
-            color: #ffffff;
-            border-color: var(--green);
-            font-weight: 800;
-        }
-
         .btn-top:hover {
             transform: translateY(-1.5px);
             opacity: 0.94;
         }
 
-        /* =========================================================
-           BOUTON DE THÈME
-           ========================================================= */
         .btn-theme-split {
             display: inline-flex;
             align-items: center;
@@ -286,704 +234,239 @@
         .btn-theme-split:hover { transform: translateY(-1.5px); }
 
         .theme-icon-part {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: var(--card);
-            border: 1px solid var(--border);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.82rem;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            width: 26px; height: 26px; border-radius: 50%; background: var(--card); border: 1px solid var(--border);
+            display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
 
         .theme-label-part {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 99px;
-            font-size: 0.74rem;
-            font-weight: 800;
-            letter-spacing: -0.01em;
-            white-space: nowrap;
+            background: var(--card); border: 1px solid var(--border); padding: 4px 11px; border-radius: 99px;
+            font-size: 0.76rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap;
         }
 
         @keyframes themeSpotlight {
-            0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0), 0 0 0 0 rgba(44, 110, 73, 0); transform: scale(1); }
-            30% { box-shadow: 0 0 0 6px rgba(230, 57, 70, 0.35), 0 0 22px 4px var(--green); transform: scale(1.04); border-color: var(--green); }
-            65% { box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2), 0 0 14px 2px var(--green); transform: scale(1.01); }
+            0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); transform: scale(1); }
+            30% { box-shadow: 0 0 0 6px rgba(230, 57, 70, 0.35), 0 0 22px 4px var(--green); transform: scale(1.05); border-color: var(--green); }
+            65% { box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2), 0 0 14px 2px var(--green); transform: scale(1.02); }
             100% { box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1); transform: scale(1); }
         }
 
-        .btn-theme-split.illuminate {
-            animation: themeSpotlight 1.8s cubic-bezier(0.22, 1, 0.36, 1) 2;
-        }
+        .btn-theme-split.illuminate { animation: themeSpotlight 1.8s cubic-bezier(0.22, 1, 0.36, 1) 2; }
 
-        /* =========================================================
-           GESTION DES VUES (PORTAIL / MODE 1 / MODE 2)
-           ========================================================= */
-        .view-section { display: none; width: 100%; }
-        .view-section.active { display: block; animation: fadeInView 0.25s ease; }
-
-        @keyframes fadeInView {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* =========================================================
-           VUE 0 : PORTAIL D'ACCUEIL STRATÉGIQUE
-           ========================================================= */
-        .mode-cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-            margin-bottom: 18px;
-        }
-
-        .mode-card {
-            background: var(--card);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1.5px solid var(--border);
-            border-radius: 18px;
-            padding: 20px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-        }
-
-        .mode-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--green);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
-        }
-
-        .mode-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .mode-badge {
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 4px 10px;
-            border-radius: 99px;
-            background: var(--pill-bg);
-            color: var(--pill-text);
-        }
-
-        .mode-status-pill {
-            font-size: 0.74rem;
-            font-weight: 800;
-            color: var(--green);
-            background: var(--green-bg);
-            border: 1px solid var(--green-border);
-            padding: 3px 10px;
-            border-radius: 99px;
-        }
-
-        .mode-card h2 {
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            color: var(--text);
-        }
-
-        .mode-quote {
-            font-size: 0.85rem;
-            font-style: italic;
-            font-weight: 600;
-            color: var(--muted);
-            background: var(--sub-card);
-            border-left: 3px solid var(--green);
-            padding: 8px 12px;
-            border-radius: 0 10px 10px 0;
-        }
-
-        .mode-points {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            font-size: 0.84rem;
-            color: var(--text);
-            margin: 4px 0;
-        }
-
-        .mode-points li strong { color: var(--green); }
-
-        .btn-mode-cta {
-            margin-top: 6px;
-            width: 100%;
-            background: var(--green);
-            color: #ffffff;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 800;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-family: var(--font-sans);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-        .btn-mode-cta:hover { transform: translateY(-1px); opacity: 0.95; }
-        .btn-mode-cta.secondary {
-            background: var(--text);
-            color: var(--bg);
-        }
-
-        /* =========================================================
-           BLOC CENTRAL (HERO)
-           ========================================================= */
         .hero {
             margin-bottom: 12px;
             background: var(--card-hero);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            padding: 22px 20px 18px 20px;
+            padding: 24px 22px 20px 22px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         }
 
-        .hero h1 {
-            font-size: clamp(1.85rem, 5vw, 2.4rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1.08;
-            margin-bottom: 6px;
-            color: var(--text);
-        }
-
-        .hero .kicker {
-            font-size: 0.74rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 6px; color: var(--text); }
+        .hero .kicker { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); margin-bottom: 12px; }
 
         .btn-share-subtle {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(var(--bg-rgb), 0.55);
-            color: var(--muted);
-            border: 1px solid var(--border);
-            padding: 5px 13px;
-            border-radius: 99px;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: all 0.18s ease;
+            display: inline-flex; align-items: center; gap: 6px; background: rgba(var(--bg-rgb), 0.55); color: var(--muted);
+            border: 1px solid var(--border); padding: 5px 13px; border-radius: 99px; font-size: 0.76rem; font-weight: 700; cursor: pointer; margin-bottom: 14px; transition: all 0.18s ease;
         }
-        .btn-share-subtle:hover {
-            color: var(--text);
-            background: var(--card);
-            border-color: var(--muted);
-            transform: translateY(-1px);
-        }
-        .btn-share-subtle svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 2.2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
+        .btn-share-subtle:hover { color: var(--text); background: var(--card); border-color: var(--muted); transform: translateY(-1px); }
+        .btn-share-subtle svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-        .hero .lead {
-            font-size: 0.9rem;
-            color: var(--text);
-            opacity: 0.9;
-            font-weight: 500;
-            max-width: 550px;
-            margin: 0 auto 14px auto;
-            line-height: 1.5;
-        }
+        .hero .lead { font-size: 0.92rem; color: var(--text); opacity: 0.88; font-weight: 500; max-width: 540px; margin: 0 auto 14px auto; line-height: 1.5; }
 
         .quick-steps {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            background: var(--sub-card);
-            border: 1px solid var(--sub-card-border);
-            padding: 8px 14px;
-            border-radius: 14px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--muted);
-            max-width: 100%;
+            display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px;
+            background: var(--sub-card); border: 1px solid var(--sub-card-border); padding: 8px 14px; border-radius: 14px; font-size: 0.76rem; font-weight: 700; color: var(--muted);
         }
         .quick-steps span strong { color: var(--text); }
         .quick-steps .step-sep { opacity: 0.45; }
 
         .ig-mini-preview {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--ig-grad);
-            color: #ffffff;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.71rem;
-            font-weight: 800;
-            border: 1px solid var(--ig-border);
-            box-shadow: 0 2px 6px rgba(220, 39, 67, 0.2);
-            vertical-align: middle;
+            display: inline-flex; align-items: center; gap: 4px; background: var(--ig-grad); color: #fff; padding: 3px 8px;
+            border-radius: 6px; font-size: 0.71rem; font-weight: 800; border: 1px solid var(--ig-border); box-shadow: 0 2px 6px rgba(220, 39, 67, 0.2); vertical-align: middle;
         }
-        .ig-mini-preview svg {
-            width: 11px;
-            height: 11px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2.2;
-        }
+        .ig-mini-preview svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
-        /* =========================================================
-           BLOC EXPLICATION & TRANSPARENCE
-           ========================================================= */
         .explain-wrapper {
-            margin-bottom: 12px;
-            background: var(--card-hero);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 6px;
+            margin-bottom: 12px; background: var(--card-hero); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border); border-radius: 16px; padding: 6px; transition: all 0.2s ease;
         }
         .btn-explain {
-            width: 100%;
-            background: transparent;
-            color: var(--text);
-            border: none;
-            padding: 10px 32px 10px 14px;
-            border-radius: 12px;
-            font-size: 0.84rem;
-            font-weight: 800;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            position: relative;
+            width: 100%; background: transparent; color: var(--text); border: none; padding: 10px 14px; border-radius: 12px;
+            font-size: 0.85rem; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; position: relative; transition: background-color 0.15s;
         }
         .btn-explain:hover { background: rgba(var(--bg-rgb), 0.35); }
         .explain-arrow { position: absolute; right: 14px; font-size: 0.75rem; color: var(--muted); }
         
         .explain-content {
-            display: none;
-            background: var(--sub-card);
-            border: 1px solid var(--sub-card-border);
-            padding: 16px 18px;
-            border-radius: 12px;
-            margin-top: 6px;
-            font-size: 0.84rem;
-            color: var(--text);
-            line-height: 1.55;
+            display: none; background: var(--sub-card); border: 1px solid var(--sub-card-border); padding: 16px 18px;
+            border-radius: 12px; margin-top: 6px; font-size: 0.84rem; color: var(--text); line-height: 1.55;
         }
         .explain-content.open { display: block; }
         .explain-content ul { padding-left: 18px; margin: 10px 0 4px 0; display: flex; flex-direction: column; gap: 9px; }
         .explain-content li strong { color: var(--green); }
 
         .trust-box {
-            background: var(--ghost-bg);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 1px solid var(--ghost-border);
-            padding: 10px 14px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            font-size: 0.78rem;
-            line-height: 1.45;
-            color: var(--ghost-text);
-            text-align: center;
-            opacity: 0.8;
+            background: var(--ghost-bg); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--ghost-border);
+            padding: 10px 14px; border-radius: 12px; margin-bottom: 16px; font-size: 0.78rem; line-height: 1.45; color: var(--ghost-text); text-align: center; opacity: 0.75; transition: opacity 0.25s ease;
         }
+        .trust-box:hover { opacity: 1; }
 
         /* =========================================================
-           DASHBOARD STICKY (SANS LES FILTRES DEDANS)
+           DASHBOARD STICKY & REORGANISATION DES FILTRE (TÂCHE 2)
            ========================================================= */
         .sticky-dashboard {
-            position: sticky;
-            top: 6px;
-            z-index: 25;
-            background: var(--sticky-bg);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 14px;
+            position: sticky; top: 8px; z-index: 20; background: var(--sticky-bg); backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px); padding: 10px 0; border-bottom: 1px solid var(--border); margin-bottom: 14px;
         }
         .dash-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 13px 15px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px 16px 16px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         .dash-autosave-note {
-            text-align: center;
-            font-size: 0.73rem;
-            font-weight: 700;
-            color: var(--muted);
-            background: var(--sub-card);
-            border: 1px solid var(--sub-card-border);
-            padding: 5px 10px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            text-align: center; font-size: 0.75rem; font-weight: 700; color: var(--muted); background: var(--sub-card);
+            border: 1px solid var(--sub-card-border); padding: 6px 12px; border-radius: 10px; margin-bottom: 12px;
         }
         
-        .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
-        .milestone { display: flex; align-items: center; gap: 10px; min-width: 0; }
-        .milestone-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .milestone-label { font-size: 0.66rem; text-transform: uppercase; font-weight: 800; color: var(--muted); letter-spacing: 0.05em; }
-        .milestone-title { font-size: 0.9rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
+        .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px; }
+        .milestone { display: flex; align-items: center; gap: 10px; }
+        .milestone-icon { font-size: 1.55rem; }
+        .milestone-label { font-size: 0.68rem; text-transform: uppercase; font-weight: 800; color: var(--muted); letter-spacing: 0.05em; }
+        .milestone-title { font-size: 0.94rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
         
-        .score-box { text-align: right; flex-shrink: 0; }
-        .score-num { font-size: 1.15rem; font-weight: 900; color: var(--green); }
-        .score-pct { font-size: 0.72rem; font-weight: 700; color: var(--muted); display: block; }
+        .score-box { text-align: right; }
+        .score-num { font-size: 1.2rem; font-weight: 900; color: var(--green); }
+        .score-pct { font-size: 0.73rem; font-weight: 700; color: var(--muted); display: block; }
 
-        .progress-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 9px;
-            width: 100%;
-        }
+        .progress-section { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 14px; width: 100%; }
 
-        .progress-track {
-            width: 100%;
-            background: var(--border);
-            height: 13px;
-            border-radius: 99px;
-            position: relative;
-            overflow: visible;
-        }
+        .progress-track { width: 100%; background: var(--border); height: 14px; border-radius: 99px; position: relative; overflow: visible; }
 
-        @keyframes waveFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 40px 50%; }
-        }
-
-        @keyframes runnerBounceRight {
-            0%, 100% { transform: translate(50%, -54%) scaleX(-1) translateY(0px) rotate(-5deg); }
-            50% { transform: translate(50%, -54%) scaleX(-1) translateY(-3px) rotate(6deg); }
-        }
+        @keyframes waveFlow { 0% { background-position: 0% 50%; } 100% { background-position: 40px 50%; } }
+        @keyframes runnerBounceRight { 0%, 100% { transform: translate(50%, -54%) scaleX(-1) translateY(0px) rotate(-5deg); } 50% { transform: translate(50%, -54%) scaleX(-1) translateY(-3px) rotate(6deg); } }
 
         .progress-fill {
-            height: 100%;
-            width: 1.5%;
-            border-radius: 99px;
-            background: repeating-linear-gradient(
-                -45deg,
-                var(--green),
-                var(--green) 10px,
-                var(--green-light) 10px,
-                var(--green-light) 20px
-            );
-            background-size: 40px 40px;
-            animation: waveFlow 1.1s linear infinite;
-            transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
+            height: 100%; width: 0%; border-radius: 99px;
+            background: repeating-linear-gradient(-45deg, var(--green), var(--green) 10px, var(--green-light) 10px, var(--green-light) 20px);
+            background-size: 40px 40px; animation: waveFlow 1.1s linear infinite; transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1); position: relative;
         }
 
         .progress-runner {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            display: inline-block;
-            transform: translate(50%, -54%) scaleX(-1);
-            font-size: 1.12rem;
-            line-height: 1;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.22));
-            animation: runnerBounceRight 0.45s ease-in-out infinite;
-            pointer-events: none;
-            user-select: none;
+            position: absolute; right: 0; top: 50%; display: inline-block; transform: translate(50%, -54%) scaleX(-1);
+            font-size: 1.15rem; line-height: 1; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.22)); animation: runnerBounceRight 0.45s ease-in-out infinite; pointer-events: none;
         }
 
         .btn-reset-prog {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 4px 12px;
-            border-radius: 99px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.18s ease;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: transparent;
+            border: 1px solid var(--border); color: var(--muted); padding: 5px 13px; border-radius: 99px; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.18s ease;
         }
-        .btn-reset-prog svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 2.3;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: transform 0.35s ease;
-        }
-        .btn-reset-prog:hover {
-            color: var(--text);
-            border-color: var(--muted);
-            background: var(--pill-bg);
-        }
+        .btn-reset-prog svg { width: 15px; height: 15px; stroke: currentColor; stroke-width: 2.3; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.35s ease; }
+        .btn-reset-prog:hover { color: var(--text); border-color: var(--muted); background: var(--pill-bg); }
         .btn-reset-prog:hover svg { transform: rotate(-180deg); }
 
         /* =========================================================
-           RECHERCHE + FILTRES JUSTE EN DESSOUS
+           PILE VISIBLE DES COMPTES BLOQUÉS EN HAUT (TÂCHE 6)
            ========================================================= */
-        .search-and-filters {
-            margin-bottom: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .search-bar { display: flex; width: 100%; }
-        .search-input {
-            width: 100%;
-            padding: 11px 15px;
+        .blocked-stack-container {
+            margin-bottom: 14px;
+            background: var(--sub-card);
+            border: 1px solid var(--sub-card-border);
             border-radius: 12px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text);
-            font-size: 0.88rem;
-            outline: none;
-            transition: border-color 0.15s;
+            padding: 10px 14px;
+            transition: all 0.25s ease;
         }
+        .blocked-stack-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--muted);
+        }
+        .blocked-stack-header span strong { color: var(--text); }
+        .stack-list {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 10px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .blocked-stack-container.expanded .stack-list { display: flex; }
+        .stack-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card);
+            border: 1px solid var(--green-border);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+        .stack-item-info { display: flex; align-items: center; gap: 8px; }
+        .stack-item-name { font-weight: 700; color: var(--text); text-decoration: line-through; }
+        .stack-item-unblock {
+            background: transparent; border: none; color: var(--muted); font-size: 0.72rem; font-weight: 700; cursor: pointer; text-decoration: underline;
+        }
+        .stack-item-unblock:hover { color: var(--accent); }
+
+        /* RECHERCHE ET FILTRES DÉPLACÉS SOUS LA RECHERCHE (TÂCHE 2) */
+        .search-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .search-input { width: 100%; padding: 11px 15px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 0.88rem; outline: none; transition: border-color 0.15s; }
         .search-input:focus { border-color: var(--green); }
 
         .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding-top: 2px;
         }
         .pill {
-            background: var(--pill-bg);
-            color: var(--pill-text);
-            border: 1px solid transparent;
-            padding: 6px 12px;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.15s;
+            background: var(--pill-bg); color: var(--pill-text); border: 1px solid transparent; padding: 6px 12px;
+            border-radius: 99px; font-size: 0.76rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.15s;
         }
         .pill:hover { border-color: var(--border); }
         .pill.active { background: var(--green); color: #fff; }
 
-        /* =========================================================
-           PILE EN CASCADE DES COMPTES BLOQUÉS (EN HAUT)
-           ========================================================= */
-        .blocked-stack-wrapper {
-            margin-bottom: 18px;
-            display: none;
+        .empty-victory-card {
+            background: var(--card); border: 1.5px solid var(--green); border-radius: 16px; padding: 26px 20px; text-align: center; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
-        .blocked-stack-wrapper.has-items {
-            display: block;
-        }
-        .stack-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            padding: 0 4px;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .stack-title {
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: var(--green);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-stack-toggle {
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 4px 11px;
-            border-radius: 99px;
-            font-size: 0.73rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-        .btn-stack-toggle:hover { border-color: var(--green); }
-
-        .stack-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-        .stack-container.collapsed .row.stack-item {
-            background: var(--green-solid);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-        }
-        .stack-container.collapsed .row.stack-depth-0 {
-            z-index: 4;
-            transform: scale(1);
-        }
-        .stack-container.collapsed .row.stack-depth-1 {
-            z-index: 3;
-            margin-top: -54px;
-            transform: scale(0.975);
-            opacity: 0.86;
-            pointer-events: none;
-        }
-        .stack-container.collapsed .row.stack-depth-2 {
-            z-index: 2;
-            margin-top: -58px;
-            transform: scale(0.95);
-            opacity: 0.65;
-            pointer-events: none;
-        }
-        .stack-container.collapsed .row.stack-depth-hidden {
-            display: none;
-        }
-        .stack-container.expanded {
-            gap: 8px;
-        }
+        .empty-victory-icon { font-size: 2.3rem; margin-bottom: 8px; }
+        .empty-victory-title { font-size: 1.15rem; font-weight: 900; margin-bottom: 6px; color: var(--text); }
+        .empty-victory-desc { font-size: 0.86rem; color: var(--muted); max-width: 440px; margin: 0 auto 16px auto; }
+        .empty-victory-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
         /* =========================================================
-           AVATARS WIKIMEDIA COMMONS + LISTE DES COMPTES
+           LISTE DES COMPTES & AVATARS WIKIMEDIA COMMONS (TÂCHE 3)
            ========================================================= */
-        .list-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--muted);
-            margin-bottom: 10px;
-            padding: 0 4px;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
+        .list-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 10px; padding: 0 4px; flex-wrap: wrap; gap: 6px; }
         .list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 40px; position: relative; }
         
         .row {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 13px 14px;
-            gap: 11px;
-            transition: all 0.22s ease;
+            position: relative; display: flex; flex-direction: column; background: var(--card);
+            border: 1px solid var(--border); border-radius: 14px; padding: 13px 14px; gap: 11px; transition: all 0.18s ease;
         }
         .row.done { background: var(--green-bg); border-color: var(--green-border); }
 
-        /* Petit rebond doux et indicateur persistant sur le dernier compte bloqué */
-        @keyframes gentleLastBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-2.5px); }
-        }
-
-        .row.last-action-row {
-            border-color: var(--green);
-            box-shadow: 0 6px 18px rgba(44, 110, 73, 0.15);
-            animation: gentleLastBounce 2.4s ease-in-out infinite;
-        }
-
-        .persistent-last-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            align-self: flex-start;
-            background: var(--green);
-            color: #ffffff;
-            font-size: 0.68rem;
-            font-weight: 800;
-            padding: 3px 9px;
-            border-radius: 99px;
-            letter-spacing: 0.01em;
-            margin-bottom: -3px;
-        }
-
-        .row-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .row-profile-left {
-            display: flex;
-            align-items: flex-start;
-            gap: 11px;
-            min-width: 0;
-            flex: 1;
-        }
-
-        .avatar-circle {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--sub-card);
-            border: 1.5px solid var(--border);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-        }
-
-        .avatar-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .row-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; width: 100%; }
 
         .row-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
-        .row-header { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+        .row-header { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+
+        /* Style Avatar Wikimedia Commons (Tâche 3) */
+        .account-avatar {
+            width: 34px; height: 34px; border-radius: 50%; object-fit: cover;
+            border: 1px solid var(--border); background: var(--sub-card); flex-shrink: 0;
+        }
+
         .name { font-weight: 800; font-size: 0.95rem; color: var(--text); letter-spacing: -0.01em; }
         .row.done .name { text-decoration: line-through; color: var(--muted); }
         .handle { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
         
-        .fact-note {
-            font-size: 0.72rem;
-            color: var(--muted);
-            opacity: 0.88;
-            font-style: italic;
-            line-height: 1.32;
-            margin-top: 2px;
-        }
+        .fact-note { font-size: 0.72rem; color: var(--muted); opacity: 0.88; font-style: italic; line-height: 1.32; margin-top: 2px; }
 
-        .tag { font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+        .tag { font-size: 0.66rem; font-weight: 800; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
         .tag-ed { background: #fde8e8; color: #9b1c1c; border: 1px solid #f8b4b4; }
         .tag-droite { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
         .tag-facho { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
@@ -991,201 +474,48 @@
         .tag-bollore { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
 
         .btn-flag {
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--muted);
-            opacity: 0.48;
-            padding: 4px 6px;
-            border-radius: 7px;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            line-height: 1;
-            flex-shrink: 0;
+            background: transparent; border: 1px solid transparent; color: var(--muted); opacity: 0.48; padding: 4px 6px;
+            border-radius: 7px; font-size: 0.82rem; cursor: pointer; transition: all 0.15s ease; line-height: 1; flex-shrink: 0;
         }
-        .btn-flag:hover {
-            opacity: 1;
-            border-color: var(--border);
-            background: var(--pill-bg);
-            color: var(--accent);
-        }
+        .btn-flag:hover { opacity: 1; border-color: var(--border); background: var(--pill-bg); color: var(--accent); }
 
-        .row-actions {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 8px;
-            width: 100%;
-        }
+        .row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; width: 100%; }
 
         .btn-check {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            background: var(--ghost-bg);
-            border: 1px solid var(--ghost-border);
-            color: var(--ghost-text);
-            opacity: 0.78;
-            padding: 8px 13px;
-            border-radius: 9px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.18s ease;
-            font-family: var(--font-sans);
+            display: inline-flex; align-items: center; justify-content: center; gap: 7px; background: var(--ghost-bg);
+            border: 1px solid var(--ghost-border); color: var(--ghost-text); opacity: 0.72; padding: 8px 13px; border-radius: 9px;
+            font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.18s ease; font-family: var(--font-sans);
         }
-        .btn-check:hover {
-            opacity: 1;
-            border-color: var(--border);
-            color: var(--text);
-        }
+        .btn-check:hover { opacity: 0.95; border-color: var(--border); color: var(--text); }
 
         .check-square {
-            width: 14px;
-            height: 14px;
-            border: 1.6px solid currentColor;
-            border-radius: 3.5px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.68rem;
-            line-height: 1;
+            width: 14px; height: 14px; border: 1.6px solid currentColor; border-radius: 3.5px; display: inline-flex;
+            align-items: center; justify-content: center; font-size: 0.68rem; line-height: 1; transition: all 0.15s ease;
         }
 
-        .row.done .btn-check {
-            background: var(--green);
-            border-color: var(--green);
-            color: #ffffff;
-            opacity: 1;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-        }
-        .row.done .check-square {
-            background: rgba(255, 255, 255, 0.22);
-            border-color: #ffffff;
-        }
+        .row.done .btn-check { background: var(--green); border-color: var(--green); color: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); }
+        .row.done .check-square { background: rgba(255, 255, 255, 0.22); border-color: #fff; }
 
         .btn-ig {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: var(--ig-grad);
-            color: #ffffff;
-            border: 1px solid var(--ig-border);
-            box-shadow: var(--ig-shadow);
-            text-decoration: none;
-            padding: 8px 14px;
-            border-radius: 9px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            white-space: nowrap;
-            transition: transform 0.15s ease, opacity 0.15s ease;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--ig-grad); color: #fff;
+            border: 1px solid var(--ig-border); box-shadow: var(--ig-shadow); text-decoration: none; padding: 8px 14px; border-radius: 9px;
+            font-size: 0.8rem; font-weight: 800; white-space: nowrap; transition: transform 0.15s ease, opacity 0.15s ease;
         }
-        .btn-ig svg {
-            width: 14px;
-            height: 14px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2.2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
+        .btn-ig svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
         .btn-ig:hover { transform: translateY(-1px); opacity: 0.94; }
-        .row.done .btn-ig {
-            background: var(--ghost-bg);
-            color: var(--muted);
-            border-color: var(--ghost-border);
-            box-shadow: none;
-            opacity: 0.75;
-        }
 
         /* =========================================================
-           VUE 2 : MODE SABOTAGE FANTÔME & IGNORANCE ACTIVE
+           INDICATEUR PERSISTANT AVEC DOUX REBOND (TÂCHE 5)
            ========================================================= */
-        .tactic-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 24px;
+        @keyframes softPulseBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
-        .tactic-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transition: all 0.2s ease;
+        .last-action-indicator {
+            display: inline-flex; align-items: center; gap: 5px; background: var(--green); color: #fff;
+            font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 99px;
+            box-shadow: 0 3px 10px rgba(44, 110, 73, 0.3); animation: softPulseBounce 2s ease-in-out infinite; margin-left: 6px; vertical-align: middle;
         }
-        .tactic-card.done {
-            background: var(--green-bg);
-            border-color: var(--green-border);
-        }
-        .tactic-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .tactic-title {
-            font-size: 1rem;
-            font-weight: 900;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .tactic-desc {
-            font-size: 0.85rem;
-            color: var(--text);
-            line-height: 1.5;
-        }
-        .tactic-why {
-            font-size: 0.78rem;
-            background: var(--sub-card);
-            border: 1px solid var(--sub-card-border);
-            padding: 8px 12px;
-            border-radius: 10px;
-            color: var(--muted);
-        }
-        .tactic-why strong { color: var(--green); }
-
-        .copy-keywords-box {
-            background: var(--sub-card);
-            border: 1px dashed var(--border);
-            padding: 10px 12px;
-            border-radius: 10px;
-            font-size: 0.78rem;
-            font-family: monospace;
-            color: var(--text);
-            margin-top: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        /* =========================================================
-           ÉTAT DE VICTOIRE
-           ========================================================= */
-        .empty-victory-card {
-            background: var(--card);
-            border: 1.5px solid var(--green);
-            border-radius: 16px;
-            padding: 26px 20px;
-            text-align: center;
-            margin-bottom: 24px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-        }
-        .empty-victory-icon { font-size: 2.3rem; margin-bottom: 8px; }
-        .empty-victory-title { font-size: 1.15rem; font-weight: 900; margin-bottom: 6px; color: var(--text); }
-        .empty-victory-desc { font-size: 0.86rem; color: var(--muted); max-width: 440px; margin: 0 auto 16px auto; }
-        .empty-victory-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
         [data-theme="dark"] .criteria-box { background: #1f1b1e; color: #d6caca; }
         [data-theme="dark"] .tag-ed { background: rgba(220, 38, 38, 0.22); color: #fca5a5; border-color: rgba(220, 38, 38, 0.45); }
@@ -1195,17 +525,8 @@
         [data-theme="dark"] .tag-bollore { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border-color: rgba(148, 163, 184, 0.3); }
 
         .bottom-scroll-veil {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 88px;
-            pointer-events: none;
-            z-index: 12;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 45%, black 100%);
-            mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 45%, black 100%);
+            position: fixed; bottom: 0; left: 0; width: 100vw; height: 88px; pointer-events: none; z-index: 12;
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
             background: linear-gradient(to bottom, rgba(var(--bg-rgb), 0) 0%, rgba(var(--bg-rgb), 0.72) 55%, rgba(var(--bg-rgb), 0.96) 100%);
             transition: opacity 0.3s ease;
         }
@@ -1220,41 +541,23 @@
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; }
         .form-control { width: 100%; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 0.88rem; font-family: var(--font-sans); }
-        .field-hint { font-size: 0.72rem; margin-top: 4px; font-weight: 600; color: var(--muted); }
-        .field-hint.valid { color: var(--green); }
         .criteria-box { background: var(--pill-bg); padding: 10px 12px; border-radius: 8px; font-size: 0.77rem; color: var(--pill-text); margin-bottom: 14px; line-height: 1.45; }
 
         .modal-actions-row { display: flex; gap: 10px; margin-top: 16px; }
-        .btn-modal-cancel { flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-weight: 700; font-size: 0.86rem; cursor: pointer; font-family: var(--font-sans); }
-        .btn-modal-danger { flex: 1; padding: 10px 14px; border-radius: 10px; border: none; background: var(--accent); color: #ffffff; font-weight: 800; font-size: 0.86rem; cursor: pointer; font-family: var(--font-sans); }
+        .btn-modal-cancel { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-weight: 700; cursor: pointer; }
+        .btn-modal-danger { flex: 1; padding: 10px; border-radius: 10px; border: none; background: var(--accent); color: #fff; font-weight: 800; cursor: pointer; }
 
-        footer {
-            text-align: center;
-            font-size: 0.78rem;
-            color: var(--muted);
-            padding: 28px 0 90px 0;
-            border-top: 1px solid var(--border);
-            line-height: 1.65;
-        }
+        footer { text-align: center; font-size: 0.78rem; color: var(--muted); padding: 28px 0 90px 0; border-top: 1px solid var(--border); line-height: 1.65; }
         footer a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
-        .ig-tag-link {
-            display: inline-block;
-            background: var(--pill-bg);
-            color: var(--text);
-            padding: 2px 9px;
-            border-radius: 6px;
-            font-weight: 800;
-            text-decoration: none;
-            border: 1px solid var(--border);
-        }
+        .ig-tag-link { display: inline-block; background: var(--pill-bg); color: var(--text); padding: 2px 9px; border-radius: 6px; font-weight: 800; text-decoration: none; border: 1px solid var(--border); }
         .ai-shame-note { margin-top: 10px; font-size: 0.72rem; opacity: 0.75; font-style: italic; }
 
         @media (max-width: 520px) {
-            .brand-blur-zone { margin-bottom: 85px; padding: 10px 16px; }
-            .top-actions-bar { border-radius: 18px; padding: 9px; gap: 6px; }
-            .hero-bg-banner { height: 340px; }
+            .brand-blur-zone { margin-bottom: 95px; }
+            .top-actions-bar { border-radius: 20px; padding: 10px; }
+            .hero-bg-banner { height: 350px; }
             .row-actions { width: 100%; justify-content: space-between; }
-            .btn-check, .btn-ig { flex: 1; padding: 10px 12px; font-size: 0.8rem; }
+            .btn-check, .btn-ig { flex: 1; padding: 10px 12px; font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -1263,16 +566,13 @@
     <div class="hero-bg-banner" aria-hidden="true"></div>
 
     <header class="top-header">
-        <div class="brand-blur-zone" onclick="switchMode('home')" title="Retourner au portail d'accueil">
+        <div class="brand-blur-zone">
             <div class="brand-title">ON BLOQUE L'EXTRÊME DROITE</div>
         </div>
         <div class="top-actions-bar">
-            <button type="button" class="btn-theme-split" onclick="cycleTheme()" id="themeBtn" title="Changer l'apparence du site">
+            <button type="button" class="btn-theme-split" onclick="cycleTheme()" id="themeBtn" title="Changer l'apparence">
                 <span class="theme-icon-part" id="themeIconPart">🌿</span>
                 <span class="theme-label-part" id="themeLabelPart">Passer au thème sombre</span>
-            </button>
-            <button type="button" class="btn-top mode-switch" onclick="switchMode('home')" id="modeSwitchBtn" style="display:none;">
-                🎯 Changer de mode ⇄
             </button>
             <button type="button" class="btn-top" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
             <button type="button" class="btn-top outline" onclick="openModal('siteFeedbackModal')">💡 Suggestion site</button>
@@ -1280,212 +580,106 @@
         </div>
     </header>
 
-    <!-- =========================================================
-         VUE 0 : PORTAIL STRATÉGIQUE D'ACCUEIL (LES 2 MODES)
-         ========================================================= -->
-    <main id="viewHome" class="view-section active">
-        <section class="hero">
-            <div class="kicker">Portail d'autodéfense algorithmique</div>
-            <h1>Coupons leur oxygène.</h1>
-            <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="18" cy="5" r="3"></circle>
-                    <circle cx="6" cy="12" r="3"></circle>
-                    <circle cx="18" cy="19" r="3"></circle>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                </svg>
-                <span class="shareBtnTextLabel">Partager l'outil</span>
-            </button>
-            <p class="lead">
-                Si l'extrême droite arrive au pouvoir, nos conquêtes sociales, l'écologie, les minorités et les contre-pouvoirs seront directement attaqués. Sur Instagram et les réseaux, leur arme principale est <strong>l'algorithme</strong> : il ne fait aucune différence entre un like de soutien et un commentaire d'indignation. Choisis ta philosophie d'action (ou combine les deux) :
-            </p>
-        </section>
-
-        <div class="mode-cards-grid">
-            <!-- CARTE MODE 1 : LA BLOCKLIST -->
-            <article class="mode-card">
-                <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°1</span>
-                    <span class="mode-status-pill" id="homeBlocklistStatus">0 / 138 bloqués</span>
-                </div>
-                <h2>🛡️ Le Barrage Radical (La Blocklist)</h2>
-                <div class="mode-quote">
-                    « Je coupe les ponts, j'assainis mon fil et j'envoie un signal de rejet massif à l'algorithme. »
-                </div>
-                <ul class="mode-points">
-                    <li><strong>Pourquoi le choisir :</strong> Inspiré de la campagne brésilienne (octobre 2026) et de #BlockOut. Bloquer un compte l'empêche d'être recommandé à ton cercle d'amis proches et nettoie durablement ton espace mental.</li>
-                    <li><strong>La limite à connaître :</strong> Aller chercher 138 profils un par un demande quelques minutes, et tu ne verras plus leurs publications pour les signaler.</li>
-                </ul>
-                <button type="button" class="btn-mode-cta" onclick="switchMode('blocklist')">
-                    <span>Accéder à la Blocklist interactive (138 comptes)</span>
-                    <span>→</span>
-                </button>
-            </article>
-
-            <!-- CARTE MODE 2 : LE SABOTAGE FANTÔME -->
-            <article class="mode-card">
-                <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°2</span>
-                    <span class="mode-status-pill" id="homeSabotageStatus">0 / 5 règles activées</span>
-                </div>
-                <h2>👻 Le Sabotage Fantôme (Ignorance & Poison d'Algo)</h2>
-                <div class="mode-quote">
-                    « Je ne vais pas sur leurs profils, mais dès qu'ils apparaissent sur mon écran, je détruis leurs statistiques de rétention. »
-                </div>
-                <ul class="mode-points">
-                    <li><strong>Pourquoi le choisir :</strong> Certains spécialistes soulignent que visiter un profil génère du trafic initial. L'arme la plus redoutée par l'algorithme d'Instagram est la <strong>fermeture brutale de l'application</strong> (Session Termination) et le zéro interaction absolu.</li>
-                    <li><strong>Comment ça marche :</strong> Un protocole en 5 réflexes quotidiens pour faire chuter le score de recommandation de l'extrême droite sans jamais leur donner une seule vue de profil.</li>
-                </ul>
-                <button type="button" class="btn-mode-cta secondary" onclick="switchMode('sabotage')">
-                    <span>Ouvrir le protocole Sabotage & Ignorance</span>
-                    <span>→</span>
-                </button>
-            </article>
+    <section class="hero">
+        <h1>La blocklist.</h1>
+        <div class="kicker">Action collective & hygiène numérique</div>
+        <button type="button" class="btn-share-subtle" onclick="shareSite()" id="shareBtn" title="Partager">
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            <span id="shareBtnText">Partager</span>
+        </button>
+        <p class="lead">L'algorithme ne fait pas la différence entre un like et un clash : tout leur donne de la visibilité. Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant.</p>
+        <div class="quick-steps">
+            <span><strong>1.</strong> Clique sur <span class="ig-mini-preview"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram ↗</span></span>
+            <span class="step-sep">→</span>
+            <span><strong>2.</strong> Menu <strong>⋯</strong></span>
+            <span class="step-sep">→</span>
+            <span><strong>3.</strong> <strong>Bloquer</strong> 🚫</span>
         </div>
+    </section>
 
-        <div class="trust-box">
-            🔒 <strong>Transparence totale :</strong> Ce site est 100 % open-source. Aucun serveur centralisé, aucun traqueur et aucune donnée collectée. Tout s'exécute directement sur votre appareil (localStorage).
+    <div class="explain-wrapper">
+        <button type="button" class="btn-explain" onclick="toggleExplain()">
+            <span>💡 Pourquoi bloquer massivement ces comptes ?</span>
+            <span class="explain-arrow" id="explainArrow">▼</span>
+        </button>
+        <div class="explain-content" id="explainContent">
+            <p>Cette stratégie d'autodéfense numérique nous vient directement du <strong>Brésil</strong> et du mouvement <strong>#BlockOut</strong> :</p>
+            <ul>
+                <li><strong>Le piège de l'algorithme :</strong> Commenter pour contredire est interprété par Meta comme de l'engagement positif.</li>
+                <li><strong>L'impact mécanique :</strong> Un pic coordonné de milliers de blocages fait chuter drastiquement le score de visibilité global du profil.</li>
+            </ul>
         </div>
-    </main>
+    </div>
 
-    <!-- =========================================================
-         VUE 1 : LA BLOCKLIST INTERACTIVE (MODE 1)
-         ========================================================= -->
-    <main id="viewBlocklist" class="view-section">
-        <section class="hero">
-            <h1>La blocklist.</h1>
-            <div class="kicker">Mode 1 • Barrage radical & hygiène numérique</div>
-            <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="18" cy="5" r="3"></circle>
-                    <circle cx="6" cy="12" r="3"></circle>
-                    <circle cx="18" cy="19" r="3"></circle>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                </svg>
-                <span class="shareBtnTextLabel">Partager</span>
-            </button>
-            <p class="lead">Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Les comptes bloqués s'empilent en haut et libèrent ta liste au fur et à mesure.</p>
-            <div class="quick-steps" aria-label="Mode d'emploi rapide">
-                <span><strong>1.</strong> Clique sur <span class="ig-mini-preview"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram ↗</span></span>
-                <span class="step-sep">→</span>
-                <span><strong>2.</strong> Menu <strong>⋯</strong> en haut à droite</span>
-                <span class="step-sep">→</span>
-                <span><strong>3.</strong> <strong>Bloquer</strong> 🚫</span>
+    <div class="trust-box">
+        🔒 <strong>Transparence totale :</strong> 100 % open-source, sans serveur, progression stockée localement (localStorage).
+    </div>
+
+    <!-- TABLEAU DE BORD STICKY AVEC LA PILE HAUTE EN CASCADE (TÂCHE 6) -->
+    <div class="sticky-dashboard">
+        <div class="dash-card">
+            <div class="dash-autosave-note">
+                ⏱️ Progression sauvegardée automatiquement.
             </div>
-        </section>
 
-        <div class="explain-wrapper">
-            <button type="button" class="btn-explain" onclick="toggleExplain()">
-                <span>💡 Pourquoi bloquer massivement ces comptes ?</span>
-                <span class="explain-arrow" id="explainArrow">▼</span>
-            </button>
-            <div class="explain-content" id="explainContent">
-                <p>Cette stratégie d'autodéfense numérique nous vient directement du <strong>Brésil</strong> (lors de la présidentielle d'octobre 2026 opposant Lula à Flávio Bolsonaro) et du mouvement <strong>#BlockOut</strong> :</p>
-                <ul>
-                    <li><strong>Le piège de l'algorithme :</strong> Sur Instagram, commenter sous un post d'extrême droite pour le contredire, s'indigner ou clasher est interprété par l'algorithme de Meta comme un fort taux d'engagement. Résultat : la plateforme propulse encore plus leurs vidéos auprès du grand public et des indécis.</li>
-                    <li><strong>L'impact mécanique du blocage :</strong> Le blocage est le signal négatif ultime pour l'algorithme. Bloquer un compte coupe non seulement toute recommandation vers ton réseau d'amis proches, mais un pic coordonné de milliers de blocages fait chuter drastiquement le score de visibilité global du profil.</li>
-                    <li><strong>Complémentarité :</strong> Tu peux aussi combiner ce blocage avec le <em>Mode 2 (Sabotage Fantôme)</em> accessible via le bouton « Changer de mode » en haut de page.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="trust-box">
-            🔒 <strong>Transparence totale :</strong> Ce site est 100 % open-source. Aucun serveur centralisé, aucun traqueur et aucune donnée collectée. Tout reste en local sur ton appareil.
-        </div>
-
-        <!-- TABLEAU DE BORD STICKY (SANS LES FILTRES) -->
-        <div class="sticky-dashboard">
-            <div class="dash-card">
-                <div class="dash-autosave-note">
-                    ⏱️ Fais à ton rythme. La progression est sauvegardée automatiquement.
+            <!-- Pile visible des comptes bloqués en cascade -->
+            <div class="blocked-stack-container" id="blockedStackContainer">
+                <div class="blocked-stack-header" onclick="toggleBlockedStack()">
+                    <span>📦 Comptes bloqués : <strong id="stackedCount">0</strong></span>
+                    <span id="stackToggleText">▼ Dérouler la pile</span>
                 </div>
-                <div class="dash-top">
-                    <div class="milestone">
-                        <span class="milestone-icon" id="milestoneIcon">🧭</span>
-                        <div>
-                            <div class="milestone-label">Grade actuel</div>
-                            <div class="milestone-title" id="milestoneText">Prêt·e à nettoyer son fil</div>
-                        </div>
-                    </div>
-                    <div class="score-box">
-                        <span class="score-num" id="scoreNum">0 / 0</span>
-                        <span class="score-pct" id="scorePct">0 % terminé</span>
+                <div class="stack-list" id="stackList"></div>
+            </div>
+
+            <div class="dash-top">
+                <div class="milestone">
+                    <span class="milestone-icon" id="milestoneIcon">🧭</span>
+                    <div>
+                        <div class="milestone-label">Grade actuel</div>
+                        <div class="milestone-title" id="milestoneText">Prêt·e à nettoyer son fil</div>
                     </div>
                 </div>
-                <div class="progress-section">
-                    <div class="progress-track">
-                        <div class="progress-fill" id="progressBar">
-                            <span class="progress-runner" id="progressRunner" title="En route !">🏃</span>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-reset-prog" onclick="openResetModal(event)" title="Remettre le compteur à zéro">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
-                            <path d="M3 3v5h5"></path>
-                        </svg>
-                        <span>Réinitialiser la progression</span>
-                    </button>
+                <div class="score-box">
+                    <span class="score-num" id="scoreNum">0 / 0</span>
+                    <span class="score-pct" id="scorePct">0 % terminé</span>
                 </div>
             </div>
-        </div>
-
-        <!-- RECHERCHE + FILTRES DE CATÉGORIES PLACÉS JUSTE EN DESSOUS -->
-        <div class="search-and-filters">
-            <div class="search-bar">
-                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un nom, @pseudo, fait marquant ou étiquette..." oninput="render()">
-            </div>
-            <div class="filter-row" id="filterRow">
-                <button type="button" class="pill active" onclick="setFilter('all', this)">Tout voir</button>
-                <button type="button" class="pill" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
-                <button type="button" class="pill" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
-                <button type="button" class="pill" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
-                <button type="button" class="pill" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
-                <button type="button" class="pill" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
-            </div>
-        </div>
-
-        <!-- PILE EN CASCADE DES COMPTES BLOQUÉS (EN HAUT) -->
-        <section class="blocked-stack-wrapper" id="blockedStackWrapper">
-            <div class="stack-header-bar">
-                <span class="stack-title" id="stackTitleLabel">✅ Comptes bloqués (0)</span>
-                <button type="button" class="btn-stack-toggle" id="stackToggleBtn" onclick="toggleStackExpand()">
-                    Tout dérouler ▼
+            
+            <div class="progress-section">
+                <div class="progress-track">
+                    <!-- Amorce de la barre à 0% fixée à 1.5% (Tâche 1) -->
+                    <div class="progress-fill" id="progressBar">
+                        <span class="progress-runner" id="progressRunner">🏃</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-reset-prog" onclick="openResetModal(event)">
+                    <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path></svg>
+                    <span>Réinitialiser la progression</span>
                 </button>
             </div>
-            <div class="stack-container collapsed" id="blockedStackList"></div>
-        </section>
-
-        <!-- LISTE PRINCIPALE : UNIQUEMENT LES COMPTES RESTANTS À TRAITER -->
-        <div class="list-meta">
-            <span id="visibleCount">0 comptes restants à bloquer</span>
-            <span>🏳️ Signaler une erreur sur une fiche</span>
         </div>
+    </div>
 
-        <div class="list" id="accountList"></div>
-    </main>
-
-    <!-- =========================================================
-         VUE 2 : LE SABOTAGE FANTÔME / IGNORANCE ACTIVE (MODE 2)
-         ========================================================= -->
-    <main id="viewSabotage" class="view-section">
-        <section class="hero">
-            <div class="kicker">Mode 2 • Guérilla algorithmique sans visite de profil</div>
-            <h1>Le Sabotage Fantôme.</h1>
-            <p class="lead">
-                Tu ne veux pas visiter leurs profils ni leur donner un seul clic ? Voici comment retourner les règles d'Instagram contre l'extrême droite. Coche les 5 réflexes ci-dessous pour activer ton protocole d'asphyxie algorithmique :
-            </p>
-        </section>
-
-        <div class="tactic-list" id="tacticListContainer"></div>
-
-        <div style="text-align: center; margin-bottom: 36px;">
-            <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
-                ← Retourner au portail des modes d'action
-            </button>
+    <!-- RECHERCHE & FILTRES REPOSITIONNÉS SOUS LA RECHERCHE (TÂCHE 2) -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un nom, @pseudo, fait marquant..." oninput="render()">
+        <div class="filter-row" id="filterRow">
+            <button type="button" class="pill active" onclick="setFilter('all', this)">Tout voir</button>
+            <button type="button" class="pill" onclick="setFilter('todo', this)">⏳ À faire</button>
+            <button type="button" class="pill" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
+            <button type="button" class="pill" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
+            <button type="button" class="pill" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
+            <button type="button" class="pill" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
+            <button type="button" class="pill" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
         </div>
-    </main>
+    </div>
+
+    <div class="list-meta">
+        <span id="visibleCount">0 comptes affichés</span>
+        <span>🏳️ Signaler une erreur</span>
+    </div>
+
+    <div class="list" id="accountList"></div>
 
     <div class="bottom-scroll-veil" id="bottomScrollVeil" aria-hidden="true"></div>
 
@@ -1496,103 +690,62 @@
                 <span class="modal-title">+ Il manque quelqu'un ?</span>
                 <button type="button" class="modal-close" onclick="closeModal('suggestModal')">×</button>
             </div>
-            <div class="criteria-box">
-                <strong>Critères d'ajout :</strong> Personnalité politique, éditorialiste, influenceur ou média public (droite, extrême droite, relais réactionnaire). Pas de compte privé ni de particulier.
-            </div>
-            <div class="form-group">
-                <label>Nom de la personne ou du média</label>
-                <input type="text" id="sugName" class="form-control" placeholder="Ex: Laurent Jacobelli">
-            </div>
-            <div class="form-group">
-                <label>Pseudo ou lien Instagram</label>
-                <input type="text" id="sugHandle" class="form-control" placeholder="Ex: @laurentjacobelli ou lien instagram.com/..." oninput="validateIgInput(this)">
-                <div class="field-hint" id="sugHandleHint">Colle un @pseudo ou un lien Instagram complet, il sera nettoyé automatiquement.</div>
-            </div>
-            <div class="form-group">
-                <label>Fait marquant en quelques mots (optionnel)</label>
-                <input type="text" id="sugFact" class="form-control" placeholder="Ex: Condamnation, propos, affaire...">
-            </div>
-            <div class="form-group">
-                <label>Étiquette politique</label>
+            <div class="criteria-box">Personnalité politique, éditorialiste, influenceur ou média public.</div>
+            <div class="form-group"><label>Nom</label><input type="text" id="sugName" class="form-control"></div>
+            <div class="form-group"><label>Pseudo Instagram</label><input type="text" id="sugHandle" class="form-control" oninput="validateIgInput(this)"><div class="field-hint" id="sugHandleHint">Colle un @pseudo ou lien.</div></div>
+            <div class="form-group"><label>Fait marquant</label><input type="text" id="sugFact" class="form-control"></div>
+            <div class="form-group"><label>Étiquette</label>
                 <select id="sugTag" class="form-control">
-                    <option value="Extrême droite — RN / Reconquête / Alliés">Extrême droite (RN, Reconquête, Alliés...)</option>
-                    <option value="Droite / Macronie — Droite réac / Libérale">Droite / Macronie (LR, ministres, droite dure...)</option>
-                    <option value="Fachosphère — Influenceur / Militant">Fachosphère (Influenceur, militant, collectif...)</option>
-                    <option value="Médias & Éditos — Chroniqueur / Média réac">Médias & Éditos (Chroniqueur, média réac...)</option>
-                    <option value="Empire Bolloré & Co — Groupe / Édition">Empire Bolloré & Co (Chaîne, magazine, édition...)</option>
+                    <option value="Extrême droite — RN / Reconquête / Alliés">Extrême droite</option>
+                    <option value="Droite / Macronie — Droite réac / Libérale">Droite / Macronie</option>
+                    <option value="Fachosphère — Influenceur / Militant">Fachosphère</option>
+                    <option value="Médias & Éditos — Chroniqueur / Média réac">Médias & Éditos</option>
+                    <option value="Empire Bolloré & Co — Groupe / Édition">Empire Bolloré & Co</option>
                 </select>
             </div>
-            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSuggestion()">Envoyer la proposition sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding:11px;" onclick="submitSuggestion()">Envoyer sur GitHub ↗</button>
         </div>
     </div>
 
     <div class="modal-backdrop" id="siteFeedbackModal">
         <div class="modal">
-            <div class="modal-header">
-                <span class="modal-title">💡 Suggestion pour le site</span>
-                <button type="button" class="modal-close" onclick="closeModal('siteFeedbackModal')">×</button>
-            </div>
-            <div class="criteria-box">
-                Une idée d'amélioration, un bug d'affichage ou une suggestion de design ? Envoie ton message directement via GitHub.
-            </div>
-            <div class="form-group">
-                <label>Sujet de ta suggestion</label>
-                <input type="text" id="fbTitle" class="form-control" placeholder="Ex: Idée pour les filtres / Bug mobile...">
-            </div>
-            <div class="form-group">
-                <label>Ton message ou ta proposition</label>
-                <textarea id="fbBody" class="form-control" rows="4" placeholder="Décris ton idée d'amélioration ici..."></textarea>
-            </div>
-            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSiteFeedback()">Envoyer sur GitHub ↗</button>
+            <div class="modal-header"><span class="modal-title">💡 Suggestion site</span><button type="button" class="modal-close" onclick="closeModal('siteFeedbackModal')">×</button></div>
+            <div class="form-group"><label>Sujet</label><input type="text" id="fbTitle" class="form-control"></div>
+            <div class="form-group"><label>Message</label><textarea id="fbBody" class="form-control" rows="4"></textarea></div>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding:11px;" onclick="submitSiteFeedback()">Envoyer sur GitHub ↗</button>
         </div>
     </div>
 
     <div class="modal-backdrop" id="reportModal">
         <div class="modal">
-            <div class="modal-header">
-                <span class="modal-title">🏳️ Signaler une erreur</span>
-                <button type="button" class="modal-close" onclick="closeModal('reportModal')">×</button>
-            </div>
-            <div class="criteria-box" id="reportTargetInfo">
-                Compte concerné : ...
-            </div>
-            <div class="form-group">
-                <label>Nature du problème</label>
+            <div class="modal-header"><span class="modal-title">🏳️ Signaler une erreur</span><button type="button" class="modal-close" onclick="closeModal('reportModal')">×</button></div>
+            <div class="criteria-box" id="reportTargetInfo">Compte : ...</div>
+            <div class="form-group"><label>Problème</label>
                 <select id="repReason" class="form-control">
-                    <option value="Lien / @pseudo Instagram cassé ou modifié">Lien / @pseudo Instagram cassé ou modifié</option>
-                    <option value="Compte déjà supprimé ou banni">Compte déjà supprimé ou banni</option>
-                    <option value="Erreur sur l'étiquette ou le fait marquant">Erreur sur l'étiquette ou le fait marquant</option>
-                    <option value="Ce compte ne devrait pas figurer dans la liste">Ce compte ne devrait pas figurer dans la liste</option>
+                    <option value="Lien Instagram cassé">Lien cassé</option>
+                    <option value="Compte supprimé">Compte supprimé</option>
+                    <option value="Erreur étiquette">Erreur étiquette</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Précisions (nouveau pseudo, source...)</label>
-                <input type="text" id="repDetails" class="form-control" placeholder="Ex: Son nouveau pseudo est @...">
-            </div>
-            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitReport()">Transmettre le signalement sur GitHub ↗</button>
+            <div class="form-group"><label>Précisions</label><input type="text" id="repDetails" class="form-control"></div>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding:11px;" onclick="submitReport()">Transmettre ↗</button>
         </div>
     </div>
 
     <div class="modal-backdrop" id="resetConfirmModal">
         <div class="modal">
-            <div class="modal-header">
-                <span class="modal-title">🔄 Réinitialiser la progression ?</span>
-                <button type="button" class="modal-close" onclick="closeResetModal(event)">×</button>
-            </div>
-            <div class="criteria-box" style="margin-bottom: 6px;">
-                Veux-tu vraiment remettre ton compteur à zéro ? Tous les comptes cochés sur cet appareil repasseront dans la liste « À faire ».
-            </div>
+            <div class="modal-header"><span class="modal-title">🔄 Réinitialiser ?</span><button type="button" class="modal-close" onclick="closeResetModal(event)">×</button></div>
+            <div class="criteria-box">Remettre tout à zéro ?</div>
             <div class="modal-actions-row">
                 <button type="button" class="btn-modal-cancel" onclick="closeResetModal(event)">Annuler</button>
-                <button type="button" class="btn-modal-danger" onclick="confirmResetAll(event)">Oui, tout réinitialiser</button>
+                <button type="button" class="btn-modal-danger" onclick="confirmResetAll(event)">Oui, réinitialiser</button>
             </div>
         </div>
     </div>
 
     <footer>
-        🛡️ <strong>Transparence & Confidentialité :</strong> Ce projet est 100 % open-source. Aucun serveur centralisé n'est utilisé : tout s'exécute directement sur votre appareil et votre progression est stockée uniquement en local (localStorage). Aucune donnée personnelle n'est collectée.<br><br>
-        Inspiré de la campagne brésilienne et de <em>Mise au Poing</em> • <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">Inspecter le code source sur GitHub</a><br><br>
-        Créé par <a class="ig-tag-link" id="creatorIgLink" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@henrilubszynski</a>, votre gaucho dévoué et en colère.
+        🛡️ Projet 100% open-source, local et sans traqueur.<br><br>
+        Créé par <a class="ig-tag-link" id="creatorIgLink" href="https://www.instagram.com/henrilubszynski/" target="_blank">@henrilubszynski</a>.
         <div class="ai-shame-note">🤖 Honteusement conçu à l'aide de l'IA.</div>
     </footer>
 
@@ -1601,64 +754,46 @@
         document.getElementById("creatorIgLink").href = `https://www.instagram.com/${CREATOR_IG_HANDLE}/`;
         document.getElementById("creatorIgLink").innerText = `@${CREATOR_IG_HANDLE}`;
 
-        const accountEmojis = {
-            "marine_lepen": "👱🏻‍♀️", "jordanbardella": "🤵🏻‍♂️", "ericzemmour_": "👨🏻‍🦲", "marionmarechal_": "👱🏻‍♀️",
-            "eciotti": "👨🏻‍🦲", "sarahknafo1": "👩🏻", "sebastien_chenu": "🤵🏻‍♂️", "tanguyjeanphilippe": "🧑🏻‍💼",
-            "louis_aliot": "👨🏻", "laure_lavalette": "👩🏻", "edwige_diaz": "👩🏻", "julien_odoul": "👱🏻‍♂️",
-            "laurentjacobelli": "👨🏻", "robert.menard_off": "👨🏻‍🦳", "gilbert_collard": "👨🏻‍🦳", "phdevilliers": "👴🏻",
-            "messiha.jean": "👨🏽‍💼", "pierre_gentillet": "🧔🏻‍♂️", "f_philippot": "🤵🏻‍♂️", "nicolasbay": "👨🏻",
-            "tiffany_joncour": "👩🏻", "marcdefleurian": "👨🏻", "antoinegolliot": "👨🏻", "bernhardt_th": "👱🏻‍♂️",
-            "rassemblementnational_fr": "🔥", "reconquete_officiel": "📢", "realdonaldtrump": "👱‍♂️", "giorgiameloni": "👱🏻‍♀️",
-            "javiermilei": "🦁", "jairmessiasbolsonaro": "👨🏻‍🦳", "flaviobolsonaro": "🤵🏻‍♂️", "orbanviktor": "👨🏻‍🦳",
-            "b.netanyahu": "👨🏻‍🦳", "buducnostsrbijeav": "👓", "bruno_retailleau": "👓", "gerald_darmanin": "🤵🏻‍♂️",
-            "emmanuelmacron": "🤵🏻‍♂️", "nicolassarkozy": "👨🏻", "sarkozy.louis": "👱🏻‍♂️", "nadinemorano": "👱🏻‍♀️",
-            "davidlisnard": "👨🏻", "edouardphilippelh": "🧔🏻‍♂️", "auroreberge.fr": "👱🏻‍♀️", "yael.braunpivet": "👩🏻",
-            "manuelvalls": "👨🏻‍🦳", "meyerhabib": "👨🏻‍🦳", "shannonseban": "👩🏻", "fredericlefebvre_off": "👨🏻‍🦳",
-            "lesrepublicains": "🏛️", "damienrieu7": "🧔🏻‍♂️", "thaisdescufon": "👱🏻‍♀️", "alice_cordier_": "👱🏻‍♀️",
-            "collectif.nemesis": "🪧", "erik_tegner": "👦🏻", "jordanflorentin_": "🎤", "ugogiljimenez": "🧔🏻‍♂️",
-            "julien.rochedy": "🧔🏻‍♂️", "thefrenchitch": "🕶️", "bassem.6920": "🧔🏽‍♂️", "psyhodelik_off": "🎧",
-            "sardocheyeslife": "🎮", "krocblancoff": "🧢", "milafique": "👩🏻‍🎤", "louisemontangon": "👱🏻‍♀️",
-            "tanguydavidofficiel_": "👨🏿‍💼", "liamdibenedettooff": "👩🏻", "cocardeetudiante": "🚩", "institutiliade": "🏛️",
-            "fondation_polemia": "📢", "lafuriaofficiel": "📕", "cyrilhanouna": "🧔🏽‍♂️", "pascalpraud": "👓",
-            "mbockcote": "👓", "charlotte_d.ornellas": "👱🏻‍♀️", "geoffroy_lejeune": "👱🏻‍♂️", "somabrouk": "👩🏼",
-            "christine_kellylea": "👩🏾", "nofaithnolaw": "👓", "gwgoldnadel": "👨🏻‍🦳", "eugeniebastieofficiel": "👩🏻",
-            "charlesconsigny": "👱🏻‍♂️", "celine.pina": "👩🏻", "rachel_khan88": "👩🏽", "carolinefourest": "👱🏻‍♀️",
-            "bernardhenrilevy": "👨🏻‍🦳", "benjaminduhamel": "🧑🏻‍💼", "ruthelkrief": "👩🏻", "oliviertruchot": "👨🏻‍🦲",
-            "paulamaroff": "👨🏻‍🦳", "frontieresmedia": "📰", "valeurs_actuelles": "🗞️", "fdesouche": "💻",
-            "bastionmediafr": "🎥", "bvoltaire": "💻", "causeur.fr": "🗞️", "breizhinfo": "💻",
-            "tvlofficiel": "📺", "radiocourtoisie": "📻", "quotidien_present": "🗞️", "lincorrect_officiel": "📕",
-            "revue_elements": "📘", "lesalonbeige": "⛪", "cerfiafr": "🚨", "alertesinfos": "🚨",
-            "bfmtv": "📺", "lciofficiel": "📺", "leparisien": "🗞️", "cnews": "📺",
-            "europe1": "📻", "le_jdd": "🗞️", "jdnews_fr": "🗞️", "tbt9w9": "📺",
-            "canalplus": "📺", "cstarlachaine": "📺", "europe2": "📻", "rfmfrance": "📻",
-            "parismatch": "📸", "magazinecapital": "📈", "voici": "🗞️", "femme_actuelle": "🗞️",
-            "teleloisirs": "📺", "geo_france": "🌍", "caminteresse": "📘", "cuisineactuelle": "🍽️",
-            "primamagazine": "🗞️", "tele2semaines": "📺", "telez_mag": "📺", "bazaarfrance": "👠",
-            "hachettefr": "📚", "editionsfayard": "📚", "editionsgrasset": "📚", "editionsstock": "📚",
-            "calmann.levy": "📚", "editionslarousse": "📕", "lelivredepoche": "📖", "armand_colin": "📚",
-            "universalmusicgroup": "🎵", "universalmusicfrance": "🎵", "studiocanal.fr": "🎬", "havas": "🏢",
-            "havasparis": "🏢"
-        };
-
-        // Correspondance exacte vers les pages Wikipédia pour récupérer les miniatures Wikimedia Commons
-        const wikiTitleOverrides = {
-            "Frontières (ex-Livre Noir)": "Frontières (média)",
-            "LCI (TF1 Info)": "La Chaîne Info",
-            "TBT9 / TPMP": "Touche pas à mon poste !",
-            "Le JDD": "Le Journal du dimanche",
-            "La Cocarde Étudiante": "La Cocarde étudiante",
-            "Rassemblement National": "Rassemblement national",
-            "Reconquête": "Reconquête (parti politique)",
-            "Présent": "Présent (quotidien)",
-            "Revue Éléments": "Éléments (revue)",
-            "Capital": "Capital (magazine)",
-            "Voici": "Voici (magazine)",
-            "GEO": "Géo (magazine)",
-            "Prima": "Prima (magazine)",
-            "Stock": "Éditions Stock",
-            "Grasset": "Éditions Grasset",
-            "Larousse": "Éditions Larousse",
-            "Papacito": "Papacito"
+        /* Table des images Wikimedia Commons pour chaque profil (Tâche 3) */
+        const accountImages = {
+            "marine_lepen": "Marine_Le_Pen_2023_(cropped).jpg",
+            "jordanbardella": "Jordan_Bardella_in_2023.jpg",
+            "ericzemmour_": "Éric_Zemmour_in_January_2022.jpg",
+            "marionmarechal_": "Marion_Maréchal_au_PE_en_2024_(cropped).jpg",
+            "eciotti": "Éric_Ciotti_in_2022.jpg",
+            "sarahknafo1": "Sarah_Knafo_au_ Parlement_européen_en_2024_(cropped).jpg",
+            "sebastien_chenu": "Sébastien_Chenu_2022.jpg",
+            "tanguyjeanphilippe": "Jean-Philippe_Tanguy_2022.jpg",
+            "louis_aliot": "Louis_Aliot_2015.jpg",
+            "laure_lavalette": "Laure_Lavalette_2022.jpg",
+            "edwige_diaz": "Edwige_Diaz_2022.jpg",
+            "julien_odoul": "Julien_Odoul_2022.jpg",
+            "laurentjacobelli": "Laurent_Jacobelli_2022.jpg",
+            "robert.menard_off": "Robert_Ménard_2014.jpg",
+            "gilbert_collard": "Gilbert_Collard_2017.jpg",
+            "phdevilliers": "Philippe_de_Villiers_2014.jpg",
+            "messiha.jean": "Jean_Messiha_2019.jpg",
+            "bruno_retailleau": "Bruno_Retailleau_2017.jpg",
+            "gerald_darmanin": "Gérald_Darmanin_2023.jpg",
+            "emmanuelmacron": "Emmanuel_Macron_2021_(cropped).jpg",
+            "nicolassarkozy": "Nicolas_Sarkozy_2012.jpg",
+            "nadinemorano": "Nadine_Morano_2014.jpg",
+            "davidlisnard": "David_Lisnard_2022.jpg",
+            "edouardphilippelh": "Édouard_Philippe_2023.jpg",
+            "auroreberge.fr": "Aurore_Bergé_2022.jpg",
+            "yael.braunpivet": "Yaël_Braun-Pivet_2022.jpg",
+            "manuelvalls": "Manuel_Valls_2017.jpg",
+            "cyrilhanouna": "Cyril_Hanouna_2015.jpg",
+            "pascalpraud": "Pascal_Praud_2018.jpg",
+            "mbockcote": "Mathieu_Bock-Côté_2022.jpg",
+            "charlotte_d.ornellas": "Charlotte_d'Ornellas_2021.jpg",
+            "geoffroy_lejeune": "Geoffroy_Lejeune_2022.jpg",
+            "somabrouk": "Sonia_Mabrouk_2016.jpg",
+            "christine_kellylea": "Christine_Kelly_2018.jpg",
+            "nofaithnolaw": "Éric_Naulleau_2011.jpg",
+            "eugeniebastieofficiel": "Eugénie_Bastié_2016.jpg",
+            "carolinefourest": "Caroline_Fourest_2011.jpg",
+            "bernardhenrilevy": "Bernard-Henri_Lévy_2011.jpg"
         };
 
         const accounts = [
@@ -1809,60 +944,10 @@
             { name: "Havas Paris", handle: "havasparis", cat: "Empire Bolloré & Co", label: "Communication (Bolloré)", style: "tag-bollore", fact: "Agence de communication stratégique au cœur de l'empire Bolloré." }
         ];
 
-        // Liste des 5 règles tactiques du Mode 2 (Sabotage Fantôme)
-        const sabotageTactics = [
-            {
-                id: "tactic_session_kill",
-                icon: "🚪",
-                title: "1. Le « Tueur de Session » (Fermer l'application)",
-                desc: "Dès qu'un Reel ou un post de l'extrême droite ou de CNews apparaît sur ton fil : ne regarde pas plus d'une seconde, ne lis pas les commentaires, et ferme brutalement l'application Instagram pendant au moins 1 minute.",
-                why: "L'objectif n°1 d'Instagram est de te garder sur l'appli pour te vendre des pubs. Une vidéo qui provoque la fermeture de l'application (Session Termination) reçoit la pire pénalité algorithmique possible."
-            },
-            {
-                id: "tactic_zero_clash",
-                icon: "🤐",
-                title: "2. La Règle du Zéro Absolu (Silence de plomb)",
-                desc: "Ne commente jamais sous leurs publications (même pour les débunker ou les clasher), ne clique jamais sur « Voir plus » dans leurs légendes, et ne partage jamais leurs posts en message privé (DM) pour t'en indigner.",
-                why: "Pour l'algorithme de Meta, un partage en DM suivi d'une discussion ou un commentaire indigné vaut jusqu'à 5 fois plus de points de viralité qu'un simple like."
-            },
-            {
-                id: "tactic_screenshot",
-                icon: "📸",
-                title: "3. La Capture d'Écran au lieu du Partage",
-                desc: "Si tu dois absolument dénoncer une dinguerie en Story ou dans un groupe, fais une capture d'écran (en barrant ou floutant le @pseudo) au lieu d'utiliser le bouton de partage d'Instagram.",
-                why: "Tu informes ton entourage sans offrir la moindre statistique de partage ni inciter des curieux à aller chercher le compte original."
-            },
-            {
-                id: "tactic_muted_words",
-                icon: "🔇",
-                title: "4. Le Filtre des « Mots Masqués » d'Instagram",
-                desc: "Va dans Paramètres Instagram → Contenu suggéré → Mots et expressions spécifiques, et colle la liste des mots-clés ci-dessous pour étouffer organiquement leurs recommandations sans visiter leurs profils.",
-                why: "Cela indique directement au moteur de recommandation que tu refuses cette thématique, réduisant la portée organique globale de ces sujets.",
-                keywords: "Bardella, Zemmour, CNews, Frontières, Reconquête, Marion Maréchal, Hanouna, Valeurs actuelles, Retailleau, Bolloré"
-            },
-            {
-                id: "tactic_counter_boost",
-                icon: "🚀",
-                title: "5. L'Amplification Inversée (Contre-Feu)",
-                desc: "À chaque fois que tu ignores ou fermes l'appli devant un réac, offre à ta prochaine connexion un Like + un Enregistrement (Save 📌) + un partage à un média indépendant, antifasciste ou progressiste.",
-                why: "La bataille algorithmique est un jeu à somme nulle : réduire l'extrême droite ne suffit pas si l'on ne propulse pas activement les voix progressistes dans les fils des indécis."
-            }
-        ];
-
-        const STORAGE_KEY = "ig_blocklist_done_v7";
-        const LAST_HANDLE_KEY = "ig_blocklist_last_v7";
-        const MODE_KEY = "ig_blocklist_mode_v1";
-        const SABOTAGE_KEY = "ig_sabotage_done_v1";
-        const WIKI_CACHE_KEY = "ig_wiki_thumbs_v1";
-
+        const STORAGE_KEY = "ig_blocklist_done_v8";
         let doneHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        let lastActionHandle = localStorage.getItem(LAST_HANDLE_KEY) || (doneHandles.length ? doneHandles[doneHandles.length - 1] : null);
-        let currentMode = localStorage.getItem(MODE_KEY) || "home";
-        let sabotageDone = JSON.parse(localStorage.getItem(SABOTAGE_KEY) || "[]");
-        let wikiThumbCache = JSON.parse(localStorage.getItem(WIKI_CACHE_KEY) || "{}");
-
         let currentFilter = "all";
-        let isStackExpanded = false;
+        let lastActionHandle = doneHandles.length > 0 ? doneHandles[doneHandles.length - 1] : null;
         let currentReportedAccount = null;
 
         const THEME_KEY = "ig_blocklist_theme";
@@ -1880,7 +965,6 @@
         function applyTheme(animate = false) {
             const iconPart = document.getElementById("themeIconPart");
             const labelPart = document.getElementById("themeLabelPart");
-
             if (currentTheme === "light") {
                 document.documentElement.removeAttribute("data-theme");
                 if (iconPart) iconPart.innerText = "🌿";
@@ -1890,7 +974,6 @@
                 if (iconPart) iconPart.innerText = "✊";
                 if (labelPart) labelPart.innerText = "Passer au thème clair";
             }
-
             if (animate) triggerThemeIllumination();
         }
 
@@ -1900,43 +983,17 @@
             applyTheme(true);
         }
 
-        function switchMode(mode) {
-            currentMode = mode;
-            localStorage.setItem(MODE_KEY, mode);
-
-            document.getElementById("viewHome").classList.toggle("active", mode === "home");
-            document.getElementById("viewBlocklist").classList.toggle("active", mode === "blocklist");
-            document.getElementById("viewSabotage").classList.toggle("active", mode === "sabotage");
-
-            const switchBtn = document.getElementById("modeSwitchBtn");
-            if (switchBtn) {
-                switchBtn.style.display = (mode === "home") ? "none" : "inline-flex";
-            }
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            render();
-        }
-
         async function shareSite() {
-            const shareData = {
-                title: "Autodéfense Algorithmique — On bloque l'extrême droite",
-                text: "Action collective & hygiène numérique : coupons la visibilité algorithmique de l'extrême droite et de l'empire Bolloré !",
-                url: window.location.href
-            };
-
+            const shareData = { title: "La Blocklist Instagram", text: "Action collective & hygiène numérique contre l'extrême droite !", url: window.location.href };
             if (navigator.share) {
                 try { await navigator.share(shareData); } catch (err) {}
             } else {
                 try {
                     await navigator.clipboard.writeText(window.location.href);
-                    document.querySelectorAll(".shareBtnTextLabel").forEach(el => {
-                        const prev = el.innerText;
-                        el.innerText = "Lien copié ! ✓";
-                        setTimeout(() => { el.innerText = prev; }, 2200);
-                    });
-                } catch (err) {
-                    prompt("Copie ce lien pour partager l'outil :", window.location.href);
-                }
+                    const btnText = document.getElementById("shareBtnText");
+                    btnText.innerText = "Lien copié ! ✓";
+                    setTimeout(() => { btnText.innerText = "Partager"; }, 2200);
+                } catch (err) { prompt("Copie ce lien :", window.location.href); }
             }
         }
 
@@ -1947,9 +1004,11 @@
             arrow.innerText = content.classList.contains("open") ? "▲" : "▼";
         }
 
-        function toggleStackExpand() {
-            isStackExpanded = !isStackExpanded;
-            render();
+        function toggleBlockedStack() {
+            const container = document.getElementById("blockedStackContainer");
+            container.classList.toggle("expanded");
+            const isExpanded = container.classList.contains("expanded");
+            document.getElementById("stackToggleText").innerText = isExpanded ? "▲ Replier la pile" : "▼ Dérouler la pile";
         }
 
         function getMilestone(pct) {
@@ -1963,20 +1022,14 @@
 
         function saveState() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(doneHandles));
-            if (lastActionHandle) {
-                localStorage.setItem(LAST_HANDLE_KEY, lastActionHandle);
-            } else {
-                localStorage.removeItem(LAST_HANDLE_KEY);
-            }
             render();
         }
 
         function toggleHandle(handle) {
             if (doneHandles.includes(handle)) {
                 doneHandles = doneHandles.filter(h => h !== handle);
-                lastActionHandle = doneHandles.length ? doneHandles[doneHandles.length - 1] : null;
+                if (lastActionHandle === handle) lastActionHandle = doneHandles.length > 0 ? doneHandles[doneHandles.length - 1] : null;
             } else {
-                doneHandles = doneHandles.filter(h => h !== handle);
                 doneHandles.push(handle);
                 lastActionHandle = handle;
             }
@@ -1984,317 +1037,22 @@
         }
 
         function markAsDone(handle) {
-            doneHandles = doneHandles.filter(h => h !== handle);
-            doneHandles.push(handle);
             lastActionHandle = handle;
+            if (!doneHandles.includes(handle)) {
+                doneHandles.push(handle);
+            }
             saveState();
         }
 
         function setFilter(filter, btnEl) {
             currentFilter = filter;
-            document.querySelectorAll("#filterRow .pill").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
             if (btnEl) btnEl.classList.add("active");
             render();
         }
 
-        function toggleSabotageRule(id) {
-            if (sabotageDone.includes(id)) {
-                sabotageDone = sabotageDone.filter(item => item !== id);
-            } else {
-                sabotageDone.push(id);
-            }
-            localStorage.setItem(SABOTAGE_KEY, JSON.stringify(sabotageDone));
-            render();
-        }
-
-        function copyMutedKeywords(btnEl, keywords) {
-            navigator.clipboard.writeText(keywords).then(() => {
-                const oldText = btnEl.innerText;
-                btnEl.innerText = "Copié ! ✓";
-                setTimeout(() => { btnEl.innerText = oldText; }, 2000);
-            });
-        }
-
-        function createAccountRowElement(acc, isDone, isPersistentLast = false) {
-            const emoji = accountEmojis[acc.handle] || "👤";
-            const cachedThumb = wikiThumbCache[acc.handle];
-            const row = document.createElement("div");
-            row.className = "row" + (isDone ? " done" : "") + (isPersistentLast ? " last-action-row" : "");
-
-            const avatarContent = cachedThumb
-                ? `<img src="${cachedThumb}" alt="${acc.name}" loading="lazy" onerror="this.parentElement.innerText='${emoji}'">`
-                : `<span aria-hidden="true">${emoji}</span>`;
-
-            row.innerHTML = `
-                ${isPersistentLast ? `<div class="persistent-last-badge">✨ Dernier compte bloqué</div>` : ""}
-                <div class="row-top">
-                    <div class="row-profile-left">
-                        <div class="avatar-circle" data-avatar-handle="${acc.handle}">${avatarContent}</div>
-                        <div class="row-info">
-                            <div class="row-header">
-                                <span class="name">${acc.name}</span>
-                                <span class="tag ${acc.style}">${acc.label}</span>
-                            </div>
-                            <span class="handle">@${acc.handle}</span>
-                            ${acc.fact ? `<span class="fact-note">${acc.fact}</span>` : ""}
-                        </div>
-                    </div>
-                    <button type="button" class="btn-flag" onclick="openReportModal('${acc.handle}')" title="Signaler une erreur sur ce compte">
-                        🏳️
-                    </button>
-                </div>
-                <div class="row-actions">
-                    <button type="button" class="btn-check" onclick="toggleHandle('${acc.handle}')">
-                        <span class="check-square">${isDone ? "✓" : ""}</span>
-                        <span>${isDone ? "Bloqué (Annuler)" : "Bloqué ?"}</span>
-                    </button>
-                    <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                        <span>Instagram ↗</span>
-                    </a>
-                </div>
-            `;
-            return row;
-        }
-
-        function renderSabotageView() {
-            const container = document.getElementById("tacticListContainer");
-            if (!container) return;
-            container.innerHTML = "";
-
-            sabotageTactics.forEach(t => {
-                const isChecked = sabotageDone.includes(t.id);
-                const card = document.createElement("div");
-                card.className = "tactic-card" + (isChecked ? " done" : "");
-
-                card.innerHTML = `
-                    <div class="tactic-top">
-                        <div class="tactic-title">
-                            <span>${t.icon}</span>
-                            <span>${t.title}</span>
-                        </div>
-                        <button type="button" class="btn-check" onclick="toggleSabotageRule('${t.id}')" style="background:${isChecked ? 'var(--green)' : 'var(--ghost-bg)'}; color:${isChecked ? '#fff' : 'var(--text)'}; opacity:1;">
-                            <span class="check-square">${isChecked ? "✓" : ""}</span>
-                            <span>${isChecked ? "Adopté" : "J'adopte"}</span>
-                        </button>
-                    </div>
-                    <p class="tactic-desc">${t.desc}</p>
-                    ${t.keywords ? `
-                        <div class="copy-keywords-box">
-                            <span>${t.keywords}</span>
-                            <button type="button" class="btn-top outline" onclick="copyMutedKeywords(this, '${t.keywords}')">Copier les mots</button>
-                        </div>
-                    ` : ""}
-                    <div class="tactic-why">
-                        <strong>Impact algorithmique :</strong> ${t.why}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function render() {
-            const total = accounts.length;
-            const doneCount = doneHandles.length;
-            const pct = Math.round((doneCount / total) * 100);
-
-            // Mise à jour des badges sur le Portail d'Accueil
-            const homeBlockStatus = document.getElementById("homeBlocklistStatus");
-            if (homeBlockStatus) homeBlockStatus.innerText = `${doneCount} / ${total} bloqués (${pct}%)`;
-            const homeSabStatus = document.getElementById("homeSabotageStatus");
-            if (homeSabStatus) homeSabStatus.innerText = `${sabotageDone.length} / ${sabotageTactics.length} règles activées`;
-
-            // Amorce fine à 0% : 1.5% au lieu de 3%
-            const barWidth = doneCount === 0 ? 1.5 : Math.max(pct, 3);
-            document.getElementById("progressBar").style.width = barWidth + "%";
-            document.getElementById("scoreNum").innerText = `${doneCount} / ${total}`;
-            document.getElementById("scorePct").innerText = `${pct} % terminé`;
-
-            const milestone = getMilestone(pct);
-            document.getElementById("milestoneIcon").innerText = milestone.icon;
-            document.getElementById("milestoneText").innerText = milestone.text;
-            document.getElementById("progressRunner").innerText = milestone.runner;
-
-            renderSabotageView();
-
-            const query = (document.getElementById("searchInput")?.value || "").toLowerCase().trim();
-
-            // 1. Rendu de la PILE EN CASCADE DES COMPTES BLOQUÉS (en haut, du plus récent au plus ancien)
-            const stackWrapper = document.getElementById("blockedStackWrapper");
-            const stackListEl = document.getElementById("blockedStackList");
-            const stackTitleEl = document.getElementById("stackTitleLabel");
-            const stackToggleBtn = document.getElementById("stackToggleBtn");
-
-            const blockedAccountsOrdered = [...doneHandles]
-                .reverse()
-                .map(h => accounts.find(a => a.handle === h))
-                .filter(Boolean)
-                .filter(acc => {
-                    if (currentFilter !== "all" && acc.cat !== currentFilter) return false;
-                    if (query) {
-                        return acc.name.toLowerCase().includes(query) ||
-                               acc.handle.toLowerCase().includes(query) ||
-                               acc.label.toLowerCase().includes(query) ||
-                               (acc.fact || "").toLowerCase().includes(query);
-                    }
-                    return true;
-                });
-
-            if (blockedAccountsOrdered.length > 0) {
-                stackWrapper.classList.add("has-items");
-                stackTitleEl.innerText = `✅ Pile des comptes bloqués (${blockedAccountsOrdered.length})`;
-                stackListEl.className = "stack-container " + (isStackExpanded ? "expanded" : "collapsed");
-
-                if (blockedAccountsOrdered.length <= 1) {
-                    stackToggleBtn.style.display = "none";
-                } else {
-                    stackToggleBtn.style.display = "inline-block";
-                    stackToggleBtn.innerText = isStackExpanded
-                        ? "Replier la pile ▲"
-                        : `Dérouler la pile (${blockedAccountsOrdered.length}) ▼`;
-                }
-
-                stackListEl.innerHTML = "";
-                blockedAccountsOrdered.forEach((acc, idx) => {
-                    const isLatest = (acc.handle === lastActionHandle && idx === 0);
-                    const rowEl = createAccountRowElement(acc, true, isLatest);
-                    rowEl.classList.add("stack-item");
-                    if (!isStackExpanded) {
-                        if (idx === 0) rowEl.classList.add("stack-depth-0");
-                        else if (idx === 1) rowEl.classList.add("stack-depth-1");
-                        else if (idx === 2) rowEl.classList.add("stack-depth-2");
-                        else rowEl.classList.add("stack-depth-hidden");
-                    }
-                    stackListEl.appendChild(rowEl);
-                });
-            } else {
-                stackWrapper.classList.remove("has-items");
-                stackListEl.innerHTML = "";
-            }
-
-            // 2. Rendu de la LISTE PRINCIPALE (uniquement les comptes RESTANTS à traiter)
-            const listEl = document.getElementById("accountList");
-            listEl.innerHTML = "";
-
-            const remainingAccounts = accounts.filter(acc => {
-                if (doneHandles.includes(acc.handle)) return false;
-                if (currentFilter !== "all" && acc.cat !== currentFilter) return false;
-                if (query) {
-                    const matchName = acc.name.toLowerCase().includes(query);
-                    const matchHandle = acc.handle.toLowerCase().includes(query);
-                    const matchLabel = acc.label.toLowerCase().includes(query);
-                    const matchFact = (acc.fact || "").toLowerCase().includes(query);
-                    return matchName || matchHandle || matchLabel || matchFact;
-                }
-                return true;
-            });
-
-            document.getElementById("visibleCount").innerText = `${remainingAccounts.length} compte${remainingAccounts.length > 1 ? "s" : ""} restant${remainingAccounts.length > 1 ? "s" : ""} à bloquer`;
-
-            if (remainingAccounts.length === 0) {
-                const emptyCard = document.createElement("div");
-                emptyCard.className = "empty-victory-card";
-                if (doneCount === total) {
-                    emptyCard.innerHTML = `
-                        <div class="empty-victory-icon">🎉✊</div>
-                        <div class="empty-victory-title">Grand chelem ! Tu as bloqué 100 % de la liste.</div>
-                        <p class="empty-victory-desc">Tous les comptes sont désormais empilés dans ta réserve en haut. Fais tourner l'outil autour de toi pour démultiplier l'impact collectif !</p>
-                        <div class="empty-victory-actions">
-                            <button type="button" class="btn-top" onclick="shareSite()">📣 Partager la blocklist</button>
-                            <button type="button" class="btn-top outline" onclick="switchMode('sabotage')">👻 Voir aussi le Mode 2</button>
-                        </div>
-                    `;
-                } else {
-                    emptyCard.innerHTML = `
-                        <div class="empty-victory-icon">✨</div>
-                        <div class="empty-victory-title">Aucun compte restant dans cette sélection</div>
-                        <p class="empty-victory-desc">Tous les comptes de cette catégorie sont déjà dans ta pile de bloqués en haut, ou aucun profil ne correspond à ta recherche.</p>
-                        <div class="empty-victory-actions">
-                            <button type="button" class="btn-top outline" onclick="document.getElementById('searchInput').value=''; setFilter('all', document.querySelector('#filterRow .pill'));">Tout réafficher</button>
-                        </div>
-                    `;
-                }
-                listEl.appendChild(emptyCard);
-                return;
-            }
-
-            remainingAccounts.forEach(acc => {
-                const rowEl = createAccountRowElement(acc, false, false);
-                listEl.appendChild(rowEl);
-            });
-        }
-
-        // Récupération 100 % statique des photos officielles libres via l'API publique Wikipédia FR / Wikimedia Commons
-        async function fetchWikimediaAvatars() {
-            const missingAccounts = accounts.filter(a => !(a.handle in wikiThumbCache));
-            if (missingAccounts.length === 0) return;
-
-            const titleToHandles = {};
-            const titlesList = [];
-
-            missingAccounts.forEach(acc => {
-                const wikiTitle = wikiTitleOverrides[acc.name] || acc.name;
-                if (!titleToHandles[wikiTitle]) {
-                    titleToHandles[wikiTitle] = [];
-                    titlesList.push(wikiTitle);
-                }
-                titleToHandles[wikiTitle].push(acc.handle);
-            });
-
-            // Requêtes par lots de 45 titres (limite API MediaWiki = 50)
-            for (let i = 0; i < titlesList.length; i += 45) {
-                const batch = titlesList.slice(i, i + 45);
-                const url = `https://fr.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(batch.join("|"))}&prop=pageimages&pithumbsize=120&redirects=1&format=json&origin=*`;
-                try {
-                    const res = await fetch(url);
-                    const data = await res.json();
-                    if (!data.query || !data.query.pages) continue;
-
-                    const redirectMap = {};
-                    if (data.query.redirects) {
-                        data.query.redirects.forEach(r => { redirectMap[r.to] = r.from; });
-                    }
-                    const normalizedMap = {};
-                    if (data.query.normalized) {
-                        data.query.normalized.forEach(n => { normalizedMap[n.to] = n.from; });
-                    }
-
-                    Object.values(data.query.pages).forEach(page => {
-                        if (page.thumbnail && page.thumbnail.source) {
-                            let origTitle = page.title;
-                            if (redirectMap[origTitle]) origTitle = redirectMap[origTitle];
-                            if (normalizedMap[origTitle]) origTitle = normalizedMap[origTitle];
-
-                            const matchedHandles = titleToHandles[origTitle] || titleToHandles[page.title] || [];
-                            matchedHandles.forEach(h => {
-                                wikiThumbCache[h] = page.thumbnail.source;
-                                document.querySelectorAll(`[data-avatar-handle="${h}"]`).forEach(el => {
-                                    const fallbackEmoji = accountEmojis[h] || "👤";
-                                    el.innerHTML = `<img src="${page.thumbnail.source}" alt="" loading="lazy" onerror="this.parentElement.innerText='${fallbackEmoji}'">`;
-                                });
-                            });
-                        }
-                    });
-                } catch (e) {}
-            }
-
-            localStorage.setItem(WIKI_CACHE_KEY, JSON.stringify(wikiThumbCache));
-        }
-
-        function openResetModal(e) {
-            if (e) { e.preventDefault(); e.stopPropagation(); }
-            openModal("resetConfirmModal");
-        }
-
-        function closeResetModal(e) {
-            if (e) { e.preventDefault(); e.stopPropagation(); }
-            closeModal("resetConfirmModal");
-        }
-
+        function openResetModal(e) { if (e) { e.preventDefault(); e.stopPropagation(); } openModal("resetConfirmModal"); }
+        function closeResetModal(e) { if (e) { e.preventDefault(); e.stopPropagation(); } closeModal("resetConfirmModal"); }
         function confirmResetAll(e) {
             if (e) { e.preventDefault(); e.stopPropagation(); }
             doneHandles = [];
@@ -2313,21 +1071,10 @@
         function validateIgInput(inputEl) {
             const hint = document.getElementById("sugHandleHint");
             const handle = extractIgHandle(inputEl.value);
-            if (!handle) {
-                hint.className = "field-hint";
-                hint.innerText = "Colle un @pseudo ou un lien Instagram complet, il sera nettoyé automatiquement.";
-                return;
-            }
+            if (!handle) { hint.className = "field-hint"; hint.innerText = "Colle un @pseudo ou un lien."; return; }
             const exists = accounts.some(a => a.handle.toLowerCase() === handle.toLowerCase());
-            if (exists) {
-                hint.className = "field-hint";
-                hint.style.color = "var(--accent)";
-                hint.innerText = `⚠️ @${handle} est déjà présent dans la blocklist !`;
-            } else {
-                hint.className = "field-hint valid";
-                hint.style.color = "";
-                hint.innerText = `✓ Pseudo détecté : @${handle}`;
-            }
+            if (exists) { hint.className = "field-hint"; hint.style.color = "var(--accent)"; hint.innerText = `⚠️ @${handle} déjà présent !`; }
+            else { hint.className = "field-hint valid"; hint.style.color = ""; hint.innerText = `✓ Pseudo détecté : @${handle}`; }
         }
 
         function openModal(id) { document.getElementById(id).classList.add("open"); }
@@ -2337,48 +1084,144 @@
             const acc = accounts.find(a => a.handle === handle);
             if (!acc) return;
             currentReportedAccount = acc;
-            document.getElementById("reportTargetInfo").innerHTML = `<strong>Compte signalé :</strong> ${acc.name} (@${acc.handle})`;
-            document.getElementById("repDetails").value = "";
+            document.getElementById("reportTargetInfo").innerHTML = `<strong>Compte :</strong> ${acc.name} (@${acc.handle})`;
             openModal("reportModal");
         }
 
         function submitSuggestion() {
             const name = document.getElementById("sugName").value.trim();
-            const rawHandle = document.getElementById("sugHandle").value;
-            const handle = extractIgHandle(rawHandle);
+            const handle = extractIgHandle(document.getElementById("sugHandle").value);
             const fact = document.getElementById("sugFact").value.trim();
             const tag = document.getElementById("sugTag").value;
-            if (!name || !handle) {
-                alert("Merci d'indiquer au moins le nom et le @pseudo Instagram.");
-                return;
-            }
-            const title = encodeURIComponent(`[Ajout] ${name} (@${handle})`);
-            const body = encodeURIComponent(`**Nom :** ${name}\n**Pseudo Instagram :** @${handle}\n**Lien :** https://www.instagram.com/${handle}/\n**Étiquette politique :** ${tag}\n**Fait marquant :** ${fact || "À compléter"}\n`);
-            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
-            closeModal("suggestModal");
+            if (!name || !handle) { alert("Nom et pseudo requis."); return; }
+            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${encodeURIComponent(`[Ajout] ${name} (@${handle})`)}&body=${encodeURIComponent(`Nom: ${name}\nPseudo: @${handle}\nÉtiquette: ${tag}\nFait: ${fact}`)}`, "_blank");
+            closeModal('suggestModal');
         }
 
         function submitSiteFeedback() {
             const subject = document.getElementById("fbTitle").value.trim();
             const message = document.getElementById("fbBody").value.trim();
-            if (!subject || !message) {
-                alert("Merci d'indiquer un sujet et une description pour ta suggestion.");
-                return;
-            }
-            const title = encodeURIComponent(`[Suggestion Site] ${subject}`);
-            const body = encodeURIComponent(`**Suggestion d'amélioration pour le site :**\n\n${message}\n`);
-            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
-            closeModal("siteFeedbackModal");
+            if (!subject || !message) { alert("Champs requis."); return; }
+            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${encodeURIComponent(`[Suggestion Site] ${subject}`)}&body=${encodeURIComponent(message)}`, "_blank");
+            closeModal('siteFeedbackModal');
         }
 
         function submitReport() {
             if (!currentReportedAccount) return;
             const reason = document.getElementById("repReason").value;
-            const details = document.getElementById("repDetails").value.trim();
-            const title = encodeURIComponent(`[Signalement] ${currentReportedAccount.name} (@${currentReportedAccount.handle})`);
-            const body = encodeURIComponent(`**Compte concerné :** ${currentReportedAccount.name} (@${currentReportedAccount.handle})\n**Nature du problème :** ${reason}\n**Précisions :** ${details || "Aucune précision supplémentaire"}\n`);
-            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
-            closeModal("reportModal");
+            window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${encodeURIComponent(`[Signalement] ${currentReportedAccount.name}`)}&body=${encodeURIComponent(`Raison: ${reason}`)}`, "_blank");
+            closeModal('reportModal');
+        }
+
+        function render() {
+            const listEl = document.getElementById("accountList");
+            const query = document.getElementById("searchInput").value.toLowerCase().trim();
+            listEl.innerHTML = "";
+
+            const total = accounts.length;
+            const doneCount = doneHandles.length;
+            const pct = Math.round((doneCount / total) * 100);
+
+            // Amorce de la barre à 0% fixée à 1.5% (Tâche 1)
+            const barWidth = doneCount === 0 ? 1.5 : Math.max(pct, 3);
+            document.getElementById("progressBar").style.width = barWidth + "%";
+            document.getElementById("scoreNum").innerText = `${doneCount} / ${total}`;
+            document.getElementById("scorePct").innerText = `${pct} % terminé`;
+
+            const milestone = getMilestone(pct);
+            document.getElementById("milestoneIcon").innerText = milestone.icon;
+            document.getElementById("milestoneText").innerText = milestone.text;
+            document.getElementById("progressRunner").innerText = milestone.runner;
+
+            // Mise à jour de la pile haute des comptes bloqués (Tâche 6)
+            document.getElementById("stackedCount").innerText = doneCount;
+            const stackListEl = document.getElementById("stackList");
+            stackListEl.innerHTML = "";
+            doneHandles.slice().reverse().forEach(handle => {
+                const acc = accounts.find(a => a.handle === handle);
+                if (!acc) return;
+                const item = document.createElement("div");
+                item.className = "stack-item";
+                item.innerHTML = `
+                    <div class="stack-item-info">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/${accountImages[acc.handle] || 'Placeholder_view_vector.svg'}?width=80" class="account-avatar" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'34\' height=\'34\'><circle cx=\'17\' cy=\'17\' r=\'17\' fill=\'%23ccc\'/></svg>'">
+                        <span class="stack-item-name">${acc.name}</span>
+                    </div>
+                    <button type="button" class="stack-item-unblock" onclick="toggleHandle('${acc.handle}')">Retirer</button>
+                `;
+                stackListEl.appendChild(item);
+            });
+
+            // Filtrage : n'affiche dans la liste principale que les comptes NON BLOQUÉS (sauf si recherche active)
+            const filtered = accounts.filter(acc => {
+                const isDone = doneHandles.includes(acc.handle);
+                if (currentFilter === "todo" && isDone) return false;
+                if (currentFilter !== "all" && currentFilter !== "todo" && acc.cat !== currentFilter) return false;
+                if (query) {
+                    return acc.name.toLowerCase().includes(query) || acc.handle.toLowerCase().includes(query) || (acc.fact || "").toLowerCase().includes(query);
+                }
+                return !isDone; // Les bloqués sortent de la liste principale par défaut (Tâche 6)
+            });
+
+            document.getElementById("visibleCount").innerText = `${filtered.length} compte${filtered.length > 1 ? "s" : ""} affiché${filtered.length > 1 ? "s" : ""}`;
+
+            if (filtered.length === 0) {
+                const emptyCard = document.createElement("div");
+                emptyCard.className = "empty-victory-card";
+                if (doneCount === total) {
+                    emptyCard.innerHTML = `
+                        <div class="empty-victory-icon">🎉✊</div>
+                        <div class="empty-victory-title">Grand chelem ! 100% bloqué.</div>
+                        <p class="empty-victory-desc">Ton fil est assaini. Fais tourner l'outil !</p>
+                        <button type="button" class="btn-top" onclick="shareSite()">Partager</button>
+                    `;
+                } else {
+                    emptyCard.innerHTML = `
+                        <div class="empty-victory-icon">✨</div>
+                        <div class="empty-victory-title">Rien à afficher ici</div>
+                        <p class="empty-victory-desc">Tous les comptes de cette catégorie sont déjà bloqués.</p>
+                    `;
+                }
+                listEl.appendChild(emptyCard);
+                return;
+            }
+
+            filtered.forEach(acc => {
+                const isDone = doneHandles.includes(acc.handle);
+                const isLastAction = (lastActionHandle === acc.handle && isDone);
+                const wikiFile = accountImages[acc.handle] || "Placeholder_view_vector.svg";
+                const avatarUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${wikiFile}?width=120`;
+
+                const row = document.createElement("div");
+                row.className = "row" + (isDone ? " done" : "");
+
+                row.innerHTML = `
+                    <div class="row-top">
+                        <div class="row-info">
+                            <div class="row-header">
+                                <img src="${avatarUrl}" class="account-avatar" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'34\' height=\'34\'><circle cx=\'17\' cy=\'17\' r=\'17\' fill=\'%23ccc\'/></svg>'">
+                                <span class="name">${acc.name}</span>
+                                <span class="tag ${acc.style}">${acc.label}</span>
+                                ${isLastAction ? `<span class="last-action-indicator">✓ Dernier bloqué</span>` : ""}
+                            </div>
+                            <span class="handle">@${acc.handle}</span>
+                            ${acc.fact ? `<span class="fact-note">${acc.fact}</span>` : ""}
+                        </div>
+                        <button type="button" class="btn-flag" onclick="openReportModal('${acc.handle}')" title="Signaler">🏳️</button>
+                    </div>
+                    <div class="row-actions">
+                        <button type="button" class="btn-check" onclick="toggleHandle('${acc.handle}')">
+                            <span class="check-square">${isDone ? "✓" : ""}</span>
+                            <span>${isDone ? "Bloqué" : "Bloqué ?"}</span>
+                        </button>
+                        <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}')">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            <span>Instagram ↗</span>
+                        </a>
+                    </div>
+                `;
+                listEl.appendChild(row);
+            });
         }
 
         window.addEventListener("scroll", () => {
@@ -2389,8 +1232,7 @@
         });
 
         applyTheme(true);
-        switchMode(currentMode);
-        fetchWikimediaAvatars();
+        render();
     </script>
 </body>
 </html>
