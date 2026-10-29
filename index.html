@@ -339,13 +339,9 @@
             border: 1px solid var(--border);
         }
 
-        .btn-top.disclaimer-button {
-            background: var(--card);
-            color: var(--text);
-            border-color: var(--border);
-        }
         .btn-top.purpose-button { background: var(--green); color: #fff; }
         .btn-top.purpose-button[hidden] { display: none; }
+        .top-actions-bar[hidden] { display: none; }
 
         .btn-top:hover {
             transform: translateY(-1px);
@@ -1438,23 +1434,37 @@
         }
         footer a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 
-        .footer-disclaimer-button {
-            background: transparent;
+        .footer-links-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 8px 12px;
             border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--card);
+        }
+        .footer-disclaimer-button {
+            padding: 6px 8px;
+            border: 0;
+            background: transparent;
             color: var(--text);
-            border-radius: 99px;
-            padding: 8px 15px;
             font: inherit;
             font-weight: 800;
+            text-align: left;
             cursor: pointer;
         }
         .footer-social-links {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
+            margin: 0;
+            padding: 0 0 0 14px;
+            border-top: 0;
+            border-left: 1px solid var(--border);
         }
         .footer-social-link {
             display: inline-flex;
@@ -1586,19 +1596,91 @@
         .disclaimer-section p + p { margin-top: 8px; }
         .disclaimer-section strong { color: var(--text); }
         .welcome-disclaimer-link {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             margin: 0 auto 14px;
-            padding: 0;
-            border: 0;
-            background: none;
-            color: var(--muted);
+            padding: 12px 20px;
+            border: 1px solid var(--green-light);
+            border-radius: 999px;
+            background: var(--green);
+            color: #ffffff;
             font: inherit;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-decoration: underline;
-            text-underline-offset: 3px;
+            font-size: 0.9rem;
+            font-weight: 900;
+            box-shadow: 0 0 0 3px rgba(var(--theme-glow), 0.16), 0 0 20px 6px rgba(var(--theme-glow), 0.38);
             cursor: pointer;
+            animation: disclaimerGlow 1.8s ease-in-out infinite;
         }
+        .welcome-disclaimer-link::before {
+            content: "✦";
+            font-size: 1.1em;
+        }
+        .welcome-disclaimer-link:hover,
+        .welcome-disclaimer-link:focus-visible {
+            outline: 3px solid rgba(var(--theme-glow), 0.3);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 4px rgba(var(--theme-glow), 0.22), 0 0 28px 10px rgba(var(--theme-glow), 0.48);
+        }
+        @keyframes disclaimerGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 3px rgba(var(--theme-glow), 0.16), 0 0 20px 6px rgba(var(--theme-glow), 0.38);
+            }
+            50% {
+                box-shadow: 0 0 0 5px rgba(var(--theme-glow), 0.24), 0 0 32px 12px rgba(var(--theme-glow), 0.55);
+            }
+        }
+        .welcome-theme-card {
+            margin: 0 auto 16px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--sub-card);
+        }
+        .welcome-theme-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .welcome-theme-heading h2 {
+            margin: 0;
+            font-size: 0.88rem;
+            font-weight: 900;
+        }
+        .welcome-theme-optional {
+            padding: 3px 7px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.62rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .welcome-theme-card p {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-size: 0.76rem;
+            text-align: center;
+        }
+        .welcome-theme-button {
+            position: static;
+            z-index: auto;
+            width: fit-content;
+            height: auto;
+            min-height: 46px;
+            margin: 0 auto;
+            padding: 8px 18px;
+            gap: 9px;
+            border-radius: 999px;
+            font: inherit;
+            font-size: 0.86rem;
+            font-weight: 800;
+        }
+        .welcome-theme-button svg { width: 20px; height: 20px; }
         .welcome-preference {
             display: flex;
             align-items: center;
@@ -1664,6 +1746,14 @@
             .btn-search-add { padding: 10px 14px; width: 100%; }
             .row-actions { width: 100%; flex-direction: row; justify-content: space-between; gap: 7px; }
             .btn-check, .btn-ig { flex: 1 1 0; width: auto; padding: 10px 8px; font-size: 0.76rem; }
+            .footer-links-group { flex-direction: column; gap: 8px; border-radius: 18px; }
+            .footer-disclaimer-button { text-align: center; }
+            .footer-social-links {
+                width: 100%;
+                padding: 10px 0 0;
+                border-left: 0;
+                border-top: 1px solid var(--border);
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1690,8 +1780,7 @@
         <button type="button" class="brand-blur-zone" onclick="switchMode('home')" aria-label="Retourner au portail d'accueil">
             <span class="brand-title">ON BLOQUE L'EXTRÊME DROITE</span>
         </button>
-        <div class="top-actions-bar">
-            <button type="button" class="btn-top disclaimer-button" onclick="openModal('disclaimerModal')">Disclaimer</button>
+        <div class="top-actions-bar" hidden>
             <button type="button" class="btn-top purpose-button" id="purposeActionButton" onclick="switchMode('home')" hidden>Changer de mode d'action</button>
         </div>
     </header>
@@ -1701,7 +1790,20 @@
             <span class="welcome-eyebrow">Avant de commencer</span>
             <h1 id="welcomeTitle">Bienvenue sur « On bloque l'extrême droite »</h1>
             <p id="welcomeIntro">Un outil d'autodéfense numérique et d'action collective pour reprendre la main sur nos espaces en ligne et soutenir les mobilisations contre l'extrême droite.</p>
-            <button type="button" class="welcome-disclaimer-link" onclick="dismissWelcome(); openModal('disclaimerModal')">Lire le disclaimer et les mentions</button>
+            <button type="button" class="welcome-disclaimer-link" onclick="dismissWelcome(); openModal('disclaimerModal')">À propos du projet et mentions légales</button>
+            <section class="welcome-theme-card" aria-labelledby="welcomeThemeTitle">
+                <div class="welcome-theme-heading">
+                    <h2 id="welcomeThemeTitle">Choisir un thème</h2>
+                    <span class="welcome-theme-optional">Facultatif</span>
+                </div>
+                <p>Tu pourras le changer à tout moment avec l'icône en haut à gauche.</p>
+                <button type="button" class="btn-theme-corner welcome-theme-button" id="welcomeThemeBtn" onclick="cycleTheme()">
+                    <svg id="welcomeThemeSvg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <span id="welcomeThemeLabel">Thème clair</span>
+                </button>
+            </section>
             <label class="welcome-preference">
                 <input type="checkbox" id="hideWelcomeCheckbox" onchange="setWelcomePreference(!this.checked)">
                 <span>Ne plus afficher cet écran</span>
@@ -1713,16 +1815,14 @@
     <template id="disclaimerTextTemplate">
         <section class="disclaimer-section">
             <h3>Le projet</h3>
-            <p>« On bloque l'extrême droite » est un <strong>outil</strong> citoyen d'autodéfense algorithmique. Il propose plusieurs pistes pour assainir son fil et rejoindre des actions collectives. Le blocage reste une action simple, mais son effet sur la visibilité globale des comptes n'est pas garanti. Pas besoin d'être informaticien·ne ou <strong>hacker</strong> pour s'en servir.</p>
-            <p>Les modes d'action sont des propositions : chacun·e reste libre de choisir celles qui lui conviennent. Les informations des fiches sont données à titre indicatif et peuvent être signalées ou corrigées depuis le site.</p>
-            <p>La récente campagne présidentielle au Brésil a montré l'importance que peut prendre une mobilisation numérique collective. André Janones, l'un des stratèges de Lula, a toutefois précisé que sa méthode consistait à ignorer les publications d'extrême droite, et non à bloquer leurs comptes. <a href="https://www.huffingtonpost.fr/international/article/ignorer-ou-bloquer-le-stratege-de-lula-precise-son-plan-qui-a-contre-l-extreme-droite-et-qui-est-reproduit-en-france_347393.html" target="_blank" rel="noopener noreferrer">Lire son éclairage dans le HuffPost</a>.</p>
-            <p>Cette expérience invite à réfléchir à la façon dont certains leviers — mobilisation collective, relais d'informations et présence coordonnée — pourraient être adaptés en France pour la présidentielle de 2027 et les échéances à venir. Les contextes diffèrent, et aucune stratégie numérique ne garantit un résultat électoral : le blocage proposé ici reste une option personnelle pour gérer son fil.</p>
+            <p>« On bloque l'extrême droite » est un outil d'<strong>autodéfense numérique</strong> et d'<strong>action collective</strong> pour reprendre la main sur son fil et soutenir les mobilisations. Chacun·e choisit librement les pistes qui lui conviennent.</p>
+            <p>Le blocage peut aider à assainir son fil, mais <strong>ne garantit pas</strong> de réduire la visibilité globale d'un compte. Les informations des fiches sont indicatives ; tu peux signaler une erreur depuis le site.</p>
+            <p>Au Brésil, le stratège André Janones expliquait privilégier l'ignorance des publications plutôt que le blocage. Cette expérience nourrit la réflexion, sans garantir qu'une stratégie soit transposable ou produise un résultat électoral. <a href="https://www.huffingtonpost.fr/international/article/ignorer-ou-bloquer-le-stratege-de-lula-precise-son-plan-qui-a-contre-l-extreme-droite-et-qui-est-reproduit-en-france_347393.html" target="_blank" rel="noopener noreferrer">Lire son éclairage dans le HuffPost</a>.</p>
         </section>
         <section class="disclaimer-section">
             <h3>Transparence</h3>
-            <p>Le site a été créé avec l'aide de l'<strong>intelligence artificielle</strong>. Il est gratuit et ne nécessite pas de compte.</p>
-            <p>La progression bénéficie d'un <strong>stockage local</strong> : tes données restent sur ton appareil. Aucun traqueur n'est utilisé et aucune donnée de progression n'est envoyée à un <strong>serveur</strong>.</p>
-            <p>Les miniatures d'avatar, lorsqu'elles sont disponibles, sont récupérées via l'<strong>API Wikipédia</strong> ; certaines images peuvent provenir de <strong>Wikimedia Commons</strong>.</p>
+            <p>Le site, créé avec l'aide de l'<strong>intelligence artificielle</strong>, est gratuit et accessible <strong>sans compte</strong>.</p>
+            <p>Ta progression est stockée <strong>localement sur ton appareil</strong> : aucun traqueur, aucune donnée de progression envoyée à un serveur. Les miniatures peuvent provenir de Wikipédia ou Wikimedia Commons.</p>
             <p>Le <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">code source est disponible sur GitHub</a>.</p>
         </section>
     </template>
@@ -2119,7 +2219,7 @@
     <div class="modal-backdrop disclaimer-modal" id="disclaimerModal" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle" onclick="if(event.target === this) closeModal('disclaimerModal')">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title" id="disclaimerTitle" tabindex="-1">ℹ️ Disclaimer & mentions</span>
+                <span class="modal-title" id="disclaimerTitle" tabindex="-1">ℹ️ À propos du projet et mentions légales</span>
                 <button type="button" class="modal-close" onclick="closeModal('disclaimerModal')" aria-label="Fermer">×</button>
             </div>
             <div class="disclaimer-copy"></div>
@@ -2136,21 +2236,23 @@
 
     <!-- PIED DE PAGE SYNTHÉTIQUE -->
     <footer>
-        <button type="button" class="footer-disclaimer-button" onclick="openModal('disclaimerModal')">Consulter le disclaimer et les mentions</button>
-        <nav class="footer-social-links" aria-label="Réseaux et code source">
-            <a class="footer-social-link instagram" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Henri Lubszynski" title="Instagram">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <circle cx="17.5" cy="6.8" r="0.8" fill="currentColor" stroke="none"></circle>
-                </svg>
-            </a>
-            <a class="footer-social-link github" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer" aria-label="Code source du projet sur GitHub" title="GitHub">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.24-1.62-1.24-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.75 2.12 3.37 1.51.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.61 5.25-5.1 5.53.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"></path>
-                </svg>
-            </a>
-        </nav>
+        <div class="footer-links-group">
+            <button type="button" class="footer-disclaimer-button" onclick="openModal('disclaimerModal')">À propos du projet et mentions légales</button>
+            <nav class="footer-social-links" aria-label="Réseaux et code source">
+                <a class="footer-social-link instagram" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Henri Lubszynski" title="Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <circle cx="17.5" cy="6.8" r="0.8" fill="currentColor" stroke="none"></circle>
+                    </svg>
+                </a>
+                <a class="footer-social-link github" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer" aria-label="Code source du projet sur GitHub" title="GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.24-1.62-1.24-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.75 2.12 3.37 1.51.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.61 5.25-5.1 5.53.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"></path>
+                    </svg>
+                </a>
+            </nav>
+        </div>
     </footer>
 
     <script>
@@ -2446,30 +2548,40 @@
         }
 
         function applyTheme() {
-            const svgEl = document.getElementById("themeCornerSvg");
-            const btnEl = document.getElementById("themeBtn");
+            let iconMarkup;
 
             if (currentTheme === "light") {
                 document.documentElement.removeAttribute("data-theme");
-                if (svgEl) {
-                    svgEl.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
-                }
-                if (btnEl) btnEl.title = "Passer au thème sombre";
+                iconMarkup = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
             } else if (currentTheme === "dark") {
                 document.documentElement.setAttribute("data-theme", "dark");
-                if (svgEl) {
-                    svgEl.innerHTML = `<path d="M12 3.5 13.8 9.2 19.5 11l-5.7 1.8L12 18.5l-1.8-5.7L4.5 11l5.7-1.8L12 3.5Z"></path><path d="m18.5 15.5.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7.7-2.1Z"></path>`;
-                }
-                if (btnEl) btnEl.title = "Passer au thème Empowerment";
+                iconMarkup = `<path d="M12 3.5 13.8 9.2 19.5 11l-5.7 1.8L12 18.5l-1.8-5.7L4.5 11l5.7-1.8L12 3.5Z"></path><path d="m18.5 15.5.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7.7-2.1Z"></path>`;
             } else {
                 document.documentElement.setAttribute("data-theme", "empowerment");
-                if (svgEl) {
-                    svgEl.innerHTML = `<circle cx="12" cy="12" r="3.5"></circle><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2.5 12h2m15 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>`;
-                }
-                if (btnEl) btnEl.title = "Revenir au thème clair";
+                iconMarkup = `<circle cx="12" cy="12" r="3.5"></circle><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2.5 12h2m15 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>`;
             }
 
-            if (btnEl) btnEl.setAttribute("aria-label", btnEl.title);
+            const themeLabels = { light: "clair", dark: "sombre", empowerment: "Empowerment" };
+            const currentThemeIndex = THEME_OPTIONS.indexOf(currentTheme);
+            const nextTheme = THEME_OPTIONS[(currentThemeIndex + 1) % THEME_OPTIONS.length];
+            const currentThemeLabel = themeLabels[currentTheme];
+            const nextThemeLabel = themeLabels[nextTheme];
+            const themeControls = [
+                { button: document.getElementById("themeBtn"), icon: document.getElementById("themeCornerSvg") },
+                { button: document.getElementById("welcomeThemeBtn"), icon: document.getElementById("welcomeThemeSvg") }
+            ];
+
+            themeControls.forEach(({ button, icon }) => {
+                if (!button) return;
+                if (icon) icon.innerHTML = iconMarkup;
+                button.title = `Passer au thème ${nextThemeLabel}`;
+                button.setAttribute("aria-label", button.id === "welcomeThemeBtn"
+                    ? `Thème actuel : ${currentThemeLabel}. Passer au thème ${nextThemeLabel}.`
+                    : button.title);
+            });
+
+            const welcomeThemeLabel = document.getElementById("welcomeThemeLabel");
+            if (welcomeThemeLabel) welcomeThemeLabel.textContent = `Thème ${currentThemeLabel}`;
         }
 
         function cycleTheme() {
@@ -2521,6 +2633,7 @@
             if (purposeActionButton) {
                 purposeActionButton.hidden = mode === "home";
                 purposeActionButton.textContent = "Changer de mode d'action";
+                purposeActionButton.parentElement.hidden = mode === "home";
             }
 
             window.scrollTo({
