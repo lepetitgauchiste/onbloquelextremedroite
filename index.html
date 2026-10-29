@@ -155,6 +155,11 @@
             transform: translateY(-1px) scale(1.04);
             border-color: var(--green);
         }
+        .btn-share-corner {
+            right: 22px;
+            left: auto;
+            animation: none;
+        }
         .btn-theme-corner svg {
             display: block;
             width: 18px;
@@ -334,7 +339,7 @@
         }
 
         .btn-top.outline {
-            background: var(--card);
+            background-color: var(--card);
             color: var(--text);
             border: 1px solid var(--border);
         }
@@ -381,11 +386,13 @@
             align-items: center;
             text-align: center;
             gap: 11px;
-            transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+            cursor: pointer;
+            transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
         }
         .mode-card.in-progress-card {
             border-color: rgba(190, 145, 62, 0.28);
-            background: linear-gradient(145deg, rgba(232, 199, 125, 0.11), var(--card) 58%);
+            background-color: var(--card);
+            background-image: linear-gradient(145deg, rgba(232, 199, 125, 0.11), transparent 58%);
         }
         .mode-card.in-progress-card::before {
             content: "";
@@ -399,22 +406,35 @@
         }
         [data-theme="dark"] .mode-card.in-progress-card {
             border-color: rgba(243, 207, 117, 0.16);
-            background: linear-gradient(145deg, rgba(165, 112, 16, 0.1), var(--card) 58%);
+            background-image: linear-gradient(145deg, rgba(165, 112, 16, 0.1), transparent 58%);
         }
         [data-theme="dark"] .mode-card.in-progress-card::before {
             background: linear-gradient(90deg, transparent, rgba(243, 207, 117, 0.32), transparent);
         }
-        .mode-card:hover {
+        .mode-card:hover,
+        .mode-card:focus-visible {
             transform: translateY(-1px);
             border-color: var(--green);
+            background-color: var(--green-bg);
             box-shadow: 0 8px 22px rgba(36, 24, 19, 0.07);
         }
-        .mode-card.in-progress-card:hover {
+        .mode-card:focus-visible {
+            outline: 3px solid var(--green);
+            outline-offset: 3px;
+        }
+        .mode-card:active {
+            transform: scale(0.995);
+        }
+        .mode-card.in-progress-card:hover,
+        .mode-card.in-progress-card:focus-visible {
             border-color: rgba(190, 145, 62, 0.42);
+            background-color: #fff3d6;
             box-shadow: 0 8px 22px rgba(135, 84, 0, 0.08);
         }
-        [data-theme="dark"] .mode-card.in-progress-card:hover {
+        [data-theme="dark"] .mode-card.in-progress-card:hover,
+        [data-theme="dark"] .mode-card.in-progress-card:focus-visible {
             border-color: rgba(243, 207, 117, 0.3);
+            background-color: rgba(165, 112, 16, 0.24);
             box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
         }
 
@@ -423,6 +443,26 @@
             margin-bottom: -2px;
             font-size: clamp(2rem, 7vw, 2.65rem);
             line-height: 1;
+            animation: modeIconHalo 2.8s ease-in-out infinite;
+        }
+        .mode-card-icon.blocklist-icon {
+            filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.62));
+        }
+        .mode-card-icon.mobilisation-icon {
+            filter: drop-shadow(0 0 8px rgba(248, 113, 113, 0.62));
+            animation-delay: 0.35s;
+        }
+        .mode-card-icon.politique-icon {
+            filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.62));
+            animation-delay: 0.7s;
+        }
+        .mode-card-icon.sabotage-icon {
+            filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.62));
+            animation-delay: 1.05s;
+        }
+        @keyframes modeIconHalo {
+            0%, 100% { opacity: 0.88; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.08); }
         }
         .mode-status-pill {
             display: inline-flex;
@@ -460,46 +500,6 @@
             width: 100%;
             line-height: 1.2;
         }
-
-        .mode-card-access {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            align-self: center;
-            margin-top: 4px;
-            padding: 9px 20px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            background: var(--card-solid);
-            color: var(--green);
-            font: inherit;
-            font-size: 0.85rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: border-color 0.15s ease, transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
-        }
-        .mode-card-access span { transition: transform 0.15s ease; }
-        .mode-card-access:hover {
-            border-color: var(--green);
-            transform: translateY(-1px);
-        }
-        .mode-card-access.in-progress:hover,
-        .mode-card-access.in-progress:focus-visible {
-            border-color: #e8c77d;
-            background: #fff3d6;
-            color: #875400;
-        }
-        [data-theme="dark"] .mode-card-access.in-progress:hover,
-        [data-theme="dark"] .mode-card-access.in-progress:focus-visible {
-            border-color: rgba(243, 207, 117, 0.55);
-            background: rgba(165, 112, 16, 0.24);
-            color: #f3cf75;
-        }
-        .mode-card-access:focus-visible {
-            outline: 2px solid var(--green);
-            outline-offset: 3px;
-        }
-        .mode-card-access:hover span { transform: translateX(3px); }
 
         .mode-work-warning {
             display: flex;
@@ -592,35 +592,6 @@
             letter-spacing: 0.08em;
             color: var(--accent);
             margin-bottom: 10px;
-        }
-
-        .btn-share-subtle {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(var(--bg-rgb), 0.55);
-            color: var(--muted);
-            border: 1px solid var(--border);
-            padding: 5px 13px;
-            border-radius: 99px;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: border-color 0.15s ease, color 0.15s ease;
-        }
-        .btn-share-subtle:hover {
-            color: var(--text);
-            border-color: var(--muted);
-        }
-        .btn-share-subtle svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 2.2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
 
         .hero .lead {
@@ -789,6 +760,18 @@
             background: var(--green);
             transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
+            animation: progressPulse 1.8s ease-in-out infinite;
+        }
+
+        .progress-fill::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+            background-size: 45% 100%;
+            background-repeat: no-repeat;
+            animation: progressShimmer 1.8s ease-in-out infinite;
         }
 
         .progress-runner {
@@ -801,6 +784,22 @@
             line-height: 1;
             pointer-events: none;
             user-select: none;
+            animation: runnerJog 0.48s ease-in-out infinite alternate;
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.18); }
+        }
+
+        @keyframes progressShimmer {
+            from { background-position: -50% 0; }
+            to { background-position: 180% 0; }
+        }
+
+        @keyframes runnerJog {
+            from { transform: translate(50%, -58%) scaleX(-1) rotate(-7deg); }
+            to { transform: translate(50%, -45%) scaleX(-1) rotate(7deg); }
         }
 
         .btn-reset-prog {
@@ -1609,7 +1608,7 @@
             font: inherit;
             font-size: 0.9rem;
             font-weight: 900;
-            box-shadow: 0 0 0 3px rgba(var(--theme-glow), 0.16), 0 0 20px 6px rgba(var(--theme-glow), 0.38);
+            box-shadow: 0 0 0 2px rgba(var(--theme-glow), 0.12), 0 0 12px 4px rgba(var(--theme-glow), 0.24);
             cursor: pointer;
             animation: disclaimerGlow 1.8s ease-in-out infinite;
         }
@@ -1621,22 +1620,20 @@
         .welcome-disclaimer-link:focus-visible {
             outline: 3px solid rgba(var(--theme-glow), 0.3);
             outline-offset: 3px;
-            box-shadow: 0 0 0 4px rgba(var(--theme-glow), 0.22), 0 0 28px 10px rgba(var(--theme-glow), 0.48);
+            box-shadow: 0 0 0 3px rgba(var(--theme-glow), 0.18), 0 0 18px 7px rgba(var(--theme-glow), 0.34);
         }
         @keyframes disclaimerGlow {
             0%, 100% {
-                box-shadow: 0 0 0 3px rgba(var(--theme-glow), 0.16), 0 0 20px 6px rgba(var(--theme-glow), 0.38);
+                box-shadow: 0 0 0 2px rgba(var(--theme-glow), 0.12), 0 0 12px 4px rgba(var(--theme-glow), 0.24);
             }
             50% {
-                box-shadow: 0 0 0 5px rgba(var(--theme-glow), 0.24), 0 0 32px 12px rgba(var(--theme-glow), 0.55);
+                box-shadow: 0 0 0 3px rgba(var(--theme-glow), 0.18), 0 0 18px 7px rgba(var(--theme-glow), 0.34);
             }
         }
         .welcome-theme-card {
-            margin: 0 auto 16px;
-            padding: 12px 14px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: var(--sub-card);
+            margin: 4px auto 8px;
+            padding: 12px 0 0;
+            border-top: 1px solid var(--border);
         }
         .welcome-theme-heading {
             display: flex;
@@ -1661,7 +1658,7 @@
             letter-spacing: 0.04em;
         }
         .welcome-theme-card p {
-            margin: 0 0 10px;
+            margin: 0 0 8px;
             color: var(--muted);
             font-size: 0.76rem;
             text-align: center;
@@ -1671,16 +1668,28 @@
             z-index: auto;
             width: fit-content;
             height: auto;
-            min-height: 46px;
+            min-height: 42px;
             margin: 0 auto;
-            padding: 8px 18px;
-            gap: 9px;
+            padding: 7px 16px;
+            gap: 8px;
             border-radius: 999px;
             font: inherit;
             font-size: 0.86rem;
             font-weight: 800;
+            border-color: var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            animation: none;
         }
         .welcome-theme-button svg { width: 20px; height: 20px; }
+        .welcome-theme-button:hover {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+        }
+        .welcome-card > .welcome-preference {
+            margin: 8px auto 10px;
+            padding: 4px 8px;
+            border: 0;
+            background: transparent;
+        }
         .welcome-preference {
             display: flex;
             align-items: center;
@@ -1711,7 +1720,7 @@
         }
         .welcome-enter {
             width: min(100%, 340px);
-            min-height: 50px;
+            min-height: 48px;
             margin: 0 auto;
             border-radius: 14px;
             font-size: 0.92rem;
@@ -1734,11 +1743,12 @@
         @media (max-width: 520px) {
             .welcome-screen { padding: 12px; }
             .welcome-card {
-                padding: 20px 16px;
+                padding: 18px 16px;
                 border-radius: 18px;
             }
             .welcome-preference { max-width: 100%; }
             .btn-theme-corner { top: 14px; left: 14px; width: 32px; height: 32px; }
+            .btn-share-corner { right: 14px; left: auto; }
             .brand-blur-zone { margin-top: 38px; margin-bottom: 58px; padding: 10px 16px; }
             .top-actions-bar { border-radius: 22px; padding: 6px 9px; gap: 6px; }
             .hero-bg-banner { height: 340px; }
@@ -1775,13 +1785,22 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
     </button>
+    <button type="button" class="btn-theme-corner btn-share-corner" id="shareBtn" onclick="shareSite()" title="Partager ce site" aria-label="Partager ce site">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+    </button>
 
     <header class="top-header">
         <button type="button" class="brand-blur-zone" onclick="switchMode('home')" aria-label="Retourner au portail d'accueil">
             <span class="brand-title">ON BLOQUE L'EXTRÊME DROITE</span>
         </button>
         <div class="top-actions-bar" hidden>
-            <button type="button" class="btn-top purpose-button" id="purposeActionButton" onclick="switchMode('home')" hidden>Changer de mode d'action</button>
+            <button type="button" class="btn-top purpose-button" id="purposeActionButton" onclick="switchMode('home')" hidden>Retour au choix des actions</button>
         </div>
     </header>
 
@@ -1832,125 +1851,73 @@
          ========================================================= -->
     <main id="viewHome" class="view-section active">
         <section class="hero">
-            <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="18" cy="5" r="3"></circle>
-                    <circle cx="6" cy="12" r="3"></circle>
-                    <circle cx="18" cy="19" r="3"></circle>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                </svg>
-                <span class="shareBtnTextLabel">Partager l'outil</span>
-            </button>
             <span class="mode-selector-emoji" aria-hidden="true">✊</span>
             <h1>Choisis ton mode d'action.</h1>
         </section>
 
         <div class="mode-cards-grid">
+            <!-- CARTE : LE SABOTAGE FANTÔME -->
+            <article class="mode-card" role="button" tabindex="0" aria-labelledby="sabotageModeTitle" onclick="activateModeCard(event, 'sabotage')" onkeydown="activateModeCard(event, 'sabotage')">
+                <span class="mode-card-icon sabotage-icon" aria-hidden="true">👻</span>
+                <h2 id="sabotageModeTitle">Le Sabotage Fantôme (ignorance active et poison d'algorithme)</h2>
+                <div class="mode-quote">
+                    Ignorance active et poison d'algorithme, sans leur offrir de vues ni d'interactions.
+                </div>
+            </article>
+
             <!-- CARTE : LA BLOCKLIST -->
-            <article class="mode-card">
-                <span class="mode-card-icon" aria-hidden="true">🛡️</span>
-                <h2>Le Barrage Radical (blocklist interactive)</h2>
+            <article class="mode-card" role="button" tabindex="0" aria-labelledby="blocklistModeTitle" aria-describedby="homeBlocklistStatus" onclick="activateModeCard(event, 'blocklist')" onkeydown="activateModeCard(event, 'blocklist')">
+                <span class="mode-card-icon blocklist-icon" aria-hidden="true">🛡️</span>
+                <h2 id="blocklistModeTitle">Le Barrage Radical (blocklist interactive)</h2>
                 <span class="mode-status-pill progress-count" id="homeBlocklistStatus" aria-live="polite">0 / 141 bloqués (0 %)</span>
                 <div class="mode-quote">
                     « Je coupe les ponts et j'assainis mon fil. »
                 </div>
-                <button type="button" class="mode-card-access" onclick="switchMode('blocklist')">
-                    Accéder <span aria-hidden="true">→</span>
-                </button>
             </article>
 
             <!-- MOBILISATION LOCALE -->
-            <article class="mode-card in-progress-card">
-                <span class="mode-card-icon" aria-hidden="true">📍</span>
-                <h2>Trouver une mobilisation près de chez soi</h2>
+            <article class="mode-card in-progress-card" role="button" tabindex="0" aria-labelledby="mobilisationModeTitle" aria-describedby="mobilisationStatus" onclick="activateModeCard(event, 'mobilisation')" onkeydown="activateModeCard(event, 'mobilisation')">
+                <span class="mode-card-icon mobilisation-icon" aria-hidden="true">📍</span>
+                <h2 id="mobilisationModeTitle">Se mobiliser en personne</h2>
                 <span class="mode-status-pill in-progress" id="mobilisationStatus">🚧 En travaux, mais accessible</span>
                 <div class="mode-quote">
-                    Une carte interactive pour repérer les mobilisations et agir près de chez soi.
+                    Participer aux manifestations, rassemblements et actions près de chez soi.
                 </div>
-                <button type="button" class="mode-card-access in-progress" aria-describedby="mobilisationStatus" title="En travaux, mais accessible" onclick="switchMode('mobilisation')">
-                    Accéder <span aria-hidden="true">→</span>
-                </button>
             </article>
 
             <!-- ACTION POLITIQUE ET BOUCLES -->
-            <article class="mode-card in-progress-card">
-                <span class="mode-card-icon" aria-hidden="true">🤝</span>
-                <h2>Rejoindre l'action politique et les boucles</h2>
+            <article class="mode-card in-progress-card" role="button" tabindex="0" aria-labelledby="politiqueModeTitle" aria-describedby="politiqueStatus" onclick="activateModeCard(event, 'politique')" onkeydown="activateModeCard(event, 'politique')">
+                <span class="mode-card-icon politique-icon" aria-hidden="true">🤝</span>
+                <h2 id="politiqueModeTitle">Rejoindre l'action politique et les boucles</h2>
                 <span class="mode-status-pill in-progress" id="politiqueStatus">🚧 En travaux, mais accessible</span>
                 <div class="mode-quote">
-                    Retrouver les collectifs et rejoindre les boucles Action Populaire ou WhatsApp.
+                    Rejoindre les boucles WhatsApp et suivre les canaux de riposte.
                 </div>
-                <button type="button" class="mode-card-access in-progress" aria-describedby="politiqueStatus" title="En travaux, mais accessible" onclick="switchMode('politique')">
-                    Accéder <span aria-hidden="true">→</span>
-                </button>
-            </article>
-
-            <!-- CARTE : LE SABOTAGE FANTÔME -->
-            <article class="mode-card in-progress-card">
-                <span class="mode-card-icon" aria-hidden="true">👻</span>
-                <h2>Le Sabotage Fantôme (ignorance active et poison d'algorithme)</h2>
-                <span class="mode-status-pill in-progress" id="sabotageStatus">🚧 En travaux, mais accessible</span>
-                <div class="mode-quote">
-                    Ignorance active et poison d'algorithme, sans leur offrir de vues ni d'interactions.
-                </div>
-                <button type="button" class="mode-card-access in-progress" aria-describedby="sabotageStatus" title="En travaux, mais accessible" onclick="switchMode('sabotage')">
-                    Accéder <span aria-hidden="true">→</span>
-                </button>
             </article>
 
         </div>
     </main>
 
     <!-- =========================================================
-         VUES MOBILISATION ET POLITIQUE : MODES 1 ET 2
+         VUE : SE MOBILISER EN PERSONNE
          ========================================================= -->
-    <main id="viewPolitique" class="view-section">
+    <main id="viewMobilisation" class="view-section">
         <section class="hero">
-            <div class="kicker">Modes 1 &amp; 2 • Mobilisation locale et action collective</div>
-            <h1>Se mobiliser et rejoindre l'action.</h1>
+            <div class="kicker">Mobilisation locale et action collective</div>
+            <h1>Se mobiliser en personne.</h1>
             <p class="lead">
-                Repère les mobilisations près de chez toi et rejoins les collectifs, plateformes d'organisation et boucles de riposte. Notre force, c'est le nombre et la coordination.
+                Retrouve les manifestations et rassemblements près de chez toi, puis rejoins une action collective sur le terrain.
             </p>
         </section>
         <aside class="mode-work-warning" role="note">
-            <span><strong>Version en travaux, mais accessible.</strong> Ce mode n'est pas finalisé : des bugs importants peuvent empêcher certaines fonctionnalités de fonctionner correctement pour le moment.</span>
+            <span><strong>Version en travaux, mais accessible.</strong> Cette partie n'est pas finalisée : des bugs importants peuvent empêcher certaines fonctionnalités de fonctionner correctement pour le moment.</span>
         </aside>
 
         <div class="tactic-list">
             <div class="tactic-card">
                 <div class="tactic-top">
                     <div class="tactic-title">
-                        <span>1. Plateforme Action Populaire (Groupes locaux & événements)</span>
-                    </div>
-                </div>
-                <p class="tactic-desc">Rejoins un groupe d'action près de chez toi, participe aux campagnes de terrain, aux collages, au porte-à-porte et aux réunions publiques partout en France.</p>
-                <a class="btn-mode-cta" href="https://actionpopulaire.fr/" target="_blank" rel="noopener noreferrer">
-                    <span>Rejoindre Action Populaire ↗</span>
-                </a>
-            </div>
-
-            <div class="tactic-card">
-                <div class="tactic-top">
-                    <div class="tactic-title">
-                        <span>2. Les Boucles WhatsApp & Canaux de Riposte</span>
-                    </div>
-                </div>
-                <p class="tactic-desc">Reçois directement sur ton téléphone les visuels à partager, les arguments de débunkage rapide et les alertes de mobilisation sans dépendre du bon vouloir de l'algorithme de Meta.</p>
-                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
-                    <a class="btn-mode-cta" style="flex:1; min-width:200px;" href="https://actionpopulaire.fr/groupes/" target="_blank" rel="noopener noreferrer">
-                        <span>Trouver une boucle locale ↗</span>
-                    </a>
-                    <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">
-                        <span>Suivre les alertes sur Instagram ↗</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="tactic-card">
-                <div class="tactic-top">
-                    <div class="tactic-title">
-                        <span>3. Cartes des Manifestations & Rassemblements</span>
+                        <span>1. Cartes des manifestations et rassemblements</span>
                     </div>
                 </div>
                 <p class="tactic-desc">Retrouve les horaires et lieux des prochaines manifestations unitaires, rassemblements antifascistes et mobilisations sociales dans ton département.</p>
@@ -1960,6 +1927,59 @@
                     </a>
                     <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://radar.squat.net/fr/events/country/FR" target="_blank" rel="noopener noreferrer">
                         <span>Agenda des luttes locales ↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="tactic-card">
+                <div class="tactic-top">
+                    <div class="tactic-title">
+                        <span>2. Plateforme Action Populaire</span>
+                    </div>
+                </div>
+                <p class="tactic-desc">Rejoins un groupe d'action près de chez toi, participe aux campagnes de terrain, aux collages, au porte-à-porte et aux réunions publiques partout en France.</p>
+                <a class="btn-mode-cta" href="https://actionpopulaire.fr/" target="_blank" rel="noopener noreferrer">
+                    <span>Rejoindre Action Populaire ↗</span>
+                </a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 36px;">
+            <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
+                ← Retourner au portail d'action
+            </button>
+        </div>
+    </main>
+
+    <!-- =========================================================
+         VUE : REJOINDRE L'ACTION POLITIQUE ET LES BOUCLES
+         ========================================================= -->
+    <main id="viewPolitique" class="view-section">
+        <section class="hero">
+            <div class="kicker">Action politique et riposte collective</div>
+            <h1>Rejoindre l'action politique et les boucles.</h1>
+            <p class="lead">
+                Reçois des ressources et des alertes pour participer à la riposte collective et relayer les actions.
+            </p>
+        </section>
+        <aside class="mode-work-warning" role="note">
+            <span><strong>Version en travaux, mais accessible.</strong> Cette partie n'est pas finalisée : des bugs importants peuvent empêcher certaines fonctionnalités de fonctionner correctement pour le moment.</span>
+        </aside>
+
+        <div class="tactic-list">
+            <div class="tactic-card">
+                <div class="tactic-top">
+                    <div class="tactic-title">
+                        <span>Les boucles WhatsApp et canaux de riposte</span>
+                    </div>
+                </div>
+                <p class="tactic-desc">Reçois directement sur ton téléphone les visuels à partager, les arguments de débunkage rapide et les alertes de mobilisation sans dépendre du bon vouloir de l'algorithme de Meta.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+                    <a class="btn-mode-cta" style="flex:1; min-width:200px;" href="https://actionpopulaire.fr/groupes/" target="_blank" rel="noopener noreferrer">
+                        <span>Trouver une boucle locale ↗</span>
+                    </a>
+                    <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">
+                        <span>Suivre les alertes sur Instagram ↗</span>
                     </a>
                 </div>
             </div>
@@ -1979,18 +1999,8 @@
         <section class="hero">
             <h1>La blocklist.</h1>
             <div class="kicker">Barrage radical & hygiène numérique</div>
-            <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="18" cy="5" r="3"></circle>
-                    <circle cx="6" cy="12" r="3"></circle>
-                    <circle cx="18" cy="19" r="3"></circle>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                </svg>
-                <span class="shareBtnTextLabel">Partager</span>
-            </button>
             <p class="lead">Ouvre un profil et bloque le compte sur Instagram si tu le souhaites. Cela peut aider à assainir ton fil, sans garantir une baisse de sa visibilité globale. Marque ensuite le compte comme bloqué pour suivre ta progression.</p>
-            <div class="quick-steps" aria-label="Mode d'emploi rapide">
+            <div class="quick-steps" aria-label="Étapes rapides">
                 <span><strong>1.</strong> Clique sur <a class="btn-ig" href="#" onclick="return false;" aria-label="Aperçu du bouton Instagram">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     <span>Instagram ↗</span>
@@ -2099,10 +2109,6 @@
                 Tu ne veux pas visiter leurs profils ni leur donner un seul clic ? Voici comment retourner les règles d'Instagram contre l'extrême droite. Coche les 5 réflexes ci-dessous pour activer ton protocole d'asphyxie algorithmique :
             </p>
         </section>
-        <aside class="mode-work-warning" role="note">
-            <span><strong>Version en travaux, mais accessible.</strong> Ce mode n'est pas finalisé : des bugs importants peuvent empêcher certaines fonctionnalités de fonctionner correctement pour le moment.</span>
-        </aside>
-
         <div class="tactic-list" id="tacticListContainer"></div>
 
         <div style="text-align: center; margin-bottom: 36px;">
@@ -2615,6 +2621,14 @@
             if (arrow) arrow.innerText = content.classList.contains("open") ? "▲" : "▼";
         }
 
+        function activateModeCard(event, mode) {
+            if (event.type === "keydown") {
+                if (event.key !== "Enter" && event.key !== " ") return;
+                event.preventDefault();
+            }
+            switchMode(mode);
+        }
+
         function switchMode(mode, addHistory = true) {
             if (!["home", "mobilisation", "politique", "sabotage", "blocklist"].includes(mode)) mode = "home";
             const modeChanged = mode !== currentMode;
@@ -2625,14 +2639,15 @@
             }
 
             document.getElementById("viewHome").classList.toggle("active", mode === "home");
-            document.getElementById("viewPolitique").classList.toggle("active", ["mobilisation", "politique"].includes(mode));
+            document.getElementById("viewMobilisation").classList.toggle("active", mode === "mobilisation");
+            document.getElementById("viewPolitique").classList.toggle("active", mode === "politique");
             document.getElementById("viewBlocklist").classList.toggle("active", mode === "blocklist");
             document.getElementById("viewSabotage").classList.toggle("active", mode === "sabotage");
 
             const purposeActionButton = document.getElementById("purposeActionButton");
             if (purposeActionButton) {
                 purposeActionButton.hidden = mode === "home";
-                purposeActionButton.textContent = "Changer de mode d'action";
+                purposeActionButton.textContent = "Retour au choix des actions";
                 purposeActionButton.parentElement.hidden = mode === "home";
             }
 
@@ -2658,11 +2673,15 @@
                 try { await navigator.share(shareData); return; } catch (err) {}
             }
             copyTextFallback(window.location.href);
-            document.querySelectorAll(".shareBtnTextLabel").forEach(el => {
-                const prev = el.innerText;
-                el.innerText = "Lien copié ✓";
-                setTimeout(() => { el.innerText = prev; }, 2200);
-            });
+            const shareButton = document.getElementById("shareBtn");
+            if (shareButton) {
+                shareButton.title = "Lien copié";
+                shareButton.setAttribute("aria-label", "Lien copié");
+                setTimeout(() => {
+                    shareButton.title = "Partager ce site";
+                    shareButton.setAttribute("aria-label", "Partager ce site");
+                }, 2200);
+            }
         }
 
         function toggleExplain() {
@@ -2686,14 +2705,69 @@
             return { icon: "🧭", text: "Prêt·e à commencer", runner: "🏃" };
         }
 
-        function saveState() {
+        function getAccountListPositions() {
+            const positions = new Map();
+            const listMeta = document.querySelector(".list-meta");
+            if (listMeta) positions.set("list-meta", listMeta.getBoundingClientRect().top);
+
+            document.querySelectorAll("#accountList > .row[data-account-handle]").forEach(row => {
+                positions.set(row.dataset.accountHandle, row.getBoundingClientRect().top);
+            });
+            return positions;
+        }
+
+        function animateAccountListReflow(previousPositions) {
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+            const elements = [];
+            const listMeta = document.querySelector(".list-meta");
+            if (listMeta) elements.push(["list-meta", listMeta]);
+            document.querySelectorAll("#accountList > .row[data-account-handle]").forEach(row => {
+                elements.push([row.dataset.accountHandle, row]);
+            });
+
+            const movingElements = [];
+            elements.forEach(([key, element]) => {
+                const previousTop = previousPositions.get(key);
+                if (previousTop === undefined) return;
+                const offset = previousTop - element.getBoundingClientRect().top;
+                if (Math.abs(offset) < 1) return;
+                element.style.transition = "none";
+                element.style.transform = `translateY(${offset}px)`;
+                movingElements.push(element);
+            });
+
+            if (movingElements.length === 0) return;
+            void document.body.offsetHeight;
+
+            requestAnimationFrame(() => {
+                movingElements.forEach(element => {
+                    element.style.transition = "transform 300ms cubic-bezier(0.22, 1, 0.36, 1)";
+                    element.style.transform = "";
+                    const clearTransition = event => {
+                        if (event.propertyName !== "transform") return;
+                        element.style.transition = "";
+                        element.removeEventListener("transitionend", clearTransition);
+                    };
+                    element.addEventListener("transitionend", clearTransition);
+                    setTimeout(() => {
+                        element.style.transition = "";
+                        element.removeEventListener("transitionend", clearTransition);
+                    }, 350);
+                });
+            });
+        }
+
+        function saveState(animateListReflow = false) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(doneHandles));
             if (lastActionHandle) {
                 localStorage.setItem(LAST_HANDLE_KEY, lastActionHandle);
             } else {
                 localStorage.removeItem(LAST_HANDLE_KEY);
             }
+            const previousPositions = animateListReflow ? getAccountListPositions() : null;
             render();
+            if (previousPositions) animateAccountListReflow(previousPositions);
         }
 
         function animateRowToStack(handle, rowEl, callback) {
@@ -2746,7 +2820,7 @@
                     doneHandles = doneHandles.filter(h => h !== handle);
                     doneHandles.push(handle);
                     lastActionHandle = handle;
-                    saveState();
+                    saveState(true);
                 });
             }
         }
@@ -3038,10 +3112,9 @@
                     emptyCard.innerHTML = `
                         <div class="empty-victory-icon">🎉✊</div>
                         <div class="empty-victory-title">Toute la liste est marquée comme bloquée.</div>
-                        <p class="empty-victory-desc">Tu peux retrouver les comptes dans la pile en haut ou choisir un autre mode d'action.</p>
+                        <p class="empty-victory-desc">Tu peux retrouver les comptes dans la pile en haut ou choisir une autre action.</p>
                         <div class="empty-victory-actions">
-                            <button type="button" class="btn-top" onclick="shareSite()">Partager la blocklist</button>
-                            <button type="button" class="btn-top outline" onclick="switchMode('home')">Voir les modes d'action</button>
+                            <button type="button" class="btn-top outline" onclick="switchMode('home')">Choisir une autre action</button>
                         </div>
                     `;
                 } else {
