@@ -171,6 +171,52 @@
             stroke-linejoin: round;
         }
 
+        .top-philosophy {
+            position: fixed;
+            top: 39px;
+            left: 50%;
+            z-index: 70;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            width: min(620px, calc(100% - 140px));
+            padding: 4px 8px;
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            opacity: 0.68;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+        }
+        .top-philosophy::before {
+            content: "";
+            flex: 0 0 5px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--green);
+            opacity: 0.75;
+        }
+        .top-philosophy:hover,
+        .top-philosophy:focus-visible { opacity: 1; }
+        .top-philosophy:focus-visible {
+            outline: 1px solid var(--border);
+            border-radius: 999px;
+        }
+        .top-philosophy-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: opacity 0.18s ease;
+        }
+        .top-philosophy-text.changing { opacity: 0; }
+
         @keyframes themeGlow {
             0%, 100% {
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 7px 2px rgba(var(--theme-glow), 0.1);
@@ -389,28 +435,6 @@
             cursor: pointer;
             transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
         }
-        .mode-card.in-progress-card {
-            border-color: rgba(190, 145, 62, 0.28);
-            background-color: var(--card);
-            background-image: linear-gradient(145deg, rgba(232, 199, 125, 0.11), transparent 58%);
-        }
-        .mode-card.in-progress-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 18%;
-            right: 18%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(190, 145, 62, 0.42), transparent);
-            pointer-events: none;
-        }
-        [data-theme="dark"] .mode-card.in-progress-card {
-            border-color: rgba(243, 207, 117, 0.16);
-            background-image: linear-gradient(145deg, rgba(165, 112, 16, 0.1), transparent 58%);
-        }
-        [data-theme="dark"] .mode-card.in-progress-card::before {
-            background: linear-gradient(90deg, transparent, rgba(243, 207, 117, 0.32), transparent);
-        }
         .mode-card:hover,
         .mode-card:focus-visible {
             transform: translateY(-1px);
@@ -425,19 +449,6 @@
         .mode-card:active {
             transform: scale(0.995);
         }
-        .mode-card.in-progress-card:hover,
-        .mode-card.in-progress-card:focus-visible {
-            border-color: rgba(190, 145, 62, 0.42);
-            background-color: #fff3d6;
-            box-shadow: 0 8px 22px rgba(135, 84, 0, 0.08);
-        }
-        [data-theme="dark"] .mode-card.in-progress-card:hover,
-        [data-theme="dark"] .mode-card.in-progress-card:focus-visible {
-            border-color: rgba(243, 207, 117, 0.3);
-            background-color: rgba(165, 112, 16, 0.24);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
-        }
-
         .mode-card-icon {
             display: block;
             margin-bottom: -2px;
@@ -476,16 +487,6 @@
             padding: 3px 10px;
             border-radius: 99px;
         }
-        .mode-status-pill.in-progress {
-            color: #875400;
-            background: #fff3d6;
-            border-color: #e8c77d;
-        }
-        [data-theme="dark"] .mode-status-pill.in-progress {
-            color: #f3cf75;
-            background: rgba(165, 112, 16, 0.16);
-            border-color: rgba(243, 207, 117, 0.35);
-        }
         .mode-status-pill.progress-count {
             padding: 5px 12px;
             font-size: 0.75rem;
@@ -499,25 +500,6 @@
             text-align: center;
             width: 100%;
             line-height: 1.2;
-        }
-
-        .mode-work-warning {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 14px;
-            padding: 12px 15px;
-            border: 1px solid #e8c77d;
-            border-radius: 12px;
-            background: #fff3d6;
-            color: #624609;
-            font-size: 0.82rem;
-            line-height: 1.5;
-        }
-        [data-theme="dark"] .mode-work-warning {
-            border-color: rgba(243, 207, 117, 0.35);
-            background: rgba(165, 112, 16, 0.16);
-            color: #f3cf75;
         }
 
         .mode-quote {
@@ -1493,6 +1475,31 @@
         }
         .footer-social-link.github svg { fill: currentColor; }
 
+        .share-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            z-index: 300;
+            max-width: min(90vw, 420px);
+            padding: 12px 18px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--card-solid);
+            color: var(--text);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            font-size: 0.88rem;
+            font-weight: 800;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 10px);
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+        .share-toast.visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
         .welcome-screen {
             position: fixed;
             inset: 0;
@@ -1599,7 +1606,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin: 0 auto 14px;
+            margin: 0 auto 22px;
             padding: 12px 20px;
             border: 1px solid var(--green-light);
             border-radius: 999px;
@@ -1631,19 +1638,34 @@
             }
         }
         .welcome-theme-card {
-            margin: 4px auto 8px;
-            padding: 12px 0 0;
-            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin: 4px auto 16px;
+            padding: 20px 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.18s ease;
+        }
+        .welcome-theme-card:hover { border-color: var(--border); }
+        .welcome-theme-card:focus-visible {
+            outline: 2px solid rgba(var(--theme-glow), 0.3);
+            outline-offset: 3px;
         }
         .welcome-theme-heading {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 4px;
         }
-        .welcome-theme-heading h2 {
-            margin: 0;
+        .welcome-theme-title {
             font-size: 0.88rem;
             font-weight: 900;
         }
@@ -1657,35 +1679,28 @@
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
-        .welcome-theme-card p {
-            margin: 0 0 8px;
+        .welcome-theme-description {
             color: var(--muted);
             font-size: 0.76rem;
-            text-align: center;
         }
-        .welcome-theme-button {
-            position: static;
-            z-index: auto;
-            width: fit-content;
-            height: auto;
-            min-height: 42px;
-            margin: 0 auto;
-            padding: 7px 16px;
+        .welcome-theme-current {
+            display: inline-flex;
+            align-items: center;
             gap: 8px;
-            border-radius: 999px;
-            font: inherit;
             font-size: 0.86rem;
             font-weight: 800;
-            border-color: var(--border);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            animation: none;
         }
-        .welcome-theme-button svg { width: 20px; height: 20px; }
-        .welcome-theme-button:hover {
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+        .welcome-theme-current svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         .welcome-card > .welcome-preference {
-            margin: 8px auto 10px;
+            margin: 12px auto 24px;
             padding: 4px 8px;
             border: 0;
             background: transparent;
@@ -1749,6 +1764,13 @@
             .welcome-preference { max-width: 100%; }
             .btn-theme-corner { top: 14px; left: 14px; width: 32px; height: 32px; }
             .btn-share-corner { right: 14px; left: auto; }
+            .top-philosophy {
+                top: 30px;
+                width: calc(100% - 104px);
+                padding: 4px 2px;
+                gap: 5px;
+                font-size: 0.64rem;
+            }
             .brand-blur-zone { margin-top: 38px; margin-bottom: 58px; padding: 10px 16px; }
             .top-actions-bar { border-radius: 22px; padding: 6px 9px; gap: 6px; }
             .hero-bg-banner { height: 340px; }
@@ -1778,6 +1800,7 @@
 <body>
 
     <div class="hero-bg-banner" aria-hidden="true"></div>
+    <div class="share-toast" id="shareToast" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <!-- BOUTON DE CYCLE DES THÈMES -->
     <button type="button" class="btn-theme-corner" onclick="cycleTheme()" id="themeBtn" title="Passer au thème sombre" aria-label="Passer au thème sombre">
@@ -1793,6 +1816,9 @@
             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
         </svg>
+    </button>
+    <button type="button" class="top-philosophy" onclick="openModal('disclaimerModal')" aria-label="À propos du projet et mentions légales">
+        <span class="top-philosophy-text" id="topPhilosophyText">Action collective</span>
     </button>
 
     <header class="top-header">
@@ -1810,19 +1836,19 @@
             <h1 id="welcomeTitle">Bienvenue sur « On bloque l'extrême droite »</h1>
             <p id="welcomeIntro">Un outil d'autodéfense numérique et d'action collective pour reprendre la main sur nos espaces en ligne et soutenir les mobilisations contre l'extrême droite.</p>
             <button type="button" class="welcome-disclaimer-link" onclick="dismissWelcome(); openModal('disclaimerModal')">À propos du projet et mentions légales</button>
-            <section class="welcome-theme-card" aria-labelledby="welcomeThemeTitle">
-                <div class="welcome-theme-heading">
-                    <h2 id="welcomeThemeTitle">Choisir un thème</h2>
+            <button type="button" class="welcome-theme-card" id="welcomeThemeBtn" onclick="cycleTheme()" aria-label="Choisir le thème">
+                <span class="welcome-theme-heading">
+                    <span class="welcome-theme-title">Choisir un thème</span>
                     <span class="welcome-theme-optional">Facultatif</span>
-                </div>
-                <p>Tu pourras le changer à tout moment avec l'icône en haut à gauche.</p>
-                <button type="button" class="btn-theme-corner welcome-theme-button" id="welcomeThemeBtn" onclick="cycleTheme()">
+                </span>
+                <span class="welcome-theme-description">Tu pourras le changer à tout moment avec l'icône en haut à gauche.</span>
+                <span class="welcome-theme-current">
                     <svg id="welcomeThemeSvg" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                     <span id="welcomeThemeLabel">Thème clair</span>
-                </button>
-            </section>
+                </span>
+            </button>
             <label class="welcome-preference">
                 <input type="checkbox" id="hideWelcomeCheckbox" onchange="setWelcomePreference(!this.checked)">
                 <span>Ne plus afficher cet écran</span>
@@ -1876,20 +1902,18 @@
             </article>
 
             <!-- MOBILISATION LOCALE -->
-            <article class="mode-card in-progress-card" role="button" tabindex="0" aria-labelledby="mobilisationModeTitle" aria-describedby="mobilisationStatus" onclick="activateModeCard(event, 'mobilisation')" onkeydown="activateModeCard(event, 'mobilisation')">
+            <article class="mode-card" role="button" tabindex="0" aria-labelledby="mobilisationModeTitle" onclick="activateModeCard(event, 'mobilisation')" onkeydown="activateModeCard(event, 'mobilisation')">
                 <span class="mode-card-icon mobilisation-icon" aria-hidden="true">📍</span>
                 <h2 id="mobilisationModeTitle">Se mobiliser en personne</h2>
-                <span class="mode-status-pill in-progress" id="mobilisationStatus">🚧 En travaux, mais accessible</span>
                 <div class="mode-quote">
                     Participer aux manifestations, rassemblements et actions près de chez soi.
                 </div>
             </article>
 
             <!-- ACTION POLITIQUE ET BOUCLES -->
-            <article class="mode-card in-progress-card" role="button" tabindex="0" aria-labelledby="politiqueModeTitle" aria-describedby="politiqueStatus" onclick="activateModeCard(event, 'politique')" onkeydown="activateModeCard(event, 'politique')">
+            <article class="mode-card" role="button" tabindex="0" aria-labelledby="politiqueModeTitle" onclick="activateModeCard(event, 'politique')" onkeydown="activateModeCard(event, 'politique')">
                 <span class="mode-card-icon politique-icon" aria-hidden="true">🤝</span>
                 <h2 id="politiqueModeTitle">Rejoindre l'action politique et les boucles</h2>
-                <span class="mode-status-pill in-progress" id="politiqueStatus">🚧 En travaux, mais accessible</span>
                 <div class="mode-quote">
                     Rejoindre les boucles WhatsApp et suivre les canaux de riposte.
                 </div>
@@ -1909,10 +1933,6 @@
                 Retrouve les manifestations et rassemblements près de chez toi, puis rejoins une action collective sur le terrain.
             </p>
         </section>
-        <aside class="mode-work-warning" role="note">
-            <span><strong>Version en travaux, mais accessible.</strong> Cette partie n'est pas finalisée : des bugs importants peuvent empêcher certaines fonctionnalités de fonctionner correctement pour le moment.</span>
-        </aside>
-
         <div class="tactic-list">
             <div class="tactic-card">
                 <div class="tactic-top">
@@ -1962,10 +1982,6 @@
                 Reçois des ressources et des alertes pour participer à la riposte collective et relayer les actions.
             </p>
         </section>
-        <aside class="mode-work-warning" role="note">
-            <span><strong>Version en travaux, mais accessible.</strong> Cette partie n'est pas finalisée : des bugs importants peuvent empêcher certaines fonctionnalités de fonctionner correctement pour le moment.</span>
-        </aside>
-
         <div class="tactic-list">
             <div class="tactic-card">
                 <div class="tactic-top">
@@ -1975,11 +1991,11 @@
                 </div>
                 <p class="tactic-desc">Reçois directement sur ton téléphone les visuels à partager, les arguments de débunkage rapide et les alertes de mobilisation sans dépendre du bon vouloir de l'algorithme de Meta.</p>
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
-                    <a class="btn-mode-cta" style="flex:1; min-width:200px;" href="https://actionpopulaire.fr/groupes/" target="_blank" rel="noopener noreferrer">
-                        <span>Trouver une boucle locale ↗</span>
+                    <a class="btn-mode-cta" style="flex:1; min-width:200px;" href="https://www.whatsapp.com/channel/0029VbDuBhQ2Jl8E7JiZEu1Y" target="_blank" rel="noopener noreferrer">
+                        <span>Rejoindre la chaîne WhatsApp ↗</span>
                     </a>
                     <a class="btn-mode-cta secondary" style="flex:1; min-width:200px;" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">
-                        <span>Suivre les alertes sur Instagram ↗</span>
+                        <span>Suivre sur Instagram ↗</span>
                     </a>
                 </div>
             </div>
@@ -2541,6 +2557,42 @@
         const THEME_OPTIONS = ["light", "dark", "empowerment"];
         let savedTheme = localStorage.getItem(THEME_KEY);
         let currentTheme = THEME_OPTIONS.includes(savedTheme) ? savedTheme : "light";
+        let shareToastTimeout;
+        const philosophyMessages = [
+            "Action collective",
+            "Choix libre",
+            "Gratuit et accessible",
+            "Sans compte",
+            "Progression sur l'appareil",
+            "Aucun traqueur",
+            "Code sur GitHub",
+            "Autodéfense numérique"
+        ];
+
+        function startPhilosophyTicker() {
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            const text = document.getElementById("topPhilosophyText");
+            if (!text) return;
+
+            let messageIndex = 0;
+            setInterval(() => {
+                text.classList.add("changing");
+                setTimeout(() => {
+                    messageIndex = (messageIndex + 1) % philosophyMessages.length;
+                    text.textContent = philosophyMessages[messageIndex];
+                    text.classList.remove("changing");
+                }, 180);
+            }, 2000);
+        }
+
+        function showShareToast(message) {
+            const toast = document.getElementById("shareToast");
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add("visible");
+            clearTimeout(shareToastTimeout);
+            shareToastTimeout = setTimeout(() => toast.classList.remove("visible"), 2600);
+        }
 
         function copyTextFallback(text) {
             const ta = document.createElement("textarea");
@@ -2549,8 +2601,15 @@
             ta.style.opacity = "0";
             document.body.appendChild(ta);
             ta.select();
-            try { document.execCommand("copy"); } catch (e) {}
-            document.body.removeChild(ta);
+            let copied = false;
+            try {
+                copied = document.execCommand("copy");
+            } catch (error) {
+                copied = false;
+            } finally {
+                document.body.removeChild(ta);
+            }
+            return copied;
         }
 
         function applyTheme() {
@@ -2670,18 +2729,28 @@
             };
 
             if (navigator.share) {
-                try { await navigator.share(shareData); return; } catch (err) {}
+                try {
+                    if (!navigator.canShare || navigator.canShare(shareData)) {
+                        await navigator.share(shareData);
+                        return;
+                    }
+                } catch (error) {
+                    if (error?.name === "AbortError") return;
+                }
             }
-            copyTextFallback(window.location.href);
-            const shareButton = document.getElementById("shareBtn");
-            if (shareButton) {
-                shareButton.title = "Lien copié";
-                shareButton.setAttribute("aria-label", "Lien copié");
-                setTimeout(() => {
-                    shareButton.title = "Partager ce site";
-                    shareButton.setAttribute("aria-label", "Partager ce site");
-                }, 2200);
+
+            let copied = false;
+            if (navigator.clipboard?.writeText) {
+                try {
+                    await navigator.clipboard.writeText(shareData.url);
+                    copied = true;
+                } catch (error) {
+                    copied = copyTextFallback(shareData.url);
+                }
+            } else {
+                copied = copyTextFallback(shareData.url);
             }
+            showShareToast(copied ? "Lien copié" : "Impossible de copier le lien. Copie l’adresse depuis la barre du navigateur.");
         }
 
         function toggleExplain() {
@@ -3376,6 +3445,7 @@
         applyTheme();
         switchMode("home", false);
         window.history.replaceState({ mode: currentMode }, "", window.location.href);
+        startPhilosophyTicker();
         if (showWelcome) document.getElementById("welcomeEnterButton").focus();
         fetchWikimediaAvatars();
     </script>
