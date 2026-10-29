@@ -255,11 +255,22 @@
 
         .brand-blur-zone {
             position: relative;
+            display: block;
             padding: 12px 26px;
             margin-top: 52px; /* Descendu pour s'aligner avec l'étoile de l'image */
             margin-bottom: 82px;
             border-radius: 22px;
             max-width: 100%;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            text-align: center;
+            cursor: pointer;
+        }
+        .brand-blur-zone:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 4px;
         }
 
         .brand-blur-zone::before {
@@ -284,7 +295,6 @@
             color: var(--text);
             line-height: 1.05;
             text-shadow: 0 2px 16px rgba(var(--bg-rgb), 0.98);
-            cursor: pointer;
         }
 
         /* Barre d'actions compacte qui englobe uniquement ses boutons */
@@ -431,26 +441,6 @@
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
         }
 
-        .mode-card-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            width: 100%;
-        }
-
-        .mode-badge {
-            font-size: 0.69rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 3px 10px;
-            border-radius: 99px;
-            background: var(--pill-bg);
-            color: var(--pill-text);
-        }
-
         .mode-status-pill {
             font-size: 0.72rem;
             font-weight: 800;
@@ -497,7 +487,7 @@
             align-items: center;
             gap: 7px;
             align-self: center;
-            margin-top: 4px;
+            margin-top: 8px;
             padding: 8px 18px;
             border: 1px solid var(--border);
             border-radius: 999px;
@@ -675,6 +665,13 @@
             line-height: 1.08;
             margin-bottom: 6px;
             color: var(--text);
+        }
+
+        .mode-selector-emoji {
+            display: block;
+            margin: 0 auto 8px;
+            font-size: clamp(3.5rem, 12vw, 5rem);
+            line-height: 1;
         }
 
         .hero .kicker {
@@ -1075,40 +1072,49 @@
             flex-direction: column;
         }
         .stack-container.collapsed .row.stack-item {
-            width: calc(100% - 28px);
-            padding: 9px 10px;
-            gap: 7px;
+            position: absolute;
+            box-sizing: border-box;
+            height: 48px;
+            padding: 6px 11px;
+            overflow: hidden;
+            gap: 0;
+            pointer-events: none;
+            transition: top 0.25s ease, left 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
         }
         .stack-container.collapsed .row.stack-item .avatar-circle {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             font-size: 1rem;
         }
-        .stack-container.collapsed .row.stack-item .name { font-size: 0.86rem; }
-        .stack-container.collapsed .row.stack-item .handle { font-size: 0.73rem; }
-        .stack-container.collapsed .row.stack-item .fact-note { display: none; }
-        .stack-container.collapsed .row.stack-depth-0 {
-            z-index: 1;
-            transform: translate(0, 0);
+        .stack-container.collapsed .row.stack-item .row-top {
+            height: 100%;
+            align-items: center;
         }
-        .stack-container.collapsed .row.stack-depth-1 {
-            z-index: 2;
-            margin-top: -108px;
-            transform: translate(9px, 8px);
-            opacity: 0.85;
-            pointer-events: none;
+        .stack-container.collapsed .row.stack-item .row-profile-left {
+            align-items: center;
         }
-        .stack-container.collapsed .row.stack-depth-2 {
-            z-index: 3;
-            margin-top: -108px;
-            transform: translate(18px, 16px);
-            opacity: 0.9;
-            pointer-events: none;
+        .stack-container.collapsed .row.stack-item .row-info {
+            overflow: hidden;
         }
-        .stack-container.collapsed .row.stack-depth-3 {
-            z-index: 4;
-            margin-top: -108px;
-            transform: translate(27px, 24px);
+        .stack-container.collapsed .row.stack-item .row-header {
+            min-width: 0;
+            flex-wrap: nowrap;
+        }
+        .stack-container.collapsed .row.stack-item .name {
+            overflow: hidden;
+            color: var(--text);
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        .stack-container.collapsed .row.stack-item .handle,
+        .stack-container.collapsed .row.stack-item .fact-note,
+        .stack-container.collapsed .row.stack-item .tag,
+        .stack-container.collapsed .row.stack-item .btn-flag,
+        .stack-container.collapsed .row.stack-item .row-actions,
+        .stack-container.collapsed .row.stack-item .persistent-last-badge {
+            display: none;
         }
         .stack-container.collapsed .row.stack-item {
             background: var(--green-solid);
@@ -1678,6 +1684,44 @@
             font-size: 0.95rem;
         }
         .disclaimer-modal .modal { max-width: 620px; max-height: min(86vh, 760px); overflow-y: auto; }
+        .disclaimer-modal .modal-header {
+            position: relative;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .disclaimer-modal .modal-title { text-align: center; }
+        .disclaimer-modal .modal-close {
+            position: absolute;
+            right: 0;
+        }
+        .disclaimer-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .disclaimer-section h3 {
+            margin-bottom: 7px;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.015em;
+        }
+        .disclaimer-section p {
+            color: var(--muted);
+            font-size: 0.86rem;
+            line-height: 1.6;
+        }
+        .disclaimer-section p + p { margin-top: 9px; }
+        .disclaimer-section strong { color: var(--text); }
+        .welcome-disclaimer-title {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .welcome-card .disclaimer-copy {
+            gap: 20px;
+            margin-bottom: 4px;
+        }
+        .welcome-card .disclaimer-section h3 { font-size: 1.04rem; }
 
         @media (max-width: 520px) {
             .btn-theme-corner { top: 14px; left: 14px; width: 32px; height: 32px; }
@@ -1688,9 +1732,14 @@
             .btn-search-add { padding: 10px 14px; width: 100%; }
             .row-actions { width: 100%; justify-content: space-between; }
             .btn-check, .btn-ig { flex: 1; padding: 10px 12px; font-size: 0.8rem; }
-            .stack-container.collapsed .row.stack-depth-1 { margin-top: -112px; }
-            .stack-container.collapsed .row.stack-depth-2 { margin-top: -112px; }
-            .stack-container.collapsed .row.stack-depth-3 { margin-top: -112px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
@@ -1706,9 +1755,9 @@
     </button>
 
     <header class="top-header">
-        <div class="brand-blur-zone" onclick="switchMode('home')" title="Retourner au portail d'accueil">
-            <div class="brand-title">ON BLOQUE L'EXTRÊME DROITE</div>
-        </div>
+        <button type="button" class="brand-blur-zone" onclick="switchMode('home')" aria-label="Retourner au portail d'accueil">
+            <span class="brand-title">ON BLOQUE L'EXTRÊME DROITE</span>
+        </button>
         <div class="top-actions-bar">
             <button type="button" class="btn-top disclaimer-button" onclick="openModal('disclaimerModal')">ℹ️ Disclaimer</button>
             <button type="button" class="btn-top purpose-button" id="purposeActionButton" onclick="switchMode('home')" hidden>✊ Changer de mode d'action</button>
@@ -1720,21 +1769,32 @@
             <span class="welcome-eyebrow">Avant de commencer</span>
             <h1 id="welcomeTitle">Bienvenue sur « On bloque l'extrême droite »</h1>
             <p id="welcomeIntro">Un outil d'autodéfense numérique et d'action collective pour reprendre la main sur nos espaces en ligne et soutenir les mobilisations contre l'extrême droite.</p>
-            <h2 class="welcome-disclaimer-title">Quelques repères sur le projet</h2>
+            <h2 class="welcome-disclaimer-title">Disclaimer &amp; mentions</h2>
             <div class="disclaimer-copy"></div>
             <label class="welcome-preference">
                 <input type="checkbox" id="hideWelcomeCheckbox" onchange="setWelcomePreference(!this.checked)">
                 <span>Ne plus afficher cet écran</span>
             </label>
-            <button type="button" class="btn-mode-cta welcome-enter" onclick="dismissWelcome()">✊ Passer à l'action</button>
+            <button type="button" class="btn-mode-cta welcome-enter" id="welcomeEnterButton" onclick="dismissWelcome()">✊ Passer à l'action</button>
         </div>
     </section>
 
     <template id="disclaimerTextTemplate">
-        <p><strong>Le projet :</strong> « On bloque l'extrême droite » est un outil citoyen d'autodéfense algorithmique. Il propose plusieurs pistes pour réduire la visibilité des contenus d'extrême droite, assainir son fil et rejoindre des actions collectives. Le blocage reste une action simple et facile à réaliser, mais son impact est faible et ce n'est pas la méthode la plus performante.</p>
-        <p><strong>Transparence :</strong> le site a été créé avec l'aide de l'intelligence artificielle par une personne qui n'est pas informaticienne. Il est gratuit et les données de progression restent 100 % locales, sur ton appareil : aucun compte ni traqueur, et aucune donnée de progression envoyée à un serveur. Les miniatures d'avatar, lorsqu'elles sont disponibles, sont demandées à l'API Wikimedia Commons.</p>
-        <p><strong>Inspirations et crédits :</strong> démarche inspirée de la campagne menée au Brésil et de <em>Mise au Poing</em>. Site créé par <a href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@henrilubszynski</a>. Le <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">code source est disponible sur GitHub</a>.</p>
-        <p>Les modes d'action présentés sont des propositions : chacun·e reste libre de choisir celles qui lui conviennent. Les informations des fiches sont données à titre indicatif et peuvent être signalées ou corrigées depuis le site.</p>
+        <section class="disclaimer-section">
+            <h3>Le projet</h3>
+            <p>« On bloque l'extrême droite » est un <strong>outil</strong> citoyen d'autodéfense algorithmique. Il propose plusieurs pistes pour assainir son fil et rejoindre des actions collectives. Le blocage reste une action simple, mais son effet sur la visibilité globale des comptes n'est pas garanti. Pas besoin d'être informaticien·ne ou <strong>hacker</strong> pour s'en servir.</p>
+            <p>Les modes d'action sont des propositions : chacun·e reste libre de choisir celles qui lui conviennent. Les informations des fiches sont données à titre indicatif et peuvent être signalées ou corrigées depuis le site.</p>
+        </section>
+        <section class="disclaimer-section">
+            <h3>Transparence</h3>
+            <p>Le site a été créé avec l'aide de l'<strong>intelligence artificielle</strong>. Il est gratuit et ne nécessite pas de compte.</p>
+            <p>La progression bénéficie d'un <strong>stockage local</strong> : tes données restent sur ton appareil. Aucun traqueur n'est utilisé et aucune donnée de progression n'est envoyée à un <strong>serveur</strong>.</p>
+            <p>Les miniatures d'avatar, lorsqu'elles sont disponibles, sont récupérées via l'<strong>API Wikipédia</strong> ; certaines images peuvent provenir de <strong>Wikimedia Commons</strong>.</p>
+        </section>
+        <section class="disclaimer-section">
+            <h3>Inspirations et crédits</h3>
+            <p>Démarche inspirée de la campagne menée au Brésil et de <em>Mise au Poing</em>. Site créé par <a href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer">@henrilubszynski</a>. Le <a href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer">code source est disponible sur GitHub</a>.</p>
+        </section>
     </template>
 
     <!-- =========================================================
@@ -1752,69 +1812,58 @@
                 </svg>
                 <span class="shareBtnTextLabel">Partager l'outil</span>
             </button>
+            <span class="mode-selector-emoji" aria-hidden="true">✊</span>
             <h1>Choisis ton mode d'action.</h1>
         </section>
 
         <div class="mode-cards-grid">
             <!-- MODE 1 : MOBILISATION LOCALE -->
             <article class="mode-card">
-                <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°1</span>
-                    <span class="mode-status-pill in-progress">🚧 En travaux, mais accessible</span>
-                </div>
-                <h2>📍 Trouver une mobilisation près de chez soi</h2>
+                <h2>Trouver une mobilisation près de chez soi</h2>
                 <div class="mode-quote">
                     Une carte interactive pour repérer les mobilisations et agir près de chez soi.
                 </div>
                 <button type="button" class="mode-card-access" onclick="switchMode('mobilisation')">
                     Accéder <span aria-hidden="true">→</span>
                 </button>
+                <span class="mode-status-pill in-progress">🚧 En travaux, mais accessible</span>
             </article>
 
             <!-- MODE 2 : ACTION POLITIQUE ET BOUCLES -->
             <article class="mode-card">
-                <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°2</span>
-                    <span class="mode-status-pill in-progress">🚧 En travaux, mais accessible</span>
-                </div>
-                <h2>🤝 Rejoindre l'action politique et les boucles</h2>
+                <h2>Rejoindre l'action politique et les boucles</h2>
                 <div class="mode-quote">
                     Retrouver les collectifs et rejoindre les boucles Action Populaire ou WhatsApp.
                 </div>
                 <button type="button" class="mode-card-access" onclick="switchMode('politique')">
                     Accéder <span aria-hidden="true">→</span>
                 </button>
+                <span class="mode-status-pill in-progress">🚧 En travaux, mais accessible</span>
             </article>
 
             <!-- CARTE MODE 3 : LE SABOTAGE FANTÔME -->
             <article class="mode-card">
-                <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°3</span>
-                    <span class="mode-status-pill in-progress">🚧 En travaux, mais accessible</span>
-                </div>
-                <h2>👻 Le Sabotage Fantôme (ignorance active et poison d'algorithme)</h2>
+                <h2>Le Sabotage Fantôme (ignorance active et poison d'algorithme)</h2>
                 <div class="mode-quote">
                     Ignorance active et poison d'algorithme, sans leur offrir de vues ni d'interactions.
                 </div>
                 <button type="button" class="mode-card-access" onclick="switchMode('sabotage')">
                     Accéder <span aria-hidden="true">→</span>
                 </button>
+                <span class="mode-status-pill in-progress">🚧 En travaux, mais accessible</span>
             </article>
 
             <!-- CARTE MODE 4 : LA BLOCKLIST -->
             <article class="mode-card">
-                <div class="mode-card-header">
-                    <span class="mode-badge">Mode d'action n°4</span>
-                    <span class="mode-status-pill" id="homeBlocklistStatus">0 / 138 bloqués</span>
-                </div>
-                <h2>🛡️ Le Barrage Radical (blocklist interactive)</h2>
+                <h2>Le Barrage Radical (blocklist interactive)</h2>
                 <div class="mode-quote">
                     « Je coupe les ponts et j'assainis mon fil. »
                 </div>
-                <p class="mode-impact-note"><strong>✅ Mode d'action 100 % fonctionnel.</strong> Une action facile et simple à mettre en place, mais pas la plus performante : son impact reste faible.</p>
                 <button type="button" class="mode-card-access" onclick="switchMode('blocklist')">
                     Accéder <span aria-hidden="true">→</span>
                 </button>
+                <p class="mode-impact-note"><strong>✅ Mode d'action 100 % fonctionnel.</strong> Une action facile et simple à mettre en place, mais pas la plus performante : son impact reste faible.</p>
+                <span class="mode-status-pill" id="homeBlocklistStatus">0 / 138 bloqués</span>
             </article>
 
         </div>
@@ -1910,7 +1959,7 @@
                 </svg>
                 <span class="shareBtnTextLabel">Partager</span>
             </button>
-            <p class="lead">Ouvre chaque profil, bloque-le sur Instagram, et réduisons leur portée à néant. Les comptes bloqués montent s'empiler en haut et libèrent ta liste au fur et à mesure.</p>
+            <p class="lead">Ouvre un profil et bloque le compte sur Instagram si tu le souhaites. Cela peut aider à assainir ton fil, sans garantir une baisse de sa visibilité globale. Marque ensuite le compte comme bloqué pour suivre ta progression.</p>
             <div class="quick-steps" aria-label="Mode d'emploi rapide">
                 <span><strong>1.</strong> Clique sur <a class="btn-ig" href="#" onclick="return false;" aria-label="Aperçu du bouton Instagram">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -1932,7 +1981,7 @@
                 <p>Cette stratégie d'autodéfense numérique nous vient directement du <strong>Brésil</strong> et du mouvement <strong>#BlockOut</strong> :</p>
                 <ul>
                     <li><strong>Le piège de l'algorithme :</strong> Sur Instagram, commenter sous un post d'extrême droite pour le contredire, s'indigner ou clasher est interprété par l'algorithme de Meta comme un fort taux d'engagement. Résultat : la plateforme propulse encore plus leurs vidéos auprès du grand public et des indécis.</li>
-                    <li><strong>L'impact mécanique du blocage :</strong> Le blocage est le signal négatif ultime pour l'algorithme. Bloquer un compte coupe non seulement toute recommandation vers ton réseau d'amis proches, mais un pic coordonné de milliers de blocages fait chuter drastiquement le score de visibilité global du profil.</li>
+                    <li><strong>L'effet du blocage :</strong> Bloquer un compte limite son exposition depuis ton profil et peut influencer tes recommandations. L'effet sur la visibilité globale du compte n'est pas garanti et dépend de la plateforme et des autres personnes.</li>
                 </ul>
             </div>
         </div>
@@ -1957,7 +2006,7 @@
                     </div>
                 </div>
                 <div class="progress-section">
-                    <div class="progress-track">
+                    <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Progression des comptes bloqués" aria-valuemin="0" aria-valuemax="138" aria-valuenow="0" aria-valuetext="0 sur 138 comptes bloqués">
                         <div class="progress-fill" id="progressBar">
                             <span class="progress-runner" id="progressRunner" title="En route !">🏃</span>
                         </div>
@@ -1976,16 +2025,16 @@
         <!-- CASE DE RECHERCHE AVEC "+ IL MANQUE QUELQU'UN ?" À DROITE + FILTRES EN DESSOUS -->
         <div class="search-and-filters">
             <div class="search-bar">
-                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un nom, @pseudo, fait marquant ou étiquette..." oninput="render()">
+                <input type="text" id="searchInput" class="search-input" aria-label="Rechercher un compte par nom, pseudo, fait marquant ou étiquette" placeholder="Rechercher un nom, @pseudo, fait marquant ou étiquette..." oninput="render()">
                 <button type="button" class="btn-search-add" onclick="openModal('suggestModal')">+ Il manque quelqu'un ?</button>
             </div>
             <div class="filter-row" id="filterRow">
-                <button type="button" class="pill active" onclick="setFilter('all', this)">Tout voir</button>
-                <button type="button" class="pill" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
-                <button type="button" class="pill" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
-                <button type="button" class="pill" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
-                <button type="button" class="pill" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
-                <button type="button" class="pill" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
+                <button type="button" class="pill active" aria-pressed="true" onclick="setFilter('all', this)">Tout voir</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setFilter('Extrême droite', this)">Extrême droite</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setFilter('Droite / Macronie', this)">Droite & Macronie</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setFilter('Fachosphère', this)">Fachosphère</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setFilter('Médias & Éditos', this)">Médias & Éditos</button>
+                <button type="button" class="pill" aria-pressed="false" onclick="setFilter('Empire Bolloré & Co', this)">Empire Bolloré & Co</button>
             </div>
         </div>
 
@@ -2002,7 +2051,7 @@
 
         <!-- LISTE PRINCIPALE : UNIQUEMENT LES COMPTES RESTANTS À TRAITER -->
         <div class="list-meta">
-            <span id="visibleCount">0 comptes restants à bloquer</span>
+            <span id="visibleCount" aria-live="polite" aria-atomic="true">0 comptes restants à bloquer</span>
             <span>🏳️ Signaler une erreur sur une fiche</span>
         </div>
 
@@ -2036,30 +2085,31 @@
     <div class="bottom-scroll-veil" id="bottomScrollVeil" aria-hidden="true"></div>
 
     <!-- MODALES -->
-    <div class="modal-backdrop" id="suggestModal">
+    <div class="modal-backdrop" id="suggestModal" role="dialog" aria-modal="true" aria-labelledby="suggestModalTitle">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title">+ Il manque quelqu'un ?</span>
-                <button type="button" class="modal-close" onclick="closeModal('suggestModal')">×</button>
+                <span class="modal-title" id="suggestModalTitle" tabindex="-1">+ Il manque quelqu'un ?</span>
+                <button type="button" class="modal-close" onclick="closeModal('suggestModal')" aria-label="Fermer">×</button>
             </div>
             <div class="criteria-box">
                 <strong>Critères d'ajout :</strong> Personnalité politique, éditorialiste, influenceur ou média public (droite, extrême droite, relais réactionnaire). Pas de compte privé ni de particulier.
             </div>
+            <p class="field-hint">Le bouton ouvre un brouillon sur GitHub : il faudra encore le vérifier et le publier. Autorise les pop-ups si le brouillon ne s'ouvre pas.</p>
             <div class="form-group">
-                <label>Nom de la personne ou du média</label>
+                <label for="sugName">Nom de la personne ou du média</label>
                 <input type="text" id="sugName" class="form-control" placeholder="Ex: Laurent Jacobelli">
             </div>
             <div class="form-group">
-                <label>Pseudo ou lien Instagram</label>
+                <label for="sugHandle">Pseudo ou lien Instagram</label>
                 <input type="text" id="sugHandle" class="form-control" placeholder="Ex: @laurentjacobelli ou lien instagram.com/..." oninput="validateIgInput(this)">
                 <div class="field-hint" id="sugHandleHint">Colle un @pseudo ou un lien Instagram complet, il sera nettoyé automatiquement.</div>
             </div>
             <div class="form-group">
-                <label>Fait marquant en quelques mots (optionnel)</label>
+                <label for="sugFact">Fait marquant en quelques mots (optionnel)</label>
                 <input type="text" id="sugFact" class="form-control" placeholder="Ex: Condamnation, propos, affaire...">
             </div>
             <div class="form-group">
-                <label>Étiquette politique</label>
+                <label for="sugTag">Étiquette politique</label>
                 <select id="sugTag" class="form-control">
                     <option value="Extrême droite — RN / Reconquête / Alliés">Extrême droite (RN, Reconquête, Alliés...)</option>
                     <option value="Droite / Macronie — Droite réac / Libérale">Droite / Macronie (LR, ministres, droite dure...)</option>
@@ -2068,42 +2118,43 @@
                     <option value="Empire Bolloré & Co — Groupe / Édition">Empire Bolloré & Co (Chaîne, magazine, édition...)</option>
                 </select>
             </div>
-            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSuggestion()">Envoyer la proposition sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSuggestion()">Ouvrir le brouillon sur GitHub ↗</button>
         </div>
     </div>
 
-    <div class="modal-backdrop" id="siteFeedbackModal">
+    <div class="modal-backdrop" id="siteFeedbackModal" role="dialog" aria-modal="true" aria-labelledby="siteFeedbackModalTitle">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title">💡 Aide-nous à améliorer le site</span>
-                <button type="button" class="modal-close" onclick="closeModal('siteFeedbackModal')">×</button>
+                <span class="modal-title" id="siteFeedbackModalTitle" tabindex="-1">💡 Aide-nous à améliorer le site</span>
+                <button type="button" class="modal-close" onclick="closeModal('siteFeedbackModal')" aria-label="Fermer">×</button>
             </div>
             <div class="criteria-box">
-                Une idée d'amélioration, un bug d'affichage ou une suggestion de design ? Envoie ton message directement via GitHub.
+                Une idée d'amélioration, un bug d'affichage ou une suggestion de design ? Le bouton ouvre un brouillon sur GitHub : il faudra encore le vérifier et le publier. Autorise les pop-ups si le brouillon ne s'ouvre pas.
             </div>
             <div class="form-group">
-                <label>Sujet de ta suggestion</label>
+                <label for="fbTitle">Sujet de ta suggestion</label>
                 <input type="text" id="fbTitle" class="form-control" placeholder="Ex: Idée pour les filtres / Bug mobile...">
             </div>
             <div class="form-group">
-                <label>Ton message ou ta proposition</label>
+                <label for="fbBody">Ton message ou ta proposition</label>
                 <textarea id="fbBody" class="form-control" rows="4" placeholder="Décris ton idée d'amélioration ici..."></textarea>
             </div>
-            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSiteFeedback()">Envoyer sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitSiteFeedback()">Ouvrir le brouillon sur GitHub ↗</button>
         </div>
     </div>
 
-    <div class="modal-backdrop" id="reportModal">
+    <div class="modal-backdrop" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title">🏳️ Signaler une erreur</span>
-                <button type="button" class="modal-close" onclick="closeModal('reportModal')">×</button>
+                <span class="modal-title" id="reportModalTitle" tabindex="-1">🏳️ Signaler une erreur</span>
+                <button type="button" class="modal-close" onclick="closeModal('reportModal')" aria-label="Fermer">×</button>
             </div>
             <div class="criteria-box" id="reportTargetInfo">
                 Compte concerné : ...
             </div>
+            <p class="field-hint">Le bouton ouvre un brouillon sur GitHub : il faudra encore le vérifier et le publier. Autorise les pop-ups si le brouillon ne s'ouvre pas.</p>
             <div class="form-group">
-                <label>Nature du problème</label>
+                <label for="repReason">Nature du problème</label>
                 <select id="repReason" class="form-control">
                     <option value="Lien / @pseudo Instagram cassé ou modifié">Lien / @pseudo Instagram cassé ou modifié</option>
                     <option value="Compte déjà supprimé ou banni">Compte déjà supprimé ou banni</option>
@@ -2112,21 +2163,21 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Précisions (nouveau pseudo, source...)</label>
+                <label for="repDetails">Précisions (nouveau pseudo, source...)</label>
                 <input type="text" id="repDetails" class="form-control" placeholder="Ex: Son nouveau pseudo est @...">
             </div>
-            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitReport()">Transmettre le signalement sur GitHub ↗</button>
+            <button type="button" class="btn-top" style="width:100%; justify-content:center; padding: 11px; font-size:0.88rem;" onclick="submitReport()">Ouvrir le brouillon sur GitHub ↗</button>
         </div>
     </div>
 
-    <div class="modal-backdrop" id="resetConfirmModal">
+    <div class="modal-backdrop" id="resetConfirmModal" role="dialog" aria-modal="true" aria-labelledby="resetConfirmModalTitle">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title">🔄 Réinitialiser la progression ?</span>
-                <button type="button" class="modal-close" onclick="closeResetModal(event)">×</button>
+                <span class="modal-title" id="resetConfirmModalTitle" tabindex="-1">🔄 Réinitialiser la progression ?</span>
+                <button type="button" class="modal-close" onclick="closeResetModal(event)" aria-label="Fermer">×</button>
             </div>
             <div class="criteria-box" style="margin-bottom: 6px;">
-                Veux-tu vraiment remettre ton compteur à zéro ? Tous les comptes cochés sur cet appareil repasseront dans la liste « À faire ».
+                Veux-tu vraiment remettre ton compteur à zéro ? Tous les comptes marqués comme bloqués sur cet appareil repasseront dans la liste « À faire ».
             </div>
             <div class="modal-actions-row">
                 <button type="button" class="btn-modal-cancel" onclick="closeResetModal(event)">Annuler</button>
@@ -2138,7 +2189,7 @@
     <div class="modal-backdrop disclaimer-modal" id="disclaimerModal" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle" onclick="if(event.target === this) closeModal('disclaimerModal')">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title" id="disclaimerTitle">ℹ️ Disclaimer & mentions</span>
+                <span class="modal-title" id="disclaimerTitle" tabindex="-1">ℹ️ Disclaimer & mentions</span>
                 <button type="button" class="modal-close" onclick="closeModal('disclaimerModal')" aria-label="Fermer">×</button>
             </div>
             <div class="disclaimer-copy"></div>
@@ -2391,28 +2442,28 @@
                 icon: "🚪",
                 title: "1. Le « Tueur de Session » (Fermer l'application)",
                 desc: "Dès qu'un Reel ou un post de l'extrême droite ou de CNews apparaît sur ton fil : ne regarde pas plus d'une seconde, ne lis pas les commentaires, et ferme brutalement l'application Instagram pendant au moins 1 minute.",
-                why: "L'objectif n°1 d'Instagram est de te garder sur l'appli pour te vendre des pubs. Une vidéo qui provoque la fermeture de l'application (Session Termination) reçoit la pire pénalité algorithmique possible."
+                why: "La durée de visionnage et les interactions peuvent influencer les recommandations. Meta ne publie pas le poids exact de ces signaux : fermer l'application ne garantit pas de réduire la portée d'un compte."
             },
             {
                 id: "tactic_zero_clash",
                 icon: "🤐",
                 title: "2. La Règle du Zéro Absolu (Silence de plomb)",
                 desc: "Ne commente jamais sous leurs publications (même pour les débunker ou les clasher), ne clique jamais sur « Voir plus » dans leurs légendes, et ne partage jamais leurs posts en message privé (DM) pour t'en indigner.",
-                why: "Pour l'algorithme de Meta, un partage en DM suivi d'une discussion ou un commentaire indigné vaut jusqu'à 5 fois plus de points de viralité qu'un simple like."
+                why: "Les interactions peuvent influencer les recommandations, mais leur poids exact n'est pas public. Éviter de commenter ou partager limite surtout les interactions de ton propre compte avec ces contenus."
             },
             {
                 id: "tactic_screenshot",
                 icon: "📸",
                 title: "3. La Capture d'Écran au lieu du Partage",
                 desc: "Si tu dois absolument dénoncer une dinguerie en Story ou dans un groupe, fais une capture d'écran (en barrant ou floutant le @pseudo) au lieu d'utiliser le bouton de partage d'Instagram.",
-                why: "Tu informes ton entourage sans offrir la moindre statistique de partage ni inciter des curieux à aller chercher le compte original."
+                why: "Une capture évite d'utiliser le partage intégré et peut limiter les interactions directes avec le compte. Elle ne permet toutefois pas de garantir ni de mesurer son effet sur la portée globale."
             },
             {
                 id: "tactic_muted_words",
                 icon: "🔇",
                 title: "4. Le Filtre des « Mots Masqués » d'Instagram",
-                desc: "Va dans Paramètres Instagram → Contenu suggéré → Mots et expressions spécifiques, et colle la liste des mots-clés ci-dessous pour étouffer organiquement leurs recommandations sans visiter leurs profils.",
-                why: "Cela indique directement au moteur de recommandation que tu refuses cette thématique, réduisant la portée organique globale de ces sujets.",
+                desc: "Va dans Paramètres Instagram → Contenu suggéré → Mots et expressions spécifiques, et ajoute les mots-clés ci-dessous pour ajuster les contenus suggérés sur ton compte.",
+                why: "Les mots masqués personnalisent les contenus affichés sur ton compte. Leur effet sur les recommandations globales n'est pas garanti.",
                 keywords: "Bardella, Zemmour, CNews, Frontières, Reconquête, Marion Maréchal, Hanouna, Valeurs actuelles, Retailleau, Bolloré"
             },
             {
@@ -2420,7 +2471,7 @@
                 icon: "🚀",
                 title: "5. L'Amplification Inversée (Contre-Feu)",
                 desc: "À chaque fois que tu ignores ou fermes l'appli devant un réac, offre à ta prochaine connexion un Like + un Enregistrement (Save 📌) + un partage à un média indépendant, antifasciste ou progressiste.",
-                why: "La bataille algorithmique est un jeu à somme nulle : réduire l'extrême droite ne suffit pas si l'on ne propulse pas activement les voix progressistes dans les fils des indécis."
+                why: "Aimer ou enregistrer un contenu peut contribuer à personnaliser ton fil. L'effet sur les recommandations d'autres personnes dépend de la plateforme et n'est pas garanti."
             }
         ];
 
@@ -2440,6 +2491,7 @@
         let currentFilter = "all";
         let isStackExpanded = false;
         let currentReportedAccount = null;
+        const modalReturnFocus = new Map();
 
         const THEME_KEY = "ig_blocklist_theme";
         const THEME_OPTIONS = ["light", "dark", "empowerment"];
@@ -2494,6 +2546,7 @@
         function dismissWelcome() {
             setWelcomePreference(!document.getElementById("hideWelcomeCheckbox").checked);
             document.getElementById("welcomeScreen").hidden = true;
+            document.querySelector(".view-section.active button, .view-section.active a[href]")?.focus();
         }
 
         function setWelcomePreference(showWelcome) {
@@ -2514,10 +2567,14 @@
             if (arrow) arrow.innerText = content.classList.contains("open") ? "▲" : "▼";
         }
 
-        function switchMode(mode) {
+        function switchMode(mode, addHistory = true) {
             if (!["home", "mobilisation", "politique", "sabotage", "blocklist"].includes(mode)) mode = "home";
+            const modeChanged = mode !== currentMode;
             currentMode = mode;
             localStorage.setItem(MODE_KEY, mode);
+            if (addHistory && modeChanged) {
+                window.history.pushState({ mode }, "", window.location.href);
+            }
 
             document.getElementById("viewHome").classList.toggle("active", mode === "home");
             document.getElementById("viewPolitique").classList.toggle("active", ["mobilisation", "politique"].includes(mode));
@@ -2534,14 +2591,21 @@
                 purposeActionButton.textContent = "✊ Changer de mode d'action";
             }
 
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({
+                top: 0,
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+            });
             render();
         }
+
+        window.addEventListener("popstate", event => {
+            if (event.state?.mode) switchMode(event.state.mode, false);
+        });
 
         async function shareSite() {
             const shareData = {
                 title: "Autodéfense Algorithmique — On bloque l'extrême droite",
-                text: "Action collective & hygiène numérique : coupons la visibilité algorithmique de l'extrême droite et de l'empire Bolloré !",
+                text: "Action collective & hygiène numérique : défendons nos fils et faisons connaître des alternatives à l'extrême droite et à l'empire Bolloré.",
                 url: window.location.href
             };
 
@@ -2574,12 +2638,12 @@
         }
 
         function getMilestone(pct) {
-            if (pct === 100) return { icon: "🎉", text: "Zone 100% Assainie – Victoire Totale !", runner: "🏆" };
-            if (pct >= 75) return { icon: "🛡️", text: "Résistant·e chevronné·e – L'algo étouffe", runner: "🏃" };
-            if (pct >= 50) return { icon: "⚡", text: "Cap de la moitié – On respire mieux !", runner: "🏃" };
-            if (pct >= 25) return { icon: "✊", text: "Premières lignes – Antifasciste actif·ve", runner: "🏃" };
-            if (pct > 0) return { icon: "🌱", text: "Premier pas engagé", runner: "🏃" };
-            return { icon: "🧭", text: "Prêt·e à nettoyer son fil", runner: "🏃" };
+            if (pct === 100) return { icon: "🎉", text: "Toute la liste est marquée comme bloquée", runner: "🏆" };
+            if (pct >= 75) return { icon: "🛡️", text: "Progression avancée — majorité de la liste traitée", runner: "🏃" };
+            if (pct >= 50) return { icon: "⚡", text: "Plus de la moitié de la liste traitée", runner: "🏃" };
+            if (pct >= 25) return { icon: "✊", text: "Un quart de la liste traité", runner: "🏃" };
+            if (pct > 0) return { icon: "🌱", text: "Premier compte marqué comme bloqué", runner: "🏃" };
+            return { icon: "🧭", text: "Prêt·e à commencer", runner: "🏃" };
         }
 
         function saveState() {
@@ -2595,6 +2659,10 @@
         // Animation de montée vers la pile avec changement de couleur avant insertion dans la pile
         function animateRowToStack(handle, rowEl, callback) {
             if (!rowEl) {
+                callback();
+                return;
+            }
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
                 callback();
                 return;
             }
@@ -2624,25 +2692,13 @@
             }
         }
 
-        function markAsDone(handle, linkEl) {
-            if (doneHandles.includes(handle)) {
-                lastActionHandle = handle;
-                saveState();
-                return;
-            }
-            const rowEl = linkEl ? linkEl.closest(".row") : null;
-            animateRowToStack(handle, rowEl, () => {
-                doneHandles = doneHandles.filter(h => h !== handle);
-                doneHandles.push(handle);
-                lastActionHandle = handle;
-                saveState();
-            });
-        }
-
         function setFilter(filter, btnEl) {
             currentFilter = filter;
-            document.querySelectorAll("#filterRow .pill").forEach(p => p.classList.remove("active"));
-            if (btnEl) btnEl.classList.add("active");
+            document.querySelectorAll("#filterRow .pill").forEach(button => {
+                const isActive = button === btnEl;
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
             render();
         }
 
@@ -2688,16 +2744,16 @@
                             ${acc.fact ? `<span class="fact-note">${acc.fact}</span>` : ""}
                         </div>
                     </div>
-                    <button type="button" class="btn-flag" onclick="openReportModal('${acc.handle}')" title="Signaler une erreur sur ce compte">
+                    <button type="button" class="btn-flag" onclick="openReportModal('${acc.handle}')" title="Signaler une erreur sur ce compte" aria-label="Signaler une erreur sur le compte de ${acc.name}">
                         🏳️
                     </button>
                 </div>
                 <div class="row-actions">
-                    <button type="button" class="btn-check" onclick="toggleHandle('${acc.handle}', this)">
+                    <button type="button" class="btn-check" aria-label="${isDone ? `Annuler le statut « bloqué » pour ${acc.name}` : `Marquer ${acc.name} comme bloqué`}" onclick="toggleHandle('${acc.handle}', this)">
                         <span class="check-square">${isDone ? "✓" : ""}</span>
-                        <span>${isDone ? "Bloqué (Annuler)" : "Bloqué ?"}</span>
+                        <span>${isDone ? "Bloqué (Annuler)" : "Marquer comme bloqué"}</span>
                     </button>
-                    <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer" onclick="markAsDone('${acc.handle}', this)">
+                    <a class="btn-ig" href="https://www.instagram.com/${acc.handle}/" target="_blank" rel="noopener noreferrer">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -2754,6 +2810,11 @@
             const homeBlockStatus = document.getElementById("homeBlocklistStatus");
             if (homeBlockStatus) homeBlockStatus.innerText = `${doneCount} / ${total} bloqués (${pct}%)`;
 
+            const progressTrack = document.getElementById("progressTrack");
+            progressTrack.setAttribute("aria-valuemax", String(total));
+            progressTrack.setAttribute("aria-valuenow", String(doneCount));
+            progressTrack.setAttribute("aria-valuetext", `${doneCount} sur ${total} comptes marqués comme bloqués (${pct} %)`);
+
             const barWidth = doneCount === 0 ? 1.5 : Math.max(pct, 3);
             document.getElementById("progressBar").style.width = barWidth + "%";
             document.getElementById("scoreNum").innerText = `${doneCount} / ${total}`;
@@ -2805,21 +2866,28 @@
                 const visibleStackAccounts = isStackExpanded
                     ? blockedAccountsOrdered
                     : blockedAccountsOrdered.slice(-4);
+                stackListEl.style.height = isStackExpanded
+                    ? ""
+                    : `${48 + (visibleStackAccounts.length - 1) * 40}px`;
                 visibleStackAccounts.forEach((acc, idx) => {
                     const isLatest = acc.handle === lastActionHandle;
                     const rowEl = createAccountRowElement(acc, true, isLatest);
                     rowEl.classList.add("stack-item");
                     if (!isStackExpanded) {
-                        if (idx === 0) rowEl.classList.add("stack-depth-0");
-                        else if (idx === 1) rowEl.classList.add("stack-depth-1");
-                        else if (idx === 2) rowEl.classList.add("stack-depth-2");
-                        else rowEl.classList.add("stack-depth-3");
+                        const distanceFromFront = visibleStackAccounts.length - idx - 1;
+                        rowEl.style.top = `${idx * 40}px`;
+                        rowEl.style.left = `${idx * 5}px`;
+                        rowEl.style.width = `calc(100% - ${idx * 5}px)`;
+                        rowEl.style.zIndex = String(idx + 1);
+                        rowEl.style.opacity = String(1 - distanceFromFront * 0.2);
+                        rowEl.style.filter = `blur(${distanceFromFront * 0.3}px)`;
                     }
                     stackListEl.appendChild(rowEl);
                 });
             } else {
                 stackWrapper.classList.remove("has-items");
                 stackListEl.innerHTML = "";
+                stackListEl.style.height = "";
             }
 
             const listEl = document.getElementById("accountList");
@@ -2846,8 +2914,8 @@
                 if (doneCount === total) {
                     emptyCard.innerHTML = `
                         <div class="empty-victory-icon">🎉✊</div>
-                        <div class="empty-victory-title">Grand chelem ! Tu as bloqué 100 % de la liste.</div>
-                        <p class="empty-victory-desc">Tous les comptes sont désormais empilés dans ta réserve en haut. Fais tourner l'outil autour de toi pour démultiplier l'impact collectif !</p>
+                        <div class="empty-victory-title">Toute la liste est marquée comme bloquée.</div>
+                        <p class="empty-victory-desc">Tu peux retrouver les comptes dans la pile en haut ou choisir un autre mode d'action.</p>
                         <div class="empty-victory-actions">
                             <button type="button" class="btn-top" onclick="shareSite()">📣 Partager la blocklist</button>
                             <button type="button" class="btn-top outline" onclick="switchMode('home')">Voir les 4 modes d'action</button>
@@ -2973,8 +3041,57 @@
             }
         }
 
-        function openModal(id) { document.getElementById(id).classList.add("open"); }
-        function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+        function getFocusableElements(container) {
+            return [...container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+                .filter(element => element.getClientRects().length > 0);
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modalReturnFocus.set(id, document.activeElement);
+            modal.classList.add("open");
+            modal.querySelector(".modal-title")?.focus();
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove("open");
+            const returnFocus = modalReturnFocus.get(id);
+            modalReturnFocus.delete(id);
+            if (returnFocus instanceof HTMLElement && returnFocus.isConnected && returnFocus.getClientRects().length > 0) {
+                returnFocus.focus();
+            }
+        }
+
+        document.addEventListener("keydown", event => {
+            const welcome = document.getElementById("welcomeScreen");
+            const dialog = welcome && !welcome.hidden ? welcome : document.querySelector(".modal-backdrop.open");
+            if (!dialog) return;
+
+            if (event.key === "Escape") {
+                if (dialog === welcome) dismissWelcome();
+                else closeModal(dialog.id);
+                return;
+            }
+
+            if (event.key !== "Tab") return;
+            const focusable = getFocusableElements(dialog);
+            if (focusable.length === 0) {
+                event.preventDefault();
+                return;
+            }
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            const activeIndex = focusable.indexOf(document.activeElement);
+            if (event.shiftKey && activeIndex <= 0) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && (activeIndex === -1 || activeIndex === focusable.length - 1)) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
 
         function openReportModal(handle) {
             const acc = accounts.find(a => a.handle === handle);
@@ -2998,7 +3115,6 @@
             const title = encodeURIComponent(`[Ajout] ${name} (@${handle})`);
             const body = encodeURIComponent(`**Nom :** ${name}\n**Pseudo Instagram :** @${handle}\n**Lien :** https://www.instagram.com/${handle}/\n**Étiquette politique :** ${tag}\n**Fait marquant :** ${fact || "À compléter"}\n`);
             window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
-            closeModal("suggestModal");
         }
 
         function submitSiteFeedback() {
@@ -3011,7 +3127,6 @@
             const title = encodeURIComponent(`[Suggestion Site] ${subject}`);
             const body = encodeURIComponent(`**Suggestion d'amélioration pour le site :**\n\n${message}\n`);
             window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
-            closeModal("siteFeedbackModal");
         }
 
         function submitReport() {
@@ -3021,7 +3136,6 @@
             const title = encodeURIComponent(`[Signalement] ${currentReportedAccount.name} (@${currentReportedAccount.handle})`);
             const body = encodeURIComponent(`**Compte concerné :** ${currentReportedAccount.name} (@${currentReportedAccount.handle})\n**Nature du problème :** ${reason}\n**Précisions :** ${details || "Aucune précision supplémentaire"}\n`);
             window.open(`https://github.com/lepetitgauchiste/onbloquelextremedroite/issues/new?title=${title}&body=${body}`, "_blank");
-            closeModal("reportModal");
         }
 
         window.addEventListener("scroll", () => {
@@ -3036,7 +3150,9 @@
         document.getElementById("showWelcomePreference").checked = showWelcome;
         document.getElementById("welcomeScreen").hidden = !showWelcome;
         applyTheme();
-        switchMode(currentMode);
+        switchMode(currentMode, false);
+        window.history.replaceState({ mode: currentMode }, "", window.location.href);
+        if (showWelcome) document.getElementById("welcomeEnterButton").focus();
         fetchWikimediaAvatars();
     </script>
 </body>
