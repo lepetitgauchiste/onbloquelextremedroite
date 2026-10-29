@@ -641,20 +641,29 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px 12px;
             background: var(--sub-card);
             border: 1px solid var(--sub-card-border);
-            padding: 8px 14px;
+            padding: 10px 16px;
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 700;
             color: var(--muted);
             max-width: 100%;
         }
+        .quick-steps > span:not(.step-sep) {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
         .quick-steps span strong { color: var(--text); }
         .quick-steps .step-sep { opacity: 0.45; }
 
-        .quick-steps .btn-ig { vertical-align: middle; }
+        .quick-steps .btn-ig {
+            flex: 0 0 auto;
+            min-height: 40px;
+            white-space: nowrap;
+        }
         .quick-steps .menu-dots {
             display: inline-flex;
             align-items: center;
@@ -1290,7 +1299,7 @@
         }
 
         /* =========================================================
-           VUES ACTION POLITIQUE (MODE 1) & SABOTAGE FANTÔME (MODE 3)
+           VUES ACTION POLITIQUE & SABOTAGE FANTÔME
            ========================================================= */
         .tactic-list {
             display: flex;
@@ -1444,6 +1453,8 @@
             justify-content: center;
             gap: 10px;
             margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
         }
         .footer-social-link {
             display: inline-flex;
@@ -1481,6 +1492,7 @@
             align-items: center;
             justify-content: center;
             overflow-y: auto;
+            overscroll-behavior-y: contain;
             isolation: isolate;
             padding: clamp(16px, 4vh, 40px) clamp(14px, 4vw, 48px);
             background: var(--bg);
@@ -1499,20 +1511,15 @@
         }
         .welcome-screen[hidden] { display: none; }
         .welcome-card {
-            width: min(100%, 900px);
-            max-height: calc(100vh - 32px);
+            width: min(100%, 620px);
             margin: auto;
-            overflow-y: auto;
-            padding: clamp(22px, 4vw, 38px);
+            padding: clamp(20px, 3vw, 30px);
             border: 1px solid rgba(var(--bg-rgb), 0.72);
-            border-radius: 26px;
+            border-radius: 22px;
             background: var(--card-hero);
             box-shadow: 0 24px 70px rgba(36, 24, 19, 0.18);
             backdrop-filter: blur(24px) saturate(1.08);
             -webkit-backdrop-filter: blur(24px) saturate(1.08);
-        }
-        @supports (height: 100dvh) {
-            .welcome-card { max-height: calc(100dvh - 32px); }
         }
         .welcome-eyebrow {
             display: flex;
@@ -1534,40 +1541,21 @@
             background: var(--green);
         }
         .welcome-card h1 {
-            max-width: 700px;
-            margin: 0 auto 14px;
-            font-size: clamp(1.9rem, 5vw, 2.8rem);
+            max-width: 520px;
+            margin: 0 auto 12px;
+            font-size: clamp(1.7rem, 5vw, 2.3rem);
             font-weight: 900;
             letter-spacing: -0.04em;
             line-height: 1.04;
             text-align: center;
         }
         .welcome-card > p {
-            max-width: 660px;
-            margin: 0 auto 25px;
+            max-width: 520px;
+            margin: 0 auto 18px;
             color: var(--muted);
-            font-size: clamp(0.94rem, 2vw, 1.04rem);
-            line-height: 1.65;
+            font-size: clamp(0.88rem, 2vw, 0.98rem);
+            line-height: 1.55;
             text-align: center;
-        }
-        .welcome-disclaimer-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin: 0 0 16px;
-            color: var(--muted);
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-        }
-        .welcome-disclaimer-title::before,
-        .welcome-disclaimer-title::after {
-            content: "";
-            width: min(12vw, 72px);
-            height: 1px;
-            background: var(--border);
         }
         .disclaimer-copy {
             display: flex;
@@ -1597,12 +1585,20 @@
         }
         .disclaimer-section p + p { margin-top: 8px; }
         .disclaimer-section strong { color: var(--text); }
-        .welcome-card .disclaimer-copy {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
+        .welcome-disclaimer-link {
+            display: block;
+            margin: 0 auto 14px;
+            padding: 0;
+            border: 0;
+            background: none;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
         }
-        .welcome-social-links { margin: 14px 0 0; }
         .welcome-preference {
             display: flex;
             align-items: center;
@@ -1653,23 +1649,12 @@
         .stack-container.collapsed .row.last-action-row .persistent-last-badge {
             pointer-events: auto;
         }
-        .welcome-disclaimer-title {
-            text-align: center;
-            font-size: 0.7rem;
-        }
-
         @media (max-width: 520px) {
-            .welcome-screen { padding: 10px; }
+            .welcome-screen { padding: 12px; }
             .welcome-card {
-                max-height: calc(100vh - 20px);
-                padding: 24px 16px;
-                border-radius: 20px;
+                padding: 20px 16px;
+                border-radius: 18px;
             }
-            @supports (height: 100dvh) {
-                .welcome-card { max-height: calc(100dvh - 20px); }
-            }
-            .welcome-card .disclaimer-copy { grid-template-columns: 1fr; }
-            .disclaimer-section { padding: 15px; }
             .welcome-preference { max-width: 100%; }
             .btn-theme-corner { top: 14px; left: 14px; width: 32px; height: 32px; }
             .brand-blur-zone { margin-top: 38px; margin-bottom: 58px; padding: 10px 16px; }
@@ -1716,27 +1701,12 @@
             <span class="welcome-eyebrow">Avant de commencer</span>
             <h1 id="welcomeTitle">Bienvenue sur « On bloque l'extrême droite »</h1>
             <p id="welcomeIntro">Un outil d'autodéfense numérique et d'action collective pour reprendre la main sur nos espaces en ligne et soutenir les mobilisations contre l'extrême droite.</p>
-            <h2 class="welcome-disclaimer-title">Disclaimer &amp; mentions</h2>
-            <div class="disclaimer-copy"></div>
+            <button type="button" class="welcome-disclaimer-link" onclick="dismissWelcome(); openModal('disclaimerModal')">Lire le disclaimer et les mentions</button>
             <label class="welcome-preference">
                 <input type="checkbox" id="hideWelcomeCheckbox" onchange="setWelcomePreference(!this.checked)">
                 <span>Ne plus afficher cet écran</span>
             </label>
             <button type="button" class="btn-mode-cta welcome-enter" id="welcomeEnterButton" onclick="dismissWelcome()">✊ Passer à l'action</button>
-            <nav class="footer-social-links welcome-social-links" aria-label="Réseaux et code source">
-                <a class="footer-social-link instagram" href="https://www.instagram.com/henrilubszynski/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Henri Lubszynski" title="Instagram">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <circle cx="17.5" cy="6.8" r="0.8" fill="currentColor" stroke="none"></circle>
-                    </svg>
-                </a>
-                <a class="footer-social-link github" href="https://github.com/lepetitgauchiste/onbloquelextremedroite" target="_blank" rel="noopener noreferrer" aria-label="Code source du projet sur GitHub" title="GitHub">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.24-1.62-1.24-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.75 2.12 3.37 1.51.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.61 5.25-5.1 5.53.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"></path>
-                    </svg>
-                </a>
-            </nav>
         </div>
     </section>
 
@@ -1777,7 +1747,7 @@
         </section>
 
         <div class="mode-cards-grid">
-            <!-- CARTE MODE 4 : LA BLOCKLIST -->
+            <!-- CARTE : LA BLOCKLIST -->
             <article class="mode-card">
                 <span class="mode-card-icon" aria-hidden="true">🛡️</span>
                 <h2>Le Barrage Radical (blocklist interactive)</h2>
@@ -1790,7 +1760,7 @@
                 </button>
             </article>
 
-            <!-- MODE 1 : MOBILISATION LOCALE -->
+            <!-- MOBILISATION LOCALE -->
             <article class="mode-card in-progress-card">
                 <span class="mode-card-icon" aria-hidden="true">📍</span>
                 <h2>Trouver une mobilisation près de chez soi</h2>
@@ -1803,7 +1773,7 @@
                 </button>
             </article>
 
-            <!-- MODE 2 : ACTION POLITIQUE ET BOUCLES -->
+            <!-- ACTION POLITIQUE ET BOUCLES -->
             <article class="mode-card in-progress-card">
                 <span class="mode-card-icon" aria-hidden="true">🤝</span>
                 <h2>Rejoindre l'action politique et les boucles</h2>
@@ -1816,7 +1786,7 @@
                 </button>
             </article>
 
-            <!-- CARTE MODE 3 : LE SABOTAGE FANTÔME -->
+            <!-- CARTE : LE SABOTAGE FANTÔME -->
             <article class="mode-card in-progress-card">
                 <span class="mode-card-icon" aria-hidden="true">👻</span>
                 <h2>Le Sabotage Fantôme (ignorance active et poison d'algorithme)</h2>
@@ -1897,18 +1867,18 @@
 
         <div style="text-align: center; margin-bottom: 36px;">
             <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
-                ← Retourner au portail des 4 modes d'action
+                ← Retourner au portail d'action
             </button>
         </div>
     </main>
 
     <!-- =========================================================
-         VUE BLOCKLIST : LE BARRAGE RADICAL (MODE 4)
+         VUE BLOCKLIST : LE BARRAGE RADICAL
          ========================================================= -->
     <main id="viewBlocklist" class="view-section">
         <section class="hero">
             <h1>La blocklist.</h1>
-            <div class="kicker">Mode 4 • Barrage radical & hygiène numérique</div>
+            <div class="kicker">Barrage radical & hygiène numérique</div>
             <button type="button" class="btn-share-subtle" onclick="shareSite()" title="Partager ce site">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="18" cy="5" r="3"></circle>
@@ -2019,11 +1989,11 @@
     </main>
 
     <!-- =========================================================
-         VUE SABOTAGE : LE SABOTAGE FANTÔME / IGNORANCE ACTIVE (MODE 3)
+         VUE SABOTAGE : LE SABOTAGE FANTÔME / IGNORANCE ACTIVE
          ========================================================= -->
     <main id="viewSabotage" class="view-section">
         <section class="hero">
-            <div class="kicker">Mode 3 • Guérilla algorithmique sans visite de profil</div>
+            <div class="kicker">Guérilla algorithmique sans visite de profil</div>
             <h1>Le Sabotage Fantôme.</h1>
             <p class="lead">
                 Tu ne veux pas visiter leurs profils ni leur donner un seul clic ? Voici comment retourner les règles d'Instagram contre l'extrême droite. Coche les 5 réflexes ci-dessous pour activer ton protocole d'asphyxie algorithmique :
@@ -2037,7 +2007,7 @@
 
         <div style="text-align: center; margin-bottom: 36px;">
             <button type="button" class="btn-top outline" onclick="switchMode('home')" style="padding: 10px 18px; font-size: 0.84rem;">
-                ← Retourner au portail des 4 modes d'action
+                ← Retourner au portail d'action
             </button>
         </div>
     </main>
@@ -2958,7 +2928,7 @@
                         <p class="empty-victory-desc">Tu peux retrouver les comptes dans la pile en haut ou choisir un autre mode d'action.</p>
                         <div class="empty-victory-actions">
                             <button type="button" class="btn-top" onclick="shareSite()">Partager la blocklist</button>
-                            <button type="button" class="btn-top outline" onclick="switchMode('home')">Voir les 4 modes d'action</button>
+                            <button type="button" class="btn-top outline" onclick="switchMode('home')">Voir les modes d'action</button>
                         </div>
                     `;
                 } else {
