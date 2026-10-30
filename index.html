@@ -74,30 +74,30 @@
         }
 
         [data-theme="empowerment"] {
-            --bg-top: #eadcf3;
-            --bg: #f5edcf;
-            --bg-rgb: 245, 237, 207;
-            --card: rgba(255, 249, 220, 0.96);
-            --card-solid: #fff8d8;
-            --card-hero: rgba(255, 247, 218, 0.94);
-            --sub-card: rgba(225, 211, 239, 0.78);
-            --sub-card-border: rgba(116, 59, 177, 0.32);
-            --text: #35213d;
-            --muted: #68516f;
-            --border: rgba(116, 59, 177, 0.34);
-            --green: #743bb1;
-            --green-light: #a23eaa;
-            --theme-glow: 116, 59, 177;
-            --green-bg: rgba(230, 216, 243, 0.94);
-            --green-solid: #e3d6ef;
-            --green-border: #b997d4;
-            --accent: #e34791;
-            --pill-bg: #fef1a1;
-            --pill-text: #53344d;
-            --sticky-bg: rgba(245, 237, 207, 0.94);
-            --ghost-bg: rgba(116, 59, 177, 0.08);
-            --ghost-border: rgba(116, 59, 177, 0.2);
-            --ghost-text: #584264;
+            --bg-top: #9f8bad;
+            --bg: #c4b7ce;
+            --bg-rgb: 196, 183, 206;
+            --card: rgba(222, 213, 230, 0.97);
+            --card-solid: #ded5e6;
+            --card-hero: rgba(222, 213, 230, 0.94);
+            --sub-card: rgba(190, 174, 202, 0.84);
+            --sub-card-border: rgba(66, 45, 79, 0.28);
+            --text: #30243a;
+            --muted: #51445a;
+            --border: rgba(66, 45, 79, 0.3);
+            --green: #633b7d;
+            --green-light: #80549b;
+            --theme-glow: 99, 59, 125;
+            --green-bg: rgba(210, 194, 222, 0.96);
+            --green-solid: #d2c2de;
+            --green-border: #9b83ae;
+            --accent: #bd477f;
+            --pill-bg: #b7a4c5;
+            --pill-text: #30243a;
+            --sticky-bg: rgba(196, 183, 206, 0.96);
+            --ghost-bg: rgba(66, 45, 79, 0.1);
+            --ghost-border: rgba(66, 45, 79, 0.24);
+            --ghost-text: #46384f;
 
             --hero-img: url('theme-empowerment.jpg');
         }
@@ -920,7 +920,13 @@
             color: var(--muted);
             font-size: 0.76rem;
         }
-        .support-avatar { background: var(--sub-card); }
+        .support-avatar {
+            background: var(--sub-card);
+            color: var(--green);
+            font-size: 1.05rem !important;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+        }
         .support-category-politique { background: #e8f5e9; color: #27623a; border: 1px solid #b7dfc1; }
         .support-category-media { background: #e8f1fb; color: #285784; border: 1px solid #bfd4ea; }
         .support-category-humour-politique { background: #f2eafb; color: #68428b; border: 1px solid #d6c3e9; }
@@ -2819,7 +2825,7 @@
         const WIKI_CACHE_KEY = "ig_wiki_thumbs_v1";
         const WELCOME_HIDE_KEY = "ig_blocklist_hide_welcome_v1";
         const SUPPORT_FOLLOWED_KEY = "ig_support_followed_v1";
-        const SUPPORT_WIKI_CACHE_KEY = "ig_support_wiki_thumbs_v1";
+        const SUPPORT_WIKI_CACHE_KEY = "ig_support_wiki_thumbs_v2";
         const PAGE_SIZE = 15;
 
         let visibleLimit = PAGE_SIZE;
@@ -3344,7 +3350,10 @@
             profile.className = "row-profile-left";
             const avatar = document.createElement("div");
             avatar.className = "avatar-circle support-avatar";
-            const fallbackEmoji = account.category === "media" ? "📰" : account.category === "humour-politique" ? "🎭" : "✊";
+            const initials = account.name.trim().split(/\s+/).slice(0, 2)
+                .map(part => Array.from(part)[0] || "")
+                .join("")
+                .toLocaleUpperCase("fr");
             const cachedImage = supportWikiThumbCache[account.handle];
             if (cachedImage?.src) {
                 const image = document.createElement("img");
@@ -3354,11 +3363,11 @@
                 image.addEventListener("error", () => {
                     supportWikiThumbCache[account.handle] = null;
                     localStorage.setItem(SUPPORT_WIKI_CACHE_KEY, JSON.stringify(supportWikiThumbCache));
-                    avatar.replaceChildren(document.createTextNode(fallbackEmoji));
+                    avatar.replaceChildren(document.createTextNode(initials));
                 }, { once: true });
                 avatar.appendChild(image);
             } else {
-                avatar.textContent = fallbackEmoji;
+                avatar.textContent = initials;
             }
             avatar.setAttribute("aria-hidden", "true");
 
@@ -3918,6 +3927,7 @@
                     localStorage.setItem(SUPPORT_WIKI_CACHE_KEY, JSON.stringify(supportWikiThumbCache));
                     renderSupportList();
                 } catch (error) {
+                    supportAvatarFetchStarted = false;
                     console.warn("Impossible de charger les images Wikipédia des comptes à suivre.", error);
                 }
             }
